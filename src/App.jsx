@@ -33,7 +33,7 @@ const contentByLocale = {
     },
     badges: {
       live: 'Live',
-      euDraw: 'EU draw',
+      euDraw: 'Draw',
     },
     heroSlides: [
       {
@@ -294,7 +294,7 @@ const contentByLocale = {
     },
     badges: {
       live: 'Ao vivo',
-      euDraw: 'Sorteio UE',
+      euDraw: 'Sorteio',
     },
     heroSlides: [
       {
@@ -553,7 +553,7 @@ const contentByLocale = {
     },
     badges: {
       live: 'En vivo',
-      euDraw: 'Sorteo UE',
+      euDraw: 'Sorteo',
     },
     heroSlides: [
       {
@@ -812,7 +812,7 @@ const contentByLocale = {
     },
     badges: {
       live: 'Ao vivo',
-      euDraw: 'Sorteio UE',
+      euDraw: 'Sorteio',
     },
     heroSlides: [
       {
@@ -1054,6 +1054,10 @@ const mergeCollection = (base = [], overrides = []) =>
 const mergePresentationCopy = (base, overrides) => ({
   ...base,
   ...overrides,
+  actions: {
+    ...base.actions,
+    ...(overrides.actions ?? {}),
+  },
   heroSlides: mergeCollection(base.heroSlides, overrides.heroSlides),
   metrics: mergeCollection(base.metrics, overrides.metrics),
   competitions: mergeCollection(base.competitions, overrides.competitions),
@@ -1363,10 +1367,14 @@ const presentationOverridesByLocale = {
   ptBR: {
     topbar: 'Conceito de apresentacao / conteudo ficticio / interface premium automotiva',
     brandSubtitle: 'Demo de Apresentacao',
+    actions: {
+      explore: 'Explorar campanha destaque',
+      viewScope: 'Ver escopo da experiencia',
+    },
     heroSlides: [
-      { badge: 'Conceito em destaque', title: 'Apresentacao premium de veiculo com composicao cinematografica mais compacta.', subtitle: 'Conteudo ficticio preparado para mostrar hierarquia, ritmo e acabamento visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas exemplo' },
-      { badge: 'Estudo visual', title: 'Uma landing mais refinada, elegante e com densidade melhor resolvida.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar a interface sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas exemplo' },
-      { badge: 'Modo showcase', title: 'Identidade luxury dark aplicada com consistencia em toda a pagina.', subtitle: 'O objetivo e apresentar uma superficie premium com melhor continuidade e menos excesso de scroll.', price: 'EUR 10.00', tickets: '7,020 / 14,000 entradas exemplo' },
+      { badge: 'Campanha signature', title: 'Composicao cinematografica com escala maior e leitura de campanha premium.', subtitle: 'Conteudo ficticio preparado para destacar hero impactante, imagem dominante e hierarquia comercial mais aspiracional.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas exemplo' },
+      { badge: 'Hero flagship', title: 'Uma campanha premium mais imponente, chamativa e aspiracional.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar impacto visual, contraste e direcao de arte sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas exemplo' },
+      { badge: 'Showcase prestige', title: 'Luxury dark com protagonismo maior para o carro, CTA e presenca de marca.', subtitle: 'O objetivo e validar uma direcao mais comercial, cinematografica e premium dentro da nova paleta escura.', price: 'EUR 10.00', tickets: '7,020 / 14,000 entradas exemplo' },
     ],
     metrics: [
       { value: '120K', label: 'audiencia exemplo', note: 'numeros ficticios apenas para apresentacao' },
@@ -1376,12 +1384,12 @@ const presentationOverridesByLocale = {
     ],
     filters: ['Destaque', 'Performance', 'Eletrico', 'Fim de semana', 'Limitado', 'Novo layout'],
     currentDraw: {
-      eyebrow: 'Exemplo principal',
-      title: 'Signature Coupe Concept',
+      eyebrow: 'Campanha em destaque',
+      title: 'Signature GT Campaign',
       priceLabel: 'Entrada a partir de',
       countdownLabel: 'Temporizador demo',
       entriesLabel: 'Entradas exemplo',
-      helper: 'Bloco ilustrativo criado para apresentar estrutura, hierarquia e acabamento premium.',
+      helper: 'Conteudo ilustrativo criado para avaliar composicao de campanha, CTA, hierarquia e impacto visual premium.',
     },
     sections: {
       competitions: { kicker: 'Cards de apresentacao', title: 'Uma grade mais compacta, com hierarquia limpa e espacos mais controlados.', copy: 'Todo o conteudo abaixo e ficticio e serve apenas para demonstrar layout, ritmo e acabamento visual.' },
@@ -1436,8 +1444,6 @@ const presentationOverridesByLocale = {
 
 const getPresentationCopy = (locale) =>
   mergePresentationCopy(contentByLocale[locale], presentationOverridesByLocale[locale] ?? {})
-
-const paymentMethods = ['Stripe', 'Apple Pay', 'Google Pay', 'SEPA', 'iDEAL', 'Bancontact']
 
 const paymentScreenByLocale = {
   en: {
@@ -1972,21 +1978,21 @@ function App() {
         </header>
         
         <main id="home">
-          <section className="section-band section-band--hero relative min-h-[88svh] overflow-hidden lg:min-h-[94svh]">
+          <section className="section-band section-band--hero hero-stage relative min-h-[82svh] overflow-hidden lg:min-h-[88svh]">
             <img
               src={currentSlide.image}
               alt={currentSlide.title}
               className="hero-image absolute inset-0 h-full w-full object-cover transition-all duration-700"
             />
             <div className="hero-vignette absolute inset-0" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_38%,rgba(58,110,165,0.22),transparent_26%),radial-gradient(circle_at_22%_20%,rgba(201,162,74,0.18),transparent_18%),linear-gradient(180deg,rgba(10,11,15,0.12)_0%,rgba(10,11,15,0.28)_55%,rgba(10,11,15,0.82)_100%)]" />
+            <div className="hero-atmosphere absolute inset-0" />
             <div className="noise-overlay absolute inset-0 opacity-35" />
 
-            <div className="hero-shell relative flex min-h-[88svh] flex-col justify-end pb-10 pt-24 lg:min-h-[94svh] lg:pb-12">
+            <div className="hero-shell relative flex min-h-[82svh] flex-col justify-end pb-5 pt-20 lg:min-h-[88svh] lg:pb-6 lg:pt-24">
               <button
                 type="button"
                 onClick={goToPreviousSlide}
-                className="absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/26 text-xl font-semibold text-white backdrop-blur-md transition hover:border-[#3a6ea5]/40 hover:bg-[#16202b]/85 hover:text-[#e0c27a] sm:left-6 lg:left-8"
+                className="hero-nav-button absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:left-6 lg:left-8"
                 aria-label="Previous slide"
               >
                 {'<'}
@@ -1994,61 +2000,87 @@ function App() {
               <button
                 type="button"
                 onClick={goToNextSlide}
-                className="absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/26 text-xl font-semibold text-white backdrop-blur-md transition hover:border-[#3a6ea5]/40 hover:bg-[#16202b]/85 hover:text-[#e0c27a] sm:right-6 lg:right-8"
+                className="hero-nav-button absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:right-6 lg:right-8"
                 aria-label="Next slide"
               >
                 {'>'}
               </button>
-              <div className="relative z-10 max-w-[52rem] pb-[4.5rem] sm:pb-20 lg:pb-24">
-                <span className="inline-flex rounded-full border border-[#c9a24a]/30 bg-[#c9a24a]/14 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.28em] text-[#e0c27a] shadow-[0_0_30px_rgba(201,162,74,0.12)] backdrop-blur-sm">
-                  {currentSlide.badge}
-                </span>
-                <h1 className="mt-5 max-w-[48rem] text-5xl font-black leading-[0.9] tracking-[-0.065em] text-[#f5f7fb] drop-shadow-[0_12px_44px_rgba(0,0,0,0.52)] sm:text-6xl lg:text-[6.25rem]">
-                  {currentSlide.title}
-                </h1>
-                <p className="mt-5 max-w-[39rem] text-base leading-8 text-[#d8dde4] sm:text-xl sm:leading-8">
-                  {currentSlide.subtitle}
-                </p>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <a href="#competitions" className="premium-button hero-primary-cta justify-center">
-                    {copy.actions.explore}
-                  </a>
-                  <a
-                    href="#platform"
-                    className="rounded-full border border-white/12 bg-black/24 px-7 py-4 text-center text-sm font-semibold text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/80 hover:shadow-[0_18px_60px_rgba(39,76,119,0.18)]"
-                  >
-                    {copy.actions.viewScope}
-                  </a>
+              <div className="hero-main-layout relative z-10 grid flex-1 items-end gap-8 pb-[2.75rem] sm:pb-16 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-10 lg:pb-16">
+                <div className="hero-copy-stage relative max-w-[42rem]">
+                  <p className="hero-shadow-title">{copy.currentDraw.title}</p>
+                  <div className="relative z-10">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="section-kicker border-[#c9a24a]/34 bg-[#c9a24a]/12 shadow-[0_0_30px_rgba(201,162,74,0.08)]">
+                        {currentSlide.badge}
+                      </span>
+                      <span className="inline-flex rounded-full border border-white/10 bg-black/28 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#d7dee7] backdrop-blur-sm">
+                        {copy.currentDraw.eyebrow}
+                      </span>
+                    </div>
+                    <p className="mt-4 max-w-[21rem] text-[0.69rem] font-bold uppercase tracking-[0.32em] text-[#9da7b3]">
+                      premium dark concept / cinematic hero / commercial hierarchy
+                    </p>
+                    <h1 className="hero-display mt-5 max-w-[38rem] text-[#f5f7fb]">
+                      {currentSlide.title}
+                    </h1>
+                    <p className="mt-4 max-w-[33rem] text-[0.98rem] leading-7 text-[#d7dee7] sm:text-[1.02rem] sm:leading-7">
+                      {currentSlide.subtitle}
+                    </p>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                      <a href="#competitions" className="premium-button hero-primary-cta justify-center sm:min-w-[18rem]">
+                        <span>{copy.actions.explore}</span>
+                        <span aria-hidden="true" className="text-lg leading-none">{'>'}</span>
+                      </a>
+                      <a
+                        href="#platform"
+                        className="hero-secondary-cta rounded-full px-7 py-4 text-center text-sm font-semibold text-white"
+                      >
+                        {copy.actions.viewScope}
+                      </a>
+                    </div>
+                    <div className="hero-inline-meta mt-5 flex flex-wrap gap-x-7 gap-y-3">
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                          {copy.currentDraw.priceLabel}
+                        </p>
+                        <p className="mt-2 text-xl font-black text-[#e0c27a]">{currentSlide.price}</p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                          {copy.currentDraw.countdownLabel}
+                        </p>
+                        <p className="mt-2 text-xl font-black text-white">{currentSlide.countdown}</p>
+                      </div>
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                          {copy.currentDraw.entriesLabel}
+                        </p>
+                        <p className="mt-2 text-lg font-extrabold text-white">{currentSlide.tickets}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="hero-info-strip mt-8 grid gap-3 sm:max-w-[44rem] sm:grid-cols-3">
-                  <div className="rounded-[22px] border border-white/10 bg-black/26 p-4 backdrop-blur-md">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
-                      {copy.currentDraw.priceLabel}
-                    </p>
-                    <p className="mt-2 text-[1.9rem] font-black tracking-[-0.04em] text-[#e0c27a]">{currentSlide.price}</p>
+
+                <div className="hero-spotlight-card hidden h-fit rounded-[30px] p-6 lg:block">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#e0c27a]">{copy.currentDraw.eyebrow}</p>
+                  <h2 className="mt-3 text-[2rem] font-black leading-[0.95] tracking-[-0.05em] text-white">
+                    {copy.currentDraw.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{copy.currentDraw.helper}</p>
+                  <div className="hero-side-details mt-6 space-y-4">
+                    <div className="hero-side-row">
+                      <span>{copy.currentDraw.priceLabel}</span>
+                      <strong>{currentSlide.price}</strong>
+                    </div>
+                    <div className="hero-side-row">
+                      <span>{copy.currentDraw.countdownLabel}</span>
+                      <strong>{currentSlide.countdown}</strong>
+                    </div>
+                    <div className="hero-side-row">
+                      <span>{copy.currentDraw.entriesLabel}</span>
+                      <strong>{currentSlide.tickets}</strong>
+                    </div>
                   </div>
-                  <div className="rounded-[22px] border border-white/10 bg-black/26 p-4 backdrop-blur-md">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
-                      {copy.currentDraw.countdownLabel}
-                    </p>
-                    <p className="mt-2 text-[1.9rem] font-black tracking-[-0.04em] text-white">{currentSlide.countdown}</p>
-                  </div>
-                  <div className="rounded-[22px] border border-white/10 bg-black/26 p-4 backdrop-blur-md">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
-                      {copy.currentDraw.entriesLabel}
-                    </p>
-                    <p className="mt-2 text-xl font-extrabold tracking-[-0.03em] text-white">{currentSlide.tickets}</p>
-                  </div>
-                </div>
-                <div className="mt-6 flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#aeb6c0]">
-                  {paymentMethods.map((method) => (
-                    <span
-                      key={method}
-                      className="rounded-full border border-white/8 bg-black/28 px-4 py-2 backdrop-blur-sm"
-                    >
-                      {method}
-                    </span>
-                  ))}
                 </div>
               </div>
 
@@ -2120,15 +2152,15 @@ function App() {
                 </div>
               </div>
 
-              <div className="pointer-events-none absolute inset-x-0 bottom-7 z-20 flex justify-center">
-                <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-white/8 bg-black/22 px-3 py-2 backdrop-blur-md">
+              <div className="relative z-20 flex justify-center">
+                <div className="hero-carousel-dots flex items-center gap-2 rounded-full px-3 py-2">
                   {copy.heroSlides.map((slide, index) => (
                     <button
                       key={slide.id}
                       type="button"
                       onClick={() => setActiveSlide(index)}
                       className={`h-2.5 rounded-full transition-all duration-300 ${
-                        index === activeSlide ? 'w-8 bg-[#c9a24a]' : 'w-2.5 bg-white/35 hover:bg-white/60'
+                        index === activeSlide ? 'w-9 bg-[#c9a24a]' : 'w-2.5 bg-white/35 hover:bg-white/60'
                       }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
@@ -2136,10 +2168,10 @@ function App() {
                 </div>
               </div>
 
-              <div className="metrics-shell mt-7 lg:mt-8">
-                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+              <div className="metrics-shell hero-metrics mt-4 lg:mt-5">
+                <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
                   {copy.metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-[24px] border border-white/8 bg-[#111722]/88 p-5 backdrop-blur-md">
+                    <div key={metric.label} className="hero-metric-cell">
                       <p className="text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">{metric.value}</p>
                       <p className="mt-3 text-sm font-bold uppercase tracking-[0.22em] text-[#e0c27a]">{metric.label}</p>
                       <p className="mt-2 text-sm leading-6 text-[#7e8896]">{metric.note}</p>
@@ -2152,21 +2184,11 @@ function App() {
 
           <section id="competitions" className="section-band section-band--soft">
             <div className="section-shell">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-5">
               <div className="max-w-3xl">
                 <span className="section-kicker">{copy.sections.competitions.kicker}</span>
                 <h2 className="section-title">{copy.sections.competitions.title}</h2>
                 <p className="section-copy">{copy.sections.competitions.copy}</p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {copy.filters.map((filter) => (
-                  <button
-                    key={filter}
-                    className="rounded-full border border-white/8 bg-[#111722] px-4 py-2 text-sm font-semibold text-[#c7ced6] transition hover:-translate-y-0.5 hover:border-[#3a6ea5]/35 hover:text-white"
-                  >
-                    {filter}
-                  </button>
-                ))}
               </div>
             </div>
 
