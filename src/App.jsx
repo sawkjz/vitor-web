@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const languageOptions = [
   { value: 'en', label: 'English' },
@@ -1583,18 +1583,117 @@ const adminByLocale = {
   },
 }
 
+const getAdminProfileCopy = (locale) => {
+  if (locale === 'en') {
+    return {
+      profileButton: 'Profile',
+      profileTitle: 'Administrator profile',
+      profileCopy: 'Logged access, active role and core permissions for this session.',
+      nameLabel: 'Name',
+      roleLabel: 'Role',
+      accessLabel: 'Last access',
+      statusLabel: 'Status',
+      statusValue: 'Active',
+      permissionsTitle: 'Permissions',
+      roleValue: 'Platform administrator',
+      permissions: ['Raffles', 'Payments', 'Support'],
+    }
+  }
+
+  if (locale === 'es') {
+    return {
+      profileButton: 'Perfil',
+      profileTitle: 'Perfil del administrador',
+      profileCopy: 'Acceso autenticado, rol activo y permisos principales de esta sesion.',
+      nameLabel: 'Nombre',
+      roleLabel: 'Rol',
+      accessLabel: 'Ultimo acceso',
+      statusLabel: 'Estado',
+      statusValue: 'Activo',
+      permissionsTitle: 'Permisos',
+      roleValue: 'Administrador de la plataforma',
+      permissions: ['Sorteos', 'Pagos', 'Soporte'],
+    }
+  }
+
+  return {
+    profileButton: 'Perfil',
+    profileTitle: 'Perfil do administrador',
+    profileCopy: 'Acesso autenticado, funcao ativa e permissoes principais desta sessao.',
+    nameLabel: 'Nome',
+    roleLabel: 'Funcao',
+    accessLabel: 'Ultimo acesso',
+    statusLabel: 'Status',
+    statusValue: 'Ativo',
+    permissionsTitle: 'Permissoes',
+    roleValue: 'Administrador da plataforma',
+    permissions: ['Sorteios', 'Pagamentos', 'Suporte'],
+  }
+}
+
+const getAccountMenuCopy = (locale) => {
+  if (locale === 'en') {
+    return {
+      menuLabel: 'Account menu',
+      guestSignOut: 'Sign out',
+      logOut: 'Log out',
+    }
+  }
+
+  if (locale === 'es') {
+    return {
+      menuLabel: 'Menu de cuenta',
+      guestSignOut: 'Salir',
+      logOut: 'Cerrar sesion',
+    }
+  }
+
+  return {
+    menuLabel: 'Menu de conta',
+    guestSignOut: 'Sair',
+    logOut: 'Terminar sessao',
+  }
+}
+
+const formatAdminName = (email) => {
+  const baseName = email.split('@')[0]?.replace(/[._-]+/g, ' ').trim()
+
+  if (!baseName) {
+    return 'Admin'
+  }
+
+  return baseName
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
 function App() {
   const [view, setView] = useState('landing')
   const [locale, setLocale] = useState('ptBR')
   const [activeSlide, setActiveSlide] = useState(0)
   const [adminForm, setAdminForm] = useState({ email: '', password: '' })
   const [adminError, setAdminError] = useState('')
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
+  const accountMenuRef = useRef(null)
   const copy = getPresentationCopy(locale)
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
+  const adminProfileCopy = getAdminProfileCopy(locale)
+  const accountMenuCopy = getAccountMenuCopy(locale)
   const navigationItems = copy.navItems.filter((item) =>
     ['competitions', 'how-it-works', 'winners'].includes(item.id)
   )
+  const adminEmail = adminForm.email.trim() || 'admin@sorteiocars.com'
+  const adminName = formatAdminName(adminEmail)
+  const adminInitials = adminName
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('')
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -1607,6 +1706,32 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = copy.htmlLang
   }, [copy.htmlLang])
+
+  useEffect(() => {
+    if (!isAccountMenuOpen) {
+      return undefined
+    }
+
+    const handlePointerDown = (event) => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        setIsAccountMenuOpen(false)
+      }
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsAccountMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isAccountMenuOpen])
 
   useEffect(() => {
     let animationFrame = 0
@@ -1674,13 +1799,40 @@ function App() {
   }, [])
 
   const currentSlide = copy.heroSlides[activeSlide]
+  const handleLocaleChange = (nextLocale) => {
+    setLocale(nextLocale)
+    setActiveSlide(0)
+  }
+
   const openAdminLogin = () => {
     setAdminError('')
+    setIsAccountMenuOpen(false)
     setView('adminLogin')
+  }
+
+  const openAdminProfile = () => {
+    setIsAccountMenuOpen(false)
+    setView('adminDashboard')
   }
 
   const returnToLanding = () => {
     setAdminError('')
+    setIsAccountMenuOpen(false)
+    setView('landing')
+  }
+
+  const handleGuestSignOut = () => {
+    setAdminError('')
+    setAdminForm({ email: '', password: '' })
+    setIsAccountMenuOpen(false)
+    setView('landing')
+  }
+
+  const handleAdminLogout = () => {
+    setAdminError('')
+    setAdminForm({ email: '', password: '' })
+    setIsAdminAuthenticated(false)
+    setIsAccountMenuOpen(false)
     setView('landing')
   }
 
@@ -1693,6 +1845,8 @@ function App() {
     }
 
     setAdminError('')
+    setIsAdminAuthenticated(true)
+    setIsAccountMenuOpen(false)
     setView('adminDashboard')
   }
 
@@ -1768,7 +1922,7 @@ function App() {
                         setAdminForm((current) => ({ ...current, password: event.target.value }))
                       }
                       className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#3a6ea5]/45"
-                      placeholder="••••••••"
+                      placeholder="********"
                     />
                   </label>
                 </div>
@@ -1828,7 +1982,7 @@ function App() {
                 </button>
                 <button
                   type="button"
-                  onClick={openAdminLogin}
+                  onClick={handleAdminLogout}
                   className="rounded-full border border-[#c9a24a]/25 bg-[#c9a24a]/10 px-5 py-3 text-sm font-semibold text-[#e0c27a] transition hover:bg-[#c9a24a]/16"
                 >
                   {adminCopy.logout}
@@ -1837,22 +1991,96 @@ function App() {
             </div>
           </div>
 
-          <div className="mt-6 grid gap-5 xl:grid-cols-[280px_minmax(0,1fr)]">
-            <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
-              {paymentScreen.summary.map((item) => (
-                <div key={item.label} className="surface-card p-5">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
-                    {item.label}
-                  </p>
-                  <p className="mt-3 text-3xl font-black text-[#e0c27a]">{item.value}</p>
-                </div>
-              ))}
-
+          <div className="mt-6 grid gap-5 xl:grid-cols-[320px_minmax(0,1fr)]">
+            <div className="grid gap-4">
               <div className="surface-card p-5">
-                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
-                  {paymentScreen.kicker}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{adminCopy.helper}</p>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#c9a24a]/25 bg-[#16202b] text-lg font-black tracking-[0.16em] text-[#e0c27a]">
+                    {adminInitials}
+                  </div>
+                  <div>
+                    <p className="text-lg font-black text-white">{adminName}</p>
+                    <p className="text-sm text-[#c7ced6]">{adminProfileCopy.roleValue}</p>
+                  </div>
+                </div>
+
+                <div className="mt-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                    {adminProfileCopy.profileTitle}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{adminProfileCopy.profileCopy}</p>
+                </div>
+
+                <div className="mt-5 grid gap-3">
+                  <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                      {adminProfileCopy.nameLabel}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-white">{adminName}</p>
+                  </div>
+                  <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                      {adminCopy.emailLabel}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-white">{adminEmail}</p>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                        {adminProfileCopy.roleLabel}
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-white">{adminProfileCopy.roleValue}</p>
+                    </div>
+                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                        {adminProfileCopy.statusLabel}
+                      </p>
+                      <p className="mt-2 text-sm font-semibold text-[#e0c27a]">
+                        {adminProfileCopy.statusValue}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                      {adminProfileCopy.accessLabel}
+                    </p>
+                    <p className="mt-2 text-sm font-semibold text-white">Hoje, 20:15</p>
+                  </div>
+                </div>
+
+                <div className="mt-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                    {adminProfileCopy.permissionsTitle}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {adminProfileCopy.permissions.map((permission) => (
+                      <span
+                        key={permission}
+                        className="rounded-full border border-[#3a6ea5]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#c7ced6]"
+                      >
+                        {permission}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+                {paymentScreen.summary.map((item) => (
+                  <div key={item.label} className="surface-card p-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                      {item.label}
+                    </p>
+                    <p className="mt-3 text-3xl font-black text-[#e0c27a]">{item.value}</p>
+                  </div>
+                ))}
+
+                <div className="surface-card p-5 sm:col-span-3 xl:col-span-1">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                    {paymentScreen.kicker}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{adminCopy.helper}</p>
+                </div>
               </div>
             </div>
 
@@ -1934,17 +2162,10 @@ function App() {
                 </select>
               </label>
 
-              <button
-                type="button"
-                onClick={openAdminLogin}
-                className="hidden rounded-full border border-white/10 px-4 py-2.5 text-sm font-semibold text-[#c7ced6] transition hover:border-[#3a6ea5]/50 hover:bg-[#16202b] hover:text-white"
-              >
-                {adminCopy.loginTitle}
-              </button>
               <a href="#competitions" className="premium-button header-cta">
                 {copy.actions.participate}
               </a>
-              <label className="language-picker">
+              <label className="hidden language-picker">
                 <span className="language-picker__label">{copy.actions.languageLabel}</span>
                 <span aria-hidden="true" className="language-picker__chevron">âŒ„</span>
                 <select
@@ -1963,6 +2184,88 @@ function App() {
                   ))}
                 </select>
               </label>
+              <div ref={accountMenuRef} className="relative ml-3">
+                <button
+                  type="button"
+                  onClick={() => setIsAccountMenuOpen((current) => !current)}
+                  aria-expanded={isAccountMenuOpen}
+                  aria-haspopup="menu"
+                  aria-label={accountMenuCopy.menuLabel}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[#c9a24a]/25 bg-[#16202b] p-0 text-sm font-black leading-none text-[#e0c27a] transition hover:border-[#c9a24a]/55 hover:bg-[#1a2430] hover:text-white"
+                >
+                  <span className="flex h-full w-full items-center justify-center text-center uppercase">
+                    {adminInitials}
+                  </span>
+                </button>
+
+                {isAccountMenuOpen ? (
+                  <div className="absolute right-0 top-full mt-3 w-[260px] rounded-[24px] border border-white/10 bg-[#0f141d]/95 p-4 shadow-[0_22px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-3">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                        {copy.actions.languageLabel}
+                      </p>
+                      <div className="relative mt-3">
+                        <select
+                          value={locale}
+                          onChange={(event) => handleLocaleChange(event.target.value)}
+                          className="w-full appearance-none rounded-full border border-white/10 bg-[#16202b] px-4 py-3 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#c9a24a]/40"
+                          aria-label={copy.actions.languageLabel}
+                        >
+                          {languageOptions.map((option) => (
+                            <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                              {option.label}
+                            </option>
+                          ))}
+                        </select>
+                        <span
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#7e8896]"
+                        >
+                          v
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid gap-2">
+                      {isAdminAuthenticated ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={openAdminProfile}
+                            className="rounded-full border border-white/8 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                          >
+                            {adminProfileCopy.profileButton}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleAdminLogout}
+                            className="rounded-full border border-[#c9a24a]/20 bg-[#c9a24a]/10 px-4 py-3 text-left text-sm font-semibold text-[#e0c27a] transition hover:bg-[#c9a24a]/16"
+                          >
+                            {accountMenuCopy.logOut}
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            type="button"
+                            onClick={openAdminLogin}
+                            className="rounded-full border border-white/8 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                          >
+                            {copy.actions.signIn}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleGuestSignOut}
+                            className="rounded-full border border-[#c9a24a]/20 bg-[#c9a24a]/10 px-4 py-3 text-left text-sm font-semibold text-[#e0c27a] transition hover:bg-[#c9a24a]/16"
+                          >
+                            {accountMenuCopy.guestSignOut}
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
 
