@@ -1592,7 +1592,9 @@ function App() {
   const copy = getPresentationCopy(locale)
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
-  const navigationItems = copy.navItems
+  const navigationItems = copy.navItems.filter((item) =>
+    ['competitions', 'how-it-works', 'winners'].includes(item.id)
+  )
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -1891,19 +1893,19 @@ function App() {
   return (
     <div className="luxury-shell text-slate-100">
       <div className="w-full">
-        <div className="border-b border-white/8 bg-[#0d1118]/90 px-4 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.32em] text-[#e0c27a] sm:px-6">
+        <div className="bg-[linear-gradient(135deg,#c9a24a_0%,#e0c27a_100%)] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#16202b] sm:px-6">
           {copy.topbar}
         </div>
 
-        <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0a0b0f]/78 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-40 bg-[#0a0b0f]/78 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:relative">
             <a href="#home" className="flex items-center gap-2.5">
               <span className="flex h-9 w-9 items-center justify-center text-[13px] font-black tracking-[0.2em] text-[#e0c27a]">
                 DR
               </span>
             </a>
 
-            <nav className="hidden items-center gap-6 text-[15px] font-semibold text-[#c7ced6] xl:flex">
+            <nav className="hidden items-center justify-center gap-8 text-[15px] font-semibold text-[#c7ced6] xl:absolute xl:left-1/2 xl:flex xl:-translate-x-1/2">
               {navigationItems.map((item) => (
                 <a key={item.id} href={`#${item.id}`} className="transition hover:text-white">
                   {item.label}
@@ -1912,15 +1914,16 @@ function App() {
             </nav>
 
             <div className="flex items-center gap-2.5">
-              <label className="hidden items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c7ced6] lg:flex">
-                <span>{copy.actions.languageLabel}</span>
+              <label className="hidden">
+                <span className="language-picker__label">{copy.actions.languageLabel}</span>
+                <span aria-hidden="true" className="language-picker__chevron">⌄</span>
                 <select
                   value={locale}
                   onChange={(event) => {
                     setLocale(event.target.value)
                     setActiveSlide(0)
                   }}
-                  className="max-w-[165px] bg-transparent text-[11px] font-semibold text-white outline-none"
+                  className="language-picker__select"
                   aria-label={copy.actions.languageLabel}
                 >
                   {languageOptions.map((option) => (
@@ -1941,14 +1944,30 @@ function App() {
               <a href="#competitions" className="premium-button header-cta">
                 {copy.actions.participate}
               </a>
+              <label className="language-picker">
+                <span className="language-picker__label">{copy.actions.languageLabel}</span>
+                <span aria-hidden="true" className="language-picker__chevron">âŒ„</span>
+                <select
+                  value={locale}
+                  onChange={(event) => {
+                    setLocale(event.target.value)
+                    setActiveSlide(0)
+                  }}
+                  className="language-picker__select"
+                  aria-label={copy.actions.languageLabel}
+                >
+                  {languageOptions.map((option) => (
+                    <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
           </div>
 
-          <div className="border-t border-white/8 px-4 py-2.5 lg:hidden">
-            <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#c7ced6]">
-                {copy.actions.languageLabel}
-              </span>
+          <div className="hidden">
+            <div className="mx-auto flex max-w-7xl items-center justify-end gap-4">
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -1957,42 +1976,51 @@ function App() {
                 >
                   Admin
                 </button>
-                <select
-                  value={locale}
-                  onChange={(event) => {
-                    setLocale(event.target.value)
-                    setActiveSlide(0)
-                  }}
-                  className="rounded-full border border-white/10 bg-[#111722] px-4 py-2 text-sm font-semibold text-white outline-none"
-                  aria-label={copy.actions.languageLabel}
-                >
-                  {languageOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <label className="language-picker language-picker--mobile">
+                  <span className="language-picker__label">{copy.actions.languageLabel}</span>
+                  <span aria-hidden="true" className="language-picker__chevron">⌄</span>
+                  <select
+                    value={locale}
+                    onChange={(event) => {
+                      setLocale(event.target.value)
+                      setActiveSlide(0)
+                    }}
+                    className="language-picker__select"
+                    aria-label={copy.actions.languageLabel}
+                  >
+                    {languageOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
             </div>
           </div>
         </header>
         
         <main id="home">
-          <section className="section-band section-band--hero hero-stage relative min-h-[82svh] overflow-hidden lg:min-h-[88svh]">
-            <img
-              src={currentSlide.image}
-              alt={currentSlide.title}
-              className="hero-image absolute inset-0 h-full w-full object-cover transition-all duration-700"
-            />
+          <section className="section-band section-band--hero hero-stage relative min-h-[74svh] overflow-hidden lg:min-h-[80svh]">
+            {copy.heroSlides.map((slide, index) => (
+              <img
+                key={slide.id}
+                src={slide.image}
+                alt={slide.title}
+                className={`hero-image hero-image-layer absolute inset-0 h-full w-full object-cover ${
+                  index === activeSlide ? 'hero-image-layer--active' : ''
+                }`}
+              />
+            ))}
             <div className="hero-vignette absolute inset-0" />
             <div className="hero-atmosphere absolute inset-0" />
             <div className="noise-overlay absolute inset-0 opacity-35" />
 
-            <div className="hero-shell relative flex min-h-[82svh] flex-col justify-end pb-5 pt-20 lg:min-h-[88svh] lg:pb-6 lg:pt-24">
+            <div className="hero-shell relative flex min-h-[74svh] flex-col justify-start pb-4 pt-10 lg:min-h-[80svh] lg:pb-4 lg:pt-14">
               <button
                 type="button"
                 onClick={goToPreviousSlide}
-                className="hero-nav-button absolute left-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:left-6 lg:left-8"
+                className="hero-nav-button absolute left-1 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:left-2 lg:-left-3"
                 aria-label="Previous slide"
               >
                 {'<'}
@@ -2000,15 +2028,15 @@ function App() {
               <button
                 type="button"
                 onClick={goToNextSlide}
-                className="hero-nav-button absolute right-4 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:right-6 lg:right-8"
+                className="hero-nav-button absolute right-1 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:right-2 lg:-right-3"
                 aria-label="Next slide"
               >
                 {'>'}
               </button>
-              <div className="hero-main-layout relative z-10 grid flex-1 items-end gap-8 pb-[2.75rem] sm:pb-16 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-10 lg:pb-16">
+              <div className="hero-main-layout relative z-10 grid flex-1 items-start gap-6 pt-6 pb-6 sm:pt-8 sm:pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:pt-10 lg:pb-8">
                 <div className="hero-copy-stage relative max-w-[42rem]">
                   <p className="hero-shadow-title">{copy.currentDraw.title}</p>
-                  <div className="relative z-10">
+                  <div key={currentSlide.id} className="hero-copy-content relative z-10">
                     <div className="flex flex-wrap items-center gap-3">
                       <span className="section-kicker border-[#c9a24a]/34 bg-[#c9a24a]/12 shadow-[0_0_30px_rgba(201,162,74,0.08)]">
                         {currentSlide.badge}
@@ -2017,19 +2045,19 @@ function App() {
                         {copy.currentDraw.eyebrow}
                       </span>
                     </div>
-                    <p className="mt-4 max-w-[21rem] text-[0.69rem] font-bold uppercase tracking-[0.32em] text-[#9da7b3]">
+                    <p className="mt-3 max-w-[19rem] text-[0.62rem] font-bold uppercase tracking-[0.28em] text-[#9da7b3] sm:text-[0.66rem]">
                       premium dark concept / cinematic hero / commercial hierarchy
                     </p>
-                    <h1 className="hero-display mt-5 max-w-[38rem] text-[#f5f7fb]">
+                    <h1 className="hero-display mt-4 max-w-[34rem] text-[#f5f7fb]">
                       {currentSlide.title}
                     </h1>
-                    <p className="mt-4 max-w-[33rem] text-[0.98rem] leading-7 text-[#d7dee7] sm:text-[1.02rem] sm:leading-7">
+                    <p className="mt-3 max-w-[30rem] text-[0.92rem] leading-6 text-[#d7dee7] sm:text-[0.98rem] sm:leading-6">
                       {currentSlide.subtitle}
                     </p>
-                    <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
                       <a href="#competitions" className="premium-button hero-primary-cta justify-center sm:min-w-[18rem]">
                         <span>{copy.actions.explore}</span>
-                        <span aria-hidden="true" className="text-lg leading-none">{'>'}</span>
+                        <span aria-hidden="true" className="premium-button__icon">{'>'}</span>
                       </a>
                       <a
                         href="#platform"
@@ -2038,7 +2066,7 @@ function App() {
                         {copy.actions.viewScope}
                       </a>
                     </div>
-                    <div className="hero-inline-meta mt-5 flex flex-wrap gap-x-7 gap-y-3">
+                    <div className="hero-inline-meta mt-4 flex flex-wrap gap-x-6 gap-y-3">
                       <div>
                         <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
                           {copy.currentDraw.priceLabel}
@@ -2062,6 +2090,7 @@ function App() {
                 </div>
 
                 <div className="hero-spotlight-card hidden h-fit rounded-[30px] p-6 lg:block">
+                  <div key={`${currentSlide.id}-spotlight`} className="hero-copy-content">
                   <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#e0c27a]">{copy.currentDraw.eyebrow}</p>
                   <h2 className="mt-3 text-[2rem] font-black leading-[0.95] tracking-[-0.05em] text-white">
                     {copy.currentDraw.title}
@@ -2080,6 +2109,7 @@ function App() {
                       <span>{copy.currentDraw.entriesLabel}</span>
                       <strong>{currentSlide.tickets}</strong>
                     </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -2241,7 +2271,7 @@ function App() {
             </div>
           </section>
           
-          <section id="how-it-works" className="section-band section-band--tight">
+          <section id="how-it-works" className="section-band section-band--tight section-band--borderless">
             <div className="section-shell">
             <div className="mb-6">
               <span className="section-kicker">{copy.sections.howItWorks.kicker}</span>
