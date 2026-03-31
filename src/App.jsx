@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 
 const languageOptions = [
   { value: 'en', label: 'English' },
@@ -6,6 +6,16 @@ const languageOptions = [
   { value: 'es', label: 'Español' },
   { value: 'ptBR', label: 'Português (Brasil)' },
 ]
+
+const mockedMediaData = {
+  heroVideo: {
+    id: 'pinterest-demo',
+    title: 'Video Promocional (Mock)',
+    source: 'blob:https://br.pinterest.com/532406fe-cfb5-4b02-b63c-6a76a6d5336c',
+    poster: '/cars/hero-1.jpg',
+    note: 'video mockado para demo visual',
+  },
+}
 
 const contentByLocale = {
   en: {
@@ -560,7 +570,7 @@ const contentByLocale = {
         id: 'aston',
         image:
           '/cars/hero-1.jpg',
-        badge: 'Campaña principal',
+        badge: 'CampaÃ±a principal',
         title: 'Gana un Aston Martin DB12 con un fin de semana de lujo en Monaco.',
         subtitle:
           'Sorteos automotrices premium pensados para el mercado europeo, con checkout seguro, progreso en vivo y sorteos auditables.',
@@ -575,7 +585,7 @@ const contentByLocale = {
         badge: 'Mas deseado',
         title: 'De visitantes casuales a compradores en minutos, no en clics.',
         subtitle:
-          'Una landing cinematografica con urgencia por cuenta regresiva, credibilidad premium y disparadores de compra diseñados para alta conversion.',
+          'Una landing cinematografica con urgencia por cuenta regresiva, credibilidad premium y disparadores de compra diseÃ±ados para alta conversion.',
         countdown: '02d : 09h : 11m',
         price: 'EUR 24.90',
         tickets: '9,870 / 15,000 vendidos',
@@ -587,7 +597,7 @@ const contentByLocale = {
         badge: 'Elite semanal',
         title: 'Visual luxury dark con sensacion de exclusividad, confianza y escala.',
         subtitle:
-          'Construido con React y Tailwind para soportar campañas, venta de boletos, dashboards, pagos y cumplimiento en Europa.',
+          'Construido con React y Tailwind para soportar campaÃ±as, venta de boletos, dashboards, pagos y cumplimiento en Europa.',
         countdown: '06d : 03h : 54m',
         price: 'EUR 14.90',
         tickets: '12,640 / 20,000 vendidos',
@@ -612,7 +622,7 @@ const contentByLocale = {
     sections: {
       competitions: {
         kicker: 'Sorteos activos',
-        title: 'Cards premium dark diseñadas para vender el siguiente boleto rapido.',
+        title: 'Cards premium dark diseÃ±adas para vender el siguiente boleto rapido.',
         copy:
           'Texto minimo, urgencia fuerte, precio visible e imagenes premium de coches mantienen el foco en la conversion.',
       },
@@ -631,13 +641,13 @@ const contentByLocale = {
         kicker: 'Alcance de la plataforma',
         title: 'Todo lo que pidio el cliente, traducido a un front premium.',
         copy:
-          'La home vende el sueño mientras adelanta todo el sistema: campañas, checkout, dashboards, administracion y cumplimiento.',
+          'La home vende el sueÃ±o mientras adelanta todo el sistema: campaÃ±as, checkout, dashboards, administracion y cumplimiento.',
       },
       compliance: {
         kicker: 'Seguridad y cumplimiento',
-        title: 'Diseñado con GDPR en mente y listo para auditoria.',
+        title: 'DiseÃ±ado con GDPR en mente y listo para auditoria.',
         copy:
-          'Lo premium solo funciona cuando la confianza acompaña. Este concepto destaca proteccion de datos, prevencion de fraude e integridad publica del resultado.',
+          'Lo premium solo funciona cuando la confianza acompaÃ±a. Este concepto destaca proteccion de datos, prevencion de fraude e integridad publica del resultado.',
       },
       cta: {
         kicker: 'CTA final',
@@ -712,7 +722,7 @@ const contentByLocale = {
     howItWorks: [
       {
         step: '01',
-        title: 'Elige tu campaña',
+        title: 'Elige tu campaÃ±a',
         text: 'Explora sorteos premium de vehiculos, revisa especificaciones, reglas y disponibilidad en vivo dentro de una landing de alta confianza.',
       },
       {
@@ -734,7 +744,7 @@ const contentByLocale = {
         stat: 'EUR 198 gastados',
       },
       {
-        name: 'Sofia, España',
+        name: 'Sofia, EspaÃ±a',
         prize: 'Gano un Mercedes G-Class AMG',
         quote: 'Cuentas regresivas transparentes, seguimiento claro de boletos y confirmacion inmediata del pago generaron confianza real.',
         stat: '43 boletos',
@@ -748,7 +758,7 @@ const contentByLocale = {
     ],
     modules: [
       {
-        title: 'Home y Paginas de Campaña',
+        title: 'Home y Paginas de CampaÃ±a',
         text: 'Hero banners, sorteos activos, urgencia por cuenta atras, galerias del vehiculo, videos, reglamento y UI premium de conversion.',
       },
       {
@@ -781,7 +791,7 @@ const contentByLocale = {
     footer: {
       intro: 'Experiencia premium de sorteos para vehiculos de lujo, lista para escalar en toda Europa.',
       columns: [
-        { title: 'Plataforma', items: ['Campañas', 'Checkout', 'Dashboard del usuario'] },
+        { title: 'Plataforma', items: ['CampaÃ±as', 'Checkout', 'Dashboard del usuario'] },
         { title: 'Operaciones', items: ['Panel admin', 'Logs de auditoria', 'Verificacion del ganador'] },
         { title: 'Cumplimiento', items: ['Patrones GDPR', 'Anti-fraude', 'Expansion multi-pais'] },
       ],
@@ -1105,7 +1115,7 @@ const mergePresentationCopy = (base, overrides) => ({
 const presentationOverridesByLocale = {
   en: {
     topbar: 'Presentation concept / fictional content / premium automotive interface',
-    brandSubtitle: 'Presentation Demo',
+    brandSubtitle: 'Luxury Raffles Europe',
     heroSlides: [
       {
         badge: 'Featured concept',
@@ -1222,7 +1232,7 @@ const presentationOverridesByLocale = {
   },
   ptPT: {
     topbar: 'Conceito de apresentacao / conteudo ficticio / interface premium automovel',
-    brandSubtitle: 'Demo de Apresentacao',
+    brandSubtitle: 'Sorteios de Luxo na Europa',
     heroSlides: [
       { badge: 'Conceito em destaque', title: 'Apresentacao premium de veiculo com composicao cinematografica mais compacta.', subtitle: 'Conteudo ficticio preparado para destacar hierarquia, espaco e acabamento visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas exemplo' },
       { badge: 'Estudo visual', title: 'Uma landing mais refinada, elegante e com ritmo melhor controlado.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar o interface sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas exemplo' },
@@ -1294,7 +1304,7 @@ const presentationOverridesByLocale = {
   },
   es: {
     topbar: 'Concepto de presentacion / contenido ficticio / interfaz premium automotriz',
-    brandSubtitle: 'Demo de Presentacion',
+    brandSubtitle: 'Sorteos de Lujo en Europa',
     heroSlides: [
       { badge: 'Concepto destacado', title: 'Presentacion premium de vehiculo con composicion cinematica mas compacta.', subtitle: 'Contenido ficticio preparado para mostrar jerarquia, espacio y direccion visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas ejemplo' },
       { badge: 'Estudio visual', title: 'Una landing mas refinada, elegante y con mejor ritmo visual.', subtitle: 'Esta version usa texto neutro para que el cliente evale la interfaz sin claims operativos.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas ejemplo' },
@@ -1342,7 +1352,7 @@ const presentationOverridesByLocale = {
       { name: 'Perfil ejemplo C', prize: 'Concepto de interfaz', quote: 'La idea aqui es presentar una estructura pulida sin introducir claims comerciales fuertes.', stat: 'Preview cliente' },
     ],
     modules: [
-      { title: 'Showcase de Landing', text: 'Hero, filtros, cards y ritmo de secciones diseñados para una presentacion premium automotriz.' },
+      { title: 'Showcase de Landing', text: 'Hero, filtros, cards y ritmo de secciones diseÃ±ados para una presentacion premium automotriz.' },
       { title: 'Preview de Checkout', text: 'Placeholders neutros que sugieren cantidad, resumen y patrones de interaccion de pago.' },
       { title: 'Preview de Usuario', text: 'Cards ilustrativos para entradas, historial y notificaciones dentro del mismo sistema visual.' },
       { title: 'Preview Admin', text: 'Bloques orientados a gestion con la misma estetica, sin entrar en detalle de implementacion.' },
@@ -1366,7 +1376,7 @@ const presentationOverridesByLocale = {
   },
   ptBR: {
     topbar: 'Conceito de apresentacao / conteudo ficticio / interface premium automotiva',
-    brandSubtitle: 'Demo de Apresentacao',
+    brandSubtitle: 'Sorteios de Luxo na Europa',
     actions: {
       explore: 'Explorar campanha destaque',
       viewScope: 'Ver escopo da experiencia',
@@ -1538,7 +1548,7 @@ const adminByLocale = {
   },
   ptPT: {
     loginTitle: 'Acesso admin',
-    loginCopy: 'Ecrã restrito para acompanhamento administrativo e consulta de pagamentos.',
+    loginCopy: 'EcrÃ£ restrito para acompanhamento administrativo e consulta de pagamentos.',
     emailLabel: 'Email admin',
     passwordLabel: 'Palavra-passe',
     submit: 'Entrar no painel',
@@ -1555,7 +1565,7 @@ const adminByLocale = {
     loginTitle: 'Acceso admin',
     loginCopy: 'Pantalla restringida para monitoreo administrativo y consulta de pagos.',
     emailLabel: 'Email admin',
-    passwordLabel: 'Contraseña',
+    passwordLabel: 'ContraseÃ±a',
     submit: 'Entrar al panel',
     cancel: 'Volver al sitio',
     panelTitle: 'Panel administrativo',
@@ -1564,7 +1574,7 @@ const adminByLocale = {
     backSite: 'Sitio publico',
     logout: 'Salir del panel',
     helper: 'Usa esta area para revisar quien completo el pago, CPF y cantidad de cupones adquiridos.',
-    error: 'Completa email y contraseña para continuar.',
+    error: 'Completa email y contraseÃ±a para continuar.',
   },
   ptBR: {
     loginTitle: 'Acesso admin',
@@ -1677,6 +1687,7 @@ function App() {
   const [adminError, setAdminError] = useState('')
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
+  const [showMockHeroVideo, setShowMockHeroVideo] = useState(true)
   const accountMenuRef = useRef(null)
   const copy = getPresentationCopy(locale)
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
@@ -1799,6 +1810,7 @@ function App() {
   }, [])
 
   const currentSlide = copy.heroSlides[activeSlide]
+  const mockHeroVideo = mockedMediaData.heroVideo
   const handleLocaleChange = (nextLocale) => {
     setLocale(nextLocale)
     setActiveSlide(0)
@@ -1906,7 +1918,7 @@ function App() {
                       onChange={(event) =>
                         setAdminForm((current) => ({ ...current, email: event.target.value }))
                       }
-                      className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#3a6ea5]/45"
+                      className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f3be2f]/45"
                       placeholder="admin@demo.com"
                     />
                   </label>
@@ -1921,7 +1933,7 @@ function App() {
                       onChange={(event) =>
                         setAdminForm((current) => ({ ...current, password: event.target.value }))
                       }
-                      className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#3a6ea5]/45"
+                      className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f3be2f]/45"
                       placeholder="********"
                     />
                   </label>
@@ -1938,7 +1950,7 @@ function App() {
                   <button
                     type="button"
                     onClick={returnToLanding}
-                    className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/90"
+                    className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
                   >
                     {adminCopy.cancel}
                   </button>
@@ -1976,7 +1988,7 @@ function App() {
                 <button
                   type="button"
                   onClick={returnToLanding}
-                  className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/90"
+                  className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
                 >
                   {adminCopy.backSite}
                 </button>
@@ -1995,7 +2007,7 @@ function App() {
             <div className="grid gap-4">
               <div className="surface-card p-5">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#c9a24a]/25 bg-[#16202b] text-lg font-black tracking-[0.16em] text-[#e0c27a]">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full text-lg font-black tracking-[0.16em] text-[#e0c27a]">
                     {adminInitials}
                   </div>
                   <div>
@@ -2056,7 +2068,7 @@ function App() {
                     {adminProfileCopy.permissions.map((permission) => (
                       <span
                         key={permission}
-                        className="rounded-full border border-[#3a6ea5]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#c7ced6]"
+                        className="rounded-full border border-[#f3be2f]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#c7ced6]"
                       >
                         {permission}
                       </span>
@@ -2127,9 +2139,12 @@ function App() {
 
         <header className="sticky top-0 z-40 bg-[#0a0b0f]/78 backdrop-blur-xl">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:relative">
-            <a href="#home" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center text-[13px] font-black tracking-[0.2em] text-[#e0c27a]">
-                DR
+            <a href="#home" className="brand-lockup group flex items-center gap-3">
+              <span className="brand-mark">
+                <img src="/web_car_draw.webp" alt="Web Car Draw logo" className="brand-mark__image" />
+              </span>
+              <span className="hidden flex-col leading-none sm:flex">
+                <span className="brand-wordmark">Web Car Draw</span>
               </span>
             </a>
 
@@ -2144,7 +2159,7 @@ function App() {
             <div className="flex items-center gap-2.5">
               <label className="hidden">
                 <span className="language-picker__label">{copy.actions.languageLabel}</span>
-                <span aria-hidden="true" className="language-picker__chevron">⌄</span>
+                <span aria-hidden="true" className="language-picker__chevron" />
                 <select
                   value={locale}
                   onChange={(event) => {
@@ -2167,7 +2182,7 @@ function App() {
               </a>
               <label className="hidden language-picker">
                 <span className="language-picker__label">{copy.actions.languageLabel}</span>
-                <span aria-hidden="true" className="language-picker__chevron">âŒ„</span>
+                <span aria-hidden="true" className="language-picker__chevron" />
                 <select
                   value={locale}
                   onChange={(event) => {
@@ -2191,7 +2206,7 @@ function App() {
                   aria-expanded={isAccountMenuOpen}
                   aria-haspopup="menu"
                   aria-label={accountMenuCopy.menuLabel}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[#c9a24a]/25 bg-[#16202b] p-0 text-sm font-black leading-none text-[#e0c27a] transition hover:border-[#c9a24a]/55 hover:bg-[#1a2430] hover:text-white"
+                  className="flex h-11 w-11 items-center justify-center rounded-full p-0 text-sm font-black leading-none text-[#e0c27a] transition hover:text-white"
                 >
                   <span className="flex h-full w-full items-center justify-center text-center uppercase">
                     {adminInitials}
@@ -2275,13 +2290,13 @@ function App() {
                 <button
                   type="button"
                   onClick={openAdminLogin}
-                  className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white transition hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/90"
+                  className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
                 >
                   Admin
                 </button>
                 <label className="language-picker language-picker--mobile">
                   <span className="language-picker__label">{copy.actions.languageLabel}</span>
-                  <span aria-hidden="true" className="language-picker__chevron">⌄</span>
+                  <span aria-hidden="true" className="language-picker__chevron" />
                   <select
                     value={locale}
                     onChange={(event) => {
@@ -2315,11 +2330,26 @@ function App() {
                 }`}
               />
             ))}
+            {showMockHeroVideo ? (
+              <video
+                className="hero-video-layer absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster={mockHeroVideo.poster}
+                aria-label={mockHeroVideo.title}
+                onError={() => setShowMockHeroVideo(false)}
+              >
+                <source src={mockHeroVideo.source} type="video/mp4" />
+              </video>
+            ) : null}
             <div className="hero-vignette absolute inset-0" />
             <div className="hero-atmosphere absolute inset-0" />
             <div className="noise-overlay absolute inset-0 opacity-35" />
 
-            <div className="hero-shell relative flex min-h-[74svh] flex-col justify-start pb-4 pt-10 lg:min-h-[80svh] lg:pb-4 lg:pt-14">
+            <div className="hero-shell relative flex min-h-[74svh] flex-col justify-start pb-4 pt-6 lg:min-h-[80svh] lg:pb-4 lg:pt-8">
               <button
                 type="button"
                 onClick={goToPreviousSlide}
@@ -2336,7 +2366,7 @@ function App() {
               >
                 {'>'}
               </button>
-              <div className="hero-main-layout relative z-10 grid flex-1 items-start gap-6 pt-6 pb-6 sm:pt-8 sm:pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:pt-10 lg:pb-8">
+              <div className="hero-main-layout relative z-10 grid flex-1 items-start gap-6 pt-2 pb-6 sm:pt-4 sm:pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:pt-6 lg:pb-8">
                 <div className="hero-copy-stage relative max-w-[42rem]">
                   <p className="hero-shadow-title">{copy.currentDraw.title}</p>
                   <div key={currentSlide.id} className="hero-copy-content relative z-10">
@@ -2344,12 +2374,15 @@ function App() {
                       <span className="section-kicker border-[#c9a24a]/34 bg-[#c9a24a]/12 shadow-[0_0_30px_rgba(201,162,74,0.08)]">
                         {currentSlide.badge}
                       </span>
+                      <span className="inline-flex rounded-full border border-[#f3be2f]/40 bg-[#f3be2f]/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffe08a] backdrop-blur-sm">
+                        {mockHeroVideo.note}
+                      </span>
                       <span className="inline-flex rounded-full border border-white/10 bg-black/28 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#d7dee7] backdrop-blur-sm">
                         {copy.currentDraw.eyebrow}
                       </span>
                     </div>
-                    <p className="mt-3 max-w-[19rem] text-[0.62rem] font-bold uppercase tracking-[0.28em] text-[#9da7b3] sm:text-[0.66rem]">
-                      premium dark concept / cinematic hero / commercial hierarchy
+                    <p className="mt-3 max-w-[19rem] text-[0.62rem] font-bold uppercase tracking-[0.28em] text-[#a8925a] sm:text-[0.66rem]">
+                      premium animated experience / high-conversion flow / yellow brand identity
                     </p>
                     <h1 className="hero-display mt-4 max-w-[34rem] text-[#f5f7fb]">
                       {currentSlide.title}
@@ -2426,18 +2459,18 @@ function App() {
                     <button
                       type="button"
                       onClick={goToPreviousSlide}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/90"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
                       aria-label="Previous slide"
                     >
-                      ‹
+                      â€¹
                     </button>
                     <button
                       type="button"
                       onClick={goToNextSlide}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/90"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
                       aria-label="Next slide"
                     >
-                      ›
+                      â€º
                     </button>
                   </div>
                 </div>
@@ -2548,7 +2581,7 @@ function App() {
                         <h3 className="text-2xl font-extrabold tracking-[-0.03em] text-white">{competition.title}</h3>
                         <p className="mt-2 line-clamp-2 text-sm text-[#7e8896]">{competition.subtitle}</p>
                       </div>
-                      <span className="rounded-full border border-[#3a6ea5]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#c7ced6]">
+                      <span className="rounded-full border border-[#f3be2f]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#c7ced6]">
                         {copy.badges.euDraw}
                       </span>
                     </div>
@@ -2583,7 +2616,7 @@ function App() {
             <div className="grid gap-5 lg:grid-cols-3">
               {copy.howItWorks.map((item) => (
                 <article key={item.step} className="surface-card p-6">
-                  <span className="inline-flex rounded-full border border-[#3a6ea5]/30 bg-[#16202b] px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#c7ced6]">
+                  <span className="inline-flex rounded-full border border-[#f3be2f]/30 bg-[#16202b] px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#c7ced6]">
                     Step {item.step}
                   </span>
                   <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.04em] text-white">{item.title}</h3>
@@ -2696,7 +2729,7 @@ function App() {
                 </div>
                 <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
                   <a href="#competitions" className="premium-button justify-center">{copy.actions.launchConcept}</a>
-                  <button className="rounded-full border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-[#3a6ea5]/45 hover:bg-[#16202b]/90">
+                  <button className="rounded-full border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90">
                     {copy.actions.reviewModules}
                   </button>
                 </div>
@@ -2706,11 +2739,16 @@ function App() {
           </section>
         </main>
 
-        <footer className="relative border-t border-white/8 bg-[linear-gradient(180deg,#0c1118_0%,#0a0b0f_100%)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(58,110,165,0.08),transparent_22%),radial-gradient(circle_at_90%_50%,rgba(201,162,74,0.06),transparent_20%)]" />
-          <div className="section-shell relative grid gap-8 py-12 text-sm text-[#7e8896] md:grid-cols-2 lg:grid-cols-4">
+        <footer className="relative border-t border-[#f3be2f]/45 bg-[linear-gradient(180deg,#f3be2f_0%,#d39a14_100%)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(255,245,205,0.28),transparent_22%),radial-gradient(circle_at_90%_50%,rgba(168,120,8,0.16),transparent_24%)]" />
+          <div className="section-shell relative grid gap-8 py-12 text-sm text-[#4b380d] md:grid-cols-2 lg:grid-cols-4">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.28em] text-white">Drive Royale</p>
+              <div className="flex items-center gap-3">
+                <span className="brand-mark brand-mark--footer">
+                  <img src="/web_car_draw.webp" alt="Web Car Draw logo" className="brand-mark__image" />
+                </span>
+                <p className="brand-wordmark">Web Car Draw</p>
+              </div>
               <p className="mt-4 leading-7">{copy.footer.intro}</p>
             </div>
 
@@ -2736,5 +2774,7 @@ function App() {
 }
 
 export default App
+
+
 
 
