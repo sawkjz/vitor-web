@@ -1665,6 +1665,302 @@ const getAccountMenuCopy = (locale) => {
   }
 }
 
+const getCatalogCopy = (locale) => {
+  if (locale === 'en') {
+    return {
+      title: 'Search live raffles in a dense marketplace catalogue.',
+      copy: 'Find campaigns fast with search, year, color and category filters in a compact browsing flow.',
+      carsTab: 'Cars',
+      housesTab: 'Houses',
+      back: 'Back to site',
+      badge: 'Raffle catalogue',
+      resultsLabel: 'campaigns live',
+      secondaryLabel: 'Category',
+      searchPlaceholder: 'Search by model, house, city or keyword',
+      colorLabel: 'Color',
+      yearLabel: 'Year',
+      clearFilters: 'Clear filters',
+      allColors: 'All colors',
+      allYears: 'All years',
+      featuredLabel: 'Featured',
+      infoColor: 'Color',
+      infoYear: 'Year',
+      infoLocation: 'Location',
+      infoTickets: 'Tickets',
+      emptyTitle: 'No raffles available in this category yet.',
+      emptyCopy: 'Add new campaigns to populate this section automatically.',
+    }
+  }
+
+  if (locale === 'es') {
+    return {
+      title: 'Busca sorteos activos en un catalogo tipo marketplace.',
+      copy: 'Encuentra campanas rapido con busqueda, ano, color y categoria en una navegacion mas compacta.',
+      carsTab: 'Coches',
+      housesTab: 'Casas',
+      back: 'Volver al sitio',
+      badge: 'Catalogo de sorteos',
+      resultsLabel: 'campanas activas',
+      secondaryLabel: 'Categoria',
+      searchPlaceholder: 'Busca por modelo, casa, ciudad o palabra clave',
+      colorLabel: 'Color',
+      yearLabel: 'Ano',
+      clearFilters: 'Limpiar filtros',
+      allColors: 'Todos los colores',
+      allYears: 'Todos los anos',
+      featuredLabel: 'Destacado',
+      infoColor: 'Color',
+      infoYear: 'Ano',
+      infoLocation: 'Ubicacion',
+      infoTickets: 'Boletos',
+      emptyTitle: 'Todavia no hay sorteos en esta categoria.',
+      emptyCopy: 'Agrega nuevas campanas para poblar esta seccion automaticamente.',
+    }
+  }
+
+  if (locale === 'ptPT') {
+    return {
+      title: 'Pesquise sorteios ativos num catalogo estilo marketplace.',
+      copy: 'Encontre campanhas rapidamente com pesquisa, ano, cor e categoria num fluxo mais compacto.',
+      carsTab: 'Carros',
+      housesTab: 'Casas',
+      back: 'Voltar ao site',
+      badge: 'Catalogo de sorteios',
+      resultsLabel: 'campanhas ativas',
+      secondaryLabel: 'Categoria',
+      searchPlaceholder: 'Pesquise por modelo, moradia, cidade ou palavra-chave',
+      colorLabel: 'Cor',
+      yearLabel: 'Ano',
+      clearFilters: 'Limpar filtros',
+      allColors: 'Todas as cores',
+      allYears: 'Todos os anos',
+      featuredLabel: 'Destaque',
+      infoColor: 'Cor',
+      infoYear: 'Ano',
+      infoLocation: 'Localizacao',
+      infoTickets: 'Bilhetes',
+      emptyTitle: 'Ainda nao existem sorteios nesta categoria.',
+      emptyCopy: 'Adicione novas campanhas para preencher esta secao automaticamente.',
+    }
+  }
+
+  return {
+    title: 'Pesquise sorteios ativos em um catalogo estilo marketplace.',
+    copy: 'Encontre campanhas rapidamente com busca, ano, cor e categoria em uma navegacao mais compacta.',
+    carsTab: 'Carros',
+    housesTab: 'Casas',
+    back: 'Voltar ao site',
+    badge: 'Catalogo de sorteios',
+    resultsLabel: 'campanhas ativas',
+    secondaryLabel: 'Categoria',
+    searchPlaceholder: 'Pesquise por modelo, casa, cidade ou palavra-chave',
+    colorLabel: 'Cor',
+    yearLabel: 'Ano',
+    clearFilters: 'Limpar filtros',
+    allColors: 'Todas as cores',
+    allYears: 'Todos os anos',
+    featuredLabel: 'Destaque',
+    infoColor: 'Cor',
+    infoYear: 'Ano',
+    infoLocation: 'Localizacao',
+    infoTickets: 'Bilhetes',
+    emptyTitle: 'Ainda nao existem sorteios nessa categoria.',
+    emptyCopy: 'Cadastre novas campanhas para preencher esta pagina automaticamente.',
+  }
+}
+
+const getCarCatalogItems = (competitions) => {
+  const metadata = [
+    { color: 'Preto', year: '2024', location: 'Zurique', featured: true },
+    { color: 'Cinza', year: '2023', location: 'Paris', featured: false },
+    { color: 'Azul', year: '2022', location: 'Milao', featured: false },
+    { color: 'Branco', year: '2024', location: 'Berlim', featured: true },
+    { color: 'Grafite', year: '2023', location: 'Madrid', featured: false },
+    { color: 'Vermelho', year: '2025', location: 'Roma', featured: true },
+  ]
+
+  return competitions.map((competition, index) => ({
+    ...competition,
+    ...metadata[index % metadata.length],
+  }))
+}
+
+const getHouseCompetitions = (locale) => {
+  if (locale === 'en') {
+    return [
+      {
+        title: 'Lake House Signature Draw',
+        subtitle: 'Panoramic deck, fireplace and private dock',
+        image: '/cars/hero-1.jpg',
+        deadline: 'Ends in 4 days',
+        price: 'EUR 34.90',
+        progress: 58,
+        sold: '7,480 sold',
+        color: 'White',
+        year: '2022',
+        location: 'Como',
+        featured: true,
+      },
+      {
+        title: 'Ibiza Modern Villa',
+        subtitle: 'Infinity pool and designer interiors',
+        image: '/cars/hero-2.jpg',
+        deadline: 'Ends in 7 days',
+        price: 'EUR 44.90',
+        progress: 63,
+        sold: '9,120 sold',
+        color: 'Sand',
+        year: '2024',
+        location: 'Ibiza',
+        featured: false,
+      },
+      {
+        title: 'Alpine Chalet Escape',
+        subtitle: 'Mountain view residence with spa suite',
+        image: '/cars/hero-3.jpg',
+        deadline: 'Ends tonight',
+        price: 'EUR 29.90',
+        progress: 88,
+        sold: '13,040 sold',
+        color: 'Wood',
+        year: '2023',
+        location: 'Zermatt',
+        featured: true,
+      },
+    ]
+  }
+
+  if (locale === 'es') {
+    return [
+      {
+        title: 'Sorteo Casa del Lago',
+        subtitle: 'Deck panoramico, chimenea y muelle privado',
+        image: '/cars/hero-1.jpg',
+        deadline: 'Termina en 4 dias',
+        price: 'EUR 34.90',
+        progress: 58,
+        sold: '7,480 vendidos',
+        color: 'Blanco',
+        year: '2022',
+        location: 'Como',
+        featured: true,
+      },
+      {
+        title: 'Villa Moderna Ibiza',
+        subtitle: 'Piscina infinita e interiores de autor',
+        image: '/cars/hero-2.jpg',
+        deadline: 'Termina en 7 dias',
+        price: 'EUR 44.90',
+        progress: 63,
+        sold: '9,120 vendidos',
+        color: 'Arena',
+        year: '2024',
+        location: 'Ibiza',
+        featured: false,
+      },
+      {
+        title: 'Chalet Alpine Escape',
+        subtitle: 'Residencia con vista a la montana y spa',
+        image: '/cars/hero-3.jpg',
+        deadline: 'Termina hoy',
+        price: 'EUR 29.90',
+        progress: 88,
+        sold: '13,040 vendidos',
+        color: 'Madera',
+        year: '2023',
+        location: 'Zermatt',
+        featured: true,
+      },
+    ]
+  }
+
+  if (locale === 'ptPT') {
+    return [
+      {
+        title: 'Sorteio Casa do Lago',
+        subtitle: 'Deck panoramico, lareira e cais privado',
+        image: '/cars/hero-1.jpg',
+        deadline: 'Termina em 4 dias',
+        price: 'EUR 34.90',
+        progress: 58,
+        sold: '7,480 vendidos',
+        color: 'Branca',
+        year: '2022',
+        location: 'Como',
+        featured: true,
+      },
+      {
+        title: 'Villa Moderna Ibiza',
+        subtitle: 'Piscina infinity e interiores de autor',
+        image: '/cars/hero-2.jpg',
+        deadline: 'Termina em 7 dias',
+        price: 'EUR 44.90',
+        progress: 63,
+        sold: '9,120 vendidos',
+        color: 'Areia',
+        year: '2024',
+        location: 'Ibiza',
+        featured: false,
+      },
+      {
+        title: 'Chalet Alpine Escape',
+        subtitle: 'Residencia com vista para a montanha e spa',
+        image: '/cars/hero-3.jpg',
+        deadline: 'Termina hoje',
+        price: 'EUR 29.90',
+        progress: 88,
+        sold: '13,040 vendidos',
+        color: 'Madeira',
+        year: '2023',
+        location: 'Zermatt',
+        featured: true,
+      },
+    ]
+  }
+
+  return [
+    {
+      title: 'Sorteio Casa do Lago',
+      subtitle: 'Deck panoramico, lareira e pier privativo',
+      image: '/cars/hero-1.jpg',
+      deadline: 'Termina em 4 dias',
+      price: 'EUR 34.90',
+      progress: 58,
+      sold: '7,480 vendidos',
+      color: 'Branca',
+      year: '2022',
+      location: 'Como',
+      featured: true,
+    },
+    {
+      title: 'Villa Moderna Ibiza',
+      subtitle: 'Piscina de borda infinita e interiores assinados',
+      image: '/cars/hero-2.jpg',
+      deadline: 'Termina em 7 dias',
+      price: 'EUR 44.90',
+      progress: 63,
+      sold: '9,120 vendidos',
+      color: 'Areia',
+      year: '2024',
+      location: 'Ibiza',
+      featured: false,
+    },
+    {
+      title: 'Chalet Alpine Escape',
+      subtitle: 'Casa com vista para montanha e suite spa',
+      image: '/cars/hero-3.jpg',
+      deadline: 'Termina hoje',
+      price: 'EUR 29.90',
+      progress: 88,
+      sold: '13,040 vendidos',
+      color: 'Madeira',
+      year: '2023',
+      location: 'Zermatt',
+      featured: true,
+    },
+  ]
+}
+
 const formatAdminName = (email) => {
   const baseName = email.split('@')[0]?.replace(/[._-]+/g, ' ').trim()
 
@@ -1683,6 +1979,10 @@ function App() {
   const [view, setView] = useState('landing')
   const [locale, setLocale] = useState('ptBR')
   const [activeSlide, setActiveSlide] = useState(0)
+  const [catalogCategory, setCatalogCategory] = useState('cars')
+  const [catalogSearch, setCatalogSearch] = useState('')
+  const [catalogColor, setCatalogColor] = useState('all')
+  const [catalogYear, setCatalogYear] = useState('all')
   const [adminForm, setAdminForm] = useState({ email: '', password: '' })
   const [adminError, setAdminError] = useState('')
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
@@ -1694,6 +1994,26 @@ function App() {
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
   const adminProfileCopy = getAdminProfileCopy(locale)
   const accountMenuCopy = getAccountMenuCopy(locale)
+  const catalogCopy = getCatalogCopy(locale)
+  const carCompetitions = getCarCatalogItems(copy.competitions)
+  const houseCompetitions = getHouseCompetitions(locale)
+  const catalogCompetitions = catalogCategory === 'houses' ? houseCompetitions : carCompetitions
+  const catalogColors = ['all', ...new Set(catalogCompetitions.map((item) => item.color))]
+  const catalogYears = ['all', ...new Set(catalogCompetitions.map((item) => item.year).sort((a, b) => Number(b) - Number(a)))]
+  const filteredCatalogCompetitions = catalogCompetitions.filter((competition) => {
+    const normalizedSearch = catalogSearch.trim().toLowerCase()
+    const matchesSearch = !normalizedSearch || [
+      competition.title,
+      competition.subtitle,
+      competition.location,
+      competition.color,
+      competition.year,
+    ].some((value) => value.toLowerCase().includes(normalizedSearch))
+    const matchesColor = catalogColor === 'all' || competition.color === catalogColor
+    const matchesYear = catalogYear === 'all' || competition.year === catalogYear
+
+    return matchesSearch && matchesColor && matchesYear
+  })
   const navigationItems = copy.navItems.filter((item) =>
     ['competitions', 'how-it-works', 'winners'].includes(item.id)
   )
@@ -1868,6 +2188,15 @@ function App() {
 
   const goToNextSlide = () => {
     setActiveSlide((current) => (current + 1) % copy.heroSlides.length)
+  }
+
+  const openCatalogPage = (category = 'cars') => {
+    setCatalogCategory(category)
+    setCatalogSearch('')
+    setCatalogColor('all')
+    setCatalogYear('all')
+    setIsAccountMenuOpen(false)
+    setView('catalog')
   }
 
   if (view === 'adminLogin') {
@@ -2130,6 +2459,274 @@ function App() {
     )
   }
 
+  if (view === 'catalog') {
+    return (
+      <div className="luxury-shell text-slate-100">
+        <div className="w-full">
+          <div className="bg-[linear-gradient(135deg,#c9a24a_0%,#e0c27a_100%)] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#16202b] sm:px-6">
+            {copy.topbar}
+          </div>
+
+          <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0a0b0f]/86 backdrop-blur-xl">
+            <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+              <button
+                type="button"
+                onClick={returnToLanding}
+                className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+              >
+                {catalogCopy.back}
+              </button>
+
+              <div className="flex items-center gap-3">
+                <span className="rounded-full border border-[#c9a24a]/28 bg-[#c9a24a]/12 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#e0c27a]">
+                  {catalogCopy.badge}
+                </span>
+                <label className="relative">
+                  <select
+                    value={locale}
+                    onChange={(event) => handleLocaleChange(event.target.value)}
+                    className="appearance-none rounded-full border border-white/10 bg-[#111722] px-4 py-3 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#c9a24a]/40"
+                    aria-label={copy.actions.languageLabel}
+                  >
+                    {languageOptions.map((option) => (
+                      <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#7e8896]"
+                  >
+                    v
+                  </span>
+                </label>
+              </div>
+            </div>
+          </header>
+
+          <main className="section-band section-band--deep min-h-screen">
+            <div className="section-shell">
+              <section className="rounded-[26px] border border-white/8 bg-[#0f141d] p-4 shadow-[0_22px_80px_rgba(0,0,0,0.28)] sm:p-5">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                  <div>
+                    <span className="section-kicker">{catalogCopy.badge}</span>
+                    <h1 className="mt-3 text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">
+                      {catalogCopy.title}
+                    </h1>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-[#c7ced6]">{catalogCopy.copy}</p>
+                  </div>
+
+                  <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_160px_140px] lg:min-w-[760px]">
+                    <label className="block">
+                      <input
+                        type="text"
+                        value={catalogSearch}
+                        onChange={(event) => setCatalogSearch(event.target.value)}
+                        placeholder={catalogCopy.searchPlaceholder}
+                        className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c9a24a]/40"
+                      />
+                    </label>
+
+                    <label className="block">
+                      <select
+                        value={catalogColor}
+                        onChange={(event) => setCatalogColor(event.target.value)}
+                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c9a24a]/40"
+                      >
+                        {catalogColors.map((color) => (
+                          <option key={color} value={color}>
+                            {color === 'all' ? catalogCopy.allColors : color}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label className="block">
+                      <select
+                        value={catalogYear}
+                        onChange={(event) => setCatalogYear(event.target.value)}
+                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c9a24a]/40"
+                      >
+                        {catalogYears.map((year) => (
+                          <option key={year} value={year}>
+                            {year === 'all' ? catalogCopy.allYears : year}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </div>
+                </div>
+              </section>
+
+              <section className="mt-5 grid gap-5 xl:grid-cols-[260px_minmax(0,1fr)]">
+                <aside className="surface-card h-fit p-4 sm:p-5">
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCatalogCategory('cars')}
+                      className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                        catalogCategory === 'cars'
+                          ? 'border border-[#c9a24a]/30 bg-[#c9a24a]/12 text-[#e0c27a]'
+                          : 'border border-white/10 bg-white/5 text-white hover:border-[#c9a24a]/30 hover:bg-[#16202b]'
+                      }`}
+                    >
+                      {catalogCopy.carsTab}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCatalogCategory('houses')}
+                      className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                        catalogCategory === 'houses'
+                          ? 'border border-[#c9a24a]/30 bg-[#c9a24a]/12 text-[#e0c27a]'
+                          : 'border border-white/10 bg-white/5 text-white hover:border-[#c9a24a]/30 hover:bg-[#16202b]'
+                      }`}
+                    >
+                      {catalogCopy.housesTab}
+                    </button>
+                  </div>
+
+                  <div className="mt-5 space-y-4">
+                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                        {catalogCopy.secondaryLabel}
+                      </p>
+                      <p className="mt-2 text-lg font-black text-white">
+                        {catalogCategory === 'houses' ? catalogCopy.housesTab : catalogCopy.carsTab}
+                      </p>
+                    </div>
+                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                        {catalogCopy.resultsLabel}
+                      </p>
+                      <p className="mt-2 text-lg font-black text-[#e0c27a]">{filteredCatalogCompetitions.length}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCatalogSearch('')
+                        setCatalogColor('all')
+                        setCatalogYear('all')
+                      }}
+                      className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                    >
+                      {catalogCopy.clearFilters}
+                    </button>
+                  </div>
+                </aside>
+
+                {filteredCatalogCompetitions.length ? (
+                  <div className="space-y-4">
+                    {filteredCatalogCompetitions.map((competition) => (
+                      <article
+                        key={`${catalogCategory}-${competition.title}`}
+                        className="overflow-hidden rounded-[24px] border border-white/8 bg-[#111722] shadow-[0_16px_60px_rgba(0,0,0,0.24)]"
+                      >
+                        <div className="grid gap-0 md:grid-cols-[220px_minmax(0,1fr)_210px]">
+                          <div className="relative h-full min-h-[180px] overflow-hidden">
+                            <img src={competition.image} alt={competition.title} className="h-full w-full object-cover" />
+                            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.04)_0%,rgba(10,11,15,0.6)_100%)]" />
+                            <div className="absolute left-4 top-4 rounded-full border border-[#c9a24a]/25 bg-[#0a0b0f]/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e0c27a]">
+                              {competition.deadline}
+                            </div>
+                          </div>
+
+                          <div className="p-4 sm:p-5">
+                            <div className="flex flex-wrap items-center gap-2">
+                              {competition.featured ? (
+                                <span className="rounded-full bg-[#e0c27a] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#0a0b0f]">
+                                  {catalogCopy.featuredLabel}
+                                </span>
+                              ) : null}
+                              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#c7ced6]">
+                                {catalogCategory === 'houses' ? catalogCopy.housesTab : catalogCopy.carsTab}
+                              </span>
+                            </div>
+
+                            <h2 className="mt-3 text-2xl font-extrabold tracking-[-0.03em] text-white">
+                              {competition.title}
+                            </h2>
+                            <p className="mt-2 text-sm leading-6 text-[#7e8896]">{competition.subtitle}</p>
+
+                            <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                              <div>
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                  {catalogCopy.infoColor}
+                                </p>
+                                <p className="mt-1 text-sm font-semibold text-white">{competition.color}</p>
+                              </div>
+                              <div>
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                  {catalogCopy.infoYear}
+                                </p>
+                                <p className="mt-1 text-sm font-semibold text-white">{competition.year}</p>
+                              </div>
+                              <div>
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                  {catalogCopy.infoLocation}
+                                </p>
+                                <p className="mt-1 text-sm font-semibold text-white">{competition.location}</p>
+                              </div>
+                              <div>
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                  {catalogCopy.infoTickets}
+                                </p>
+                                <p className="mt-1 text-sm font-semibold text-white">{competition.sold}</p>
+                              </div>
+                            </div>
+
+                            <div className="mt-4">
+                              <div className="flex items-center justify-between text-sm text-[#c7ced6]">
+                                <span>{competition.sold}</span>
+                                <span>{competition.progress}%</span>
+                              </div>
+                              <div className="mt-2 h-2 rounded-full bg-white/8">
+                                <div
+                                  className="h-full rounded-full bg-[#c9a24a]"
+                                  style={{ width: `${competition.progress}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col justify-between border-t border-white/8 bg-[#0f141d] p-4 md:border-l md:border-t-0">
+                            <div>
+                              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                                {copy.currentDraw.priceLabel}
+                              </p>
+                              <p className="mt-2 text-3xl font-black text-[#e0c27a]">{competition.price}</p>
+                            </div>
+
+                            <div className="mt-4 space-y-3">
+                              <button type="button" className="premium-button w-full justify-center">
+                                {copy.actions.buyTickets}
+                              </button>
+                              <button
+                                type="button"
+                                className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                              >
+                                {copy.actions.enterCompetition}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="surface-card p-8">
+                    <h2 className="text-2xl font-black text-white">{catalogCopy.emptyTitle}</h2>
+                    <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{catalogCopy.emptyCopy}</p>
+                  </div>
+                )}
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="luxury-shell text-slate-100">
       <div className="w-full">
@@ -2177,9 +2774,13 @@ function App() {
                 </select>
               </label>
 
-              <a href="#competitions" className="premium-button header-cta">
+              <button
+                type="button"
+                onClick={() => openCatalogPage('cars')}
+                className="premium-button header-cta"
+              >
                 {copy.actions.participate}
-              </a>
+              </button>
               <label className="hidden language-picker">
                 <span className="language-picker__label">{copy.actions.languageLabel}</span>
                 <span aria-hidden="true" className="language-picker__chevron" />
@@ -2391,10 +2992,14 @@ function App() {
                       {currentSlide.subtitle}
                     </p>
                     <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
-                      <a href="#competitions" className="premium-button hero-primary-cta justify-center sm:min-w-[18rem]">
+                      <button
+                        type="button"
+                        onClick={() => openCatalogPage('cars')}
+                        className="premium-button hero-primary-cta justify-center sm:min-w-[18rem]"
+                      >
                         <span>{copy.actions.explore}</span>
                         <span aria-hidden="true" className="premium-button__icon">{'>'}</span>
-                      </a>
+                      </button>
                       <a
                         href="#platform"
                         className="hero-secondary-cta rounded-full px-7 py-4 text-center text-sm font-semibold text-white"
@@ -2599,7 +3204,13 @@ function App() {
                       </div>
                     </div>
 
-                    <button className="premium-button mt-6 w-full justify-center">{copy.actions.enterCompetition}</button>
+                    <button
+                      type="button"
+                      onClick={() => openCatalogPage('cars')}
+                      className="premium-button mt-6 w-full justify-center"
+                    >
+                      {copy.actions.enterCompetition}
+                    </button>
                   </div>
                 </article>
               ))}
@@ -2728,7 +3339,13 @@ function App() {
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-[#c7ced6]">{copy.sections.cta.copy}</p>
                 </div>
                 <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
-                  <a href="#competitions" className="premium-button justify-center">{copy.actions.launchConcept}</a>
+                  <button
+                    type="button"
+                    onClick={() => openCatalogPage('cars')}
+                    className="premium-button justify-center"
+                  >
+                    {copy.actions.launchConcept}
+                  </button>
                   <button className="rounded-full border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90">
                     {copy.actions.reviewModules}
                   </button>
