@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useMemo, useRef, useState } from 'react'
 
 const languageOptions = [
   { value: 'en', label: 'English' },
@@ -1791,7 +1791,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Lake House Signature Draw',
         subtitle: 'Panoramic deck, fireplace and private dock',
-        image: '/cars/hero-1.jpg',
+        image: '/houses/6391394-house-6597406_1920.jpg',
         deadline: 'Ends in 4 days',
         price: 'EUR 34.90',
         progress: 58,
@@ -1804,7 +1804,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Ibiza Modern Villa',
         subtitle: 'Infinity pool and designer interiors',
-        image: '/cars/hero-2.jpg',
+        image: '/houses/gregorybutler-large-home-389271_1280.jpg',
         deadline: 'Ends in 7 days',
         price: 'EUR 44.90',
         progress: 63,
@@ -1817,7 +1817,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Alpine Chalet Escape',
         subtitle: 'Mountain view residence with spa suite',
-        image: '/cars/hero-3.jpg',
+        image: '/houses/peggychoucair-house-4028391_1920.jpg',
         deadline: 'Ends tonight',
         price: 'EUR 29.90',
         progress: 88,
@@ -1835,7 +1835,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Sorteo Casa del Lago',
         subtitle: 'Deck panoramico, chimenea y muelle privado',
-        image: '/cars/hero-1.jpg',
+        image: '/houses/6391394-house-6597406_1920.jpg',
         deadline: 'Termina en 4 dias',
         price: 'EUR 34.90',
         progress: 58,
@@ -1848,7 +1848,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Villa Moderna Ibiza',
         subtitle: 'Piscina infinita e interiores de autor',
-        image: '/cars/hero-2.jpg',
+        image: '/houses/gregorybutler-large-home-389271_1280.jpg',
         deadline: 'Termina en 7 dias',
         price: 'EUR 44.90',
         progress: 63,
@@ -1861,7 +1861,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Chalet Alpine Escape',
         subtitle: 'Residencia con vista a la montana y spa',
-        image: '/cars/hero-3.jpg',
+        image: '/houses/peggychoucair-house-4028391_1920.jpg',
         deadline: 'Termina hoy',
         price: 'EUR 29.90',
         progress: 88,
@@ -1879,7 +1879,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Sorteio Casa do Lago',
         subtitle: 'Deck panoramico, lareira e cais privado',
-        image: '/cars/hero-1.jpg',
+        image: '/houses/6391394-house-6597406_1920.jpg',
         deadline: 'Termina em 4 dias',
         price: 'EUR 34.90',
         progress: 58,
@@ -1892,7 +1892,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Villa Moderna Ibiza',
         subtitle: 'Piscina infinity e interiores de autor',
-        image: '/cars/hero-2.jpg',
+        image: '/houses/gregorybutler-large-home-389271_1280.jpg',
         deadline: 'Termina em 7 dias',
         price: 'EUR 44.90',
         progress: 63,
@@ -1905,7 +1905,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Chalet Alpine Escape',
         subtitle: 'Residencia com vista para a montanha e spa',
-        image: '/cars/hero-3.jpg',
+        image: '/houses/peggychoucair-house-4028391_1920.jpg',
         deadline: 'Termina hoje',
         price: 'EUR 29.90',
         progress: 88,
@@ -1922,7 +1922,7 @@ const getHouseCompetitions = (locale) => {
     {
       title: 'Sorteio Casa do Lago',
       subtitle: 'Deck panoramico, lareira e pier privativo',
-      image: '/cars/hero-1.jpg',
+      image: '/houses/6391394-house-6597406_1920.jpg',
       deadline: 'Termina em 4 dias',
       price: 'EUR 34.90',
       progress: 58,
@@ -1935,7 +1935,7 @@ const getHouseCompetitions = (locale) => {
     {
       title: 'Villa Moderna Ibiza',
       subtitle: 'Piscina de borda infinita e interiores assinados',
-      image: '/cars/hero-2.jpg',
+      image: '/houses/gregorybutler-large-home-389271_1280.jpg',
       deadline: 'Termina em 7 dias',
       price: 'EUR 44.90',
       progress: 63,
@@ -1948,7 +1948,7 @@ const getHouseCompetitions = (locale) => {
     {
       title: 'Chalet Alpine Escape',
       subtitle: 'Casa com vista para montanha e suite spa',
-      image: '/cars/hero-3.jpg',
+      image: '/houses/peggychoucair-house-4028391_1920.jpg',
       deadline: 'Termina hoje',
       price: 'EUR 29.90',
       progress: 88,
@@ -1987,33 +1987,44 @@ function App() {
   const [adminError, setAdminError] = useState('')
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
-  const [showMockHeroVideo, setShowMockHeroVideo] = useState(true)
+  const [showMockHeroVideo, setShowMockHeroVideo] = useState(false)
   const accountMenuRef = useRef(null)
-  const copy = getPresentationCopy(locale)
+  const copy = useMemo(() => getPresentationCopy(locale), [locale])
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
   const adminProfileCopy = getAdminProfileCopy(locale)
   const accountMenuCopy = getAccountMenuCopy(locale)
   const catalogCopy = getCatalogCopy(locale)
-  const carCompetitions = getCarCatalogItems(copy.competitions)
-  const houseCompetitions = getHouseCompetitions(locale)
-  const catalogCompetitions = catalogCategory === 'houses' ? houseCompetitions : carCompetitions
-  const catalogColors = ['all', ...new Set(catalogCompetitions.map((item) => item.color))]
-  const catalogYears = ['all', ...new Set(catalogCompetitions.map((item) => item.year).sort((a, b) => Number(b) - Number(a)))]
-  const filteredCatalogCompetitions = catalogCompetitions.filter((competition) => {
+  const carCompetitions = useMemo(() => getCarCatalogItems(copy.competitions), [copy.competitions])
+  const houseCompetitions = useMemo(() => getHouseCompetitions(locale), [locale])
+  const catalogCompetitions = useMemo(
+    () => (catalogCategory === 'houses' ? houseCompetitions : carCompetitions),
+    [catalogCategory, houseCompetitions, carCompetitions]
+  )
+  const catalogColors = useMemo(
+    () => ['all', ...new Set(catalogCompetitions.map((item) => item.color))],
+    [catalogCompetitions]
+  )
+  const catalogYears = useMemo(
+    () => ['all', ...new Set(catalogCompetitions.map((item) => item.year).sort((a, b) => Number(b) - Number(a)))],
+    [catalogCompetitions]
+  )
+  const filteredCatalogCompetitions = useMemo(() => {
     const normalizedSearch = catalogSearch.trim().toLowerCase()
-    const matchesSearch = !normalizedSearch || [
-      competition.title,
-      competition.subtitle,
-      competition.location,
-      competition.color,
-      competition.year,
-    ].some((value) => value.toLowerCase().includes(normalizedSearch))
-    const matchesColor = catalogColor === 'all' || competition.color === catalogColor
-    const matchesYear = catalogYear === 'all' || competition.year === catalogYear
+    return catalogCompetitions.filter((competition) => {
+      const matchesSearch = !normalizedSearch || [
+        competition.title,
+        competition.subtitle,
+        competition.location,
+        competition.color,
+        competition.year,
+      ].some((value) => value.toLowerCase().includes(normalizedSearch))
+      const matchesColor = catalogColor === 'all' || competition.color === catalogColor
+      const matchesYear = catalogYear === 'all' || competition.year === catalogYear
 
-    return matchesSearch && matchesColor && matchesYear
-  })
+      return matchesSearch && matchesColor && matchesYear
+    })
+  }, [catalogSearch, catalogCompetitions, catalogColor, catalogYear])
   const navigationItems = copy.navItems.filter((item) =>
     ['competitions', 'how-it-works', 'winners'].includes(item.id)
   )
@@ -2027,16 +2038,45 @@ function App() {
     .join('')
 
   useEffect(() => {
+    if (view !== 'landing') {
+      return undefined
+    }
+
     const interval = window.setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) {
+        return
+      }
       setActiveSlide((current) => (current + 1) % copy.heroSlides.length)
     }, 5000)
 
     return () => window.clearInterval(interval)
-  }, [copy.heroSlides.length])
+  }, [copy.heroSlides.length, view])
 
   useEffect(() => {
     document.documentElement.lang = copy.htmlLang
   }, [copy.htmlLang])
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return undefined
+    }
+
+    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const narrowViewportQuery = window.matchMedia('(max-width: 767px)')
+
+    const updateHeroVideoState = () => {
+      setShowMockHeroVideo(!(reduceMotionQuery.matches || narrowViewportQuery.matches))
+    }
+
+    updateHeroVideoState()
+    reduceMotionQuery.addEventListener('change', updateHeroVideoState)
+    narrowViewportQuery.addEventListener('change', updateHeroVideoState)
+
+    return () => {
+      reduceMotionQuery.removeEventListener('change', updateHeroVideoState)
+      narrowViewportQuery.removeEventListener('change', updateHeroVideoState)
+    }
+  }, [])
 
   useEffect(() => {
     if (!isAccountMenuOpen) {
@@ -2210,18 +2250,18 @@ function App() {
                 <h1 className="mt-5 max-w-3xl text-4xl font-black tracking-[-0.05em] text-white sm:text-5xl">
                   {adminCopy.loginTitle}
                 </h1>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-[#c7ced6] sm:text-base">
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-[#b7beca] sm:text-base">
                   {adminCopy.loginCopy}
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-3">
                 {paymentScreen.summary.map((item) => (
-                  <div key={item.label} className="rounded-[22px] border border-white/8 bg-[#111722] p-5">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                  <div key={item.label} className="rounded-[22px] border border-white/8 bg-[#12131a] p-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">
                       {item.label}
                     </p>
-                    <p className="mt-3 text-3xl font-black text-[#e0c27a]">{item.value}</p>
+                    <p className="mt-3 text-3xl font-black text-[#ffd25a]">{item.value}</p>
                   </div>
                 ))}
               </div>
@@ -2229,7 +2269,7 @@ function App() {
 
             <div className="surface-card p-6 sm:p-7">
               <form className="flex h-full flex-col justify-center" onSubmit={handleAdminLogin}>
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#7e8896]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9aa0ac]">
                   {adminCopy.panelBadge}
                 </p>
                 <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] text-white">
@@ -2238,7 +2278,7 @@ function App() {
 
                 <div className="mt-6 space-y-4">
                   <label className="block">
-                    <span className="mb-2 block text-sm font-semibold text-[#c7ced6]">
+                    <span className="mb-2 block text-sm font-semibold text-[#b7beca]">
                       {adminCopy.emailLabel}
                     </span>
                     <input
@@ -2247,13 +2287,13 @@ function App() {
                       onChange={(event) =>
                         setAdminForm((current) => ({ ...current, email: event.target.value }))
                       }
-                      className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f3be2f]/45"
+                      className="w-full rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                       placeholder="admin@demo.com"
                     />
                   </label>
 
                   <label className="block">
-                    <span className="mb-2 block text-sm font-semibold text-[#c7ced6]">
+                    <span className="mb-2 block text-sm font-semibold text-[#b7beca]">
                       {adminCopy.passwordLabel}
                     </span>
                     <input
@@ -2262,14 +2302,14 @@ function App() {
                       onChange={(event) =>
                         setAdminForm((current) => ({ ...current, password: event.target.value }))
                       }
-                      className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f3be2f]/45"
+                      className="w-full rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                       placeholder="********"
                     />
                   </label>
                 </div>
 
                 {adminError ? (
-                  <p className="mt-4 text-sm text-[#e0c27a]">{adminError}</p>
+                  <p className="mt-4 text-sm text-[#ffd25a]">{adminError}</p>
                 ) : null}
 
                 <div className="mt-6 flex flex-col gap-3">
@@ -2279,7 +2319,7 @@ function App() {
                   <button
                     type="button"
                     onClick={returnToLanding}
-                    className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
+                    className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                   >
                     {adminCopy.cancel}
                   </button>
@@ -2301,14 +2341,14 @@ function App() {
               <div>
                 <div className="flex items-center gap-3">
                   <span className="section-kicker">{adminCopy.panelBadge}</span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#c7ced6]">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b7beca]">
                     {paymentScreen.kicker}
                   </span>
                 </div>
                 <h1 className="mt-4 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">
                   {adminCopy.panelTitle}
                 </h1>
-                <p className="mt-3 max-w-3xl text-sm leading-7 text-[#c7ced6]">
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-[#b7beca]">
                   {adminCopy.panelCopy}
                 </p>
               </div>
@@ -2317,14 +2357,14 @@ function App() {
                 <button
                   type="button"
                   onClick={returnToLanding}
-                  className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
+                  className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                 >
                   {adminCopy.backSite}
                 </button>
                 <button
                   type="button"
                   onClick={handleAdminLogout}
-                  className="rounded-full border border-[#c9a24a]/25 bg-[#c9a24a]/10 px-5 py-3 text-sm font-semibold text-[#e0c27a] transition hover:bg-[#c9a24a]/16"
+                  className="rounded-full border border-[#f0c000]/25 bg-[#f0c000]/10 px-5 py-3 text-sm font-semibold text-[#ffd25a] transition hover:bg-[#f0c000]/16"
                 >
                   {adminCopy.logout}
                 </button>
@@ -2336,53 +2376,53 @@ function App() {
             <div className="grid gap-4">
               <div className="surface-card p-5">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full text-lg font-black tracking-[0.16em] text-[#e0c27a]">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full text-lg font-black tracking-[0.16em] text-[#ffd25a]">
                     {adminInitials}
                   </div>
                   <div>
                     <p className="text-lg font-black text-white">{adminName}</p>
-                    <p className="text-sm text-[#c7ced6]">{adminProfileCopy.roleValue}</p>
+                    <p className="text-sm text-[#b7beca]">{adminProfileCopy.roleValue}</p>
                   </div>
                 </div>
 
                 <div className="mt-5">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">
                     {adminProfileCopy.profileTitle}
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{adminProfileCopy.profileCopy}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#b7beca]">{adminProfileCopy.profileCopy}</p>
                 </div>
 
                 <div className="mt-5 grid gap-3">
-                  <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                  <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                       {adminProfileCopy.nameLabel}
                     </p>
                     <p className="mt-2 text-sm font-semibold text-white">{adminName}</p>
                   </div>
-                  <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                  <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                       {adminCopy.emailLabel}
                     </p>
                     <p className="mt-2 text-sm font-semibold text-white">{adminEmail}</p>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                    <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                         {adminProfileCopy.roleLabel}
                       </p>
                       <p className="mt-2 text-sm font-semibold text-white">{adminProfileCopy.roleValue}</p>
                     </div>
-                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                    <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                         {adminProfileCopy.statusLabel}
                       </p>
-                      <p className="mt-2 text-sm font-semibold text-[#e0c27a]">
+                      <p className="mt-2 text-sm font-semibold text-[#ffd25a]">
                         {adminProfileCopy.statusValue}
                       </p>
                     </div>
                   </div>
-                  <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                  <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                       {adminProfileCopy.accessLabel}
                     </p>
                     <p className="mt-2 text-sm font-semibold text-white">Hoje, 20:15</p>
@@ -2390,14 +2430,14 @@ function App() {
                 </div>
 
                 <div className="mt-5">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                     {adminProfileCopy.permissionsTitle}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {adminProfileCopy.permissions.map((permission) => (
                       <span
                         key={permission}
-                        className="rounded-full border border-[#f3be2f]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#c7ced6]"
+                        className="rounded-full border border-[#f0c000]/30 bg-[#1a1c24] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#b7beca]"
                       >
                         {permission}
                       </span>
@@ -2409,18 +2449,18 @@ function App() {
               <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
                 {paymentScreen.summary.map((item) => (
                   <div key={item.label} className="surface-card p-5">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">
                       {item.label}
                     </p>
-                    <p className="mt-3 text-3xl font-black text-[#e0c27a]">{item.value}</p>
+                    <p className="mt-3 text-3xl font-black text-[#ffd25a]">{item.value}</p>
                   </div>
                 ))}
 
                 <div className="surface-card p-5 sm:col-span-3 xl:col-span-1">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">
                     {paymentScreen.kicker}
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{adminCopy.helper}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#b7beca]">{adminCopy.helper}</p>
                 </div>
               </div>
             </div>
@@ -2428,12 +2468,12 @@ function App() {
             <div className="surface-card overflow-hidden p-0">
               <div className="overflow-x-auto">
                 <table className="min-w-full border-separate border-spacing-0 text-left">
-                  <thead className="bg-[#111722]">
+                  <thead className="bg-[#12131a]">
                     <tr>
                       {paymentScreen.headers.map((header) => (
                         <th
                           key={header}
-                          className="border-b border-white/8 px-5 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]"
+                          className="border-b border-white/8 px-5 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]"
                         >
                           {header}
                         </th>
@@ -2442,11 +2482,11 @@ function App() {
                   </thead>
                   <tbody>
                     {paymentScreen.rows.map((row) => (
-                      <tr key={`${row.name}-${row.cpf}`} className="bg-[#0f141d] transition hover:bg-[#16202b]">
+                      <tr key={`${row.name}-${row.cpf}`} className="bg-[#101218] transition hover:bg-[#1a1c24]">
                         <td className="border-b border-white/6 px-5 py-4 text-sm font-semibold text-white">{row.name}</td>
-                        <td className="border-b border-white/6 px-5 py-4 text-sm text-[#c7ced6]">{row.cpf}</td>
-                        <td className="border-b border-white/6 px-5 py-4 text-sm font-bold text-[#e0c27a]">{row.coupons}</td>
-                        <td className="border-b border-white/6 px-5 py-4 text-sm text-[#c7ced6]">{row.status}</td>
+                        <td className="border-b border-white/6 px-5 py-4 text-sm text-[#b7beca]">{row.cpf}</td>
+                        <td className="border-b border-white/6 px-5 py-4 text-sm font-bold text-[#ffd25a]">{row.coupons}</td>
+                        <td className="border-b border-white/6 px-5 py-4 text-sm text-[#b7beca]">{row.status}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -2463,40 +2503,40 @@ function App() {
     return (
       <div className="luxury-shell text-slate-100">
         <div className="w-full">
-          <div className="bg-[linear-gradient(135deg,#c9a24a_0%,#e0c27a_100%)] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#16202b] sm:px-6">
+          <div className="bg-[#f0c000] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#0e0e13] sm:px-6">
             {copy.topbar}
           </div>
 
-          <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0a0b0f]/86 backdrop-blur-xl">
+          <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0b0c10]/86 backdrop-blur-xl">
             <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
               <button
                 type="button"
                 onClick={returnToLanding}
-                className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
               >
                 {catalogCopy.back}
               </button>
 
               <div className="flex items-center gap-3">
-                <span className="rounded-full border border-[#c9a24a]/28 bg-[#c9a24a]/12 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#e0c27a]">
+                <span className="rounded-full border border-[#f0c000]/28 bg-[#f0c000]/12 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#ffd25a]">
                   {catalogCopy.badge}
                 </span>
                 <label className="relative">
                   <select
                     value={locale}
                     onChange={(event) => handleLocaleChange(event.target.value)}
-                    className="appearance-none rounded-full border border-white/10 bg-[#111722] px-4 py-3 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#c9a24a]/40"
+                    className="appearance-none rounded-full border border-white/10 bg-[#12131a] px-4 py-3 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#f0c000]/40"
                     aria-label={copy.actions.languageLabel}
                   >
                     {languageOptions.map((option) => (
-                      <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                      <option key={option.value} value={option.value} className="bg-[#12131a] text-white">
                         {option.label}
                       </option>
                     ))}
                   </select>
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#7e8896]"
+                    className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#9aa0ac]"
                   >
                     v
                   </span>
@@ -2507,14 +2547,14 @@ function App() {
 
           <main className="section-band section-band--deep min-h-screen">
             <div className="section-shell">
-              <section className="rounded-[26px] border border-white/8 bg-[#0f141d] p-4 shadow-[0_22px_80px_rgba(0,0,0,0.28)] sm:p-5">
+              <section className="rounded-[26px] border border-white/8 bg-[#101218] p-4 shadow-[0_22px_80px_rgba(0,0,0,0.28)] sm:p-5">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                   <div>
                     <span className="section-kicker">{catalogCopy.badge}</span>
                     <h1 className="mt-3 text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">
                       {catalogCopy.title}
                     </h1>
-                    <p className="mt-2 max-w-3xl text-sm leading-6 text-[#c7ced6]">{catalogCopy.copy}</p>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-[#b7beca]">{catalogCopy.copy}</p>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_160px_140px] lg:min-w-[760px]">
@@ -2524,7 +2564,7 @@ function App() {
                         value={catalogSearch}
                         onChange={(event) => setCatalogSearch(event.target.value)}
                         placeholder={catalogCopy.searchPlaceholder}
-                        className="w-full rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c9a24a]/40"
+                        className="w-full rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/40"
                       />
                     </label>
 
@@ -2532,7 +2572,7 @@ function App() {
                       <select
                         value={catalogColor}
                         onChange={(event) => setCatalogColor(event.target.value)}
-                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c9a24a]/40"
+                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/40"
                       >
                         {catalogColors.map((color) => (
                           <option key={color} value={color}>
@@ -2546,7 +2586,7 @@ function App() {
                       <select
                         value={catalogYear}
                         onChange={(event) => setCatalogYear(event.target.value)}
-                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#111722] px-4 py-3 text-sm text-white outline-none transition focus:border-[#c9a24a]/40"
+                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/40"
                       >
                         {catalogYears.map((year) => (
                           <option key={year} value={year}>
@@ -2567,8 +2607,8 @@ function App() {
                       onClick={() => setCatalogCategory('cars')}
                       className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                         catalogCategory === 'cars'
-                          ? 'border border-[#c9a24a]/30 bg-[#c9a24a]/12 text-[#e0c27a]'
-                          : 'border border-white/10 bg-white/5 text-white hover:border-[#c9a24a]/30 hover:bg-[#16202b]'
+                          ? 'border border-[#f0c000]/30 bg-[#f0c000]/12 text-[#ffd25a]'
+                          : 'border border-white/10 bg-white/5 text-white hover:border-[#f0c000]/30 hover:bg-[#1a1c24]'
                       }`}
                     >
                       {catalogCopy.carsTab}
@@ -2578,8 +2618,8 @@ function App() {
                       onClick={() => setCatalogCategory('houses')}
                       className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                         catalogCategory === 'houses'
-                          ? 'border border-[#c9a24a]/30 bg-[#c9a24a]/12 text-[#e0c27a]'
-                          : 'border border-white/10 bg-white/5 text-white hover:border-[#c9a24a]/30 hover:bg-[#16202b]'
+                          ? 'border border-[#f0c000]/30 bg-[#f0c000]/12 text-[#ffd25a]'
+                          : 'border border-white/10 bg-white/5 text-white hover:border-[#f0c000]/30 hover:bg-[#1a1c24]'
                       }`}
                     >
                       {catalogCopy.housesTab}
@@ -2587,19 +2627,19 @@ function App() {
                   </div>
 
                   <div className="mt-5 space-y-4">
-                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                    <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]">
                         {catalogCopy.secondaryLabel}
                       </p>
                       <p className="mt-2 text-lg font-black text-white">
                         {catalogCategory === 'houses' ? catalogCopy.housesTab : catalogCopy.carsTab}
                       </p>
                     </div>
-                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-4">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                    <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]">
                         {catalogCopy.resultsLabel}
                       </p>
-                      <p className="mt-2 text-lg font-black text-[#e0c27a]">{filteredCatalogCompetitions.length}</p>
+                      <p className="mt-2 text-lg font-black text-[#ffd25a]">{filteredCatalogCompetitions.length}</p>
                     </div>
                     <button
                       type="button"
@@ -2608,7 +2648,7 @@ function App() {
                         setCatalogColor('all')
                         setCatalogYear('all')
                       }}
-                      className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                      className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
                     >
                       {catalogCopy.clearFilters}
                     </button>
@@ -2620,13 +2660,19 @@ function App() {
                     {filteredCatalogCompetitions.map((competition) => (
                       <article
                         key={`${catalogCategory}-${competition.title}`}
-                        className="overflow-hidden rounded-[24px] border border-white/8 bg-[#111722] shadow-[0_16px_60px_rgba(0,0,0,0.24)]"
+                        className="overflow-hidden rounded-[24px] border border-white/8 bg-[#12131a] shadow-[0_16px_60px_rgba(0,0,0,0.24)]"
                       >
                         <div className="grid gap-0 md:grid-cols-[220px_minmax(0,1fr)_210px]">
                           <div className="relative h-full min-h-[180px] overflow-hidden">
-                            <img src={competition.image} alt={competition.title} className="h-full w-full object-cover" />
+                            <img
+                              src={competition.image}
+                              alt={competition.title}
+                              loading="lazy"
+                              decoding="async"
+                              className="h-full w-full object-cover"
+                            />
                             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.04)_0%,rgba(10,11,15,0.6)_100%)]" />
-                            <div className="absolute left-4 top-4 rounded-full border border-[#c9a24a]/25 bg-[#0a0b0f]/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#e0c27a]">
+                            <div className="absolute left-4 top-4 rounded-full border border-[#f0c000]/25 bg-[#0b0c10]/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffd25a]">
                               {competition.deadline}
                             </div>
                           </div>
@@ -2634,11 +2680,11 @@ function App() {
                           <div className="p-4 sm:p-5">
                             <div className="flex flex-wrap items-center gap-2">
                               {competition.featured ? (
-                                <span className="rounded-full bg-[#e0c27a] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#0a0b0f]">
+                                <span className="rounded-full bg-[#ffd25a] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#0b0c10]">
                                   {catalogCopy.featuredLabel}
                                 </span>
                               ) : null}
-                              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#c7ced6]">
+                              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#b7beca]">
                                 {catalogCategory === 'houses' ? catalogCopy.housesTab : catalogCopy.carsTab}
                               </span>
                             </div>
@@ -2646,29 +2692,29 @@ function App() {
                             <h2 className="mt-3 text-2xl font-extrabold tracking-[-0.03em] text-white">
                               {competition.title}
                             </h2>
-                            <p className="mt-2 text-sm leading-6 text-[#7e8896]">{competition.subtitle}</p>
+                            <p className="mt-2 text-sm leading-6 text-[#9aa0ac]">{competition.subtitle}</p>
 
                             <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                               <div>
-                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                                   {catalogCopy.infoColor}
                                 </p>
                                 <p className="mt-1 text-sm font-semibold text-white">{competition.color}</p>
                               </div>
                               <div>
-                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                                   {catalogCopy.infoYear}
                                 </p>
                                 <p className="mt-1 text-sm font-semibold text-white">{competition.year}</p>
                               </div>
                               <div>
-                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                                   {catalogCopy.infoLocation}
                                 </p>
                                 <p className="mt-1 text-sm font-semibold text-white">{competition.location}</p>
                               </div>
                               <div>
-                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#7e8896]">
+                                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                                   {catalogCopy.infoTickets}
                                 </p>
                                 <p className="mt-1 text-sm font-semibold text-white">{competition.sold}</p>
@@ -2676,25 +2722,25 @@ function App() {
                             </div>
 
                             <div className="mt-4">
-                              <div className="flex items-center justify-between text-sm text-[#c7ced6]">
+                              <div className="flex items-center justify-between text-sm text-[#b7beca]">
                                 <span>{competition.sold}</span>
                                 <span>{competition.progress}%</span>
                               </div>
                               <div className="mt-2 h-2 rounded-full bg-white/8">
                                 <div
-                                  className="h-full rounded-full bg-[#c9a24a]"
+                                  className="h-full rounded-full bg-[#f0c000]"
                                   style={{ width: `${competition.progress}%` }}
                                 />
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex flex-col justify-between border-t border-white/8 bg-[#0f141d] p-4 md:border-l md:border-t-0">
+                          <div className="flex flex-col justify-between border-t border-white/8 bg-[#101218] p-4 md:border-l md:border-t-0">
                             <div>
-                              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">
                                 {copy.currentDraw.priceLabel}
                               </p>
-                              <p className="mt-2 text-3xl font-black text-[#e0c27a]">{competition.price}</p>
+                              <p className="mt-2 text-3xl font-black text-[#ffd25a]">{competition.price}</p>
                             </div>
 
                             <div className="mt-4 space-y-3">
@@ -2703,7 +2749,7 @@ function App() {
                               </button>
                               <button
                                 type="button"
-                                className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                                className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
                               >
                                 {copy.actions.enterCompetition}
                               </button>
@@ -2716,7 +2762,7 @@ function App() {
                 ) : (
                   <div className="surface-card p-8">
                     <h2 className="text-2xl font-black text-white">{catalogCopy.emptyTitle}</h2>
-                    <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{catalogCopy.emptyCopy}</p>
+                    <p className="mt-3 text-sm leading-7 text-[#b7beca]">{catalogCopy.emptyCopy}</p>
                   </div>
                 )}
               </section>
@@ -2730,11 +2776,11 @@ function App() {
   return (
     <div className="luxury-shell text-slate-100">
       <div className="w-full">
-        <div className="bg-[linear-gradient(135deg,#c9a24a_0%,#e0c27a_100%)] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#16202b] sm:px-6">
+        <div className="bg-[#f0c000] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#0e0e13] sm:px-6">
           {copy.topbar}
         </div>
 
-        <header className="sticky top-0 z-40 bg-[#0a0b0f]/78 backdrop-blur-xl">
+        <header className="sticky top-0 z-40 bg-[#0b0c10]/78 backdrop-blur-xl">
           <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:relative">
             <a href="#home" className="brand-lockup group flex items-center gap-3">
               <span className="brand-mark">
@@ -2745,7 +2791,7 @@ function App() {
               </span>
             </a>
 
-            <nav className="hidden items-center justify-center gap-8 text-[15px] font-semibold text-[#c7ced6] xl:absolute xl:left-1/2 xl:flex xl:-translate-x-1/2">
+            <nav className="hidden items-center justify-center gap-8 text-[15px] font-semibold text-[#b7beca] xl:absolute xl:left-1/2 xl:flex xl:-translate-x-1/2">
               {navigationItems.map((item) => (
                 <a key={item.id} href={`#${item.id}`} className="transition hover:text-white">
                   {item.label}
@@ -2767,7 +2813,7 @@ function App() {
                   aria-label={copy.actions.languageLabel}
                 >
                   {languageOptions.map((option) => (
-                    <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                    <option key={option.value} value={option.value} className="bg-[#12131a] text-white">
                       {option.label}
                     </option>
                   ))}
@@ -2794,7 +2840,7 @@ function App() {
                   aria-label={copy.actions.languageLabel}
                 >
                   {languageOptions.map((option) => (
-                    <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                    <option key={option.value} value={option.value} className="bg-[#12131a] text-white">
                       {option.label}
                     </option>
                   ))}
@@ -2807,7 +2853,7 @@ function App() {
                   aria-expanded={isAccountMenuOpen}
                   aria-haspopup="menu"
                   aria-label={accountMenuCopy.menuLabel}
-                  className="flex h-11 w-11 items-center justify-center rounded-full p-0 text-sm font-black leading-none text-[#e0c27a] transition hover:text-white"
+                  className="flex h-11 w-11 items-center justify-center rounded-full p-0 text-sm font-black leading-none text-[#ffd25a] transition hover:text-white"
                 >
                   <span className="flex h-full w-full items-center justify-center text-center uppercase">
                     {adminInitials}
@@ -2815,27 +2861,27 @@ function App() {
                 </button>
 
                 {isAccountMenuOpen ? (
-                  <div className="absolute right-0 top-full mt-3 w-[260px] rounded-[24px] border border-white/10 bg-[#0f141d]/95 p-4 shadow-[0_22px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-                    <div className="rounded-[20px] border border-white/8 bg-[#111722] p-3">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#7e8896]">
+                  <div className="absolute right-0 top-full mt-3 w-[260px] rounded-[24px] border border-white/10 bg-[#101218]/95 p-4 shadow-[0_22px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl">
+                    <div className="rounded-[20px] border border-white/8 bg-[#12131a] p-3">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">
                         {copy.actions.languageLabel}
                       </p>
                       <div className="relative mt-3">
                         <select
                           value={locale}
                           onChange={(event) => handleLocaleChange(event.target.value)}
-                          className="w-full appearance-none rounded-full border border-white/10 bg-[#16202b] px-4 py-3 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#c9a24a]/40"
+                          className="w-full appearance-none rounded-full border border-white/10 bg-[#1a1c24] px-4 py-3 pr-10 text-sm font-semibold text-white outline-none transition focus:border-[#f0c000]/40"
                           aria-label={copy.actions.languageLabel}
                         >
                           {languageOptions.map((option) => (
-                            <option key={option.value} value={option.value} className="bg-[#111722] text-white">
+                            <option key={option.value} value={option.value} className="bg-[#12131a] text-white">
                               {option.label}
                             </option>
                           ))}
                         </select>
                         <span
                           aria-hidden="true"
-                          className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#7e8896]"
+                          className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#9aa0ac]"
                         >
                           v
                         </span>
@@ -2848,14 +2894,14 @@ function App() {
                           <button
                             type="button"
                             onClick={openAdminProfile}
-                            className="rounded-full border border-white/8 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                            className="rounded-full border border-white/8 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
                           >
                             {adminProfileCopy.profileButton}
                           </button>
                           <button
                             type="button"
                             onClick={handleAdminLogout}
-                            className="rounded-full border border-[#c9a24a]/20 bg-[#c9a24a]/10 px-4 py-3 text-left text-sm font-semibold text-[#e0c27a] transition hover:bg-[#c9a24a]/16"
+                            className="rounded-full border border-[#f0c000]/20 bg-[#f0c000]/10 px-4 py-3 text-left text-sm font-semibold text-[#ffd25a] transition hover:bg-[#f0c000]/16"
                           >
                             {accountMenuCopy.logOut}
                           </button>
@@ -2865,14 +2911,14 @@ function App() {
                           <button
                             type="button"
                             onClick={openAdminLogin}
-                            className="rounded-full border border-white/8 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white transition hover:border-[#c9a24a]/35 hover:bg-[#16202b]"
+                            className="rounded-full border border-white/8 bg-white/5 px-4 py-3 text-left text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
                           >
                             {copy.actions.signIn}
                           </button>
                           <button
                             type="button"
                             onClick={handleGuestSignOut}
-                            className="rounded-full border border-[#c9a24a]/20 bg-[#c9a24a]/10 px-4 py-3 text-left text-sm font-semibold text-[#e0c27a] transition hover:bg-[#c9a24a]/16"
+                            className="rounded-full border border-[#f0c000]/20 bg-[#f0c000]/10 px-4 py-3 text-left text-sm font-semibold text-[#ffd25a] transition hover:bg-[#f0c000]/16"
                           >
                             {accountMenuCopy.guestSignOut}
                           </button>
@@ -2891,7 +2937,7 @@ function App() {
                 <button
                   type="button"
                   onClick={openAdminLogin}
-                  className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
+                  className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                 >
                   Admin
                 </button>
@@ -2926,6 +2972,9 @@ function App() {
                 key={slide.id}
                 src={slide.image}
                 alt={slide.title}
+                loading={index === activeSlide ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={index === activeSlide ? 'high' : 'low'}
                 className={`hero-image hero-image-layer absolute inset-0 h-full w-full object-cover ${
                   index === activeSlide ? 'hero-image-layer--active' : ''
                 }`}
@@ -2972,10 +3021,10 @@ function App() {
                   <p className="hero-shadow-title">{copy.currentDraw.title}</p>
                   <div key={currentSlide.id} className="hero-copy-content relative z-10">
                     <div className="flex flex-wrap items-center gap-3">
-                      <span className="section-kicker border-[#c9a24a]/34 bg-[#c9a24a]/12 shadow-[0_0_30px_rgba(201,162,74,0.08)]">
+                      <span className="section-kicker border-[#f0c000]/34 bg-[#f0c000]/12 shadow-[0_0_30px_rgba(201,162,74,0.08)]">
                         {currentSlide.badge}
                       </span>
-                      <span className="inline-flex rounded-full border border-[#f3be2f]/40 bg-[#f3be2f]/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffe08a] backdrop-blur-sm">
+                      <span className="inline-flex rounded-full border border-[#f0c000]/40 bg-[#f0c000]/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffe08a] backdrop-blur-sm">
                         {mockHeroVideo.note}
                       </span>
                       <span className="inline-flex rounded-full border border-white/10 bg-black/28 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#d7dee7] backdrop-blur-sm">
@@ -3009,19 +3058,19 @@ function App() {
                     </div>
                     <div className="hero-inline-meta mt-4 flex flex-wrap gap-x-6 gap-y-3">
                       <div>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]">
                           {copy.currentDraw.priceLabel}
                         </p>
-                        <p className="mt-2 text-xl font-black text-[#e0c27a]">{currentSlide.price}</p>
+                        <p className="mt-2 text-xl font-black text-[#ffd25a]">{currentSlide.price}</p>
                       </div>
                       <div>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]">
                           {copy.currentDraw.countdownLabel}
                         </p>
                         <p className="mt-2 text-xl font-black text-white">{currentSlide.countdown}</p>
                       </div>
                       <div>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#7e8896]">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]">
                           {copy.currentDraw.entriesLabel}
                         </p>
                         <p className="mt-2 text-lg font-extrabold text-white">{currentSlide.tickets}</p>
@@ -3032,11 +3081,11 @@ function App() {
 
                 <div className="hero-spotlight-card hidden h-fit rounded-[30px] p-6 lg:block">
                   <div key={`${currentSlide.id}-spotlight`} className="hero-copy-content">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#e0c27a]">{copy.currentDraw.eyebrow}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#ffd25a]">{copy.currentDraw.eyebrow}</p>
                   <h2 className="mt-3 text-[2rem] font-black leading-[0.95] tracking-[-0.05em] text-white">
                     {copy.currentDraw.title}
                   </h2>
-                  <p className="mt-3 text-sm leading-7 text-[#c7ced6]">{copy.currentDraw.helper}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#b7beca]">{copy.currentDraw.helper}</p>
                   <div className="hero-side-details mt-6 space-y-4">
                     <div className="hero-side-row">
                       <span>{copy.currentDraw.priceLabel}</span>
@@ -3057,14 +3106,14 @@ function App() {
 
               <div className="hidden mt-8 flex-col gap-4">
                 <div className="flex items-center justify-between">
-                  <div className="rounded-full border border-white/8 bg-black/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#c7ced6]">
+                  <div className="rounded-full border border-white/8 bg-black/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#b7beca]">
                     Carousel
                   </div>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={goToPreviousSlide}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                       aria-label="Previous slide"
                     >
                       â€¹
@@ -3072,7 +3121,7 @@ function App() {
                     <button
                       type="button"
                       onClick={goToNextSlide}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                       aria-label="Next slide"
                     >
                       â€º
@@ -3090,7 +3139,7 @@ function App() {
                         <button
                           type="button"
                           onClick={() => setActiveSlide(index)}
-                          className="grid w-full gap-4 rounded-[22px] border border-white/8 bg-[#111722]/82 p-4 text-left transition hover:border-[#c9a24a]/28 hover:bg-[#111722]"
+                          className="grid w-full gap-4 rounded-[22px] border border-white/8 bg-[#12131a]/82 p-4 text-left transition hover:border-[#f0c000]/28 hover:bg-[#12131a]"
                         >
                           <div
                             className="h-24 rounded-[16px] bg-cover bg-center"
@@ -3098,7 +3147,7 @@ function App() {
                           />
                           <div className="flex items-end justify-between gap-4">
                             <div>
-                              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#7e8896]">
+                              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9aa0ac]">
                                 {slide.badge}
                               </p>
                               <p className="mt-2 text-lg font-extrabold text-white">{slide.price}</p>
@@ -3109,7 +3158,7 @@ function App() {
                                   key={`${slide.id}-${dotIndex}`}
                                   className={`h-2.5 rounded-full transition-all ${
                                     dotIndex === index
-                                      ? 'w-8 bg-[#c9a24a]'
+                                      ? 'w-8 bg-[#f0c000]'
                                       : 'w-2.5 bg-white/18'
                                   }`}
                                 />
@@ -3131,7 +3180,7 @@ function App() {
                       type="button"
                       onClick={() => setActiveSlide(index)}
                       className={`h-2.5 rounded-full transition-all duration-300 ${
-                        index === activeSlide ? 'w-9 bg-[#c9a24a]' : 'w-2.5 bg-white/35 hover:bg-white/60'
+                        index === activeSlide ? 'w-9 bg-[#f0c000]' : 'w-2.5 bg-white/35 hover:bg-white/60'
                       }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
@@ -3144,8 +3193,8 @@ function App() {
                   {copy.metrics.map((metric) => (
                     <div key={metric.label} className="hero-metric-cell">
                       <p className="text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">{metric.value}</p>
-                      <p className="mt-3 text-sm font-bold uppercase tracking-[0.22em] text-[#e0c27a]">{metric.label}</p>
-                      <p className="mt-2 text-sm leading-6 text-[#7e8896]">{metric.note}</p>
+                      <p className="mt-3 text-sm font-bold uppercase tracking-[0.22em] text-[#ffd25a]">{metric.label}</p>
+                      <p className="mt-2 text-sm leading-6 text-[#9aa0ac]">{metric.note}</p>
                     </div>
                   ))}
                 </div>
@@ -3167,15 +3216,21 @@ function App() {
               {copy.competitions.map((competition) => (
                 <article
                   key={competition.title}
-                  className="flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#111722] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#c9a24a]/28"
+                  className="flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28"
                 >
                   <div className="relative h-72 overflow-hidden">
-                    <img src={competition.image} alt={competition.title} className="h-full w-full object-cover transition duration-700 hover:scale-105" />
+                    <img
+                      src={competition.image}
+                      alt={competition.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.06)_0%,rgba(10,11,15,0.1)_30%,rgba(10,11,15,0.85)_100%)]" />
-                    <div className="absolute left-5 top-5 rounded-full border border-[#c9a24a]/25 bg-[#0a0b0f]/70 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#e0c27a] backdrop-blur-sm">
+                    <div className="absolute left-5 top-5 rounded-full border border-[#f0c000]/25 bg-[#0b0c10]/70 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffd25a] backdrop-blur-sm">
                       {competition.deadline}
                     </div>
-                    <div className="absolute bottom-5 left-5 rounded-full bg-[#e0c27a] px-4 py-2 text-sm font-black text-[#0a0b0f] shadow-[0_14px_40px_rgba(201,162,74,0.28)]">
+                    <div className="absolute bottom-5 left-5 rounded-full bg-[#ffd25a] px-4 py-2 text-sm font-black text-[#0b0c10] shadow-[0_14px_40px_rgba(201,162,74,0.28)]">
                       {competition.price}
                     </div>
                   </div>
@@ -3184,21 +3239,21 @@ function App() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-h-[84px]">
                         <h3 className="text-2xl font-extrabold tracking-[-0.03em] text-white">{competition.title}</h3>
-                        <p className="mt-2 line-clamp-2 text-sm text-[#7e8896]">{competition.subtitle}</p>
+                        <p className="mt-2 line-clamp-2 text-sm text-[#9aa0ac]">{competition.subtitle}</p>
                       </div>
-                      <span className="rounded-full border border-[#f3be2f]/30 bg-[#16202b] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#c7ced6]">
+                      <span className="rounded-full border border-[#f0c000]/30 bg-[#1a1c24] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#b7beca]">
                         {copy.badges.euDraw}
                       </span>
                     </div>
 
                     <div className="mt-auto pt-6">
-                      <div className="flex items-center justify-between text-sm text-[#c7ced6]">
+                      <div className="flex items-center justify-between text-sm text-[#b7beca]">
                         <span>{competition.sold}</span>
                         <span>{competition.progress}%</span>
                       </div>
                       <div className="mt-3 h-2 rounded-full bg-white/8">
                         <div
-                          className="h-full rounded-full bg-[#c9a24a]"
+                          className="h-full rounded-full bg-[#f0c000]"
                           style={{ width: `${competition.progress}%` }}
                         />
                       </div>
@@ -3227,11 +3282,11 @@ function App() {
             <div className="grid gap-5 lg:grid-cols-3">
               {copy.howItWorks.map((item) => (
                 <article key={item.step} className="surface-card p-6">
-                  <span className="inline-flex rounded-full border border-[#f3be2f]/30 bg-[#16202b] px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#c7ced6]">
+                  <span className="inline-flex rounded-full border border-[#f0c000]/30 bg-[#1a1c24] px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#b7beca]">
                     Step {item.step}
                   </span>
                   <h3 className="mt-5 text-2xl font-extrabold tracking-[-0.04em] text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#7e8896]">{item.text}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#9aa0ac]">{item.text}</p>
                 </article>
               ))}
             </div>
@@ -3247,6 +3302,8 @@ function App() {
                     <img
                       src="/cars/hero-2.jpg"
                       alt="Premium car showcase"
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.02),rgba(10,11,15,0.7))]" />
@@ -3254,12 +3311,12 @@ function App() {
                   <div className="p-6 lg:p-8">
                     <span className="section-kicker">{copy.sections.winners.kicker}</span>
                     <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-white">{copy.sections.winners.title}</h2>
-                    <p className="mt-4 text-sm leading-7 text-[#c7ced6]">{copy.sections.winners.copy}</p>
+                    <p className="mt-4 text-sm leading-7 text-[#b7beca]">{copy.sections.winners.copy}</p>
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
                       {copy.sections.winners.stats.map((stat) => (
-                        <div key={stat.label} className="rounded-[22px] border border-white/8 bg-[#111722] p-5">
-                          <p className="text-3xl font-black text-[#e0c27a]">{stat.value}</p>
-                          <p className="mt-2 text-sm text-[#7e8896]">{stat.label}</p>
+                        <div key={stat.label} className="rounded-[22px] border border-white/8 bg-[#12131a] p-5">
+                          <p className="text-3xl font-black text-[#ffd25a]">{stat.value}</p>
+                          <p className="mt-2 text-sm text-[#9aa0ac]">{stat.label}</p>
                         </div>
                       ))}
                     </div>
@@ -3273,13 +3330,13 @@ function App() {
                     <div className="flex items-center justify-between gap-4">
                       <div>
                         <p className="text-lg font-extrabold text-white">{winner.name}</p>
-                        <p className="mt-1 text-sm text-[#e0c27a]">{winner.prize}</p>
+                        <p className="mt-1 text-sm text-[#ffd25a]">{winner.prize}</p>
                       </div>
-                      <span className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#c7ced6]">
+                      <span className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#b7beca]">
                         {winner.stat}
                       </span>
                     </div>
-                    <p className="mt-4 text-sm leading-7 text-[#7e8896]">"{winner.quote}"</p>
+                    <p className="mt-4 text-sm leading-7 text-[#9aa0ac]">"{winner.quote}"</p>
                   </article>
                 ))}
               </div>
@@ -3300,9 +3357,9 @@ function App() {
                 <article key={module.title} className="surface-card p-6">
                   <div className="flex items-center justify-between">
                     <h3 className="text-2xl font-extrabold tracking-[-0.03em] text-white">{module.title}</h3>
-                    <span className="h-3 w-3 rounded-full bg-[#c9a24a] shadow-[0_0_18px_rgba(201,162,74,0.55)]" />
+                    <span className="h-3 w-3 rounded-full bg-[#f0c000] shadow-[0_0_18px_rgba(201,162,74,0.55)]" />
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-[#7e8896]">{module.text}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#9aa0ac]">{module.text}</p>
                 </article>
               ))}
             </div>
@@ -3315,12 +3372,12 @@ function App() {
               <div className="surface-card p-6">
                 <span className="section-kicker">{copy.sections.compliance.kicker}</span>
                 <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-white">{copy.sections.compliance.title}</h2>
-                <p className="mt-4 text-sm leading-7 text-[#c7ced6]">{copy.sections.compliance.copy}</p>
+                <p className="mt-4 text-sm leading-7 text-[#b7beca]">{copy.sections.compliance.copy}</p>
               </div>
 
               <div className="grid gap-5 sm:grid-cols-2">
                 {copy.complianceItems.map((item) => (
-                  <div key={item} className="rounded-[24px] border border-white/8 bg-[#111722] p-5">
+                  <div key={item} className="rounded-[24px] border border-white/8 bg-[#12131a] p-5">
                     <p className="text-base font-bold leading-7 text-white">{item}</p>
                   </div>
                 ))}
@@ -3331,12 +3388,12 @@ function App() {
 
           <section className="section-band section-band--deep">
             <div className="section-shell">
-            <div className="overflow-hidden rounded-[28px] border border-[#c9a24a]/20 bg-[linear-gradient(135deg,rgba(17,23,34,0.98)_0%,rgba(10,11,15,0.94)_42%,rgba(22,32,43,0.96)_100%)] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.45)] sm:p-8">
+            <div className="overflow-hidden rounded-[28px] border border-[#e11d2e]/25 bg-[linear-gradient(135deg,rgba(14,18,26,0.98)_0%,rgba(10,11,15,0.94)_42%,rgba(18,22,30,0.96)_100%)] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.45)] sm:p-8">
               <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
                 <div>
                   <span className="section-kicker">{copy.sections.cta.kicker}</span>
                   <h2 className="mt-4 max-w-3xl text-3xl font-black tracking-[-0.05em] text-white sm:text-4xl">{copy.sections.cta.title}</h2>
-                  <p className="mt-4 max-w-2xl text-sm leading-7 text-[#c7ced6]">{copy.sections.cta.copy}</p>
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-[#b7beca]">{copy.sections.cta.copy}</p>
                 </div>
                 <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
                   <button
@@ -3346,7 +3403,7 @@ function App() {
                   >
                     {copy.actions.launchConcept}
                   </button>
-                  <button className="rounded-full border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-[#f3be2f]/45 hover:bg-[#16202b]/90">
+                  <button className="rounded-full border border-white/10 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90">
                     {copy.actions.reviewModules}
                   </button>
                 </div>
@@ -3356,9 +3413,9 @@ function App() {
           </section>
         </main>
 
-        <footer className="relative border-t border-[#f3be2f]/45 bg-[linear-gradient(180deg,#f3be2f_0%,#d39a14_100%)]">
+        <footer className="relative border-t border-[#e11d2e]/55 bg-[linear-gradient(180deg,#0b0c10_0%,#12131a_100%)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(255,245,205,0.28),transparent_22%),radial-gradient(circle_at_90%_50%,rgba(168,120,8,0.16),transparent_24%)]" />
-          <div className="section-shell relative grid gap-8 py-12 text-sm text-[#4b380d] md:grid-cols-2 lg:grid-cols-4">
+          <div className="section-shell relative grid gap-8 py-12 text-sm text-[#b7beca] md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center gap-3">
                 <span className="brand-mark brand-mark--footer">
@@ -3371,7 +3428,7 @@ function App() {
 
             {copy.footer.columns.map((column) => (
               <div key={column.title}>
-                <p className="font-bold uppercase tracking-[0.22em] text-[#e0c27a]">{column.title}</p>
+                <p className="font-bold uppercase tracking-[0.22em] text-[#ffd25a]">{column.title}</p>
                 <ul className="mt-4 space-y-3">
                   {column.items.map((item) => (
                     <li key={item}>
@@ -3391,6 +3448,10 @@ function App() {
 }
 
 export default App
+
+
+
+
 
 
 
