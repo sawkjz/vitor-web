@@ -269,6 +269,42 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
+  .competition-deadline-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    max-width: min(11rem, calc(100% - 2rem));
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+    color: #fff6f2;
+    font-size: 0.68rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow:
+      0 12px 28px rgba(216, 52, 44, 0.28),
+      0 4px 10px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(6px);
+    z-index: 2;
+  }
+
+  .competition-deadline-badge--urgent {
+    background: linear-gradient(135deg, #f14f43 0%, #d8342c 100%);
+    box-shadow:
+      0 12px 28px rgba(216, 52, 44, 0.28),
+      0 4px 10px rgba(0, 0, 0, 0.24);
+  }
+
+  .competition-deadline-badge--warm {
+    background: linear-gradient(135deg, #ffd25a 0%, #f0c000 100%);
+    color: #2c1900;
+    box-shadow:
+      0 12px 28px rgba(240, 192, 0, 0.22),
+      0 4px 10px rgba(0, 0, 0, 0.22);
+  }
+
   .premium-button {
     display: inline-flex;
     align-items: center;
@@ -333,6 +369,16 @@
 
   .hero-copy-stage {
     isolation: isolate;
+  }
+
+  @media (max-width: 640px) {
+    .competition-deadline-badge {
+      min-height: 1.8rem;
+      max-width: min(9.5rem, calc(100% - 1.5rem));
+      padding: 0.38rem 0.7rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+    }
   }
 
   .hero-copy-content {
@@ -730,6 +776,213 @@
     text-shadow: 0 0 18px rgba(225, 29, 46, 0.22);
   }
 
+  .home-topbar {
+    border-bottom: 1px solid rgba(225, 29, 46, 0.55);
+    background: linear-gradient(180deg, #0b0f1a 0%, #0a0d16 100%);
+    color: #c8cfda;
+  }
+
+  .home-header {
+    position: sticky;
+    background: rgba(11, 15, 26, 0.9);
+    border-bottom: 1px solid rgba(225, 29, 46, 0.5);
+  }
+
+  .home-header__inner {
+    min-height: 4.8rem;
+  }
+
+  .home-nav a {
+    position: relative;
+    color: #c1c9d6;
+    transition: color 180ms ease;
+  }
+
+  .home-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.45rem;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0.22);
+    transform-origin: left;
+    opacity: 0;
+    background: linear-gradient(90deg, #e11d2e, #ff586a);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+
+  .home-nav a:hover {
+    color: #ffffff;
+  }
+
+  .home-nav a:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  .home-header__cta {
+    border-color: rgba(255, 255, 255, 0.76);
+  }
+
+  .home-hero .hero-vignette {
+    background:
+      linear-gradient(90deg, rgba(6, 8, 12, 0.9) 0%, rgba(6, 8, 12, 0.72) 28%, rgba(6, 8, 12, 0.3) 56%, rgba(6, 8, 12, 0.12) 100%),
+      linear-gradient(180deg, rgba(9, 11, 16, 0.58) 0%, rgba(9, 11, 16, 0.14) 30%, rgba(9, 11, 16, 0.3) 58%, rgba(9, 11, 16, 0.9) 100%);
+  }
+
+  .home-hero-layout {
+    align-items: end;
+  }
+
+  .hero-countdown-panel {
+    border-radius: 1.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+      linear-gradient(180deg, rgba(8, 10, 14, 0.86), rgba(8, 10, 14, 0.92)),
+      linear-gradient(90deg, rgba(225, 29, 46, 0.12), rgba(225, 29, 46, 0));
+    padding: 0.95rem;
+    box-shadow:
+      0 20px 56px rgba(0, 0, 0, 0.36),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .hero-countdown-panel__title {
+    margin: 0 0 0.75rem;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #d3dae6;
+    text-align: center;
+  }
+
+  .hero-countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .hero-countdown-cell {
+    border-radius: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(17, 20, 30, 0.94), rgba(11, 13, 20, 0.92));
+    padding: 0.58rem 0.35rem;
+    text-align: center;
+  }
+
+  .hero-countdown-value {
+    display: block;
+    font-family: 'Bebas Neue', 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+  }
+
+  .hero-countdown-label {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a8b1c0;
+  }
+
+  .home-competitions-grid {
+    gap: 1.5rem;
+  }
+
+  .home-competition-card {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
+      linear-gradient(180deg, rgba(14, 18, 26, 0.98), rgba(9, 11, 16, 0.97));
+  }
+
+  .home-info .surface-card,
+  .home-platform .surface-card,
+  .home-winners .surface-card {
+    border-color: rgba(255, 255, 255, 0.09);
+  }
+
+  .home-footer {
+    background: linear-gradient(180deg, #0a0d15 0%, #0e131d 100%);
+  }
+
+  .home-footer__grid {
+    gap: 2rem;
+  }
+
+  .home-footer p {
+    color: #aeb8c8;
+  }
+
+  .internal-shell {
+    background:
+      radial-gradient(circle at 12% 0%, rgba(225, 29, 46, 0.14), transparent 24%),
+      radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.08), transparent 30%),
+      linear-gradient(180deg, #0b0f1a 0%, #0f1420 58%, #0b0f1a 100%);
+  }
+
+  .internal-page {
+    padding-top: 2.25rem;
+  }
+
+  .internal-menu-overlay {
+    backdrop-filter: blur(4px);
+  }
+
+  .internal-menu-drawer {
+    overflow-y: auto;
+  }
+
+  .internal-menu-link {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.9rem 0.95rem;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e9edf4;
+    transition: border-color 180ms ease, background 180ms ease;
+  }
+
+  .internal-menu-link:hover {
+    border-color: rgba(225, 29, 46, 0.48);
+    background: rgba(225, 29, 46, 0.12);
+  }
+
+  .internal-menu-btn {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  .internal-product-card {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
+      linear-gradient(180deg, rgba(13, 18, 27, 0.96), rgba(9, 12, 19, 0.95));
+  }
+
+  .internal-product-info {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 12px 34px rgba(0, 0, 0, 0.24);
+  }
+
+  .internal-offer-btn {
+    line-height: 1.2;
+  }
+
+  .internal-buy-btn {
+    min-height: 3.4rem;
+  }
+
+  .internal-input {
+    min-height: 3rem;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-copy-content,
     .section-title,
@@ -771,6 +1024,15 @@
       padding-inline: 2.25rem;
     }
 
+    .home-header__inner {
+      max-width: 88rem;
+    }
+
+    .home-footer__grid {
+      max-width: 88rem;
+      grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 0.85fr));
+    }
+
     .hero-image {
       object-position: 78% center;
     }
@@ -800,6 +1062,32 @@
   }
 
   @media (max-width: 767px) {
+    .home-topbar {
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      padding-block: 0.45rem;
+    }
+
+    .home-header {
+      background: rgba(11, 15, 26, 0.96);
+    }
+
+    .home-header__inner {
+      min-height: 3.8rem;
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+    }
+
+    .home-header__actions {
+      gap: 0.55rem;
+    }
+
+    .home-header__cta {
+      padding: 0.7rem 0.9rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.01em;
+    }
+
     .hero-video-layer {
       display: none;
     }
@@ -822,6 +1110,91 @@
 
     .hero-display {
       font-size: clamp(2.3rem, 9.2vw, 3.5rem);
+    }
+
+    .home-hero-layout {
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .home-hero .hero-copy-stage {
+      max-width: 28rem;
+    }
+
+    .home-hero .hero-copy-content > div:first-child {
+      justify-content: center;
+    }
+
+    .home-hero .hero-inline-meta {
+      justify-content: center;
+    }
+
+    .home-hero .hero-inline-meta > div {
+      min-width: 8.2rem;
+    }
+
+    .hero-countdown-panel {
+      width: 100%;
+      max-width: 30rem;
+      padding: 0.85rem;
+    }
+
+    .hero-countdown-grid {
+      gap: 0.42rem;
+    }
+
+    .hero-countdown-cell {
+      padding: 0.52rem 0.28rem;
+    }
+
+    .hero-countdown-value {
+      font-size: 1.24rem;
+    }
+
+    .hero-countdown-label {
+      font-size: 0.53rem;
+      letter-spacing: 0.14em;
+    }
+
+    .home-competitions-grid {
+      gap: 1rem;
+    }
+
+    .home-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .internal-page {
+      padding-top: 1.2rem;
+    }
+
+    .internal-menu-drawer {
+      max-width: 100%;
+      border-radius: 1.2rem;
+    }
+
+    .internal-menu-link {
+      font-size: 1.02rem;
+      padding: 0.95rem;
+    }
+
+    .internal-product-card {
+      padding: 0.85rem;
+    }
+
+    .internal-product-info {
+      padding: 1rem;
+    }
+
+    .internal-buy-btn {
+      min-height: 3.2rem;
+      font-size: 0.76rem;
+    }
+
+    .internal-input {
+      min-height: 2.85rem;
     }
 
     .hero-image {

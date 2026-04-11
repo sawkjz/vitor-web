@@ -1249,7 +1249,7 @@ const presentationOverridesByLocale = {
       eyebrow: 'Exemplo principal',
       title: 'Signature Coupe Concept',
       priceLabel: 'Entrada desde',
-      countdownLabel: 'Temporizador demo',
+      countdownLabel: 'Temporizador',
       entriesLabel: 'Entradas exemplo',
       helper: 'Bloco ilustrativo criado para apresentar estrutura, hierarquia e acabamento premium.',
     },
@@ -1321,7 +1321,7 @@ const presentationOverridesByLocale = {
       eyebrow: 'Ejemplo principal',
       title: 'Signature Coupe Concept',
       priceLabel: 'Entrada desde',
-      countdownLabel: 'Temporizador demo',
+      countdownLabel: 'Temporizador',
       entriesLabel: 'Entradas ejemplo',
       helper: 'Bloque ilustrativo creado para mostrar estructura, jerarquia y acabado premium.',
     },
@@ -1397,7 +1397,7 @@ const presentationOverridesByLocale = {
       eyebrow: 'Campanha em destaque',
       title: 'Signature GT Campaign',
       priceLabel: 'Entrada a partir de',
-      countdownLabel: 'Temporizador demo',
+      countdownLabel: 'Temporizador',
       entriesLabel: 'Entradas exemplo',
       helper: 'Conteudo ilustrativo criado para avaliar composicao de campanha, CTA, hierarquia e impacto visual premium.',
     },
@@ -1961,6 +1961,251 @@ const getHouseCompetitions = (locale) => {
   ]
 }
 
+const deadlineBadgeCopy = {
+  en: {
+    finalHours: 'Final hours',
+    endsToday: 'Ends today',
+    thisWeek: 'Ends this week',
+    ongoing: 'Ongoing',
+  },
+  es: {
+    finalHours: 'Ultimas horas',
+    endsToday: 'Cierra hoy',
+    thisWeek: 'Termina esta semana',
+    ongoing: 'En curso',
+  },
+  ptPT: {
+    finalHours: 'Ultimas horas',
+    endsToday: 'Encerra hoje',
+    thisWeek: 'Termina esta semana',
+    ongoing: 'Em andamento',
+  },
+  ptBR: {
+    finalHours: 'Ultimas horas',
+    endsToday: 'Encerra hoje',
+    thisWeek: 'Termina esta semana',
+    ongoing: 'Em andamento',
+  },
+}
+
+const getDeadlineBadgeLabel = (deadline, locale = 'ptBR') => {
+  const labels = deadlineBadgeCopy[locale] ?? deadlineBadgeCopy.ptBR
+  const normalized = (deadline ?? '').toLowerCase()
+
+  if (
+    /(ultimas horas|final hours|ultimas horas|ending shortly|terminando logo|a terminar)/.test(normalized)
+  ) {
+    return labels.finalHours
+  }
+
+  if (/(encerra hoje|termina hoje|ends today|ends tonight|cierra hoy|termina hoy)/.test(normalized)) {
+    return labels.endsToday
+  }
+
+  if (
+    /(\b[1-7]\b\s*dias?|\b[1-7]\b\s*days?|this week|esta semana|nesta semana|termina em \d+ dias|termina en \d+ dias|ends in \d+ days?|fecha em breve|janela limitada|limited window|closes soon|closing later|cierra pronto|cierre posterior|fecha mais tarde)/.test(normalized)
+  ) {
+    return labels.thisWeek
+  }
+
+  return labels.ongoing
+}
+
+const getDeadlineBadgeTone = (deadline) => {
+  const normalized = (deadline ?? '').toLowerCase()
+
+  if (
+    /(ultimas horas|final hours|ending shortly|terminando logo|a terminar|encerra hoje|termina hoje|ends today|ends tonight|cierra hoy|termina hoy)/.test(normalized)
+  ) {
+    return 'urgent'
+  }
+
+  if (
+    /(\b[1-7]\b\s*dias?|\b[1-7]\b\s*days?|this week|esta semana|nesta semana|termina em \d+ dias|termina en \d+ dias|ends in \d+ days?|fecha em breve|janela limitada|limited window|closes soon|closing later|cierra pronto|cierre posterior|fecha mais tarde)/.test(normalized)
+  ) {
+    return 'warm'
+  }
+
+  return 'warm'
+}
+
+const countdownUnitLabelsByLocale = {
+  en: { days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds' },
+  es: { days: 'Dias', hours: 'Horas', minutes: 'Minutos', seconds: 'Segundos' },
+  ptPT: { days: 'Dias', hours: 'Horas', minutes: 'Minutos', seconds: 'Segundos' },
+  ptBR: { days: 'Dias', hours: 'Horas', minutes: 'Minutos', seconds: 'Segundos' },
+}
+
+const getCountdownUnits = (countdown, locale = 'ptBR') => {
+  const labels = countdownUnitLabelsByLocale[locale] ?? countdownUnitLabelsByLocale.ptBR
+  const parts = (countdown ?? '')
+    .split(':')
+    .map((part) => part.trim())
+    .filter(Boolean)
+
+  return [
+    { value: parts[0] ?? '--', label: labels.days },
+    { value: parts[1] ?? '--', label: labels.hours },
+    { value: parts[2] ?? '--', label: labels.minutes },
+    { value: '--', label: labels.seconds },
+  ]
+}
+
+const localeByCurrency = {
+  en: 'en-IE',
+  es: 'es-ES',
+  ptPT: 'pt-PT',
+  ptBR: 'pt-BR',
+}
+
+const parseEuroPrice = (price) => {
+  const numeric = Number(String(price ?? '').replace(/[^\d.,]/g, '').replace(',', '.'))
+  return Number.isFinite(numeric) ? numeric : 0
+}
+
+const formatEuroPrice = (value, locale = 'ptBR') =>
+  new Intl.NumberFormat(localeByCurrency[locale] ?? 'pt-BR', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value)
+
+const buildGalleryFromCompetition = (competition, category = 'cars') => {
+  if (!competition) {
+    return []
+  }
+
+  const fallbackCars = ['/cars/hero-1.jpg', '/cars/hero-2.jpg', '/cars/hero-3.jpg', '/cars/card-1.jpg']
+  const fallbackHouses = [
+    '/houses/6391394-house-6597406_1920.jpg',
+    '/houses/gregorybutler-large-home-389271_1280.jpg',
+    '/houses/peggychoucair-house-4028391_1920.jpg',
+  ]
+  const fallback = category === 'houses' ? fallbackHouses : fallbackCars
+
+  return [competition.image, ...fallback].filter((image, index, array) => image && array.indexOf(image) === index)
+}
+
+const internalScreenCopyByLocale = {
+  en: {
+    menuTitle: 'Menu',
+    menuHome: 'Home',
+    menuActive: 'Active draw',
+    menuUpcoming: 'Upcoming draws',
+    menuFaq: 'F.A.Q',
+    menuLogin: 'Login / Register',
+    productDescriptionTitle: 'Description',
+    productStock: 'Stock',
+    productAvailable: 'Available',
+    productQuantity: 'Quantity',
+    buyNow: 'Buy now',
+    checkoutTitle: 'Checkout',
+    checkoutCoupon: 'Referral code',
+    checkoutDiscount: 'Discount',
+    checkoutTotal: 'Total',
+    checkoutTerms: 'I confirm I am over 18 and accept the terms and conditions.',
+    checkoutPay: 'Pay',
+    authTitleLogin: 'Login',
+    authTitleRegister: 'Create account',
+    authName: 'Name',
+    authSurname: 'Surname',
+    authEmail: 'Email',
+    authPassword: 'Password',
+    authPrimaryLogin: 'Sign in',
+    authPrimaryRegister: 'Create',
+    authSwitchLogin: 'Already have an account?',
+    authSwitchRegister: 'New customer?',
+  },
+  es: {
+    menuTitle: 'Menu',
+    menuHome: 'Inicio',
+    menuActive: 'Sorteo activo',
+    menuUpcoming: 'Proximos sorteos',
+    menuFaq: 'F.A.Q',
+    menuLogin: 'Iniciar sesion / Registro',
+    productDescriptionTitle: 'Descripcion',
+    productStock: 'Stock',
+    productAvailable: 'Disponible',
+    productQuantity: 'Cantidad',
+    buyNow: 'Comprar',
+    checkoutTitle: 'Checkout',
+    checkoutCoupon: 'Codigo de referido',
+    checkoutDiscount: 'Descuento',
+    checkoutTotal: 'Total',
+    checkoutTerms: 'Certifico que soy mayor de 18 anos y acepto los terminos y condiciones.',
+    checkoutPay: 'Pagar',
+    authTitleLogin: 'Iniciar sesion',
+    authTitleRegister: 'Registro',
+    authName: 'Nombre',
+    authSurname: 'Apellidos',
+    authEmail: 'Correo electronico',
+    authPassword: 'Contrasena',
+    authPrimaryLogin: 'Entrar',
+    authPrimaryRegister: 'Crear',
+    authSwitchLogin: 'Ya tienes cuenta?',
+    authSwitchRegister: 'Nuevo cliente?',
+  },
+  ptPT: {
+    menuTitle: 'Menu',
+    menuHome: 'Inicio',
+    menuActive: 'Sorteio ativo',
+    menuUpcoming: 'Proximos sorteios',
+    menuFaq: 'F.A.Q',
+    menuLogin: 'Entrar / Registar',
+    productDescriptionTitle: 'Descricao',
+    productStock: 'Stock',
+    productAvailable: 'Disponivel',
+    productQuantity: 'Quantidade',
+    buyNow: 'Comprar',
+    checkoutTitle: 'Checkout',
+    checkoutCoupon: 'Codigo de referencia',
+    checkoutDiscount: 'Desconto',
+    checkoutTotal: 'Total',
+    checkoutTerms: 'Confirmo que tenho mais de 18 anos e aceito os termos e condicoes.',
+    checkoutPay: 'Pagar',
+    authTitleLogin: 'Entrar',
+    authTitleRegister: 'Criar conta',
+    authName: 'Nome',
+    authSurname: 'Apelidos',
+    authEmail: 'Email',
+    authPassword: 'Palavra-passe',
+    authPrimaryLogin: 'Entrar',
+    authPrimaryRegister: 'Criar',
+    authSwitchLogin: 'Ja tens conta?',
+    authSwitchRegister: 'Novo cliente?',
+  },
+  ptBR: {
+    menuTitle: 'Menu',
+    menuHome: 'Inicio',
+    menuActive: 'Sorteio ativo',
+    menuUpcoming: 'Proximos sorteios',
+    menuFaq: 'F.A.Q',
+    menuLogin: 'Entrar / Registrar',
+    productDescriptionTitle: 'Descricao',
+    productStock: 'Estoque',
+    productAvailable: 'Disponivel',
+    productQuantity: 'Quantidade',
+    buyNow: 'Comprar',
+    checkoutTitle: 'Checkout',
+    checkoutCoupon: 'Codigo de referido',
+    checkoutDiscount: 'Desconto',
+    checkoutTotal: 'Total',
+    checkoutTerms: 'Certifico que sou maior de 18 anos e aceito os termos e condicoes.',
+    checkoutPay: 'Pagar',
+    authTitleLogin: 'Entrar',
+    authTitleRegister: 'Criar conta',
+    authName: 'Nome',
+    authSurname: 'Sobrenome',
+    authEmail: 'Email',
+    authPassword: 'Senha',
+    authPrimaryLogin: 'Entrar',
+    authPrimaryRegister: 'Criar',
+    authSwitchLogin: 'Ja tem conta?',
+    authSwitchRegister: 'Novo cliente?',
+  },
+}
+
 const formatAdminName = (email) => {
   const baseName = email.split('@')[0]?.replace(/[._-]+/g, ' ').trim()
 
@@ -1983,12 +2228,23 @@ function App() {
   const [catalogSearch, setCatalogSearch] = useState('')
   const [catalogColor, setCatalogColor] = useState('all')
   const [catalogYear, setCatalogYear] = useState('all')
+  const [selectedCompetition, setSelectedCompetition] = useState(null)
+  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0)
+  const [quantity, setQuantity] = useState(1)
+  const [selectedOffer, setSelectedOffer] = useState('single')
+  const [couponCode, setCouponCode] = useState('')
+  const [acceptTerms, setAcceptTerms] = useState(false)
+  const [authMode, setAuthMode] = useState('login')
+  const [authForm, setAuthForm] = useState({ name: '', surname: '', email: '', password: '' })
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [adminForm, setAdminForm] = useState({ email: '', password: '' })
   const [adminError, setAdminError] = useState('')
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
   const [showMockHeroVideo, setShowMockHeroVideo] = useState(false)
   const accountMenuRef = useRef(null)
+  const mobileMenuRef = useRef(null)
+  const heroSwipeStartRef = useRef(null)
   const copy = useMemo(() => getPresentationCopy(locale), [locale])
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
@@ -2009,6 +2265,28 @@ function App() {
     () => ['all', ...new Set(catalogCompetitions.map((item) => item.year).sort((a, b) => Number(b) - Number(a)))],
     [catalogCompetitions]
   )
+  const internalCopy = internalScreenCopyByLocale[locale] ?? internalScreenCopyByLocale.ptBR
+  const fallbackCompetition = catalogCategory === 'houses' ? houseCompetitions[0] : carCompetitions[0]
+  const activeCompetition = selectedCompetition ?? fallbackCompetition
+  const competitionGallery = useMemo(
+    () => buildGalleryFromCompetition(activeCompetition, catalogCategory),
+    [activeCompetition, catalogCategory]
+  )
+  const unitPrice = parseEuroPrice(activeCompetition?.price)
+  const offerOptions = useMemo(
+    () => [
+      { id: 'single', label: `1 x ${formatEuroPrice(unitPrice, locale)}`, baseQty: 1, bonusQty: 0, multiplier: 1 },
+      { id: 'plus1', label: '3 + 1 Gratis', baseQty: 3, bonusQty: 1, multiplier: 3 },
+      { id: 'plus3', label: '5 + 3 Gratis', baseQty: 5, bonusQty: 3, multiplier: 5 },
+      { id: 'plus4', label: '10 + 4 Gratis', baseQty: 10, bonusQty: 4, multiplier: 10 },
+    ],
+    [unitPrice, locale]
+  )
+  const activeOffer = offerOptions.find((offer) => offer.id === selectedOffer) ?? offerOptions[0]
+  const subtotal = unitPrice * Math.max(1, quantity) * activeOffer.multiplier
+  const hasCoupon = couponCode.trim().length > 0
+  const discount = hasCoupon ? subtotal * 0.08 : 0
+  const total = Math.max(0, subtotal - discount)
   const filteredCatalogCompetitions = useMemo(() => {
     const normalizedSearch = catalogSearch.trim().toLowerCase()
     return catalogCompetitions.filter((competition) => {
@@ -2105,6 +2383,32 @@ function App() {
   }, [isAccountMenuOpen])
 
   useEffect(() => {
+    if (!isMobileMenuOpen) {
+      return undefined
+    }
+
+    const handlePointerDown = (event) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
     let animationFrame = 0
 
     const handleAnchorClick = (event) => {
@@ -2171,6 +2475,7 @@ function App() {
 
   const currentSlide = copy.heroSlides[activeSlide]
   const mockHeroVideo = mockedMediaData.heroVideo
+  const heroCountdownUnits = getCountdownUnits(currentSlide.countdown, locale)
   const handleLocaleChange = (nextLocale) => {
     setLocale(nextLocale)
     setActiveSlide(0)
@@ -2230,13 +2535,408 @@ function App() {
     setActiveSlide((current) => (current + 1) % copy.heroSlides.length)
   }
 
+  const handleHeroTouchStart = (event) => {
+    const touch = event.touches?.[0]
+    if (!touch) {
+      return
+    }
+
+    heroSwipeStartRef.current = { x: touch.clientX, y: touch.clientY }
+  }
+
+  const handleHeroTouchEnd = (event) => {
+    const start = heroSwipeStartRef.current
+    const touch = event.changedTouches?.[0]
+    heroSwipeStartRef.current = null
+
+    if (!start || !touch) {
+      return
+    }
+
+    const deltaX = touch.clientX - start.x
+    const deltaY = touch.clientY - start.y
+    const horizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 46
+
+    if (!horizontalSwipe) {
+      return
+    }
+
+    if (deltaX < 0) {
+      goToNextSlide()
+      return
+    }
+
+    goToPreviousSlide()
+  }
+
   const openCatalogPage = (category = 'cars') => {
     setCatalogCategory(category)
     setCatalogSearch('')
     setCatalogColor('all')
     setCatalogYear('all')
     setIsAccountMenuOpen(false)
+    setIsMobileMenuOpen(false)
     setView('catalog')
+  }
+
+  const openProductPage = (competition, category = catalogCategory) => {
+    setCatalogCategory(category)
+    setSelectedCompetition(competition)
+    setSelectedGalleryIndex(0)
+    setQuantity(1)
+    setSelectedOffer('single')
+    setIsAccountMenuOpen(false)
+    setIsMobileMenuOpen(false)
+    setView('product')
+  }
+
+  const openCheckoutPage = () => {
+    setIsMobileMenuOpen(false)
+    setView('checkout')
+  }
+
+  const openAuthPage = (mode = 'login') => {
+    setAuthMode(mode)
+    setIsMobileMenuOpen(false)
+    setView('auth')
+  }
+
+  const jumpToLandingSection = (sectionId) => {
+    setIsMobileMenuOpen(false)
+    setIsAccountMenuOpen(false)
+    setView('landing')
+    window.setTimeout(() => {
+      const target = document.querySelector(`#${sectionId}`)
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 20)
+  }
+
+  if (view === 'product' && activeCompetition) {
+    return (
+      <div className="luxury-shell text-slate-100 internal-shell">
+        <header className="home-header sticky top-0 z-40 backdrop-blur-xl">
+          <div className="home-header__inner mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen((current) => !current)}
+                className="internal-menu-btn inline-flex h-11 w-11 items-center justify-center rounded-[14px] border border-white/15 bg-white/6 text-white xl:hidden"
+                aria-label={internalCopy.menuTitle}
+              >
+                {isMobileMenuOpen ? 'x' : '='}
+              </button>
+              <a href="#home" className="brand-lockup group flex items-center gap-3">
+                <span className="brand-mark">
+                  <img src="/web_car_draw.webp" alt="Web Car Draw logo" className="brand-mark__image" />
+                </span>
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => openCatalogPage(catalogCategory)}
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition hover:border-[#f0c000]/35"
+              >
+                {catalogCopy.back}
+              </button>
+              <button type="button" onClick={openCheckoutPage} className="premium-button header-cta home-header__cta">
+                {internalCopy.checkoutPay}
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {isMobileMenuOpen ? (
+          <div className="internal-menu-overlay fixed inset-0 z-50 bg-black/70 p-4 xl:hidden">
+            <aside ref={mobileMenuRef} className="internal-menu-drawer ml-auto h-full w-full max-w-[340px] rounded-[24px] border border-white/10 bg-[#0b0f1a] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.55)]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9aa0ac]">{internalCopy.menuTitle}</p>
+              <div className="mt-6 flex flex-col gap-2">
+                <button type="button" onClick={returnToLanding} className="internal-menu-link">{internalCopy.menuHome}</button>
+                <button type="button" onClick={() => jumpToLandingSection('competitions')} className="internal-menu-link">{internalCopy.menuActive}</button>
+                <button type="button" onClick={() => openCatalogPage('cars')} className="internal-menu-link">{internalCopy.menuUpcoming}</button>
+                <button type="button" onClick={() => jumpToLandingSection('compliance')} className="internal-menu-link">{internalCopy.menuFaq}</button>
+                <button type="button" onClick={() => openAuthPage('login')} className="internal-menu-link">{internalCopy.menuLogin}</button>
+              </div>
+            </aside>
+          </div>
+        ) : null}
+
+        <main className="section-band section-band--soft internal-page">
+          <div className="section-shell">
+            <section className="internal-product-card rounded-[28px] border border-white/10 bg-[#111622] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] sm:p-6">
+              <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+                <div>
+                  <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#0f131e]">
+                    <img
+                      src={competitionGallery[selectedGalleryIndex] ?? activeCompetition.image}
+                      alt={activeCompetition.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-[260px] w-full object-cover sm:h-[320px] lg:h-[420px]"
+                    />
+                  </div>
+                  <div className="mt-3 grid grid-cols-4 gap-2">
+                    {competitionGallery.slice(0, 4).map((image) => (
+                      <button
+                        key={image}
+                        type="button"
+                        onClick={() => setSelectedGalleryIndex(competitionGallery.indexOf(image))}
+                        className={`overflow-hidden rounded-[14px] border transition ${
+                          competitionGallery[selectedGalleryIndex] === image
+                            ? 'border-[#e11d2e] ring-2 ring-[#e11d2e]/30'
+                            : 'border-white/10'
+                        }`}
+                      >
+                        <img src={image} alt={activeCompetition.title} className="h-20 w-full object-cover sm:h-24" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="internal-product-info rounded-[22px] border border-white/10 bg-[#0f131d] p-4 sm:p-5">
+                  <h1 className="text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">{activeCompetition.title}</h1>
+                  <p className="mt-3 text-lg font-semibold text-[#b7beca]">{activeCompetition.subtitle}</p>
+                  <p className="mt-5 text-4xl font-black text-[#ff4a5c]">{activeCompetition.price}</p>
+
+                  <div className="mt-5 flex flex-wrap items-center gap-3 text-sm">
+                    <span className="rounded-full border border-[#e11d2e]/30 bg-[#e11d2e]/10 px-3 py-1 font-semibold text-[#ffd3d8]">
+                      {internalCopy.productStock}: {internalCopy.productAvailable}
+                    </span>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-semibold text-[#b7beca]">
+                      {activeCompetition.sold}
+                    </span>
+                  </div>
+
+                  <div className="mt-6">
+                    <p className="text-sm font-semibold text-[#d7dee7]">{internalCopy.productQuantity}</p>
+                    <div className="mt-2 inline-flex items-center rounded-full border border-white/10 bg-[#111826] p-1">
+                      <button
+                        type="button"
+                        onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+                        className="h-9 w-9 rounded-full text-lg font-black text-white transition hover:bg-white/10"
+                      >
+                        -
+                      </button>
+                      <span className="inline-flex min-w-[3rem] justify-center text-lg font-black text-white">{quantity}</span>
+                      <button
+                        type="button"
+                        onClick={() => setQuantity((current) => Math.min(99, current + 1))}
+                        className="h-9 w-9 rounded-full text-lg font-black text-white transition hover:bg-white/10"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid gap-3">
+                    {offerOptions.map((offer) => (
+                      <button
+                        key={offer.id}
+                        type="button"
+                        onClick={() => setSelectedOffer(offer.id)}
+                        className={`internal-offer-btn rounded-[14px] border px-4 py-3 text-left text-sm font-bold uppercase tracking-[0.08em] transition ${
+                          selectedOffer === offer.id
+                            ? 'border-[#e11d2e] bg-[#e11d2e]/18 text-white'
+                            : 'border-white/10 bg-white/5 text-[#d7dee7] hover:border-[#e11d2e]/45'
+                        }`}
+                      >
+                        {offer.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={openCheckoutPage}
+                    className="internal-buy-btn mt-6 w-full rounded-full border border-[#e11d2e] bg-[#e11d2e] px-6 py-4 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[0_18px_45px_rgba(225,29,46,0.36)] transition hover:bg-[#c61120]"
+                  >
+                    {internalCopy.buyNow}
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section className="mt-6 rounded-[26px] border border-white/10 bg-[#111622] p-5 sm:p-7">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#ff7a88]">{internalCopy.productDescriptionTitle}</p>
+              <h2 className="mt-4 max-w-[24ch] text-4xl font-black leading-[1.02] tracking-[-0.04em] text-white">
+                {activeCompetition.title}
+              </h2>
+              <div className="mt-5 max-w-3xl space-y-5 text-[1.03rem] leading-8 text-[#c4cddd]">
+                <p>{activeCompetition.subtitle}. {copy.sections.platform.copy}</p>
+                <p>{copy.sections.competitions.copy}</p>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (view === 'checkout' && activeCompetition) {
+    return (
+      <div className="luxury-shell text-slate-100 internal-shell">
+        <header className="home-header sticky top-0 z-40 backdrop-blur-xl">
+          <div className="home-header__inner mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+            <button
+              type="button"
+              onClick={() => setView('product')}
+              className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35"
+            >
+              {catalogCopy.back}
+            </button>
+            <button type="button" onClick={() => openAuthPage('login')} className="premium-button header-cta home-header__cta">
+              {internalCopy.menuLogin}
+            </button>
+          </div>
+        </header>
+
+        <main className="section-band section-band--soft internal-page">
+          <div className="section-shell">
+            <section className="mx-auto w-full max-w-4xl rounded-[28px] border border-white/10 bg-[#111622] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] sm:p-6">
+              <h1 className="text-3xl font-black tracking-[-0.04em] text-white">{internalCopy.checkoutTitle}</h1>
+              <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_360px]">
+                <div className="rounded-[18px] border border-white/10 bg-[#0f131d] p-4">
+                  <div className="flex items-center gap-3">
+                    <img src={activeCompetition.image} alt={activeCompetition.title} className="h-16 w-24 rounded-[12px] object-cover" />
+                    <div>
+                      <p className="text-sm font-bold text-white">{activeCompetition.title}</p>
+                      <p className="mt-1 text-sm text-[#9aa0ac]">{activeOffer.label}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-5">
+                    <p className="text-sm font-semibold text-[#d7dee7]">{internalCopy.checkoutCoupon}</p>
+                    <input
+                      type="text"
+                      value={couponCode}
+                      onChange={(event) => setCouponCode(event.target.value)}
+                      placeholder="50fifty"
+                      className="internal-input mt-2 w-full rounded-[14px] border border-white/10 bg-[#111826] px-4 py-3 text-sm text-white outline-none transition focus:border-[#e11d2e]/55"
+                    />
+                  </div>
+
+                  <label className="mt-5 flex items-start gap-3 text-sm text-[#c4cddd]">
+                    <input
+                      type="checkbox"
+                      checked={acceptTerms}
+                      onChange={(event) => setAcceptTerms(event.target.checked)}
+                      className="mt-1 h-4 w-4 rounded border border-white/20 bg-[#101420]"
+                    />
+                    <span>{internalCopy.checkoutTerms}</span>
+                  </label>
+                </div>
+
+                <aside className="rounded-[18px] border border-white/10 bg-[#0f131d] p-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm text-[#b7beca]">
+                      <span>{internalCopy.checkoutDiscount}</span>
+                      <strong className="text-[#ff9ca8]">-{formatEuroPrice(discount, locale)}</strong>
+                    </div>
+                    <div className="flex items-center justify-between border-t border-white/10 pt-3 text-base text-white">
+                      <span>{internalCopy.checkoutTotal}</span>
+                      <strong className="text-3xl font-black text-[#ffd25a]">{formatEuroPrice(total, locale)}</strong>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => openAuthPage('login')}
+                    className="mt-6 w-full rounded-full border border-[#e11d2e] bg-[#e11d2e] px-6 py-4 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[0_18px_45px_rgba(225,29,46,0.36)] transition hover:bg-[#c61120]"
+                  >
+                    {internalCopy.checkoutPay}
+                  </button>
+                </aside>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (view === 'auth') {
+    return (
+      <div className="luxury-shell text-slate-100 internal-shell">
+        <main className="section-band section-band--deep min-h-screen">
+          <div className="section-shell flex min-h-[70vh] items-center justify-center">
+            <section className="w-full max-w-[460px] rounded-[26px] border border-white/10 bg-[#111622] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.4)] sm:p-7">
+              <h1 className="text-3xl font-black tracking-[-0.04em] text-white">
+                {authMode === 'login' ? internalCopy.authTitleLogin : internalCopy.authTitleRegister}
+              </h1>
+
+              <form className="mt-6 space-y-4">
+                {authMode === 'register' ? (
+                  <>
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-semibold text-[#c4cddd]">{internalCopy.authName}</span>
+                      <input
+                        type="text"
+                        value={authForm.name}
+                        onChange={(event) => setAuthForm((current) => ({ ...current, name: event.target.value }))}
+                        className="internal-input w-full rounded-[14px] border border-white/10 bg-[#111826] px-4 py-3 text-sm text-white outline-none transition focus:border-[#e11d2e]/55"
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="mb-2 block text-sm font-semibold text-[#c4cddd]">{internalCopy.authSurname}</span>
+                      <input
+                        type="text"
+                        value={authForm.surname}
+                        onChange={(event) => setAuthForm((current) => ({ ...current, surname: event.target.value }))}
+                        className="internal-input w-full rounded-[14px] border border-white/10 bg-[#111826] px-4 py-3 text-sm text-white outline-none transition focus:border-[#e11d2e]/55"
+                      />
+                    </label>
+                  </>
+                ) : null}
+
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-[#c4cddd]">{internalCopy.authEmail}</span>
+                  <input
+                    type="email"
+                    value={authForm.email}
+                    onChange={(event) => setAuthForm((current) => ({ ...current, email: event.target.value }))}
+                    className="internal-input w-full rounded-[14px] border border-white/10 bg-[#111826] px-4 py-3 text-sm text-white outline-none transition focus:border-[#e11d2e]/55"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-[#c4cddd]">{internalCopy.authPassword}</span>
+                  <input
+                    type="password"
+                    value={authForm.password}
+                    onChange={(event) => setAuthForm((current) => ({ ...current, password: event.target.value }))}
+                    className="internal-input w-full rounded-[14px] border border-white/10 bg-[#111826] px-4 py-3 text-sm text-white outline-none transition focus:border-[#e11d2e]/55"
+                  />
+                </label>
+
+                <button
+                  type="button"
+                  onClick={openCheckoutPage}
+                  className="w-full rounded-full border border-[#e11d2e] bg-[#e11d2e] px-6 py-4 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[0_18px_45px_rgba(225,29,46,0.36)] transition hover:bg-[#c61120]"
+                >
+                  {authMode === 'login' ? internalCopy.authPrimaryLogin : internalCopy.authPrimaryRegister}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setAuthMode((current) => (current === 'login' ? 'register' : 'login'))}
+                  className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-[#d7dee7] transition hover:border-[#e11d2e]/45"
+                >
+                  {authMode === 'login' ? internalCopy.authSwitchRegister : internalCopy.authSwitchLogin}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={returnToLanding}
+                  className="w-full text-sm text-[#9aa0ac] underline-offset-4 hover:text-white hover:underline"
+                >
+                  {catalogCopy.back}
+                </button>
+              </form>
+            </section>
+          </div>
+        </main>
+      </div>
+    )
   }
 
   if (view === 'adminLogin') {
@@ -2503,19 +3203,25 @@ function App() {
     return (
       <div className="luxury-shell text-slate-100">
         <div className="w-full">
-          <div className="bg-[#f0c000] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#0e0e13] sm:px-6">
-            {copy.topbar}
-          </div>
-
           <header className="sticky top-0 z-40 border-b border-white/8 bg-[#0b0c10]/86 backdrop-blur-xl">
             <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-              <button
-                type="button"
-                onClick={returnToLanding}
-                className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
-              >
-                {catalogCopy.back}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileMenuOpen((current) => !current)}
+                  className="internal-menu-btn inline-flex h-11 w-11 items-center justify-center rounded-[14px] border border-white/15 bg-white/6 text-white xl:hidden"
+                  aria-label={internalCopy.menuTitle}
+                >
+                  {isMobileMenuOpen ? 'x' : '='}
+                </button>
+                <button
+                  type="button"
+                  onClick={returnToLanding}
+                  className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
+                >
+                  {catalogCopy.back}
+                </button>
+              </div>
 
               <div className="flex items-center gap-3">
                 <span className="rounded-full border border-[#f0c000]/28 bg-[#f0c000]/12 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.24em] text-[#ffd25a]">
@@ -2544,6 +3250,21 @@ function App() {
               </div>
             </div>
           </header>
+
+          {isMobileMenuOpen ? (
+            <div className="internal-menu-overlay fixed inset-0 z-50 bg-black/70 p-4 xl:hidden">
+              <aside ref={mobileMenuRef} className="internal-menu-drawer ml-auto h-full w-full max-w-[340px] rounded-[24px] border border-white/10 bg-[#0b0f1a] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.55)]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9aa0ac]">{internalCopy.menuTitle}</p>
+                <div className="mt-6 flex flex-col gap-2">
+                  <button type="button" onClick={returnToLanding} className="internal-menu-link">{internalCopy.menuHome}</button>
+                  <button type="button" onClick={() => jumpToLandingSection('competitions')} className="internal-menu-link">{internalCopy.menuActive}</button>
+                  <button type="button" onClick={() => openCatalogPage('cars')} className="internal-menu-link">{internalCopy.menuUpcoming}</button>
+                  <button type="button" onClick={() => jumpToLandingSection('compliance')} className="internal-menu-link">{internalCopy.menuFaq}</button>
+                  <button type="button" onClick={() => openAuthPage('login')} className="internal-menu-link">{internalCopy.menuLogin}</button>
+                </div>
+              </aside>
+            </div>
+          ) : null}
 
           <main className="section-band section-band--deep min-h-screen">
             <div className="section-shell">
@@ -2672,8 +3393,10 @@ function App() {
                               className="h-full w-full object-cover"
                             />
                             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.04)_0%,rgba(10,11,15,0.6)_100%)]" />
-                            <div className="absolute left-4 top-4 rounded-full border border-[#f0c000]/25 bg-[#0b0c10]/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffd25a]">
-                              {competition.deadline}
+                            <div
+                              className={`competition-deadline-badge competition-deadline-badge--${getDeadlineBadgeTone(competition.deadline)} absolute left-4 top-4`}
+                            >
+                              {getDeadlineBadgeLabel(competition.deadline, locale)}
                             </div>
                           </div>
 
@@ -2744,11 +3467,19 @@ function App() {
                             </div>
 
                             <div className="mt-4 space-y-3">
-                              <button type="button" className="premium-button w-full justify-center">
+                              <button
+                                type="button"
+                                onClick={() => openProductPage(competition, catalogCategory)}
+                                className="premium-button w-full justify-center"
+                              >
                                 {copy.actions.buyTickets}
                               </button>
                               <button
                                 type="button"
+                                onClick={() => {
+                                  openProductPage(competition, catalogCategory)
+                                  setView('checkout')
+                                }}
                                 className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
                               >
                                 {copy.actions.enterCompetition}
@@ -2776,22 +3507,28 @@ function App() {
   return (
     <div className="luxury-shell text-slate-100">
       <div className="w-full">
-        <div className="bg-[#f0c000] px-4 py-2 text-center text-[10px] font-extrabold uppercase tracking-[0.26em] text-[#0e0e13] sm:px-6">
-          {copy.topbar}
-        </div>
+        <header className="home-header sticky top-0 z-40 backdrop-blur-xl">
+          <div className="home-header__inner mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:relative">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen((current) => !current)}
+                className="internal-menu-btn inline-flex h-11 w-11 items-center justify-center rounded-[14px] border border-white/15 bg-white/6 text-white xl:hidden"
+                aria-label={internalCopy.menuTitle}
+              >
+                {isMobileMenuOpen ? 'x' : '='}
+              </button>
+              <a href="#home" className="brand-lockup group flex items-center gap-3">
+                <span className="brand-mark">
+                  <img src="/web_car_draw.webp" alt="Web Car Draw logo" className="brand-mark__image" />
+                </span>
+                <span className="hidden flex-col leading-none sm:flex">
+                  <span className="brand-wordmark">Web Car Draw</span>
+                </span>
+              </a>
+            </div>
 
-        <header className="sticky top-0 z-40 bg-[#0b0c10]/78 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:relative">
-            <a href="#home" className="brand-lockup group flex items-center gap-3">
-              <span className="brand-mark">
-                <img src="/web_car_draw.webp" alt="Web Car Draw logo" className="brand-mark__image" />
-              </span>
-              <span className="hidden flex-col leading-none sm:flex">
-                <span className="brand-wordmark">Web Car Draw</span>
-              </span>
-            </a>
-
-            <nav className="hidden items-center justify-center gap-8 text-[15px] font-semibold text-[#b7beca] xl:absolute xl:left-1/2 xl:flex xl:-translate-x-1/2">
+            <nav className="home-nav hidden items-center justify-center gap-8 text-[15px] font-semibold text-[#b7beca] xl:absolute xl:left-1/2 xl:flex xl:-translate-x-1/2">
               {navigationItems.map((item) => (
                 <a key={item.id} href={`#${item.id}`} className="transition hover:text-white">
                   {item.label}
@@ -2799,7 +3536,7 @@ function App() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-2.5">
+            <div className="home-header__actions flex items-center gap-2.5">
               <label className="hidden">
                 <span className="language-picker__label">{copy.actions.languageLabel}</span>
                 <span aria-hidden="true" className="language-picker__chevron" />
@@ -2823,7 +3560,7 @@ function App() {
               <button
                 type="button"
                 onClick={() => openCatalogPage('cars')}
-                className="premium-button header-cta"
+                className="premium-button header-cta home-header__cta"
               >
                 {copy.actions.participate}
               </button>
@@ -2964,9 +3701,28 @@ function App() {
             </div>
           </div>
         </header>
+
+        {isMobileMenuOpen ? (
+          <div className="internal-menu-overlay fixed inset-0 z-50 bg-black/70 p-4 xl:hidden">
+            <aside ref={mobileMenuRef} className="internal-menu-drawer ml-auto h-full w-full max-w-[340px] rounded-[24px] border border-white/10 bg-[#0b0f1a] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.55)]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9aa0ac]">{internalCopy.menuTitle}</p>
+              <div className="mt-6 flex flex-col gap-2">
+                <button type="button" onClick={returnToLanding} className="internal-menu-link">{internalCopy.menuHome}</button>
+                <button type="button" onClick={() => jumpToLandingSection('competitions')} className="internal-menu-link">{internalCopy.menuActive}</button>
+                <button type="button" onClick={() => openCatalogPage('cars')} className="internal-menu-link">{internalCopy.menuUpcoming}</button>
+                <button type="button" onClick={() => jumpToLandingSection('compliance')} className="internal-menu-link">{internalCopy.menuFaq}</button>
+                <button type="button" onClick={() => openAuthPage('login')} className="internal-menu-link">{internalCopy.menuLogin}</button>
+              </div>
+            </aside>
+          </div>
+        ) : null}
         
         <main id="home">
-          <section className="section-band section-band--hero hero-stage relative min-h-[74svh] overflow-hidden lg:min-h-[80svh]">
+          <section
+            className="home-hero section-band section-band--hero hero-stage relative min-h-[74svh] overflow-hidden lg:min-h-[80svh]"
+            onTouchStart={handleHeroTouchStart}
+            onTouchEnd={handleHeroTouchEnd}
+          >
             {copy.heroSlides.map((slide, index) => (
               <img
                 key={slide.id}
@@ -2999,24 +3755,8 @@ function App() {
             <div className="hero-atmosphere absolute inset-0" />
             <div className="noise-overlay absolute inset-0 opacity-35" />
 
-            <div className="hero-shell relative flex min-h-[74svh] flex-col justify-start pb-4 pt-6 lg:min-h-[80svh] lg:pb-4 lg:pt-8">
-              <button
-                type="button"
-                onClick={goToPreviousSlide}
-                className="hero-nav-button absolute left-1 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:left-2 lg:-left-3"
-                aria-label="Previous slide"
-              >
-                {'<'}
-              </button>
-              <button
-                type="button"
-                onClick={goToNextSlide}
-                className="hero-nav-button absolute right-1 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-xl font-semibold sm:right-2 lg:-right-3"
-                aria-label="Next slide"
-              >
-                {'>'}
-              </button>
-              <div className="hero-main-layout relative z-10 grid flex-1 items-start gap-6 pt-2 pb-6 sm:pt-4 sm:pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:pt-6 lg:pb-8">
+            <div className="hero-shell home-hero-shell relative flex min-h-[74svh] flex-col justify-start pb-4 pt-6 lg:min-h-[80svh] lg:pb-4 lg:pt-8">
+              <div className="hero-main-layout home-hero-layout relative z-10 grid flex-1 items-start gap-6 pt-2 pb-6 sm:pt-4 sm:pb-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-8 lg:pt-6 lg:pb-8">
                 <div className="hero-copy-stage relative max-w-[42rem]">
                   <p className="hero-shadow-title">{copy.currentDraw.title}</p>
                   <div key={currentSlide.id} className="hero-copy-content relative z-10">
@@ -3024,16 +3764,10 @@ function App() {
                       <span className="section-kicker border-[#f0c000]/34 bg-[#f0c000]/12 shadow-[0_0_30px_rgba(201,162,74,0.08)]">
                         {currentSlide.badge}
                       </span>
-                      <span className="inline-flex rounded-full border border-[#f0c000]/40 bg-[#f0c000]/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffe08a] backdrop-blur-sm">
-                        {mockHeroVideo.note}
-                      </span>
                       <span className="inline-flex rounded-full border border-white/10 bg-black/28 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#d7dee7] backdrop-blur-sm">
                         {copy.currentDraw.eyebrow}
                       </span>
                     </div>
-                    <p className="mt-3 max-w-[19rem] text-[0.62rem] font-bold uppercase tracking-[0.28em] text-[#a8925a] sm:text-[0.66rem]">
-                      premium animated experience / high-conversion flow / yellow brand identity
-                    </p>
                     <h1 className="hero-display mt-4 max-w-[34rem] text-[#f5f7fb]">
                       {currentSlide.title}
                     </h1>
@@ -3199,10 +3933,22 @@ function App() {
                   ))}
                 </div>
               </div>
+
+              <div className="hero-countdown-panel mt-8 lg:mt-20">
+                <p className="hero-countdown-panel__title">{copy.currentDraw.countdownLabel}</p>
+                <div className="hero-countdown-grid">
+                  {heroCountdownUnits.map((unit) => (
+                    <div key={unit.label} className="hero-countdown-cell">
+                      <span className="hero-countdown-value">{unit.value}</span>
+                      <span className="hero-countdown-label">{unit.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
 
-          <section id="competitions" className="section-band section-band--soft">
+          <section id="competitions" className="home-competitions section-band section-band--soft">
             <div className="section-shell">
             <div className="flex flex-col gap-5">
               <div className="max-w-3xl">
@@ -3212,13 +3958,15 @@ function App() {
               </div>
             </div>
 
-            <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {copy.competitions.map((competition) => (
+            <div className="home-competitions-grid mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {copy.competitions.map((competition, index) => (
                 <article
                   key={competition.title}
-                  className="flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28"
+                  className={`home-competition-card flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28 ${
+                    index === 0 ? 'md:col-span-2 xl:col-span-2' : ''
+                  }`}
                 >
-                  <div className="relative h-72 overflow-hidden">
+                  <div className={`relative overflow-hidden ${index === 0 ? 'h-80 md:h-[22rem]' : 'h-72'}`}>
                     <img
                       src={competition.image}
                       alt={competition.title}
@@ -3227,8 +3975,10 @@ function App() {
                       className="h-full w-full object-cover transition duration-700 hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.06)_0%,rgba(10,11,15,0.1)_30%,rgba(10,11,15,0.85)_100%)]" />
-                    <div className="absolute left-5 top-5 rounded-full border border-[#f0c000]/25 bg-[#0b0c10]/70 px-3 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ffd25a] backdrop-blur-sm">
-                      {competition.deadline}
+                    <div
+                      className={`competition-deadline-badge competition-deadline-badge--${getDeadlineBadgeTone(competition.deadline)} absolute left-4 top-4 sm:left-5 sm:top-5`}
+                    >
+                      {getDeadlineBadgeLabel(competition.deadline, locale)}
                     </div>
                     <div className="absolute bottom-5 left-5 rounded-full bg-[#ffd25a] px-4 py-2 text-sm font-black text-[#0b0c10] shadow-[0_14px_40px_rgba(201,162,74,0.28)]">
                       {competition.price}
@@ -3273,7 +4023,7 @@ function App() {
             </div>
           </section>
           
-          <section id="how-it-works" className="section-band section-band--tight section-band--borderless">
+          <section id="how-it-works" className="home-info section-band section-band--tight section-band--borderless">
             <div className="section-shell">
             <div className="mb-6">
               <span className="section-kicker">{copy.sections.howItWorks.kicker}</span>
@@ -3293,7 +4043,7 @@ function App() {
             </div>
           </section>
 
-          <section id="winners" className="section-band section-band--deep">
+          <section id="winners" className="home-winners section-band section-band--deep">
             <div className="section-shell">
             <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
               <div className="surface-card overflow-hidden p-0">
@@ -3344,7 +4094,7 @@ function App() {
             </div>
           </section>
 
-          <section id="platform" className="section-band section-band--soft">
+          <section id="platform" className="home-platform section-band section-band--soft">
             <div className="section-shell">
             <div className="max-w-3xl">
               <span className="section-kicker">{copy.sections.platform.kicker}</span>
@@ -3366,7 +4116,7 @@ function App() {
             </div>
           </section>
 
-          <section id="compliance" className="section-band section-band--tight">
+          <section id="compliance" className="home-compliance section-band section-band--tight">
             <div className="section-shell">
             <div className="grid gap-5 lg:grid-cols-[1fr_1.2fr]">
               <div className="surface-card p-6">
@@ -3386,7 +4136,7 @@ function App() {
             </div>
           </section>
 
-          <section className="section-band section-band--deep">
+          <section className="home-promo section-band section-band--deep">
             <div className="section-shell">
             <div className="overflow-hidden rounded-[28px] border border-[#e11d2e]/25 bg-[linear-gradient(135deg,rgba(14,18,26,0.98)_0%,rgba(10,11,15,0.94)_42%,rgba(18,22,30,0.96)_100%)] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.45)] sm:p-8">
               <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -3413,9 +4163,9 @@ function App() {
           </section>
         </main>
 
-        <footer className="relative border-t border-[#e11d2e]/55 bg-[linear-gradient(180deg,#0b0c10_0%,#12131a_100%)]">
+        <footer className="home-footer relative border-t border-[#e11d2e]/55 bg-[linear-gradient(180deg,#0b0c10_0%,#12131a_100%)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,rgba(255,245,205,0.28),transparent_22%),radial-gradient(circle_at_90%_50%,rgba(168,120,8,0.16),transparent_24%)]" />
-          <div className="section-shell relative grid gap-8 py-12 text-sm text-[#b7beca] md:grid-cols-2 lg:grid-cols-4">
+          <div className="home-footer__grid section-shell relative grid gap-8 py-12 text-sm text-[#b7beca] md:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center gap-3">
                 <span className="brand-mark brand-mark--footer">
