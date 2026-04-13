@@ -2002,7 +2002,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Lake House Signature Draw',
         subtitle: 'Panoramic deck, fireplace and private dock',
-        image: '/houses/6391394-house-6597406_1920.jpg',
+        image: '/houses/casa-1.jpeg',
         deadline: 'Ends in 4 days',
         price: 'EUR 34.90',
         progress: 58,
@@ -2015,7 +2015,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Ibiza Modern Villa',
         subtitle: 'Infinity pool and designer interiors',
-        image: '/houses/gregorybutler-large-home-389271_1280.jpg',
+        image: '/houses/casa-2.jpeg',
         deadline: 'Ends in 7 days',
         price: 'EUR 44.90',
         progress: 63,
@@ -2028,7 +2028,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Alpine Chalet Escape',
         subtitle: 'Mountain view residence with spa suite',
-        image: '/houses/peggychoucair-house-4028391_1920.jpg',
+        image: '/houses/casa-3.jpeg',
         deadline: 'Ends tonight',
         price: 'EUR 29.90',
         progress: 88,
@@ -2046,7 +2046,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Sorteo Casa del Lago',
         subtitle: 'Deck panoramico, chimenea y muelle privado',
-        image: '/houses/6391394-house-6597406_1920.jpg',
+        image: '/houses/casa-1.jpeg',
         deadline: 'Termina en 4 dias',
         price: 'EUR 34.90',
         progress: 58,
@@ -2059,7 +2059,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Villa Moderna Ibiza',
         subtitle: 'Piscina infinita e interiores de autor',
-        image: '/houses/gregorybutler-large-home-389271_1280.jpg',
+        image: '/houses/casa-2.jpeg',
         deadline: 'Termina en 7 dias',
         price: 'EUR 44.90',
         progress: 63,
@@ -2072,7 +2072,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Chalet Alpine Escape',
         subtitle: 'Residencia con vista a la montana y spa',
-        image: '/houses/peggychoucair-house-4028391_1920.jpg',
+        image: '/houses/casa-3.jpeg',
         deadline: 'Termina hoy',
         price: 'EUR 29.90',
         progress: 88,
@@ -2090,7 +2090,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Sorteio Casa do Lago',
         subtitle: 'Deck panoramico, lareira e cais privado',
-        image: '/houses/6391394-house-6597406_1920.jpg',
+        image: '/houses/casa-1.jpeg',
         deadline: 'Termina em 4 dias',
         price: 'EUR 34.90',
         progress: 58,
@@ -2103,7 +2103,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Villa Moderna Ibiza',
         subtitle: 'Piscina infinity e interiores de autor',
-        image: '/houses/gregorybutler-large-home-389271_1280.jpg',
+        image: '/houses/casa-2.jpeg',
         deadline: 'Termina em 7 dias',
         price: 'EUR 44.90',
         progress: 63,
@@ -2116,7 +2116,7 @@ const getHouseCompetitions = (locale) => {
       {
         title: 'Chalet Alpine Escape',
         subtitle: 'Residencia com vista para a montanha e spa',
-        image: '/houses/peggychoucair-house-4028391_1920.jpg',
+        image: '/houses/casa-3.jpeg',
         deadline: 'Termina hoje',
         price: 'EUR 29.90',
         progress: 88,
@@ -2133,7 +2133,7 @@ const getHouseCompetitions = (locale) => {
     {
       title: 'Sorteio Casa do Lago',
       subtitle: 'Deck panoramico, lareira e pier privativo',
-      image: '/houses/6391394-house-6597406_1920.jpg',
+      image: '/houses/casa-1.jpeg',
       deadline: 'Termina em 4 dias',
       price: 'EUR 34.90',
       progress: 58,
@@ -2146,7 +2146,7 @@ const getHouseCompetitions = (locale) => {
     {
       title: 'Villa Moderna Ibiza',
       subtitle: 'Piscina de borda infinita e interiores assinados',
-      image: '/houses/gregorybutler-large-home-389271_1280.jpg',
+      image: '/houses/casa-2.jpeg',
       deadline: 'Termina em 7 dias',
       price: 'EUR 44.90',
       progress: 63,
@@ -2159,7 +2159,7 @@ const getHouseCompetitions = (locale) => {
     {
       title: 'Chalet Alpine Escape',
       subtitle: 'Casa com vista para montanha e suite spa',
-      image: '/houses/peggychoucair-house-4028391_1920.jpg',
+      image: '/houses/casa-3.jpeg',
       deadline: 'Termina hoje',
       price: 'EUR 29.90',
       progress: 88,
@@ -2367,9 +2367,9 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
 
   const fallbackCars = ['/cars/hero-1.jpg', '/cars/hero-2.jpg', '/cars/hero-3.jpg', '/cars/card-1.jpg']
   const fallbackHouses = [
-    '/houses/6391394-house-6597406_1920.jpg',
-    '/houses/gregorybutler-large-home-389271_1280.jpg',
-    '/houses/peggychoucair-house-4028391_1920.jpg',
+    '/houses/casa-1.jpeg',
+    '/houses/casa-2.jpeg',
+    '/houses/casa-3.jpeg',
   ]
   const fallback = category === 'houses' ? fallbackHouses : fallbackCars
   const customGallery = Array.isArray(competition.gallery)
