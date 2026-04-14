@@ -1,0 +1,80 @@
+{
+  "siteName": "Black Ticket Club",
+  "homeTitle": "Compre bilhetes dos carros em destaque",
+  "homeSubtitle": "Cada carro possui sua propria pagina de venda e o admin escolhe quais entram na home.",
+  "homeDescription": "O painel administrativo controla valor, fotos, descricao, destaque da home e preparacao da integracao com Stripe para cada carro/sorteio.",
+  "campaigns": [
+    {
+      "id": "mustang-black-2026",
+      "slug": "mustang-black-2026",
+      "badge": "Destaque principal",
+      "title": "Sorteio oficial do Mustang Black Edition",
+      "carName": "Ford Mustang Black Edition 5.0 V8",
+      "shortDescription": "Mustang em destaque com checkout preparado para Stripe e compra por bilhetes.",
+      "description": "Pagina do carro com galeria, contagem, detalhes do sorteio e fluxo pronto para Stripe. O admin consegue editar textos, valor, fotos e regras da campanha.",
+      "status": "active",
+      "featuredOnHome": true,
+      "ticketPrice": 25,
+      "currency": "BRL",
+      "totalTickets": 5000,
+      "soldTickets": 1384,
+      "maxTicketsPerOrder": 100,
+      "drawDate": "2026-06-12T21:00:00.000Z",
+      "heroImage": "/cars/hero-1.jpg",
+      "gallery": [
+        "/cars/hero-1.jpg",
+        "/cars/hero-2.jpg",
+        "/cars/hero-3.jpg",
+        "/cars/card-1.jpg"
+      ],
+      "highlights": [
+        "Entrega documentada para o vencedor",
+        "Bilhetes com numeracao rastreavel",
+        "Checkout preparado para Stripe"
+      ],
+      "stripe": {
+        "enabled": false,
+        "priceId": "",
+        "productName": "Bilhete Mustang Black Edition",
+        "successUrl": "http://localhost:5173/?checkout=success",
+        "cancelUrl": "http://localhost:5173/?checkout=cancel"
+      }
+    },
+    {
+      "id": "g-class-shadow-2026",
+      "slug": "g-class-shadow-2026",
+      "badge": "SUV premium",
+      "title": "Sorteio da G-Class Shadow Edition",
+      "carName": "Mercedes G-Class Shadow Edition",
+      "shortDescription": "SUV premium com fotos, descricao longa e controle de destaque na home.",
+      "description": "Use este sorteio como segundo carro da home ou mantenha apenas como pagina individual. Todo o conteudo pode ser alterado pelo painel admin.",
+      "status": "active",
+      "featuredOnHome": true,
+      "ticketPrice": 35,
+      "currency": "BRL",
+      "totalTickets": 8000,
+      "soldTickets": 2120,
+      "maxTicketsPerOrder": 80,
+      "drawDate": "2026-07-05T20:00:00.000Z",
+      "heroImage": "/cars/hero-3.jpg",
+      "gallery": [
+        "/cars/hero-3.jpg",
+        "/cars/hero-2.jpg",
+        "/cars/hero-1.jpg"
+      ],
+      "highlights": [
+        "Pagina individual do carro",
+        "Destaque opcional na home",
+        "Preparado para Stripe Checkout"
+      ],
+      "stripe": {
+        "enabled": false,
+        "priceId": "",
+        "productName": "Bilhete G-Class Shadow Edition",
+        "successUrl": "http://localhost:5173/?checkout=success",
+        "cancelUrl": "http://localhost:5173/?checkout=cancel"
+      }
+    }
+  ],
+  "updatedAt": "2026-04-14T00:00:00.000Z"
+}
