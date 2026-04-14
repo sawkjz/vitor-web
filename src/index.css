@@ -976,11 +976,253 @@
   }
 
   .internal-buy-btn {
+    --internal-buy-star-1-opacity: 0.25;
+    --internal-buy-star-1-scale: 1;
+    --internal-buy-star-2-opacity: 1;
+    --internal-buy-star-2-scale: 1;
+    --internal-buy-star-3-opacity: 0.5;
+    --internal-buy-star-3-scale: 1;
     min-height: 3.4rem;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transform: translateZ(0) scale(1);
+    transition:
+      transform 220ms ease,
+      box-shadow 260ms ease,
+      background-color 220ms ease;
+  }
+
+  .internal-buy-btn::before {
+    content: '';
+    position: absolute;
+    left: 22%;
+    right: 22%;
+    bottom: -14px;
+    height: 22px;
+    border-radius: 999px;
+    background: rgba(255, 138, 151, 0.82);
+    filter: blur(14px);
+    opacity: 0;
+    transform: translateY(7px);
+    transition: opacity 260ms ease, transform 260ms ease;
+    pointer-events: none;
+  }
+
+  .internal-buy-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(118deg, transparent 32%, rgba(255, 255, 255, 0.36) 50%, transparent 68%);
+    transform: translateX(-130%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .internal-buy-btn__label {
+    position: relative;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .internal-buy-btn__icon {
+    width: 1.45rem;
+    height: 1.45rem;
+    flex: 0 0 auto;
+    margin-right: 0.6rem;
+    fill: currentColor;
+    position: relative;
+    z-index: 3;
+  }
+
+  .internal-buy-btn__icon path {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 260ms ease, opacity 260ms ease;
+  }
+
+  .internal-buy-btn__icon path:nth-child(1) {
+    opacity: var(--internal-buy-star-1-opacity);
+    transform: scale(var(--internal-buy-star-1-scale));
+    transform-origin: 25% 14.58%;
+  }
+
+  .internal-buy-btn__icon path:nth-child(2) {
+    opacity: var(--internal-buy-star-2-opacity);
+    transform: scale(var(--internal-buy-star-2-scale));
+    transform-origin: 60.42% 50%;
+  }
+
+  .internal-buy-btn__icon path:nth-child(3) {
+    opacity: var(--internal-buy-star-3-opacity);
+    transform: scale(var(--internal-buy-star-3-scale));
+    transform-origin: 25% 85.42%;
+  }
+
+  .internal-buy-btn__stroke {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px dashed rgba(255, 226, 228, 0.72);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .internal-buy-btn__dots {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 220ms ease;
+  }
+
+  .internal-buy-btn__dot {
+    position: absolute;
+    left: 50%;
+    top: 62%;
+    width: var(--dot-size, 2px);
+    height: var(--dot-size, 2px);
+    border-radius: 999px;
+    background: rgba(255, 226, 228, 0.95);
+    box-shadow: 0 0 10px rgba(255, 200, 207, 0.86);
+    transform: translate3d(-50%, 0, 0);
+    opacity: 0;
+    animation: internal-buy-dot var(--dot-duration, 1.8s) ease-out var(--dot-delay, 0s) infinite paused;
+  }
+
+  .internal-buy-btn:hover {
+    transform: translateZ(0) scale(1.055);
+    box-shadow:
+      0 24px 60px rgba(225, 29, 46, 0.46),
+      0 0 0 2px rgba(255, 111, 127, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+
+  .internal-buy-btn:hover::before {
+    opacity: 0.92;
+    transform: translateY(0);
+  }
+
+  .internal-buy-btn:hover::after {
+    opacity: 1;
+    animation: internal-buy-sweep 1s ease;
+  }
+
+  .internal-buy-btn:hover .internal-buy-btn__stroke {
+    opacity: 1;
+    animation: internal-buy-stroke 1.5s linear infinite;
+  }
+
+  .internal-buy-btn:hover .internal-buy-btn__dots {
+    opacity: 0.72;
+  }
+
+  .internal-buy-btn:hover .internal-buy-btn__dot {
+    animation-play-state: running;
+  }
+
+  .internal-buy-btn:hover .internal-buy-btn__icon {
+    animation: internal-buy-star-twinkle 1.4s ease-in-out infinite;
+  }
+
+  .internal-buy-btn:active {
+    transform: translateZ(0) scale(1.03);
   }
 
   .internal-input {
     min-height: 3rem;
+  }
+
+  @keyframes internal-buy-stroke {
+    0% {
+      border-color: rgba(255, 226, 228, 0);
+      border-style: dashed;
+    }
+
+    25%,
+    72% {
+      border-color: rgba(255, 226, 228, 0.75);
+    }
+
+    100% {
+      border-color: rgba(255, 226, 228, 0);
+    }
+  }
+
+  @keyframes internal-buy-dot {
+    0% {
+      opacity: 0;
+      transform: translate3d(-50%, 0, 0) scale(0.3);
+    }
+
+    20% {
+      opacity: 1;
+    }
+
+    80% {
+      opacity: 0.72;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate3d(calc(-50% + var(--dot-x, 0px)), -34px, 0) scale(0.1);
+    }
+  }
+
+  @keyframes internal-buy-sweep {
+    0% {
+      transform: translateX(-130%);
+    }
+
+    100% {
+      transform: translateX(130%);
+    }
+  }
+
+  @keyframes internal-buy-star-twinkle {
+    0% {
+      --internal-buy-star-1-opacity: 0.25;
+      --internal-buy-star-1-scale: 1;
+      --internal-buy-star-2-opacity: 1;
+      --internal-buy-star-2-scale: 1;
+      --internal-buy-star-3-opacity: 0.5;
+      --internal-buy-star-3-scale: 1;
+    }
+
+    25% {
+      --internal-buy-star-1-opacity: 0.45;
+      --internal-buy-star-1-scale: 1.22;
+      --internal-buy-star-2-opacity: 0.4;
+      --internal-buy-star-2-scale: 0.82;
+      --internal-buy-star-3-opacity: 1;
+      --internal-buy-star-3-scale: 1.2;
+    }
+
+    55% {
+      --internal-buy-star-1-opacity: 0.7;
+      --internal-buy-star-1-scale: 1.34;
+      --internal-buy-star-2-opacity: 1;
+      --internal-buy-star-2-scale: 1.14;
+      --internal-buy-star-3-opacity: 0.45;
+      --internal-buy-star-3-scale: 0.92;
+    }
+
+    100% {
+      --internal-buy-star-1-opacity: 0.25;
+      --internal-buy-star-1-scale: 1;
+      --internal-buy-star-2-opacity: 1;
+      --internal-buy-star-2-scale: 1;
+      --internal-buy-star-3-opacity: 0.5;
+      --internal-buy-star-3-scale: 1;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -995,8 +1237,15 @@
 
     .surface-card,
     .premium-button,
-    .brand-lockup {
+    .brand-lockup,
+    .internal-buy-btn,
+    .internal-buy-btn::before,
+    .internal-buy-btn::after,
+    .internal-buy-btn__stroke,
+    .internal-buy-btn__dots,
+    .internal-buy-btn__dot {
       transition: none !important;
+      animation: none !important;
     }
   }
 

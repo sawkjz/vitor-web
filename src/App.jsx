@@ -2357,6 +2357,42 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+
+    const buttons = document.querySelectorAll('.internal-buy-btn')
+
+    buttons.forEach((button) => {
+      if (button.dataset.enhanced === 'true') {
+        return
+      }
+
+      const stroke = document.createElement('span')
+      stroke.className = 'internal-buy-btn__stroke'
+      stroke.setAttribute('aria-hidden', 'true')
+
+      const dots = document.createElement('span')
+      dots.className = 'internal-buy-btn__dots'
+      dots.setAttribute('aria-hidden', 'true')
+
+      for (let index = 0; index < 22; index += 1) {
+        const dot = document.createElement('span')
+        dot.className = 'internal-buy-btn__dot'
+        dot.style.setProperty('--dot-x', `${(Math.random() * 70 - 35).toFixed(2)}px`)
+        dot.style.setProperty('--dot-size', `${(Math.random() * 1.4 + 1.8).toFixed(2)}px`)
+        dot.style.setProperty('--dot-delay', `${(Math.random() * 1.2).toFixed(2)}s`)
+        dot.style.setProperty('--dot-duration', `${(Math.random() * 1.1 + 1.4).toFixed(2)}s`)
+        dots.appendChild(dot)
+      }
+
+      button.appendChild(stroke)
+      button.appendChild(dots)
+      button.dataset.enhanced = 'true'
+    })
+  }, [view, locale])
+
+  useEffect(() => {
     if (!isAccountMenuOpen) {
       return undefined
     }
@@ -2639,9 +2675,6 @@ function App() {
               >
                 {catalogCopy.back}
               </button>
-              <button type="button" onClick={openCheckoutPage} className="premium-button header-cta home-header__cta">
-                {internalCopy.checkoutPay}
-              </button>
             </div>
           </div>
         </header>
@@ -2776,16 +2809,13 @@ function App() {
     return (
       <div className="luxury-shell text-slate-100 internal-shell">
         <header className="home-header sticky top-0 z-40 backdrop-blur-xl">
-          <div className="home-header__inner mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+          <div className="home-header__inner mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
             <button
               type="button"
               onClick={() => setView('product')}
               className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35"
             >
               {catalogCopy.back}
-            </button>
-            <button type="button" onClick={() => openAuthPage('login')} className="premium-button header-cta home-header__cta">
-              {internalCopy.menuLogin}
             </button>
           </div>
         </header>
