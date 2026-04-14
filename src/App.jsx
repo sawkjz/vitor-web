@@ -1664,9 +1664,11 @@ const getAdminCarsCopy = (locale) => {
       subtitleLabel: 'Subtitle',
       descriptionLabel: 'Description',
       imageLabel: 'Image URL',
+      galleryLabel: 'Gallery URLs',
       deadlineLabel: 'Deadline',
       priceLabel: 'Price',
-      soldLabel: 'Sold text',
+      entriesLabel: 'Entries text',
+      stockStatusLabel: 'Stock status',
       progressLabel: 'Progress (%)',
       draftBadge: 'Draft',
       savedMessage: 'Home cars updated successfully.',
@@ -1687,9 +1689,11 @@ const getAdminCarsCopy = (locale) => {
       subtitleLabel: 'Subtitulo',
       descriptionLabel: 'Descripcion',
       imageLabel: 'URL de imagen',
+      galleryLabel: 'URLs de galeria',
       deadlineLabel: 'Plazo',
       priceLabel: 'Precio',
-      soldLabel: 'Texto vendidos',
+      entriesLabel: 'Texto de entradas',
+      stockStatusLabel: 'Estado de stock',
       progressLabel: 'Progreso (%)',
       draftBadge: 'Borrador',
       savedMessage: 'Coches de inicio actualizados con exito.',
@@ -1709,9 +1713,11 @@ const getAdminCarsCopy = (locale) => {
     subtitleLabel: 'Subtitulo',
     descriptionLabel: 'Descricao',
     imageLabel: 'URL da imagem',
+    galleryLabel: 'URLs da galeria',
     deadlineLabel: 'Prazo',
     priceLabel: 'Preco',
-    soldLabel: 'Texto vendidos',
+    entriesLabel: 'Texto de entradas',
+    stockStatusLabel: 'Status do estoque',
     progressLabel: 'Progresso (%)',
     draftBadge: 'Rascunho',
     savedMessage: 'Carros da home atualizados com sucesso.',
@@ -2160,9 +2166,29 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
     '/houses/peggychoucair-house-4028391_1920.jpg',
   ]
   const fallback = category === 'houses' ? fallbackHouses : fallbackCars
+  const customGallery = Array.isArray(competition.gallery)
+    ? competition.gallery
+    : typeof competition.gallery === 'string'
+      ? competition.gallery.split(/[\n,]+/).map((item) => item.trim()).filter(Boolean)
+      : []
 
-  return [competition.image, ...fallback].filter((image, index, array) => image && array.indexOf(image) === index)
+  return [competition.image, ...customGallery, ...fallback]
+    .filter((image, index, array) => image && array.indexOf(image) === index)
 }
+
+const toAdminDraftCompetition = (competition) => ({
+  ...competition,
+  entries: competition.entries ?? competition.sold ?? '',
+  stockStatus: competition.stockStatus ?? 'Disponivel',
+  galleryText: Array.isArray(competition.gallery)
+    ? competition.gallery.join('\n')
+    : typeof competition.gallery === 'string'
+      ? competition.gallery
+      : '',
+})
+
+const toAdminDraftCompetitions = (competitions) =>
+  (competitions ?? []).map((competition) => toAdminDraftCompetition(competition))
 
 const internalScreenCopyByLocale = {
   en: {
@@ -2654,7 +2680,7 @@ function App() {
     const nextHomeCompetitions = customCompetitionsByLocale[nextLocale] ?? nextCopy.competitions
     setLocale(nextLocale)
     setActiveSlide(0)
-    setAdminCarsDraft(nextHomeCompetitions)
+    setAdminCarsDraft(toAdminDraftCompetitions(nextHomeCompetitions))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
   }
@@ -2663,7 +2689,7 @@ function App() {
     setAdminError('')
     setIsAccountMenuOpen(false)
     setAdminDashboardTab('payments')
-    setAdminCarsDraft(homeCompetitions)
+    setAdminCarsDraft(toAdminDraftCompetitions(homeCompetitions))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminLogin')
@@ -2672,7 +2698,7 @@ function App() {
   const openAdminProfile = () => {
     setIsAccountMenuOpen(false)
     setAdminDashboardTab('payments')
-    setAdminCarsDraft(homeCompetitions)
+    setAdminCarsDraft(toAdminDraftCompetitions(homeCompetitions))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminDashboard')
@@ -2776,8 +2802,11 @@ function App() {
         subtitle: 'Configurar detalhes',
         description: 'Descricao do sorteio',
         image: '/cars/hero-1.jpg',
+        galleryText: '',
         deadline: 'Termina em breve',
         price: 'EUR 0.00',
+        stockStatus: 'Disponivel',
+        entries: '0 entradas',
         progress: 0,
         sold: '0 vendidos',
       },
@@ -2793,7 +2822,7 @@ function App() {
   }
 
   const handleResetAdminCarsDraft = () => {
-    setAdminCarsDraft(homeCompetitions)
+    setAdminCarsDraft(toAdminDraftCompetitions(homeCompetitions))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
   }
@@ -2809,9 +2838,15 @@ function App() {
           subtitle: item.subtitle?.trim() || 'Sem subtitulo',
           description: item.description?.trim() || item.subtitle?.trim() || 'Sem descricao',
           image: item.image?.trim() || '/cars/hero-1.jpg',
+          gallery: `${item.galleryText ?? ''}`
+            .split(/[\n,]+/)
+            .map((entry) => entry.trim())
+            .filter(Boolean),
           deadline: item.deadline?.trim() || 'Termina em breve',
           price: item.price?.trim() || 'EUR 0.00',
-          sold: item.sold?.trim() || '0 vendidos',
+          entries: item.entries?.trim() || item.sold?.trim() || '0 entradas',
+          sold: item.entries?.trim() || item.sold?.trim() || '0 entradas',
+          stockStatus: item.stockStatus?.trim() || 'Disponivel',
           progress: Number.isNaN(normalizedProgress)
             ? 0
             : Math.max(0, Math.min(100, normalizedProgress)),
@@ -2826,9 +2861,12 @@ function App() {
         subtitle: 'Configurar detalhes',
         description: 'Descricao do sorteio',
         image: '/cars/hero-1.jpg',
+        gallery: [],
         deadline: 'Termina em breve',
         price: 'EUR 0.00',
-        sold: '0 vendidos',
+        entries: '0 entradas',
+        sold: '0 entradas',
+        stockStatus: 'Disponivel',
         progress: 0,
       }]
 
@@ -2836,7 +2874,7 @@ function App() {
       ...current,
       [locale]: safeCompetitions,
     }))
-    setAdminCarsDraft(safeCompetitions)
+    setAdminCarsDraft(toAdminDraftCompetitions(safeCompetitions))
     setAdminCarsDirty(false)
     setAdminCarsNotice(adminCarsCopy.savedMessage)
   }
@@ -3011,10 +3049,10 @@ function App() {
 
                   <div className="mt-5 flex flex-wrap items-center gap-3 text-sm">
                     <span className="rounded-full border border-[#e11d2e]/30 bg-[#e11d2e]/10 px-3 py-1 font-semibold text-[#ffd3d8]">
-                      {internalCopy.productStock}: {internalCopy.productAvailable}
+                      {internalCopy.productStock}: {activeCompetition.stockStatus || internalCopy.productAvailable}
                     </span>
                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-semibold text-[#b7beca]">
-                      {activeCompetition.sold}
+                      {activeCompetition.entries || activeCompetition.sold}
                     </span>
                   </div>
 
@@ -3642,6 +3680,19 @@ function App() {
                             />
                           </label>
 
+                          <label className="block md:col-span-2">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.galleryLabel}
+                            </span>
+                            <textarea
+                              rows={3}
+                              value={car.galleryText ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'galleryText', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              placeholder="/cars/hero-1.jpg&#10;/cars/hero-2.jpg"
+                            />
+                          </label>
+
                           <label className="block">
                             <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
                               {adminCarsCopy.deadlineLabel}
@@ -3668,12 +3719,24 @@ function App() {
 
                           <label className="block">
                             <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.soldLabel}
+                              {adminCarsCopy.entriesLabel}
                             </span>
                             <input
                               type="text"
-                              value={car.sold ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'sold', event.target.value)}
+                              value={car.entries ?? car.sold ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'entries', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.stockStatusLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.stockStatus ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'stockStatus', event.target.value)}
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
                           </label>
@@ -3945,13 +4008,13 @@ function App() {
                                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
                                   {catalogCopy.infoTickets}
                                 </p>
-                                <p className="mt-1 text-sm font-semibold text-white">{competition.sold}</p>
+                                <p className="mt-1 text-sm font-semibold text-white">{competition.entries || competition.sold}</p>
                               </div>
                             </div>
 
                             <div className="mt-4">
                               <div className="flex items-center justify-between text-sm text-[#b7beca]">
-                                <span>{competition.sold}</span>
+                                <span>{competition.entries || competition.sold}</span>
                                 <span>{competition.progress}%</span>
                               </div>
                               <div className="mt-2 h-2 rounded-full bg-white/8">
@@ -4503,7 +4566,7 @@ function App() {
 
                     <div className="mt-auto pt-6">
                       <div className="flex items-center justify-between text-sm text-[#b7beca]">
-                        <span>{competition.sold}</span>
+                        <span>{competition.entries || competition.sold}</span>
                         <span>{competition.progress}%</span>
                       </div>
                       <div className="mt-3 h-2 rounded-full bg-white/8">
