@@ -1669,8 +1669,8 @@ const getAdminCarsCopy = (locale) => {
       uploadingImage: 'Uploading...',
       uploadHint: 'Uploads to Supabase bucket',
       deadlineLabel: 'Deadline',
-      priceLabel: 'Price',
-      entriesLabel: 'Entries text',
+      priceLabel: 'Ticket price (EUR)',
+      entriesLabel: 'Entries summary',
       entriesSoldLabel: 'Sold qty',
       entriesTotalLabel: 'Total qty',
       stockStatusLabel: 'Stock status',
@@ -1704,8 +1704,8 @@ const getAdminCarsCopy = (locale) => {
       uploadingImage: 'Subiendo...',
       uploadHint: 'Sube al bucket de Supabase',
       deadlineLabel: 'Plazo',
-      priceLabel: 'Precio',
-      entriesLabel: 'Texto de entradas',
+      priceLabel: 'Precio del boleto (EUR)',
+      entriesLabel: 'Resumen de entradas',
       entriesSoldLabel: 'Cant. vendida',
       entriesTotalLabel: 'Cant. total',
       stockStatusLabel: 'Estado de stock',
@@ -1738,8 +1738,8 @@ const getAdminCarsCopy = (locale) => {
     uploadingImage: 'Enviando...',
     uploadHint: 'Envia para o bucket do Supabase',
     deadlineLabel: 'Prazo',
-    priceLabel: 'Preco',
-    entriesLabel: 'Texto de entradas',
+    priceLabel: 'Preco do bilhete (EUR)',
+    entriesLabel: 'Resumo de entradas',
     entriesSoldLabel: 'Qtd. vendida',
     entriesTotalLabel: 'Qtd. total',
     stockStatusLabel: 'Status do estoque',
@@ -2205,6 +2205,61 @@ const formatEntriesFromTotals = (sold, total, locale = 'ptBR') => {
   return `${soldFormatted} / ${totalFormatted} entradas`
 }
 
+const toDateTimeLocalValue = (input) => {
+  if (!input) {
+    return ''
+  }
+
+  const date = new Date(input)
+  if (Number.isNaN(date.getTime())) {
+    return ''
+  }
+
+  const offset = date.getTimezoneOffset()
+  const localDate = new Date(date.getTime() - offset * 60 * 1000)
+  return localDate.toISOString().slice(0, 16)
+}
+
+const buildDeadlineFromEndAt = (endAt, locale = 'ptBR') => {
+  if (!endAt) {
+    return ''
+  }
+
+  const target = new Date(endAt)
+  if (Number.isNaN(target.getTime())) {
+    return ''
+  }
+
+  const now = new Date()
+  const diffMs = target.getTime() - now.getTime()
+  if (diffMs <= 0) {
+    return locale === 'en' ? 'Closed' : locale === 'es' ? 'Cerrado' : 'Encerrado'
+  }
+
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+  const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24))
+
+  if (diffHours < 24) {
+    return locale === 'en' ? 'Ends today' : locale === 'es' ? 'Termina hoy' : 'Termina hoje'
+  }
+
+  if (diffDays <= 7) {
+    if (locale === 'en') {
+      return `Ends in ${diffDays} days`
+    }
+    if (locale === 'es') {
+      return `Termina en ${diffDays} dias`
+    }
+    return `Termina em ${diffDays} dias`
+  }
+
+  return locale === 'en'
+    ? `Ends on ${target.toLocaleDateString('en-IE')}`
+    : locale === 'es'
+      ? `Termina el ${target.toLocaleDateString('es-ES')}`
+      : `Termina em ${target.toLocaleDateString('pt-BR')}`
+}
+
 const buildGalleryFromCompetition = (competition, category = 'cars') => {
   if (!competition) {
     return []
@@ -2232,6 +2287,10 @@ const toAdminDraftCompetition = (competition) => ({
   entries: competition.entries ?? competition.sold ?? '',
   entriesSold: parseIntegerLike(competition.entriesSold),
   entriesTotal: parseIntegerLike(competition.entriesTotal),
+  endAt: toDateTimeLocalValue(competition.endAt),
+  ticketPrice: Number.isFinite(Number(competition.ticketPrice))
+    ? Number(competition.ticketPrice)
+    : parseEuroPrice(competition.price),
   stockStatus: competition.stockStatus ?? 'Disponivel',
   gallery1: Array.isArray(competition.gallery) ? (competition.gallery[0] ?? '') : '',
   gallery2: Array.isArray(competition.gallery) ? (competition.gallery[1] ?? '') : '',
@@ -2909,7 +2968,9 @@ function App() {
         gallery2: '',
         gallery3: '',
         gallery4: '',
+        endAt: '',
         deadline: 'Termina em breve',
+        ticketPrice: 0,
         price: 'EUR 0.00',
         stockStatus: 'Disponivel',
         entries: '0 entradas',
@@ -2941,6 +3002,10 @@ function App() {
         const normalizedProgress = Number.parseInt(`${item.progress ?? 0}`, 10)
         const entriesSold = parseIntegerLike(item.entriesSold)
         const entriesTotal = parseIntegerLike(item.entriesTotal)
+        const endAtDate = item.endAt ? new Date(item.endAt) : null
+        const endAtIso = endAtDate && !Number.isNaN(endAtDate.getTime()) ? endAtDate.toISOString() : ''
+        const ticketPrice = Number.parseFloat(`${item.ticketPrice ?? 0}`)
+        const normalizedTicketPrice = Number.isFinite(ticketPrice) ? Math.max(0, ticketPrice) : 0
         const hasTotals = entriesTotal > 0
         const computedProgress = hasTotals
           ? Math.max(0, Math.min(100, Math.round((entriesSold / entriesTotal) * 100)))
@@ -2958,8 +3023,10 @@ function App() {
           gallery: [item.gallery1, item.gallery2, item.gallery3, item.gallery4]
             .map((entry) => `${entry ?? ''}`.trim())
             .filter(Boolean),
-          deadline: item.deadline?.trim() || 'Termina em breve',
-          price: item.price?.trim() || 'EUR 0.00',
+          endAt: endAtIso,
+          deadline: buildDeadlineFromEndAt(endAtIso, locale) || item.deadline?.trim() || 'Termina em breve',
+          ticketPrice: normalizedTicketPrice,
+          price: formatEuroPrice(normalizedTicketPrice, locale),
           entriesSold,
           entriesTotal,
           entries: entriesTextFromTotals || item.entries?.trim() || item.sold?.trim() || '0 entradas',
@@ -2978,7 +3045,9 @@ function App() {
         description: 'Descricao do sorteio',
         image: '/cars/hero-1.jpg',
         gallery: [],
+        endAt: '',
         deadline: 'Termina em breve',
+        ticketPrice: 0,
         price: 'EUR 0.00',
         entries: '0 entradas',
         entriesSold: 0,
@@ -3928,9 +3997,9 @@ function App() {
                               {adminCarsCopy.deadlineLabel}
                             </span>
                             <input
-                              type="text"
-                              value={car.deadline ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'deadline', event.target.value)}
+                              type="datetime-local"
+                              value={car.endAt ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'endAt', event.target.value)}
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
                           </label>
@@ -3940,9 +4009,11 @@ function App() {
                               {adminCarsCopy.priceLabel}
                             </span>
                             <input
-                              type="text"
-                              value={car.price ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'price', event.target.value)}
+                              type="number"
+                              min="0"
+                              step="0.01"
+                              value={car.ticketPrice ?? 0}
+                              onChange={(event) => updateAdminCarField(index, 'ticketPrice', event.target.value)}
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
                           </label>
@@ -3953,8 +4024,12 @@ function App() {
                             </span>
                             <input
                               type="text"
-                              value={car.entries ?? car.sold ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'entries', event.target.value)}
+                              value={
+                                parseIntegerLike(car.entriesTotal) > 0
+                                  ? formatEntriesFromTotals(parseIntegerLike(car.entriesSold), parseIntegerLike(car.entriesTotal), locale)
+                                  : (car.entries ?? car.sold ?? '')
+                              }
+                              readOnly
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
                           </label>
