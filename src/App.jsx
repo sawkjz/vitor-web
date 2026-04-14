@@ -1664,7 +1664,7 @@ const getAdminCarsCopy = (locale) => {
       subtitleLabel: 'Subtitle',
       descriptionLabel: 'Description',
       imageLabel: 'Image URL',
-      galleryLabel: 'Gallery URLs',
+      galleryLabel: 'Gallery images',
       deadlineLabel: 'Deadline',
       priceLabel: 'Price',
       entriesLabel: 'Entries text',
@@ -1696,7 +1696,7 @@ const getAdminCarsCopy = (locale) => {
       subtitleLabel: 'Subtitulo',
       descriptionLabel: 'Descripcion',
       imageLabel: 'URL de imagen',
-      galleryLabel: 'URLs de galeria',
+      galleryLabel: 'Imagenes de galeria',
       deadlineLabel: 'Plazo',
       priceLabel: 'Precio',
       entriesLabel: 'Texto de entradas',
@@ -1727,7 +1727,7 @@ const getAdminCarsCopy = (locale) => {
     subtitleLabel: 'Subtitulo',
     descriptionLabel: 'Descricao',
     imageLabel: 'URL da imagem',
-    galleryLabel: 'URLs da galeria',
+    galleryLabel: 'Imagens da galeria',
     deadlineLabel: 'Prazo',
     priceLabel: 'Preco',
     entriesLabel: 'Texto de entradas',
@@ -2224,11 +2224,10 @@ const toAdminDraftCompetition = (competition) => ({
   entriesSold: parseIntegerLike(competition.entriesSold),
   entriesTotal: parseIntegerLike(competition.entriesTotal),
   stockStatus: competition.stockStatus ?? 'Disponivel',
-  galleryText: Array.isArray(competition.gallery)
-    ? competition.gallery.join('\n')
-    : typeof competition.gallery === 'string'
-      ? competition.gallery
-      : '',
+  gallery1: Array.isArray(competition.gallery) ? (competition.gallery[0] ?? '') : '',
+  gallery2: Array.isArray(competition.gallery) ? (competition.gallery[1] ?? '') : '',
+  gallery3: Array.isArray(competition.gallery) ? (competition.gallery[2] ?? '') : '',
+  gallery4: Array.isArray(competition.gallery) ? (competition.gallery[3] ?? '') : '',
 })
 
 const toAdminDraftCompetitions = (competitions) =>
@@ -2846,7 +2845,10 @@ function App() {
         subtitle: 'Configurar detalhes',
         description: 'Descricao do sorteio',
         image: '/cars/hero-1.jpg',
-        galleryText: '',
+        gallery1: '',
+        gallery2: '',
+        gallery3: '',
+        gallery4: '',
         deadline: 'Termina em breve',
         price: 'EUR 0.00',
         stockStatus: 'Disponivel',
@@ -2893,9 +2895,8 @@ function App() {
           subtitle: item.subtitle?.trim() || 'Sem subtitulo',
           description: item.description?.trim() || item.subtitle?.trim() || 'Sem descricao',
           image: item.image?.trim() || '/cars/hero-1.jpg',
-          gallery: `${item.galleryText ?? ''}`
-            .split(/[\n,]+/)
-            .map((entry) => entry.trim())
+          gallery: [item.gallery1, item.gallery2, item.gallery3, item.gallery4]
+            .map((entry) => `${entry ?? ''}`.trim())
             .filter(Boolean),
           deadline: item.deadline?.trim() || 'Termina em breve',
           price: item.price?.trim() || 'EUR 0.00',
@@ -3756,13 +3757,36 @@ function App() {
                             <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
                               {adminCarsCopy.galleryLabel}
                             </span>
-                            <textarea
-                              rows={3}
-                              value={car.galleryText ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'galleryText', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                              placeholder="/cars/hero-1.jpg&#10;/cars/hero-2.jpg"
-                            />
+                            <div className="grid gap-2 sm:grid-cols-2">
+                              <input
+                                type="text"
+                                value={car.gallery1 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'gallery1', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                placeholder="Galeria 1"
+                              />
+                              <input
+                                type="text"
+                                value={car.gallery2 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'gallery2', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                placeholder="Galeria 2"
+                              />
+                              <input
+                                type="text"
+                                value={car.gallery3 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'gallery3', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                placeholder="Galeria 3"
+                              />
+                              <input
+                                type="text"
+                                value={car.gallery4 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'gallery4', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                placeholder="Galeria 4"
+                              />
+                            </div>
                           </label>
 
                           <label className="block">
