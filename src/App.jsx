@@ -1668,8 +1668,15 @@ const getAdminCarsCopy = (locale) => {
       deadlineLabel: 'Deadline',
       priceLabel: 'Price',
       entriesLabel: 'Entries text',
+      entriesSoldLabel: 'Sold qty',
+      entriesTotalLabel: 'Total qty',
       stockStatusLabel: 'Stock status',
+      stockAvailable: 'Available',
+      stockLow: 'Low stock',
+      stockOut: 'Out of stock',
+      stockSoon: 'Coming soon',
       progressLabel: 'Progress (%)',
+      progressAuto: 'Auto by sold/total',
       draftBadge: 'Draft',
       savedMessage: 'Home cars updated successfully.',
     }
@@ -1693,8 +1700,15 @@ const getAdminCarsCopy = (locale) => {
       deadlineLabel: 'Plazo',
       priceLabel: 'Precio',
       entriesLabel: 'Texto de entradas',
+      entriesSoldLabel: 'Cant. vendida',
+      entriesTotalLabel: 'Cant. total',
       stockStatusLabel: 'Estado de stock',
+      stockAvailable: 'Disponible',
+      stockLow: 'Stock bajo',
+      stockOut: 'Sin stock',
+      stockSoon: 'Proximamente',
       progressLabel: 'Progreso (%)',
+      progressAuto: 'Auto por vendidas/total',
       draftBadge: 'Borrador',
       savedMessage: 'Coches de inicio actualizados con exito.',
     }
@@ -1717,8 +1731,15 @@ const getAdminCarsCopy = (locale) => {
     deadlineLabel: 'Prazo',
     priceLabel: 'Preco',
     entriesLabel: 'Texto de entradas',
+    entriesSoldLabel: 'Qtd. vendida',
+    entriesTotalLabel: 'Qtd. total',
     stockStatusLabel: 'Status do estoque',
+    stockAvailable: 'Disponivel',
+    stockLow: 'Estoque baixo',
+    stockOut: 'Esgotado',
+    stockSoon: 'Em breve',
     progressLabel: 'Progresso (%)',
+    progressAuto: 'Auto por vendidas/total',
     draftBadge: 'Rascunho',
     savedMessage: 'Carros da home atualizados com sucesso.',
   }
@@ -2154,6 +2175,27 @@ const formatEuroPrice = (value, locale = 'ptBR') =>
     maximumFractionDigits: 2,
   }).format(value)
 
+const parseIntegerLike = (value) => {
+  const numeric = Number.parseInt(`${value ?? ''}`.replace(/[^\d]/g, ''), 10)
+  return Number.isFinite(numeric) ? numeric : 0
+}
+
+const formatEntriesFromTotals = (sold, total, locale = 'ptBR') => {
+  const formatter = new Intl.NumberFormat(localeByCurrency[locale] ?? 'pt-BR')
+  const soldFormatted = formatter.format(Math.max(0, sold))
+  const totalFormatted = formatter.format(Math.max(0, total))
+
+  if (locale === 'en') {
+    return `${soldFormatted} / ${totalFormatted} entries`
+  }
+
+  if (locale === 'es') {
+    return `${soldFormatted} / ${totalFormatted} entradas`
+  }
+
+  return `${soldFormatted} / ${totalFormatted} entradas`
+}
+
 const buildGalleryFromCompetition = (competition, category = 'cars') => {
   if (!competition) {
     return []
@@ -2179,6 +2221,8 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
 const toAdminDraftCompetition = (competition) => ({
   ...competition,
   entries: competition.entries ?? competition.sold ?? '',
+  entriesSold: parseIntegerLike(competition.entriesSold),
+  entriesTotal: parseIntegerLike(competition.entriesTotal),
   stockStatus: competition.stockStatus ?? 'Disponivel',
   galleryText: Array.isArray(competition.gallery)
     ? competition.gallery.join('\n')
@@ -2807,6 +2851,8 @@ function App() {
         price: 'EUR 0.00',
         stockStatus: 'Disponivel',
         entries: '0 entradas',
+        entriesSold: 0,
+        entriesTotal: 0,
         progress: 0,
         sold: '0 vendidos',
       },
@@ -2831,6 +2877,15 @@ function App() {
     const normalizedCompetitions = adminCarsDraft
       .map((item, index) => {
         const normalizedProgress = Number.parseInt(`${item.progress ?? 0}`, 10)
+        const entriesSold = parseIntegerLike(item.entriesSold)
+        const entriesTotal = parseIntegerLike(item.entriesTotal)
+        const hasTotals = entriesTotal > 0
+        const computedProgress = hasTotals
+          ? Math.max(0, Math.min(100, Math.round((entriesSold / entriesTotal) * 100)))
+          : (Number.isNaN(normalizedProgress) ? 0 : Math.max(0, Math.min(100, normalizedProgress)))
+        const entriesTextFromTotals = hasTotals
+          ? formatEntriesFromTotals(entriesSold, entriesTotal, locale)
+          : ''
 
         return {
           ...item,
@@ -2844,12 +2899,12 @@ function App() {
             .filter(Boolean),
           deadline: item.deadline?.trim() || 'Termina em breve',
           price: item.price?.trim() || 'EUR 0.00',
-          entries: item.entries?.trim() || item.sold?.trim() || '0 entradas',
-          sold: item.entries?.trim() || item.sold?.trim() || '0 entradas',
+          entriesSold,
+          entriesTotal,
+          entries: entriesTextFromTotals || item.entries?.trim() || item.sold?.trim() || '0 entradas',
+          sold: entriesTextFromTotals || item.entries?.trim() || item.sold?.trim() || '0 entradas',
           stockStatus: item.stockStatus?.trim() || 'Disponivel',
-          progress: Number.isNaN(normalizedProgress)
-            ? 0
-            : Math.max(0, Math.min(100, normalizedProgress)),
+          progress: computedProgress,
         }
       })
       .filter((item) => item.title)
@@ -2865,6 +2920,8 @@ function App() {
         deadline: 'Termina em breve',
         price: 'EUR 0.00',
         entries: '0 entradas',
+        entriesSold: 0,
+        entriesTotal: 0,
         sold: '0 entradas',
         stockStatus: 'Disponivel',
         progress: 0,
@@ -3631,6 +3688,21 @@ function App() {
                           </button>
                         </div>
 
+                        <div className="mb-4 grid gap-3 rounded-[16px] border border-white/8 bg-[#101218] p-3 sm:grid-cols-[88px_minmax(0,1fr)]">
+                          <img
+                            src={car.image || '/cars/hero-1.jpg'}
+                            alt={car.title || `Carro ${index + 1}`}
+                            className="h-20 w-full rounded-[12px] object-cover"
+                          />
+                          <div className="flex flex-col justify-center gap-1">
+                            <p className="text-sm font-bold text-white">{car.title || `Carro ${index + 1}`}</p>
+                            <p className="text-xs text-[#9aa0ac]">{car.entries || '0 entradas'}</p>
+                            <p className="text-xs text-[#9aa0ac]">
+                              {adminCarsCopy.progressLabel}: {Number.parseInt(`${car.progress ?? 0}`, 10) || 0}%
+                            </p>
+                          </div>
+                        </div>
+
                         <div className="grid gap-3 md:grid-cols-2">
                           <label className="block">
                             <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
@@ -3731,14 +3803,44 @@ function App() {
 
                           <label className="block">
                             <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.stockStatusLabel}
+                              {adminCarsCopy.entriesSoldLabel}
                             </span>
                             <input
-                              type="text"
-                              value={car.stockStatus ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'stockStatus', event.target.value)}
+                              type="number"
+                              min="0"
+                              value={car.entriesSold ?? 0}
+                              onChange={(event) => updateAdminCarField(index, 'entriesSold', event.target.value)}
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.entriesTotalLabel}
+                            </span>
+                            <input
+                              type="number"
+                              min="0"
+                              value={car.entriesTotal ?? 0}
+                              onChange={(event) => updateAdminCarField(index, 'entriesTotal', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.stockStatusLabel}
+                            </span>
+                            <select
+                              value={car.stockStatus ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'stockStatus', event.target.value)}
+                              className="w-full appearance-none rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            >
+                              <option value={adminCarsCopy.stockAvailable}>{adminCarsCopy.stockAvailable}</option>
+                              <option value={adminCarsCopy.stockLow}>{adminCarsCopy.stockLow}</option>
+                              <option value={adminCarsCopy.stockOut}>{adminCarsCopy.stockOut}</option>
+                              <option value={adminCarsCopy.stockSoon}>{adminCarsCopy.stockSoon}</option>
+                            </select>
                           </label>
 
                           <label className="block">
@@ -3753,6 +3855,7 @@ function App() {
                               onChange={(event) => updateAdminCarField(index, 'progress', event.target.value)}
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
+                            <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.progressAuto}</span>
                           </label>
                         </div>
                       </article>
