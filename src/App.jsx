@@ -7,6 +7,10 @@ const languageOptions = [
   { value: 'ptBR', label: 'Português (Brasil)' },
 ]
 
+const ADMIN_TOKEN_STORAGE_KEY = 'admin_access_token'
+const ADMIN_USER_STORAGE_KEY = 'admin_user_email'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8787'
+
 const mockedMediaData = {
   heroVideo: {
     id: 'pinterest-demo',
@@ -1545,6 +1549,7 @@ const adminByLocale = {
     logout: 'Exit panel',
     helper: 'Use this area to check who completed payment, CPF and purchased coupon quantity.',
     error: 'Fill in email and password to continue.',
+    loading: 'Validating access...',
   },
   ptPT: {
     loginTitle: 'Acesso admin',
@@ -1560,6 +1565,7 @@ const adminByLocale = {
     logout: 'Sair do painel',
     helper: 'Use esta area para verificar quem concluiu o pagamento, CPF e quantidade de cupoes adquiridos.',
     error: 'Preencha email e palavra-passe para continuar.',
+    loading: 'A validar acesso...',
   },
   es: {
     loginTitle: 'Acceso admin',
@@ -1575,6 +1581,7 @@ const adminByLocale = {
     logout: 'Salir del panel',
     helper: 'Usa esta area para revisar quien completo el pago, CPF y cantidad de cupones adquiridos.',
     error: 'Completa email y contraseÃ±a para continuar.',
+    loading: 'Validando acceso...',
   },
   ptBR: {
     loginTitle: 'Acesso admin',
@@ -1590,6 +1597,7 @@ const adminByLocale = {
     logout: 'Sair do painel',
     helper: 'Use esta area para verificar quem concluiu o pagamento, CPF e quantidade de cupons adquiridos.',
     error: 'Preencha email e senha para continuar.',
+    loading: 'Validando acesso...',
   },
 }
 
@@ -2311,6 +2319,7 @@ function App() {
   const [adminCarsDirty, setAdminCarsDirty] = useState(false)
   const [adminCarsNotice, setAdminCarsNotice] = useState('')
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
+  const [isAdminLoading, setIsAdminLoading] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
   const [showMockHeroVideo, setShowMockHeroVideo] = useState(false)
   const accountMenuRef = useRef(null)
@@ -2387,6 +2396,58 @@ function App() {
     .slice(0, 2)
     .map((part) => part.charAt(0).toUpperCase())
     .join('')
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const token = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY)
+    const storedEmail = window.localStorage.getItem(ADMIN_USER_STORAGE_KEY)
+
+    if (token) {
+      setIsAdminAuthenticated(true)
+    }
+
+    if (storedEmail) {
+      setAdminForm((current) => ({ ...current, email: storedEmail }))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const token = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY)
+
+    if (!token) {
+      return
+    }
+
+    const validateSession = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/admin/me`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        if (!response.ok) {
+          throw new Error('Sessao admin expirada.')
+        }
+
+        setIsAdminAuthenticated(true)
+      } catch {
+        window.localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY)
+        window.localStorage.removeItem(ADMIN_USER_STORAGE_KEY)
+        setIsAdminAuthenticated(false)
+      }
+    }
+
+    validateSession()
+  }, [])
 
   useEffect(() => {
     if (view !== 'landing') {
@@ -2632,11 +2693,16 @@ function App() {
     setAdminForm({ email: '', password: '' })
     setAdminDashboardTab('payments')
     setIsAdminAuthenticated(false)
+    setIsAdminLoading(false)
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY)
+      window.localStorage.removeItem(ADMIN_USER_STORAGE_KEY)
+    }
     setIsAccountMenuOpen(false)
     setView('landing')
   }
 
-  const handleAdminLogin = (event) => {
+  const handleAdminLogin = async (event) => {
     event.preventDefault()
 
     if (!adminForm.email.trim() || !adminForm.password.trim()) {
@@ -2645,10 +2711,50 @@ function App() {
     }
 
     setAdminError('')
-    setAdminDashboardTab('payments')
-    setIsAdminAuthenticated(true)
-    setIsAccountMenuOpen(false)
-    setView('adminDashboard')
+    setIsAdminLoading(true)
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: adminForm.email.trim(),
+          password: adminForm.password,
+        }),
+      })
+
+      const payload = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        setAdminError(payload?.message || 'Falha no login admin.')
+        setIsAdminLoading(false)
+        return
+      }
+
+      const accessToken = payload?.session?.accessToken
+      const email = payload?.user?.email || adminForm.email.trim()
+
+      if (!accessToken) {
+        setAdminError('Sessao invalida retornada pela API.')
+        setIsAdminLoading(false)
+        return
+      }
+
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, accessToken)
+        window.localStorage.setItem(ADMIN_USER_STORAGE_KEY, email)
+      }
+
+      setAdminForm((current) => ({ ...current, password: '', email }))
+      setAdminDashboardTab('payments')
+      setIsAdminAuthenticated(true)
+      setIsAccountMenuOpen(false)
+      setView('adminDashboard')
+      setIsAdminLoading(false)
+    } catch (error) {
+      setAdminError(error?.message || 'Erro ao conectar com API admin.')
+      setIsAdminLoading(false)
+    }
   }
 
   const updateAdminCarField = (index, field, value) => {
@@ -3209,8 +3315,12 @@ function App() {
                 ) : null}
 
                 <div className="mt-6 flex flex-col gap-3">
-                  <button type="submit" className="premium-button w-full justify-center">
-                    {adminCopy.submit}
+                  <button
+                    type="submit"
+                    disabled={isAdminLoading}
+                    className="premium-button w-full justify-center disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {isAdminLoading ? adminCopy.loading : adminCopy.submit}
                   </button>
                   <button
                     type="button"
