@@ -1662,6 +1662,7 @@ const getAdminCarsCopy = (locale) => {
       remove: 'Remove',
       titleLabel: 'Title',
       subtitleLabel: 'Subtitle',
+      descriptionLabel: 'Description',
       imageLabel: 'Image URL',
       deadlineLabel: 'Deadline',
       priceLabel: 'Price',
@@ -1684,6 +1685,7 @@ const getAdminCarsCopy = (locale) => {
       remove: 'Eliminar',
       titleLabel: 'Titulo',
       subtitleLabel: 'Subtitulo',
+      descriptionLabel: 'Descripcion',
       imageLabel: 'URL de imagen',
       deadlineLabel: 'Plazo',
       priceLabel: 'Precio',
@@ -1705,6 +1707,7 @@ const getAdminCarsCopy = (locale) => {
     remove: 'Remover',
     titleLabel: 'Titulo',
     subtitleLabel: 'Subtitulo',
+    descriptionLabel: 'Descricao',
     imageLabel: 'URL da imagem',
     deadlineLabel: 'Prazo',
     priceLabel: 'Preco',
@@ -2771,6 +2774,7 @@ function App() {
       {
         title: `Novo carro ${current.length + 1}`,
         subtitle: 'Configurar detalhes',
+        description: 'Descricao do sorteio',
         image: '/cars/hero-1.jpg',
         deadline: 'Termina em breve',
         price: 'EUR 0.00',
@@ -2803,6 +2807,7 @@ function App() {
           ...item,
           title: item.title?.trim() || `Carro ${index + 1}`,
           subtitle: item.subtitle?.trim() || 'Sem subtitulo',
+          description: item.description?.trim() || item.subtitle?.trim() || 'Sem descricao',
           image: item.image?.trim() || '/cars/hero-1.jpg',
           deadline: item.deadline?.trim() || 'Termina em breve',
           price: item.price?.trim() || 'EUR 0.00',
@@ -2819,6 +2824,7 @@ function App() {
       : [{
         title: 'Carro 1',
         subtitle: 'Configurar detalhes',
+        description: 'Descricao do sorteio',
         image: '/cars/hero-1.jpg',
         deadline: 'Termina em breve',
         price: 'EUR 0.00',
@@ -3067,8 +3073,8 @@ function App() {
                 {activeCompetition.title}
               </h2>
               <div className="mt-5 max-w-3xl space-y-5 text-[1.03rem] leading-8 text-[#c4cddd]">
-                <p>{activeCompetition.subtitle}. {copy.sections.platform.copy}</p>
-                <p>{copy.sections.competitions.copy}</p>
+                <p>{activeCompetition.description || activeCompetition.subtitle}</p>
+                <p>{copy.sections.platform.copy}</p>
               </div>
             </section>
           </div>
@@ -3608,6 +3614,18 @@ function App() {
                               type="text"
                               value={car.subtitle ?? ''}
                               onChange={(event) => updateAdminCarField(index, 'subtitle', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block md:col-span-2">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.descriptionLabel}
+                            </span>
+                            <textarea
+                              rows={3}
+                              value={car.description ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'description', event.target.value)}
                               className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                             />
                           </label>
@@ -4498,7 +4516,7 @@ function App() {
 
                     <button
                       type="button"
-                      onClick={() => openCatalogPage('cars')}
+                      onClick={() => openProductPage(competition, 'cars')}
                       className="premium-button mt-6 w-full justify-center"
                     >
                       {copy.actions.enterCompetition}
