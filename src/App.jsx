@@ -1665,6 +1665,9 @@ const getAdminCarsCopy = (locale) => {
       descriptionLabel: 'Description',
       imageLabel: 'Image URL',
       galleryLabel: 'Gallery images',
+      uploadImage: 'Attach image',
+      uploadingImage: 'Uploading...',
+      uploadHint: 'Uploads to Supabase bucket',
       deadlineLabel: 'Deadline',
       priceLabel: 'Price',
       entriesLabel: 'Entries text',
@@ -1697,6 +1700,9 @@ const getAdminCarsCopy = (locale) => {
       descriptionLabel: 'Descripcion',
       imageLabel: 'URL de imagen',
       galleryLabel: 'Imagenes de galeria',
+      uploadImage: 'Adjuntar imagen',
+      uploadingImage: 'Subiendo...',
+      uploadHint: 'Sube al bucket de Supabase',
       deadlineLabel: 'Plazo',
       priceLabel: 'Precio',
       entriesLabel: 'Texto de entradas',
@@ -1728,6 +1734,9 @@ const getAdminCarsCopy = (locale) => {
     descriptionLabel: 'Descricao',
     imageLabel: 'URL da imagem',
     galleryLabel: 'Imagens da galeria',
+    uploadImage: 'Anexar imagem',
+    uploadingImage: 'Enviando...',
+    uploadHint: 'Envia para o bucket do Supabase',
     deadlineLabel: 'Prazo',
     priceLabel: 'Preco',
     entriesLabel: 'Texto de entradas',
@@ -2390,6 +2399,7 @@ function App() {
   const [adminCarsDraft, setAdminCarsDraft] = useState([])
   const [adminCarsDirty, setAdminCarsDirty] = useState(false)
   const [adminCarsNotice, setAdminCarsNotice] = useState('')
+  const [adminUploadBusy, setAdminUploadBusy] = useState({})
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAdminLoading, setIsAdminLoading] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
@@ -2835,6 +2845,56 @@ function App() {
     )))
     setAdminCarsDirty(true)
     setAdminCarsNotice('')
+  }
+
+  const handleAdminImageUpload = async (file, index, field) => {
+    if (!file) {
+      return
+    }
+
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const token = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY)
+    if (!token) {
+      setAdminCarsNotice('Sessao admin expirada. Faca login novamente.')
+      return
+    }
+
+    const busyKey = `${index}-${field}`
+    setAdminUploadBusy((current) => ({ ...current, [busyKey]: true }))
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('folder', 'admin-cars')
+
+      const response = await fetch(`${API_BASE_URL}/api/admin/upload-image`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      })
+
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Falha ao anexar imagem no bucket.')
+      }
+
+      const imageUrl = payload?.publicUrl || ''
+      if (!imageUrl) {
+        throw new Error('URL da imagem nao retornada pela API.')
+      }
+
+      updateAdminCarField(index, field, imageUrl)
+      setAdminCarsNotice('Imagem anexada com sucesso.')
+    } catch (error) {
+      setAdminCarsNotice(error?.message || 'Erro ao anexar imagem.')
+    } finally {
+      setAdminUploadBusy((current) => ({ ...current, [busyKey]: false }))
+    }
   }
 
   const handleAddAdminCar = () => {
@@ -3745,12 +3805,29 @@ function App() {
                             <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
                               {adminCarsCopy.imageLabel}
                             </span>
-                            <input
-                              type="text"
-                              value={car.image ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'image', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
+                            <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_170px]">
+                              <input
+                                type="text"
+                                value={car.image ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'image', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                {adminUploadBusy[`${index}-image`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={Boolean(adminUploadBusy[`${index}-image`])}
+                                  onChange={(event) => {
+                                    const file = event.target.files?.[0]
+                                    handleAdminImageUpload(file, index, 'image')
+                                    event.target.value = ''
+                                  }}
+                                />
+                              </label>
+                            </div>
+                            <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
                           </label>
 
                           <label className="block md:col-span-2">
@@ -3765,6 +3842,20 @@ function App() {
                                 className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                                 placeholder="Galeria 1"
                               />
+                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                {adminUploadBusy[`${index}-gallery1`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={Boolean(adminUploadBusy[`${index}-gallery1`])}
+                                  onChange={(event) => {
+                                    const file = event.target.files?.[0]
+                                    handleAdminImageUpload(file, index, 'gallery1')
+                                    event.target.value = ''
+                                  }}
+                                />
+                              </label>
                               <input
                                 type="text"
                                 value={car.gallery2 ?? ''}
@@ -3772,6 +3863,20 @@ function App() {
                                 className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                                 placeholder="Galeria 2"
                               />
+                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                {adminUploadBusy[`${index}-gallery2`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={Boolean(adminUploadBusy[`${index}-gallery2`])}
+                                  onChange={(event) => {
+                                    const file = event.target.files?.[0]
+                                    handleAdminImageUpload(file, index, 'gallery2')
+                                    event.target.value = ''
+                                  }}
+                                />
+                              </label>
                               <input
                                 type="text"
                                 value={car.gallery3 ?? ''}
@@ -3779,6 +3884,20 @@ function App() {
                                 className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                                 placeholder="Galeria 3"
                               />
+                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                {adminUploadBusy[`${index}-gallery3`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={Boolean(adminUploadBusy[`${index}-gallery3`])}
+                                  onChange={(event) => {
+                                    const file = event.target.files?.[0]
+                                    handleAdminImageUpload(file, index, 'gallery3')
+                                    event.target.value = ''
+                                  }}
+                                />
+                              </label>
                               <input
                                 type="text"
                                 value={car.gallery4 ?? ''}
@@ -3786,7 +3905,22 @@ function App() {
                                 className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                                 placeholder="Galeria 4"
                               />
+                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                {adminUploadBusy[`${index}-gallery4`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={Boolean(adminUploadBusy[`${index}-gallery4`])}
+                                  onChange={(event) => {
+                                    const file = event.target.files?.[0]
+                                    handleAdminImageUpload(file, index, 'gallery4')
+                                    event.target.value = ''
+                                  }}
+                                />
+                              </label>
                             </div>
+                            <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
                           </label>
 
                           <label className="block">

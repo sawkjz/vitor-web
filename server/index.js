@@ -1,6 +1,8 @@
 import 'dotenv/config'
+import crypto from 'node:crypto'
 import cors from 'cors'
 import express from 'express'
+import multer from 'multer'
 import { createClient } from '@supabase/supabase-js'
 
 const app = express()
@@ -9,6 +11,7 @@ const PORT = Number(process.env.API_PORT || 8787)
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const SUPABASE_STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || 'cars'
 const ADMIN_EMAIL_ALLOWLIST = (process.env.ADMIN_EMAIL_ALLOWLIST || '')
   .split(',')
   .map((item) => item.trim().toLowerCase())
@@ -71,6 +74,33 @@ const isAdminUser = async (user) => {
   return checkAdminByTable(user.email)
 }
 
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 8 * 1024 * 1024 },
+})
+
+const getBearerToken = (req) => {
+  const authHeader = req.headers.authorization || ''
+  return authHeader.startsWith('Bearer ')
+    ? authHeader.slice('Bearer '.length).trim()
+    : ''
+}
+
+const getAdminUserFromToken = async (token) => {
+  const { data, error } = await supabaseAdminClient.auth.getUser(token)
+
+  if (error || !data?.user) {
+    throw toApiError(401, error?.message || 'Token invalido.')
+  }
+
+  const isAdmin = await isAdminUser(data.user)
+  if (!isAdmin) {
+    throw toApiError(403, 'Usuario sem permissao de admin.')
+  }
+
+  return data.user
+}
+
 app.use(cors({ origin: true, credentials: true }))
 app.use(express.json())
 
@@ -121,36 +151,77 @@ app.post('/api/admin/login', async (req, res) => {
 
 app.get('/api/admin/me', async (req, res) => {
   try {
-    const authHeader = req.headers.authorization || ''
-    const token = authHeader.startsWith('Bearer ')
-      ? authHeader.slice('Bearer '.length).trim()
-      : ''
+    const token = getBearerToken(req)
 
     if (!token) {
       throw toApiError(401, 'Token de acesso ausente.')
     }
 
-    const { data, error } = await supabaseAdminClient.auth.getUser(token)
-
-    if (error || !data?.user) {
-      throw toApiError(401, error?.message || 'Token invalido.')
-    }
-
-    const isAdmin = await isAdminUser(data.user)
-    if (!isAdmin) {
-      throw toApiError(403, 'Usuario sem permissao de admin.')
-    }
+    const user = await getAdminUserFromToken(token)
 
     res.status(200).json({
       user: {
-        id: data.user.id,
-        email: data.user.email,
+        id: user.id,
+        email: user.email,
       },
     })
   } catch (error) {
     const status = error?.status || 500
     res.status(status).json({
       message: error?.message || 'Erro ao validar sessao admin.',
+      details: error?.details || null,
+    })
+  }
+})
+
+app.post('/api/admin/upload-image', upload.single('file'), async (req, res) => {
+  try {
+    const token = getBearerToken(req)
+    if (!token) {
+      throw toApiError(401, 'Token de acesso ausente.')
+    }
+
+    await getAdminUserFromToken(token)
+
+    if (!req.file) {
+      throw toApiError(400, 'Nenhum arquivo recebido.')
+    }
+
+    if (!req.file.mimetype?.startsWith('image/')) {
+      throw toApiError(400, 'Formato invalido. Envie apenas imagem.')
+    }
+
+    const extensionFromName = req.file.originalname?.split('.').pop()?.toLowerCase()
+    const extension = extensionFromName || req.file.mimetype.split('/').pop() || 'jpg'
+    const folderRaw = `${req.body?.folder || 'admin-cars'}`
+    const folder = folderRaw.replace(/[^a-zA-Z0-9/_-]/g, '') || 'admin-cars'
+    const fileName = `${Date.now()}-${crypto.randomUUID()}.${extension}`
+    const filePath = `${folder}/${fileName}`
+
+    const { error: uploadError } = await supabaseAdminClient.storage
+      .from(SUPABASE_STORAGE_BUCKET)
+      .upload(filePath, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: false,
+      })
+
+    if (uploadError) {
+      throw toApiError(500, uploadError.message)
+    }
+
+    const { data } = supabaseAdminClient.storage
+      .from(SUPABASE_STORAGE_BUCKET)
+      .getPublicUrl(filePath)
+
+    res.status(200).json({
+      bucket: SUPABASE_STORAGE_BUCKET,
+      path: filePath,
+      publicUrl: data?.publicUrl || '',
+    })
+  } catch (error) {
+    const status = error?.status || 500
+    res.status(status).json({
+      message: error?.message || 'Erro ao anexar imagem no bucket.',
       details: error?.details || null,
     })
   }

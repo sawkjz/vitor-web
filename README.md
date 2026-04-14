@@ -29,6 +29,7 @@ Create `.env` from `.env.example` and fill:
 - `VITE_API_URL` (optional, default `http://localhost:8787`)
 - `API_PORT` (optional, default `8787`)
 - `ADMIN_EMAIL_ALLOWLIST` (optional, comma-separated)
+- `SUPABASE_STORAGE_BUCKET` (optional, default `cars`)
 
 ### Run
 
@@ -40,3 +41,4 @@ Create `.env` from `.env.example` and fill:
 - `GET /api/health`
 - `POST /api/admin/login`
 - `GET /api/admin/me`
+- `POST /api/admin/upload-image` (multipart/form-data with `file`)
