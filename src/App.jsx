@@ -1653,104 +1653,185 @@ const getAdminCarsCopy = (locale) => {
   if (locale === 'en') {
     return {
       paymentsTab: 'Payments',
-      carsTab: 'Home cars',
-      title: 'Home car configuration',
-      copy: 'Edit the cards shown on the home page and apply only when you click save.',
-      addCar: 'Add car',
+      carsTab: 'Raffles',
+      carRafflesTab: 'Car raffles',
+      houseRafflesTab: 'House raffles',
+      title: 'Raffle configuration',
+      copy: 'Create real raffle campaigns from the backend data source used by the site.',
+      addCar: 'Add raffle',
       restore: 'Discard draft',
-      save: 'Save home cars',
+      save: 'Save raffles',
       remove: 'Remove',
-      titleLabel: 'Title',
-      subtitleLabel: 'Subtitle',
+      titleLabel: 'Campaign title',
+      subtitleLabel: 'Short description',
       descriptionLabel: 'Description',
-      imageLabel: 'Image URL',
+      categoryLabel: 'Category',
+      carCategory: 'Car',
+      houseCategory: 'House',
+      carNameLabel: 'Car name',
+      houseNameLabel: 'House name',
+      yearLabel: 'Year',
+      cityLabel: 'City',
+      bedroomsLabel: 'Bedrooms',
+      bathroomsLabel: 'Bathrooms',
+      areaLabel: 'Area (m²)',
+      badgeLabel: 'Badge',
+      statusLabel: 'Status',
+      featuredLabel: 'Show on home',
+      idLabel: 'ID',
+      slugLabel: 'Slug',
+      imageLabel: 'Hero image',
       galleryLabel: 'Gallery images',
+      highlightLabel: 'Highlights',
       uploadImage: 'Attach image',
       uploadingImage: 'Uploading...',
       uploadHint: 'Uploads to Supabase bucket',
-      deadlineLabel: 'Deadline',
-      priceLabel: 'Ticket price (EUR)',
+      deadlineLabel: 'Draw date',
+      priceLabel: 'Ticket price',
+      currencyLabel: 'Currency',
       entriesLabel: 'Entries summary',
-      entriesSoldLabel: 'Sold qty',
-      entriesTotalLabel: 'Total qty',
-      stockStatusLabel: 'Stock status',
-      stockAvailable: 'Available',
-      stockLow: 'Low stock',
-      stockOut: 'Out of stock',
-      stockSoon: 'Coming soon',
+      entriesSoldLabel: 'Sold tickets (auto)',
+      entriesTotalLabel: 'Total tickets',
+      maxTicketsLabel: 'Max tickets/order',
+      stockStatusLabel: 'Status',
+      stockAvailable: 'active',
+      stockLow: 'draft',
+      stockOut: 'closed',
+      stockSoon: 'scheduled',
+      stripeTitle: 'Stripe',
+      stripeEnabledLabel: 'Enable Stripe',
+      stripePriceIdLabel: 'Stripe price ID',
+      stripeProductNameLabel: 'Stripe product name',
+      stripeSuccessUrlLabel: 'Success URL',
+      stripeCancelUrlLabel: 'Cancel URL',
       progressLabel: 'Progress (%)',
-      progressAuto: 'Auto by sold/total',
+      progressAuto: 'Automatic from purchases',
       draftBadge: 'Draft',
-      savedMessage: 'Home cars updated successfully.',
+      loading: 'Loading raffles...',
+      savedMessage: 'Raffles updated successfully.',
     }
   }
 
   if (locale === 'es') {
     return {
       paymentsTab: 'Pagos',
-      carsTab: 'Coches de inicio',
-      title: 'Configuracion de coches de la home',
-      copy: 'Edita las tarjetas de la pagina inicial y aplica cambios solo al guardar.',
-      addCar: 'Agregar coche',
+      carsTab: 'Sorteos',
+      carRafflesTab: 'Sorteos de coche',
+      houseRafflesTab: 'Sorteos de casa',
+      title: 'Configuracion de sorteos',
+      copy: 'Crea sorteos reales desde la fuente de datos del backend.',
+      addCar: 'Agregar sorteo',
       restore: 'Descartar borrador',
-      save: 'Guardar coches de inicio',
+      save: 'Guardar sorteos',
       remove: 'Eliminar',
-      titleLabel: 'Titulo',
-      subtitleLabel: 'Subtitulo',
+      titleLabel: 'Titulo de campana',
+      subtitleLabel: 'Descripcion corta',
       descriptionLabel: 'Descripcion',
-      imageLabel: 'URL de imagen',
+      categoryLabel: 'Categoria',
+      carCategory: 'Coche',
+      houseCategory: 'Casa',
+      carNameLabel: 'Nombre del coche',
+      houseNameLabel: 'Nombre de la casa',
+      yearLabel: 'Ano',
+      cityLabel: 'Ciudad',
+      bedroomsLabel: 'Habitaciones',
+      bathroomsLabel: 'Banos',
+      areaLabel: 'Area (m²)',
+      badgeLabel: 'Badge',
+      statusLabel: 'Estado',
+      featuredLabel: 'Mostrar en home',
+      idLabel: 'ID',
+      slugLabel: 'Slug',
+      imageLabel: 'Imagen principal',
       galleryLabel: 'Imagenes de galeria',
+      highlightLabel: 'Highlights',
       uploadImage: 'Adjuntar imagen',
       uploadingImage: 'Subiendo...',
       uploadHint: 'Sube al bucket de Supabase',
-      deadlineLabel: 'Plazo',
-      priceLabel: 'Precio del boleto (EUR)',
+      deadlineLabel: 'Fecha del sorteo',
+      priceLabel: 'Precio del boleto',
+      currencyLabel: 'Moneda',
       entriesLabel: 'Resumen de entradas',
-      entriesSoldLabel: 'Cant. vendida',
-      entriesTotalLabel: 'Cant. total',
-      stockStatusLabel: 'Estado de stock',
-      stockAvailable: 'Disponible',
-      stockLow: 'Stock bajo',
-      stockOut: 'Sin stock',
-      stockSoon: 'Proximamente',
+      entriesSoldLabel: 'Boletos vendidos (auto)',
+      entriesTotalLabel: 'Boletos totales',
+      maxTicketsLabel: 'Maximo por pedido',
+      stockStatusLabel: 'Estado',
+      stockAvailable: 'active',
+      stockLow: 'draft',
+      stockOut: 'closed',
+      stockSoon: 'scheduled',
+      stripeTitle: 'Stripe',
+      stripeEnabledLabel: 'Habilitar Stripe',
+      stripePriceIdLabel: 'Price ID de Stripe',
+      stripeProductNameLabel: 'Nombre del producto Stripe',
+      stripeSuccessUrlLabel: 'URL de exito',
+      stripeCancelUrlLabel: 'URL de cancelacion',
       progressLabel: 'Progreso (%)',
-      progressAuto: 'Auto por vendidas/total',
+      progressAuto: 'Automatico por compras',
       draftBadge: 'Borrador',
-      savedMessage: 'Coches de inicio actualizados con exito.',
+      loading: 'Cargando sorteos...',
+      savedMessage: 'Sorteos actualizados con exito.',
     }
   }
 
   return {
     paymentsTab: 'Pagamentos',
     carsTab: 'Sorteios',
-    title: 'Configuracao dos carros da home',
-    copy: 'Edite os cards da pagina inicial e aplique as alteracoes apenas ao clicar em salvar.',
-    addCar: 'Adicionar carro',
+    carRafflesTab: 'Sorteios de carro',
+    houseRafflesTab: 'Sorteios de casa',
+    title: 'Configuracao dos sorteios',
+    copy: 'Cadastre carros e sorteios reais a partir dos dados persistidos no backend do site.',
+    addCar: 'Adicionar sorteio',
     restore: 'Descartar rascunho',
-    save: 'Salvar carros da home',
+    save: 'Salvar sorteios',
     remove: 'Remover',
-    titleLabel: 'Titulo',
-    subtitleLabel: 'Subtitulo',
+    titleLabel: 'Titulo da campanha',
+    subtitleLabel: 'Descricao curta',
     descriptionLabel: 'Descricao',
-    imageLabel: 'URL da imagem',
+    categoryLabel: 'Categoria',
+    carCategory: 'Carro',
+    houseCategory: 'Casa',
+    carNameLabel: 'Nome do carro',
+    houseNameLabel: 'Nome da casa',
+    yearLabel: 'Ano',
+    cityLabel: 'Cidade',
+    bedroomsLabel: 'Quartos',
+    bathroomsLabel: 'Banheiros',
+    areaLabel: 'Area (m²)',
+    badgeLabel: 'Badge',
+    statusLabel: 'Status',
+    featuredLabel: 'Mostrar na home',
+    idLabel: 'ID',
+    slugLabel: 'Slug',
+    imageLabel: 'Imagem principal',
     galleryLabel: 'Imagens da galeria',
+    highlightLabel: 'Destaques',
     uploadImage: 'Anexar imagem',
     uploadingImage: 'Enviando...',
     uploadHint: 'Envia para o bucket do Supabase',
-    deadlineLabel: 'Prazo',
-    priceLabel: 'Preco do bilhete (EUR)',
+    deadlineLabel: 'Data do sorteio',
+    priceLabel: 'Preco do bilhete',
+    currencyLabel: 'Moeda',
     entriesLabel: 'Resumo de entradas',
-    entriesSoldLabel: 'Qtd. vendida',
-    entriesTotalLabel: 'Qtd. total',
-    stockStatusLabel: 'Status do estoque',
-    stockAvailable: 'Disponivel',
-    stockLow: 'Estoque baixo',
-    stockOut: 'Esgotado',
-    stockSoon: 'Em breve',
+    entriesSoldLabel: 'Bilhetes vendidos (auto)',
+    entriesTotalLabel: 'Bilhetes totais',
+    maxTicketsLabel: 'Max. por pedido',
+    stockStatusLabel: 'Status',
+    stockAvailable: 'active',
+    stockLow: 'draft',
+    stockOut: 'closed',
+    stockSoon: 'scheduled',
+    stripeTitle: 'Stripe',
+    stripeEnabledLabel: 'Habilitar Stripe',
+    stripePriceIdLabel: 'Price ID do Stripe',
+    stripeProductNameLabel: 'Nome do produto Stripe',
+    stripeSuccessUrlLabel: 'URL de sucesso',
+    stripeCancelUrlLabel: 'URL de cancelamento',
     progressLabel: 'Progresso (%)',
-    progressAuto: 'Auto por vendidas/total',
+    progressAuto: 'Automatico pelas compras',
     draftBadge: 'Rascunho',
-    savedMessage: 'Carros da home atualizados com sucesso.',
+    loading: 'Carregando sorteios...',
+    savedMessage: 'Sorteios atualizados com sucesso.',
   }
 }
 
@@ -1893,8 +1974,22 @@ const getCarCatalogItems = (competitions) => {
   ]
 
   return competitions.map((competition, index) => ({
-    ...competition,
     ...metadata[index % metadata.length],
+    ...competition,
+  }))
+}
+
+const getHouseCatalogItems = (competitions) => {
+  const metadata = [
+    { color: 'Branca', year: '2022', location: 'Como', featured: true },
+    { color: 'Areia', year: '2024', location: 'Ibiza', featured: false },
+    { color: 'Madeira', year: '2023', location: 'Zermatt', featured: true },
+    { color: 'Bege', year: '2025', location: 'Algarve', featured: false },
+  ]
+
+  return competitions.map((competition, index) => ({
+    ...metadata[index % metadata.length],
+    ...competition,
   }))
 }
 
@@ -2176,13 +2271,15 @@ const parseEuroPrice = (price) => {
   return Number.isFinite(numeric) ? numeric : 0
 }
 
-const formatEuroPrice = (value, locale = 'ptBR') =>
+const formatMoney = (value, currency = 'EUR', locale = 'ptBR') =>
   new Intl.NumberFormat(localeByCurrency[locale] ?? 'pt-BR', {
     style: 'currency',
-    currency: 'EUR',
+    currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value)
+
+const formatEuroPrice = (value, locale = 'ptBR') => formatMoney(value, 'EUR', locale)
 
 const parseIntegerLike = (value) => {
   const numeric = Number.parseInt(`${value ?? ''}`.replace(/[^\d]/g, ''), 10)
@@ -2282,24 +2379,190 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
     .filter((image, index, array) => image && array.indexOf(image) === index)
 }
 
-const toAdminDraftCompetition = (competition) => ({
-  ...competition,
-  entries: competition.entries ?? competition.sold ?? '',
-  entriesSold: parseIntegerLike(competition.entriesSold),
-  entriesTotal: parseIntegerLike(competition.entriesTotal),
-  endAt: toDateTimeLocalValue(competition.endAt),
-  ticketPrice: Number.isFinite(Number(competition.ticketPrice))
-    ? Number(competition.ticketPrice)
-    : parseEuroPrice(competition.price),
-  stockStatus: competition.stockStatus ?? 'Disponivel',
-  gallery1: Array.isArray(competition.gallery) ? (competition.gallery[0] ?? '') : '',
-  gallery2: Array.isArray(competition.gallery) ? (competition.gallery[1] ?? '') : '',
-  gallery3: Array.isArray(competition.gallery) ? (competition.gallery[2] ?? '') : '',
-  gallery4: Array.isArray(competition.gallery) ? (competition.gallery[3] ?? '') : '',
+const slugifyValue = (value) =>
+  `${value ?? ''}`
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+const createEmptyCampaignDraft = (index = 0) => ({
+  id: `raffle-${Date.now()}-${index + 1}`,
+  slug: '',
+  category: 'cars',
+  badge: 'Novo sorteio',
+  title: 'Sorteio principal',
+  carName: '',
+  propertyName: '',
+  year: `${new Date().getFullYear()}`,
+  city: '',
+  bedrooms: '',
+  bathrooms: '',
+  area: '',
+  location: '',
+  color: '',
+  shortDescription: '',
+  description: '',
+  status: 'draft',
+  featuredOnHome: true,
+  ticketPrice: 0,
+  currency: 'BRL',
+  totalTickets: 0,
+  soldTickets: 0,
+  maxTicketsPerOrder: 100,
+  drawDate: '',
+  heroImage: '',
+  gallery1: '',
+  gallery2: '',
+  gallery3: '',
+  gallery4: '',
+  highlight1: '',
+  highlight2: '',
+  highlight3: '',
+  stripeEnabled: false,
+  stripePriceId: '',
+  stripeProductName: '',
+  stripeSuccessUrl: '',
+  stripeCancelUrl: '',
 })
 
-const toAdminDraftCompetitions = (competitions) =>
-  (competitions ?? []).map((competition) => toAdminDraftCompetition(competition))
+const toAdminDraftCampaign = (campaign = {}, index = 0) => ({
+  ...createEmptyCampaignDraft(index),
+  ...campaign,
+  drawDate: toDateTimeLocalValue(campaign.drawDate),
+  gallery1: Array.isArray(campaign.gallery) ? (campaign.gallery[0] ?? '') : '',
+  gallery2: Array.isArray(campaign.gallery) ? (campaign.gallery[1] ?? '') : '',
+  gallery3: Array.isArray(campaign.gallery) ? (campaign.gallery[2] ?? '') : '',
+  gallery4: Array.isArray(campaign.gallery) ? (campaign.gallery[3] ?? '') : '',
+  highlight1: Array.isArray(campaign.highlights) ? (campaign.highlights[0] ?? '') : '',
+  highlight2: Array.isArray(campaign.highlights) ? (campaign.highlights[1] ?? '') : '',
+  highlight3: Array.isArray(campaign.highlights) ? (campaign.highlights[2] ?? '') : '',
+  stripeEnabled: Boolean(campaign.stripe?.enabled),
+  stripePriceId: campaign.stripe?.priceId ?? '',
+  stripeProductName: campaign.stripe?.productName ?? '',
+  stripeSuccessUrl: campaign.stripe?.successUrl ?? '',
+  stripeCancelUrl: campaign.stripe?.cancelUrl ?? '',
+})
+
+const toAdminDraftCampaigns = (campaigns) =>
+  (campaigns ?? []).map((campaign, index) => toAdminDraftCampaign(campaign, index))
+
+const normalizeCampaignDraft = (campaign, locale = 'ptBR', existingCampaign = null) => {
+  const drawDate = campaign.drawDate ? new Date(campaign.drawDate) : null
+  const drawDateIso = drawDate && !Number.isNaN(drawDate.getTime()) ? drawDate.toISOString() : ''
+  const ticketPrice = Number.parseFloat(`${campaign.ticketPrice ?? 0}`)
+  const totalTickets = parseIntegerLike(campaign.totalTickets)
+  const soldTickets = existingCampaign
+    ? parseIntegerLike(existingCampaign.soldTickets)
+    : parseIntegerLike(campaign.soldTickets)
+  const generatedSlug = slugifyValue(campaign.slug || campaign.carName || campaign.propertyName || campaign.title || campaign.id)
+
+  return {
+    id: `${campaign.id || generatedSlug || `raffle-${Date.now()}`}`.trim(),
+    slug: generatedSlug || `raffle-${Date.now()}`,
+    category: `${campaign.category || 'cars'}`.trim(),
+    badge: `${campaign.badge || 'Sorteio'}`.trim(),
+    title: `${campaign.title || campaign.carName || campaign.propertyName || 'Sorteio principal'}`.trim(),
+    carName: `${campaign.carName || campaign.title || ''}`.trim(),
+    propertyName: `${campaign.propertyName || campaign.title || ''}`.trim(),
+    year: `${campaign.year || ''}`.trim(),
+    city: `${campaign.city || ''}`.trim(),
+    bedrooms: `${campaign.bedrooms || ''}`.trim(),
+    bathrooms: `${campaign.bathrooms || ''}`.trim(),
+    area: `${campaign.area || ''}`.trim(),
+    location: `${campaign.location || campaign.city || ''}`.trim(),
+    color: `${campaign.color || ''}`.trim(),
+    shortDescription: `${campaign.shortDescription || ''}`.trim(),
+    description: `${campaign.description || ''}`.trim(),
+    status: `${campaign.status || 'draft'}`.trim(),
+    featuredOnHome: Boolean(campaign.featuredOnHome),
+    ticketPrice: Number.isFinite(ticketPrice) ? Math.max(0, ticketPrice) : 0,
+    currency: `${campaign.currency || 'BRL'}`.trim() || 'BRL',
+    totalTickets,
+    soldTickets: Math.min(Math.max(0, soldTickets), Math.max(0, totalTickets || soldTickets)),
+    maxTicketsPerOrder: Math.max(1, parseIntegerLike(campaign.maxTicketsPerOrder) || 100),
+    drawDate: drawDateIso,
+    heroImage: `${campaign.heroImage || ''}`.trim(),
+    gallery: [campaign.gallery1, campaign.gallery2, campaign.gallery3, campaign.gallery4]
+      .map((item) => `${item || ''}`.trim())
+      .filter(Boolean),
+    highlights: [campaign.highlight1, campaign.highlight2, campaign.highlight3]
+      .map((item) => `${item || ''}`.trim())
+      .filter(Boolean),
+    stripe: {
+      enabled: Boolean(campaign.stripeEnabled),
+      priceId: `${campaign.stripePriceId || ''}`.trim(),
+      productName: `${campaign.stripeProductName || campaign.carName || campaign.title || ''}`.trim(),
+      successUrl: `${campaign.stripeSuccessUrl || ''}`.trim(),
+      cancelUrl: `${campaign.stripeCancelUrl || ''}`.trim(),
+    },
+    updatedAt: new Date().toISOString(),
+    locale,
+  }
+}
+
+const mapCampaignToCompetition = (campaign, locale = 'ptBR', index = 0) => {
+  const isHouse = campaign.category === 'houses'
+  const metadata = isHouse ? [
+    { color: 'Branca', location: 'Como' },
+    { color: 'Areia', location: 'Ibiza' },
+    { color: 'Madeira', location: 'Zermatt' },
+    { color: 'Bege', location: 'Algarve' },
+  ] : [
+    { color: 'Preto', location: 'Online' },
+    { color: 'Cinza', location: 'Portugal' },
+    { color: 'Azul', location: 'Brasil' },
+    { color: 'Branco', location: 'Europa' },
+  ]
+  const fallbackMeta = metadata[index % metadata.length]
+  const progress = campaign.totalTickets > 0
+    ? Math.round((campaign.soldTickets / campaign.totalTickets) * 100)
+    : 0
+  const assetName = isHouse
+    ? (campaign.propertyName || campaign.title)
+    : (campaign.carName || campaign.title)
+
+  return {
+    id: campaign.id,
+    slug: campaign.slug,
+    category: campaign.category || 'cars',
+    badge: campaign.badge,
+    title: assetName,
+    subtitle: campaign.shortDescription || campaign.title,
+    description: campaign.description,
+    image: campaign.heroImage || (isHouse ? '/houses/6391394-house-6597406_1920.jpg' : '/cars/hero-1.jpg'),
+    gallery: campaign.gallery ?? [],
+    deadline: buildDeadlineFromEndAt(campaign.drawDate, locale),
+    price: formatMoney(campaign.ticketPrice ?? 0, campaign.currency ?? 'BRL', locale),
+    ticketPrice: campaign.ticketPrice ?? 0,
+    currency: campaign.currency ?? 'BRL',
+    progress,
+    entries: formatEntriesFromTotals(campaign.soldTickets ?? 0, campaign.totalTickets ?? 0, locale),
+    sold: formatEntriesFromTotals(campaign.soldTickets ?? 0, campaign.totalTickets ?? 0, locale),
+    stockStatus: campaign.status === 'closed' ? 'Encerrado' : 'Disponivel',
+    year: `${campaign.year || new Date(campaign.drawDate || Date.now()).getFullYear()}`,
+    color: campaign.color || fallbackMeta.color,
+    location: campaign.location || campaign.city || fallbackMeta.location,
+    featured: Boolean(campaign.featuredOnHome),
+    endAt: campaign.drawDate,
+    highlights: campaign.highlights ?? [],
+    maxTicketsPerOrder: campaign.maxTicketsPerOrder ?? 100,
+    stripe: campaign.stripe ?? {},
+    city: campaign.city || '',
+    bedrooms: campaign.bedrooms || '',
+    bathrooms: campaign.bathrooms || '',
+    area: campaign.area || '',
+  }
+}
+
+const DEFAULT_STORE_CONFIG = {
+  siteName: 'Black Ticket Club',
+  homeTitle: 'Compre bilhetes dos carros em destaque',
+  homeSubtitle: 'Escolha um sorteio e compre seus bilhetes.',
+  homeDescription: 'Painel administrativo conectado ao backend para editar campanhas reais.',
+  campaigns: [],
+}
 
 const internalScreenCopyByLocale = {
   en: {
@@ -2454,11 +2717,14 @@ function App() {
   const [adminForm, setAdminForm] = useState({ email: '', password: '' })
   const [adminError, setAdminError] = useState('')
   const [adminDashboardTab, setAdminDashboardTab] = useState('payments')
-  const [customCompetitionsByLocale, setCustomCompetitionsByLocale] = useState({})
+  const [adminCampaignCategory, setAdminCampaignCategory] = useState('cars')
+  const [storeConfig, setStoreConfig] = useState(DEFAULT_STORE_CONFIG)
+  const [storeCampaigns, setStoreCampaigns] = useState([])
   const [adminCarsDraft, setAdminCarsDraft] = useState([])
   const [adminCarsDirty, setAdminCarsDirty] = useState(false)
   const [adminCarsNotice, setAdminCarsNotice] = useState('')
   const [adminUploadBusy, setAdminUploadBusy] = useState({})
+  const [isCampaignsLoading, setIsCampaignsLoading] = useState(false)
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAdminLoading, setIsAdminLoading] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
@@ -2473,9 +2739,33 @@ function App() {
   const adminCarsCopy = getAdminCarsCopy(locale)
   const accountMenuCopy = getAccountMenuCopy(locale)
   const catalogCopy = getCatalogCopy(locale)
-  const homeCompetitions = customCompetitionsByLocale[locale] ?? copy.competitions
-  const carCompetitions = useMemo(() => getCarCatalogItems(homeCompetitions), [homeCompetitions])
-  const houseCompetitions = useMemo(() => getHouseCompetitions(locale), [locale])
+  const mappedCampaignCompetitions = useMemo(
+    () => storeCampaigns.map((campaign, index) => mapCampaignToCompetition(campaign, locale, index)),
+    [locale, storeCampaigns]
+  )
+  const homeCompetitions = mappedCampaignCompetitions.filter((campaign) => campaign.featured)
+  const carCampaignCompetitions = useMemo(
+    () => mappedCampaignCompetitions.filter((campaign) => campaign.category !== 'houses'),
+    [mappedCampaignCompetitions]
+  )
+  const houseCampaignCompetitions = useMemo(
+    () => mappedCampaignCompetitions.filter((campaign) => campaign.category === 'houses'),
+    [mappedCampaignCompetitions]
+  )
+  const carCompetitions = useMemo(
+    () => getCarCatalogItems(carCampaignCompetitions.length ? carCampaignCompetitions : copy.competitions),
+    [copy.competitions, carCampaignCompetitions]
+  )
+  const houseCompetitions = useMemo(
+    () => getHouseCatalogItems(houseCampaignCompetitions.length ? houseCampaignCompetitions : getHouseCompetitions(locale)),
+    [houseCampaignCompetitions, locale]
+  )
+  const visibleAdminDrafts = useMemo(
+    () => adminCarsDraft
+      .map((campaign, index) => ({ campaign, index }))
+      .filter(({ campaign }) => (campaign.category ?? 'cars') === adminCampaignCategory),
+    [adminCampaignCategory, adminCarsDraft]
+  )
   const catalogCompetitions = useMemo(
     () => (catalogCategory === 'houses' ? houseCompetitions : carCompetitions),
     [catalogCategory, houseCompetitions, carCompetitions]
@@ -2495,15 +2785,15 @@ function App() {
     () => buildGalleryFromCompetition(activeCompetition, catalogCategory),
     [activeCompetition, catalogCategory]
   )
-  const unitPrice = parseEuroPrice(activeCompetition?.price)
+  const unitPrice = Number(activeCompetition?.ticketPrice) || parseEuroPrice(activeCompetition?.price)
   const offerOptions = useMemo(
     () => [
-      { id: 'single', label: `1 x ${formatEuroPrice(unitPrice, locale)}`, baseQty: 1, bonusQty: 0, multiplier: 1 },
+      { id: 'single', label: `1 x ${formatMoney(unitPrice, activeCompetition?.currency ?? 'EUR', locale)}`, baseQty: 1, bonusQty: 0, multiplier: 1 },
       { id: 'plus1', label: '3 + 1 Gratis', baseQty: 3, bonusQty: 1, multiplier: 3 },
       { id: 'plus3', label: '5 + 3 Gratis', baseQty: 5, bonusQty: 3, multiplier: 5 },
       { id: 'plus4', label: '10 + 4 Gratis', baseQty: 10, bonusQty: 4, multiplier: 10 },
     ],
-    [unitPrice, locale]
+    [activeCompetition?.currency, unitPrice, locale]
   )
   const activeOffer = offerOptions.find((offer) => offer.id === selectedOffer) ?? offerOptions[0]
   const subtotal = unitPrice * Math.max(1, quantity) * activeOffer.multiplier
@@ -2588,6 +2878,50 @@ function App() {
     }
 
     validateSession()
+  }, [])
+
+  useEffect(() => {
+    let isMounted = true
+
+    const loadStoreConfig = async () => {
+      setIsCampaignsLoading(true)
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/store-config`)
+        const payload = await response.json().catch(() => ({}))
+
+        if (!response.ok) {
+          throw new Error(payload?.message || 'Falha ao carregar sorteios.')
+        }
+
+        if (!isMounted) {
+          return
+        }
+
+        const campaigns = Array.isArray(payload?.campaigns) ? payload.campaigns : []
+        setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns })
+        setStoreCampaigns(campaigns)
+        setAdminCarsDraft(toAdminDraftCampaigns(campaigns))
+      } catch {
+        if (!isMounted) {
+          return
+        }
+
+        setStoreConfig(DEFAULT_STORE_CONFIG)
+        setStoreCampaigns([])
+        setAdminCarsDraft([])
+      } finally {
+        if (isMounted) {
+          setIsCampaignsLoading(false)
+        }
+      }
+    }
+
+    loadStoreConfig()
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   useEffect(() => {
@@ -2788,20 +3122,15 @@ function App() {
   const mockHeroVideo = mockedMediaData.heroVideo
   const heroCountdownUnits = getCountdownUnits(currentSlide.countdown, locale)
   const handleLocaleChange = (nextLocale) => {
-    const nextCopy = getPresentationCopy(nextLocale)
-    const nextHomeCompetitions = customCompetitionsByLocale[nextLocale] ?? nextCopy.competitions
     setLocale(nextLocale)
     setActiveSlide(0)
-    setAdminCarsDraft(toAdminDraftCompetitions(nextHomeCompetitions))
-    setAdminCarsDirty(false)
-    setAdminCarsNotice('')
   }
 
   const openAdminLogin = () => {
     setAdminError('')
     setIsAccountMenuOpen(false)
     setAdminDashboardTab('payments')
-    setAdminCarsDraft(toAdminDraftCompetitions(homeCompetitions))
+    setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminLogin')
@@ -2810,7 +3139,7 @@ function App() {
   const openAdminProfile = () => {
     setIsAccountMenuOpen(false)
     setAdminDashboardTab('payments')
-    setAdminCarsDraft(toAdminDraftCompetitions(homeCompetitions))
+    setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminDashboard')
@@ -2960,24 +3289,8 @@ function App() {
     setAdminCarsDraft((current) => [
       ...current,
       {
-        title: `Novo carro ${current.length + 1}`,
-        subtitle: 'Configurar detalhes',
-        description: 'Descricao do sorteio',
-        image: '/cars/hero-1.jpg',
-        gallery1: '',
-        gallery2: '',
-        gallery3: '',
-        gallery4: '',
-        endAt: '',
-        deadline: 'Termina em breve',
-        ticketPrice: 0,
-        price: 'EUR 0.00',
-        stockStatus: 'Disponivel',
-        entries: '0 entradas',
-        entriesSold: 0,
-        entriesTotal: 0,
-        progress: 0,
-        sold: '0 vendidos',
+        ...createEmptyCampaignDraft(current.length),
+        category: adminCampaignCategory,
       },
     ])
     setAdminCarsDirty(true)
@@ -2991,79 +3304,61 @@ function App() {
   }
 
   const handleResetAdminCarsDraft = () => {
-    setAdminCarsDraft(toAdminDraftCompetitions(homeCompetitions))
+    setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
   }
 
-  const handleSaveAdminCars = () => {
-    const normalizedCompetitions = adminCarsDraft
-      .map((item, index) => {
-        const normalizedProgress = Number.parseInt(`${item.progress ?? 0}`, 10)
-        const entriesSold = parseIntegerLike(item.entriesSold)
-        const entriesTotal = parseIntegerLike(item.entriesTotal)
-        const endAtDate = item.endAt ? new Date(item.endAt) : null
-        const endAtIso = endAtDate && !Number.isNaN(endAtDate.getTime()) ? endAtDate.toISOString() : ''
-        const ticketPrice = Number.parseFloat(`${item.ticketPrice ?? 0}`)
-        const normalizedTicketPrice = Number.isFinite(ticketPrice) ? Math.max(0, ticketPrice) : 0
-        const hasTotals = entriesTotal > 0
-        const computedProgress = hasTotals
-          ? Math.max(0, Math.min(100, Math.round((entriesSold / entriesTotal) * 100)))
-          : (Number.isNaN(normalizedProgress) ? 0 : Math.max(0, Math.min(100, normalizedProgress)))
-        const entriesTextFromTotals = hasTotals
-          ? formatEntriesFromTotals(entriesSold, entriesTotal, locale)
-          : ''
+  const handleSaveAdminCars = async () => {
+    if (typeof window === 'undefined') {
+      return
+    }
 
-        return {
-          ...item,
-          title: item.title?.trim() || `Carro ${index + 1}`,
-          subtitle: item.subtitle?.trim() || 'Sem subtitulo',
-          description: item.description?.trim() || item.subtitle?.trim() || 'Sem descricao',
-          image: item.image?.trim() || '/cars/hero-1.jpg',
-          gallery: [item.gallery1, item.gallery2, item.gallery3, item.gallery4]
-            .map((entry) => `${entry ?? ''}`.trim())
-            .filter(Boolean),
-          endAt: endAtIso,
-          deadline: buildDeadlineFromEndAt(endAtIso, locale) || item.deadline?.trim() || 'Termina em breve',
-          ticketPrice: normalizedTicketPrice,
-          price: formatEuroPrice(normalizedTicketPrice, locale),
-          entriesSold,
-          entriesTotal,
-          entries: entriesTextFromTotals || item.entries?.trim() || item.sold?.trim() || '0 entradas',
-          sold: entriesTextFromTotals || item.entries?.trim() || item.sold?.trim() || '0 entradas',
-          stockStatus: item.stockStatus?.trim() || 'Disponivel',
-          progress: computedProgress,
-        }
+    const token = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY)
+    if (!token) {
+      setAdminCarsNotice('Sessao admin expirada. Faca login novamente.')
+      return
+    }
+
+    const campaigns = adminCarsDraft.map((campaign) => {
+      const existingCampaign = storeCampaigns.find((item) => item.id === campaign.id || item.slug === campaign.slug) ?? null
+      return normalizeCampaignDraft(campaign, locale, existingCampaign)
+    })
+
+    try {
+      setIsCampaignsLoading(true)
+
+      const response = await fetch(`${API_BASE_URL}/api/admin/campaigns`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          siteName: storeConfig.siteName,
+          homeTitle: storeConfig.homeTitle,
+          homeSubtitle: storeConfig.homeSubtitle,
+          homeDescription: storeConfig.homeDescription,
+          campaigns,
+        }),
       })
-      .filter((item) => item.title)
 
-    const safeCompetitions = normalizedCompetitions.length
-      ? normalizedCompetitions
-      : [{
-        title: 'Carro 1',
-        subtitle: 'Configurar detalhes',
-        description: 'Descricao do sorteio',
-        image: '/cars/hero-1.jpg',
-        gallery: [],
-        endAt: '',
-        deadline: 'Termina em breve',
-        ticketPrice: 0,
-        price: 'EUR 0.00',
-        entries: '0 entradas',
-        entriesSold: 0,
-        entriesTotal: 0,
-        sold: '0 entradas',
-        stockStatus: 'Disponivel',
-        progress: 0,
-      }]
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Falha ao salvar sorteios.')
+      }
 
-    setCustomCompetitionsByLocale((current) => ({
-      ...current,
-      [locale]: safeCompetitions,
-    }))
-    setAdminCarsDraft(toAdminDraftCompetitions(safeCompetitions))
-    setAdminCarsDirty(false)
-    setAdminCarsNotice(adminCarsCopy.savedMessage)
+      const nextCampaigns = Array.isArray(payload?.campaigns) ? payload.campaigns : campaigns
+      setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns: nextCampaigns })
+      setStoreCampaigns(nextCampaigns)
+      setAdminCarsDraft(toAdminDraftCampaigns(nextCampaigns))
+      setAdminCarsDirty(false)
+      setAdminCarsNotice(adminCarsCopy.savedMessage)
+    } catch (error) {
+      setAdminCarsNotice(error?.message || 'Erro ao salvar sorteios.')
+    } finally {
+      setIsCampaignsLoading(false)
+    }
   }
 
   const goToPreviousSlide = () => {
@@ -3764,6 +4059,30 @@ function App() {
                       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">{adminCarsCopy.draftBadge}</p>
                       <h3 className="mt-2 text-2xl font-black tracking-[-0.03em] text-white">{adminCarsCopy.title}</h3>
                       <p className="mt-2 max-w-3xl text-sm leading-7 text-[#b7beca]">{adminCarsCopy.copy}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setAdminCampaignCategory('cars')}
+                          className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition ${
+                            adminCampaignCategory === 'cars'
+                              ? 'border border-[#f0c000]/35 bg-[#f0c000]/14 text-[#ffd25a]'
+                              : 'border border-white/10 bg-white/5 text-[#b7beca] hover:border-[#f0c000]/30 hover:text-white'
+                          }`}
+                        >
+                          {adminCarsCopy.carRafflesTab}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setAdminCampaignCategory('houses')}
+                          className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition ${
+                            adminCampaignCategory === 'houses'
+                              ? 'border border-[#f0c000]/35 bg-[#f0c000]/14 text-[#ffd25a]'
+                              : 'border border-white/10 bg-white/5 text-[#b7beca] hover:border-[#f0c000]/30 hover:text-white'
+                          }`}
+                        >
+                          {adminCarsCopy.houseRafflesTab}
+                        </button>
+                      </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <button
@@ -3802,297 +4121,502 @@ function App() {
                     </p>
                   ) : null}
 
+                  {isCampaignsLoading ? (
+                    <p className="mt-5 text-sm font-semibold text-[#b7beca]">{adminCarsCopy.loading}</p>
+                  ) : null}
+
                   <div className="mt-5 grid gap-4">
-                    {adminCarsDraft.map((car, index) => (
-                      <article key={`admin-car-${index}`} className="rounded-[22px] border border-white/8 bg-[#12131a] p-4">
-                        <div className="mb-4 flex items-center justify-between gap-3">
-                          <p className="text-sm font-black uppercase tracking-[0.12em] text-white">
-                            {adminCarsCopy.carsTab} #{index + 1}
-                          </p>
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveAdminCar(index)}
-                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white transition hover:border-[#f0c000]/35"
-                          >
-                            {adminCarsCopy.remove}
-                          </button>
-                        </div>
+                    {!visibleAdminDrafts.length ? (
+                      <div className="rounded-[22px] border border-dashed border-white/10 bg-[#12131a] p-6 text-sm text-[#b7beca]">
+                        {adminCampaignCategory === 'houses'
+                          ? 'Nenhum sorteio de casa cadastrado ainda nesta aba.'
+                          : 'Nenhum sorteio de carro cadastrado ainda nesta aba.'}
+                      </div>
+                    ) : null}
 
-                        <div className="mb-4 grid gap-3 rounded-[16px] border border-white/8 bg-[#101218] p-3 sm:grid-cols-[88px_minmax(0,1fr)]">
-                          <img
-                            src={car.image || '/cars/hero-1.jpg'}
-                            alt={car.title || `Carro ${index + 1}`}
-                            className="h-20 w-full rounded-[12px] object-cover"
-                          />
-                          <div className="flex flex-col justify-center gap-1">
-                            <p className="text-sm font-bold text-white">{car.title || `Carro ${index + 1}`}</p>
-                            <p className="text-xs text-[#9aa0ac]">{car.entries || '0 entradas'}</p>
-                            <p className="text-xs text-[#9aa0ac]">
-                              {adminCarsCopy.progressLabel}: {Number.parseInt(`${car.progress ?? 0}`, 10) || 0}%
+                    {visibleAdminDrafts.map(({ campaign: car, index }) => {
+                      const soldTickets = parseIntegerLike(car.soldTickets)
+                      const totalTickets = parseIntegerLike(car.totalTickets)
+                      const progress = totalTickets > 0 ? Math.round((soldTickets / totalTickets) * 100) : 0
+                      const entriesSummary = totalTickets > 0
+                        ? formatEntriesFromTotals(soldTickets, totalTickets, locale)
+                        : '0 entradas'
+                      const isHouseDraft = car.category === 'houses'
+                      const assetName = isHouseDraft ? (car.propertyName || '') : (car.carName || '')
+
+                      return (
+                        <article key={`admin-car-${index}`} className="rounded-[22px] border border-white/8 bg-[#12131a] p-4">
+                          <div className="mb-4 flex items-center justify-between gap-3">
+                            <p className="text-sm font-black uppercase tracking-[0.12em] text-white">
+                              {adminCarsCopy.carsTab} #{index + 1}
                             </p>
-                          </div>
-                        </div>
-
-                        <div className="grid gap-3 md:grid-cols-2">
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.titleLabel}
-                            </span>
-                            <input
-                              type="text"
-                              value={car.title ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'title', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.subtitleLabel}
-                            </span>
-                            <input
-                              type="text"
-                              value={car.subtitle ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'subtitle', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block md:col-span-2">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.descriptionLabel}
-                            </span>
-                            <textarea
-                              rows={3}
-                              value={car.description ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'description', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block md:col-span-2">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.imageLabel}
-                            </span>
-                            <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_170px]">
-                              <input
-                                type="text"
-                                value={car.image ?? ''}
-                                onChange={(event) => updateAdminCarField(index, 'image', event.target.value)}
-                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                              />
-                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
-                                {adminUploadBusy[`${index}-image`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  disabled={Boolean(adminUploadBusy[`${index}-image`])}
-                                  onChange={(event) => {
-                                    const file = event.target.files?.[0]
-                                    handleAdminImageUpload(file, index, 'image')
-                                    event.target.value = ''
-                                  }}
-                                />
-                              </label>
-                            </div>
-                            <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
-                          </label>
-
-                          <label className="block md:col-span-2">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.galleryLabel}
-                            </span>
-                            <div className="grid gap-2 sm:grid-cols-2">
-                              <input
-                                type="text"
-                                value={car.gallery1 ?? ''}
-                                onChange={(event) => updateAdminCarField(index, 'gallery1', event.target.value)}
-                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                                placeholder="Galeria 1"
-                              />
-                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
-                                {adminUploadBusy[`${index}-gallery1`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  disabled={Boolean(adminUploadBusy[`${index}-gallery1`])}
-                                  onChange={(event) => {
-                                    const file = event.target.files?.[0]
-                                    handleAdminImageUpload(file, index, 'gallery1')
-                                    event.target.value = ''
-                                  }}
-                                />
-                              </label>
-                              <input
-                                type="text"
-                                value={car.gallery2 ?? ''}
-                                onChange={(event) => updateAdminCarField(index, 'gallery2', event.target.value)}
-                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                                placeholder="Galeria 2"
-                              />
-                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
-                                {adminUploadBusy[`${index}-gallery2`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  disabled={Boolean(adminUploadBusy[`${index}-gallery2`])}
-                                  onChange={(event) => {
-                                    const file = event.target.files?.[0]
-                                    handleAdminImageUpload(file, index, 'gallery2')
-                                    event.target.value = ''
-                                  }}
-                                />
-                              </label>
-                              <input
-                                type="text"
-                                value={car.gallery3 ?? ''}
-                                onChange={(event) => updateAdminCarField(index, 'gallery3', event.target.value)}
-                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                                placeholder="Galeria 3"
-                              />
-                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
-                                {adminUploadBusy[`${index}-gallery3`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  disabled={Boolean(adminUploadBusy[`${index}-gallery3`])}
-                                  onChange={(event) => {
-                                    const file = event.target.files?.[0]
-                                    handleAdminImageUpload(file, index, 'gallery3')
-                                    event.target.value = ''
-                                  }}
-                                />
-                              </label>
-                              <input
-                                type="text"
-                                value={car.gallery4 ?? ''}
-                                onChange={(event) => updateAdminCarField(index, 'gallery4', event.target.value)}
-                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                                placeholder="Galeria 4"
-                              />
-                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
-                                {adminUploadBusy[`${index}-gallery4`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  disabled={Boolean(adminUploadBusy[`${index}-gallery4`])}
-                                  onChange={(event) => {
-                                    const file = event.target.files?.[0]
-                                    handleAdminImageUpload(file, index, 'gallery4')
-                                    event.target.value = ''
-                                  }}
-                                />
-                              </label>
-                            </div>
-                            <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.deadlineLabel}
-                            </span>
-                            <input
-                              type="datetime-local"
-                              value={car.endAt ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'endAt', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.priceLabel}
-                            </span>
-                            <input
-                              type="number"
-                              min="0"
-                              step="0.01"
-                              value={car.ticketPrice ?? 0}
-                              onChange={(event) => updateAdminCarField(index, 'ticketPrice', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.entriesLabel}
-                            </span>
-                            <input
-                              type="text"
-                              value={
-                                parseIntegerLike(car.entriesTotal) > 0
-                                  ? formatEntriesFromTotals(parseIntegerLike(car.entriesSold), parseIntegerLike(car.entriesTotal), locale)
-                                  : (car.entries ?? car.sold ?? '')
-                              }
-                              readOnly
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.entriesSoldLabel}
-                            </span>
-                            <input
-                              type="number"
-                              min="0"
-                              value={car.entriesSold ?? 0}
-                              onChange={(event) => updateAdminCarField(index, 'entriesSold', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.entriesTotalLabel}
-                            </span>
-                            <input
-                              type="number"
-                              min="0"
-                              value={car.entriesTotal ?? 0}
-                              onChange={(event) => updateAdminCarField(index, 'entriesTotal', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                            />
-                          </label>
-
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.stockStatusLabel}
-                            </span>
-                            <select
-                              value={car.stockStatus ?? ''}
-                              onChange={(event) => updateAdminCarField(index, 'stockStatus', event.target.value)}
-                              className="w-full appearance-none rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveAdminCar(index)}
+                              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white transition hover:border-[#f0c000]/35"
                             >
-                              <option value={adminCarsCopy.stockAvailable}>{adminCarsCopy.stockAvailable}</option>
-                              <option value={adminCarsCopy.stockLow}>{adminCarsCopy.stockLow}</option>
-                              <option value={adminCarsCopy.stockOut}>{adminCarsCopy.stockOut}</option>
-                              <option value={adminCarsCopy.stockSoon}>{adminCarsCopy.stockSoon}</option>
-                            </select>
-                          </label>
+                              {adminCarsCopy.remove}
+                            </button>
+                          </div>
 
-                          <label className="block">
-                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
-                              {adminCarsCopy.progressLabel}
-                            </span>
-                            <input
-                              type="number"
-                              min="0"
-                              max="100"
-                              value={car.progress ?? 0}
-                              onChange={(event) => updateAdminCarField(index, 'progress', event.target.value)}
-                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                          <div className="mb-4 grid gap-3 rounded-[16px] border border-white/8 bg-[#101218] p-3 sm:grid-cols-[88px_minmax(0,1fr)]">
+                            <img
+                              src={car.heroImage || (isHouseDraft ? '/houses/6391394-house-6597406_1920.jpg' : '/cars/hero-1.jpg')}
+                              alt={assetName || `Sorteio ${index + 1}`}
+                              className="h-20 w-full rounded-[12px] object-cover"
                             />
-                            <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.progressAuto}</span>
-                          </label>
-                        </div>
-                      </article>
-                    ))}
+                            <div className="flex flex-col justify-center gap-1">
+                              <p className="text-sm font-bold text-white">{assetName || `Sorteio ${index + 1}`}</p>
+                              <p className="text-xs text-[#9aa0ac]">{entriesSummary}</p>
+                              <p className="text-xs text-[#9aa0ac]">
+                                {adminCarsCopy.progressLabel}: {progress}%
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="grid gap-3 md:grid-cols-2">
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.idLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.id ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'id', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.slugLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.slug ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'slug', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.categoryLabel}
+                              </span>
+                              <select
+                                value={car.category ?? 'cars'}
+                                onChange={(event) => updateAdminCarField(index, 'category', event.target.value)}
+                                className="w-full appearance-none rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              >
+                                <option value="cars">{adminCarsCopy.carCategory}</option>
+                                <option value="houses">{adminCarsCopy.houseCategory}</option>
+                              </select>
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.titleLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.title ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'title', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {isHouseDraft ? adminCarsCopy.houseNameLabel : adminCarsCopy.carNameLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={isHouseDraft ? (car.propertyName ?? '') : (car.carName ?? '')}
+                                onChange={(event) => updateAdminCarField(index, isHouseDraft ? 'propertyName' : 'carName', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.yearLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.year ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'year', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            {isHouseDraft ? (
+                              <>
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.cityLabel}
+                                  </span>
+                                  <input
+                                    type="text"
+                                    value={car.city ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'city', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.bedroomsLabel}
+                                  </span>
+                                  <input
+                                    type="number"
+                                    min="0"
+                                    value={car.bedrooms ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'bedrooms', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.bathroomsLabel}
+                                  </span>
+                                  <input
+                                    type="number"
+                                    min="0"
+                                    value={car.bathrooms ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'bathrooms', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.areaLabel}
+                                  </span>
+                                  <input
+                                    type="number"
+                                    min="0"
+                                    value={car.area ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'area', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+                              </>
+                            ) : null}
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.badgeLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.badge ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'badge', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.statusLabel}
+                              </span>
+                              <select
+                                value={car.status ?? 'draft'}
+                                onChange={(event) => updateAdminCarField(index, 'status', event.target.value)}
+                                className="w-full appearance-none rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              >
+                                <option value={adminCarsCopy.stockAvailable}>{adminCarsCopy.stockAvailable}</option>
+                                <option value={adminCarsCopy.stockLow}>{adminCarsCopy.stockLow}</option>
+                                <option value={adminCarsCopy.stockOut}>{adminCarsCopy.stockOut}</option>
+                                <option value={adminCarsCopy.stockSoon}>{adminCarsCopy.stockSoon}</option>
+                              </select>
+                            </label>
+
+                            <label className="flex items-center gap-3 rounded-[14px] border border-white/10 bg-[#101218] px-4 py-3">
+                              <input
+                                type="checkbox"
+                                checked={Boolean(car.featuredOnHome)}
+                                onChange={(event) => updateAdminCarField(index, 'featuredOnHome', event.target.checked)}
+                                className="h-4 w-4 accent-[#f0c000]"
+                              />
+                              <span className="text-sm font-semibold text-white">{adminCarsCopy.featuredLabel}</span>
+                            </label>
+
+                            <label className="block md:col-span-2">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.subtitleLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.shortDescription ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'shortDescription', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block md:col-span-2">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.descriptionLabel}
+                              </span>
+                              <textarea
+                                rows={4}
+                                value={car.description ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'description', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block md:col-span-2">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.imageLabel}
+                              </span>
+                              <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_170px]">
+                                <input
+                                  type="text"
+                                  value={car.heroImage ?? ''}
+                                  onChange={(event) => updateAdminCarField(index, 'heroImage', event.target.value)}
+                                  className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                />
+                                <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                  {adminUploadBusy[`${index}-heroImage`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    disabled={Boolean(adminUploadBusy[`${index}-heroImage`])}
+                                    onChange={(event) => {
+                                      const file = event.target.files?.[0]
+                                      handleAdminImageUpload(file, index, 'heroImage')
+                                      event.target.value = ''
+                                    }}
+                                  />
+                                </label>
+                              </div>
+                              <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
+                            </label>
+
+                            <label className="block md:col-span-2">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.galleryLabel}
+                              </span>
+                              <div className="grid gap-2 sm:grid-cols-2">
+                                {['gallery1', 'gallery2', 'gallery3', 'gallery4'].map((field, galleryIndex) => (
+                                  <div key={field} className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_150px]">
+                                    <input
+                                      type="text"
+                                      value={car[field] ?? ''}
+                                      onChange={(event) => updateAdminCarField(index, field, event.target.value)}
+                                      className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                      placeholder={`Galeria ${galleryIndex + 1}`}
+                                    />
+                                    <label className="inline-flex cursor-pointer items-center justify-center rounded-[14px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                      {adminUploadBusy[`${index}-${field}`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                      <input
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        disabled={Boolean(adminUploadBusy[`${index}-${field}`])}
+                                        onChange={(event) => {
+                                          const file = event.target.files?.[0]
+                                          handleAdminImageUpload(file, index, field)
+                                          event.target.value = ''
+                                        }}
+                                      />
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                              <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.deadlineLabel}
+                              </span>
+                              <input
+                                type="datetime-local"
+                                value={car.drawDate ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'drawDate', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.priceLabel}
+                              </span>
+                              <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                value={car.ticketPrice ?? 0}
+                                onChange={(event) => updateAdminCarField(index, 'ticketPrice', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.currencyLabel}
+                              </span>
+                              <input
+                                type="text"
+                                value={car.currency ?? 'BRL'}
+                                onChange={(event) => updateAdminCarField(index, 'currency', event.target.value.toUpperCase())}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.entriesTotalLabel}
+                              </span>
+                              <input
+                                type="number"
+                                min="0"
+                                value={car.totalTickets ?? 0}
+                                onChange={(event) => updateAdminCarField(index, 'totalTickets', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <div className="rounded-[14px] border border-white/10 bg-[#101218] px-3 py-3">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.entriesSoldLabel}
+                              </span>
+                              <p className="text-sm font-semibold text-white">{soldTickets}</p>
+                            </div>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.maxTicketsLabel}
+                              </span>
+                              <input
+                                type="number"
+                                min="1"
+                                value={car.maxTicketsPerOrder ?? 100}
+                                onChange={(event) => updateAdminCarField(index, 'maxTicketsPerOrder', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <div className="rounded-[14px] border border-white/10 bg-[#101218] px-3 py-3">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.entriesLabel}
+                              </span>
+                              <p className="text-sm font-semibold text-white">{entriesSummary}</p>
+                            </div>
+
+                            <div className="rounded-[14px] border border-white/10 bg-[#101218] px-3 py-3">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.progressLabel}
+                              </span>
+                              <p className="text-sm font-semibold text-white">{progress}%</p>
+                              <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.progressAuto}</span>
+                            </div>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.highlightLabel} 1
+                              </span>
+                              <input
+                                type="text"
+                                value={car.highlight1 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'highlight1', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.highlightLabel} 2
+                              </span>
+                              <input
+                                type="text"
+                                value={car.highlight2 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'highlight2', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <label className="block md:col-span-2">
+                              <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                {adminCarsCopy.highlightLabel} 3
+                              </span>
+                              <input
+                                type="text"
+                                value={car.highlight3 ?? ''}
+                                onChange={(event) => updateAdminCarField(index, 'highlight3', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
+
+                            <div className="md:col-span-2 rounded-[18px] border border-white/8 bg-[#101218] p-4">
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">{adminCarsCopy.stripeTitle}</p>
+                              <div className="mt-3 grid gap-3 md:grid-cols-2">
+                                <label className="flex items-center gap-3 rounded-[14px] border border-white/10 bg-[#12131a] px-4 py-3">
+                                  <input
+                                    type="checkbox"
+                                    checked={Boolean(car.stripeEnabled)}
+                                    onChange={(event) => updateAdminCarField(index, 'stripeEnabled', event.target.checked)}
+                                    className="h-4 w-4 accent-[#f0c000]"
+                                  />
+                                  <span className="text-sm font-semibold text-white">{adminCarsCopy.stripeEnabledLabel}</span>
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.stripePriceIdLabel}
+                                  </span>
+                                  <input
+                                    type="text"
+                                    value={car.stripePriceId ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'stripePriceId', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.stripeProductNameLabel}
+                                  </span>
+                                  <input
+                                    type="text"
+                                    value={car.stripeProductName ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'stripeProductName', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.stripeSuccessUrlLabel}
+                                  </span>
+                                  <input
+                                    type="text"
+                                    value={car.stripeSuccessUrl ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'stripeSuccessUrl', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+
+                                <label className="block md:col-span-2">
+                                  <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                                    {adminCarsCopy.stripeCancelUrlLabel}
+                                  </span>
+                                  <input
+                                    type="text"
+                                    value={car.stripeCancelUrl ?? ''}
+                                    onChange={(event) => updateAdminCarField(index, 'stripeCancelUrl', event.target.value)}
+                                    className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      )
+                    })}
                   </div>
                 </div>
               )}
@@ -4857,8 +5381,10 @@ function App() {
             <div className="flex flex-col gap-5">
               <div className="max-w-3xl">
                 <span className="section-kicker">{copy.sections.competitions.kicker}</span>
-                <h2 className="section-title">{copy.sections.competitions.title}</h2>
-                <p className="section-copy">{copy.sections.competitions.copy}</p>
+                <h2 className="section-title">{storeConfig.homeTitle || copy.sections.competitions.title}</h2>
+                <p className="section-copy">
+                  {storeConfig.homeDescription || storeConfig.homeSubtitle || copy.sections.competitions.copy}
+                </p>
               </div>
             </div>
 
@@ -4915,7 +5441,7 @@ function App() {
 
                     <button
                       type="button"
-                      onClick={() => openProductPage(competition, 'cars')}
+                      onClick={() => openProductPage(competition, competition.category === 'houses' ? 'houses' : 'cars')}
                       className="premium-button mt-6 w-full justify-center"
                     >
                       {copy.actions.enterCompetition}
@@ -5102,10 +5628,3 @@ function App() {
 }
 
 export default App
-
-
-
-
-
-
-

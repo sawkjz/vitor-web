@@ -262,12 +262,6 @@
   margin-top: 24px;
 }
 
-.campaign-card,
-.buy-card {
-  display: grid;
-  gap: 18px;
-}
-
 .secondary-grid {
   grid-template-columns: 1.1fr 0.9fr;
 }
@@ -371,34 +365,6 @@ textarea {
   margin-top: 24px;
 }
 
-.campaign-switcher {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.campaign-tab {
-  display: grid;
-  gap: 6px;
-  padding: 14px 16px;
-  text-align: left;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-  color: #fff;
-  cursor: pointer;
-}
-
-.campaign-tab span {
-  color: #9ea6b8;
-  font-size: 0.82rem;
-}
-
-.campaign-tab-active {
-  border-color: rgba(240, 192, 0, 0.45);
-  background: rgba(240, 192, 0, 0.08);
-}
-
 .media-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -458,8 +424,7 @@ textarea {
   .content-grid,
   .secondary-grid,
   .admin-panel-grid,
-  .media-grid,
-  .campaign-switcher {
+  .media-grid {
     grid-template-columns: 1fr;
   }
 

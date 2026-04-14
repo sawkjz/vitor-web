@@ -1,0 +1,35 @@
+{
+  "id": "mustang-black-2026",
+  "slug": "mustang-black-2026",
+  "title": "Sorteio oficial do Mustang Black Edition",
+  "carName": "Ford Mustang Black Edition 5.0 V8",
+  "subtitle": "Compre bilhetes online e acompanhe o sorteio em uma experiencia pronta para Stripe.",
+  "description": "Configure campanha, valor do bilhete, galeria de fotos, descricao detalhada e parametros da venda no admin. A estrutura ja deixa o fluxo pronto para conectar checkout real com Stripe.",
+  "status": "active",
+  "ticketPrice": 25,
+  "currency": "BRL",
+  "totalTickets": 5000,
+  "soldTickets": 1384,
+  "maxTicketsPerOrder": 100,
+  "drawDate": "2026-06-12T21:00:00.000Z",
+  "heroImage": "/cars/hero-1.jpg",
+  "gallery": [
+    "/cars/hero-1.jpg",
+    "/cars/hero-2.jpg",
+    "/cars/hero-3.jpg",
+    "/cars/card-1.jpg"
+  ],
+  "highlights": [
+    "Entrega documentada para o vencedor",
+    "Bilhetes com numeracao rastreavel",
+    "Checkout preparado para Stripe"
+  ],
+  "stripe": {
+    "enabled": false,
+    "priceId": "",
+    "productName": "Bilhete Mustang Black Edition",
+    "successUrl": "http://localhost:5173/?checkout=success",
+    "cancelUrl": "http://localhost:5173/?checkout=cancel"
+  },
+  "updatedAt": "2026-04-14T00:00:00.000Z"
+}
