@@ -1641,6 +1641,72 @@ const getAdminProfileCopy = (locale) => {
   }
 }
 
+const getAdminCarsCopy = (locale) => {
+  if (locale === 'en') {
+    return {
+      paymentsTab: 'Payments',
+      carsTab: 'Home cars',
+      title: 'Home car configuration',
+      copy: 'Edit the cards shown on the home page and apply only when you click save.',
+      addCar: 'Add car',
+      restore: 'Discard draft',
+      save: 'Save home cars',
+      remove: 'Remove',
+      titleLabel: 'Title',
+      subtitleLabel: 'Subtitle',
+      imageLabel: 'Image URL',
+      deadlineLabel: 'Deadline',
+      priceLabel: 'Price',
+      soldLabel: 'Sold text',
+      progressLabel: 'Progress (%)',
+      draftBadge: 'Draft',
+      savedMessage: 'Home cars updated successfully.',
+    }
+  }
+
+  if (locale === 'es') {
+    return {
+      paymentsTab: 'Pagos',
+      carsTab: 'Coches de inicio',
+      title: 'Configuracion de coches de la home',
+      copy: 'Edita las tarjetas de la pagina inicial y aplica cambios solo al guardar.',
+      addCar: 'Agregar coche',
+      restore: 'Descartar borrador',
+      save: 'Guardar coches de inicio',
+      remove: 'Eliminar',
+      titleLabel: 'Titulo',
+      subtitleLabel: 'Subtitulo',
+      imageLabel: 'URL de imagen',
+      deadlineLabel: 'Plazo',
+      priceLabel: 'Precio',
+      soldLabel: 'Texto vendidos',
+      progressLabel: 'Progreso (%)',
+      draftBadge: 'Borrador',
+      savedMessage: 'Coches de inicio actualizados con exito.',
+    }
+  }
+
+  return {
+    paymentsTab: 'Pagamentos',
+    carsTab: 'Carros da home',
+    title: 'Configuracao dos carros da home',
+    copy: 'Edite os cards da pagina inicial e aplique as alteracoes apenas ao clicar em salvar.',
+    addCar: 'Adicionar carro',
+    restore: 'Descartar rascunho',
+    save: 'Salvar carros da home',
+    remove: 'Remover',
+    titleLabel: 'Titulo',
+    subtitleLabel: 'Subtitulo',
+    imageLabel: 'URL da imagem',
+    deadlineLabel: 'Prazo',
+    priceLabel: 'Preco',
+    soldLabel: 'Texto vendidos',
+    progressLabel: 'Progresso (%)',
+    draftBadge: 'Rascunho',
+    savedMessage: 'Carros da home atualizados com sucesso.',
+  }
+}
+
 const getAccountMenuCopy = (locale) => {
   if (locale === 'en') {
     return {
@@ -2239,6 +2305,11 @@ function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [adminForm, setAdminForm] = useState({ email: '', password: '' })
   const [adminError, setAdminError] = useState('')
+  const [adminDashboardTab, setAdminDashboardTab] = useState('payments')
+  const [customCompetitionsByLocale, setCustomCompetitionsByLocale] = useState({})
+  const [adminCarsDraft, setAdminCarsDraft] = useState([])
+  const [adminCarsDirty, setAdminCarsDirty] = useState(false)
+  const [adminCarsNotice, setAdminCarsNotice] = useState('')
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
   const [showMockHeroVideo, setShowMockHeroVideo] = useState(false)
@@ -2249,9 +2320,11 @@ function App() {
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
   const adminProfileCopy = getAdminProfileCopy(locale)
+  const adminCarsCopy = getAdminCarsCopy(locale)
   const accountMenuCopy = getAccountMenuCopy(locale)
   const catalogCopy = getCatalogCopy(locale)
-  const carCompetitions = useMemo(() => getCarCatalogItems(copy.competitions), [copy.competitions])
+  const homeCompetitions = customCompetitionsByLocale[locale] ?? copy.competitions
+  const carCompetitions = useMemo(() => getCarCatalogItems(homeCompetitions), [homeCompetitions])
   const houseCompetitions = useMemo(() => getHouseCompetitions(locale), [locale])
   const catalogCompetitions = useMemo(
     () => (catalogCategory === 'houses' ? houseCompetitions : carCompetitions),
@@ -2513,18 +2586,31 @@ function App() {
   const mockHeroVideo = mockedMediaData.heroVideo
   const heroCountdownUnits = getCountdownUnits(currentSlide.countdown, locale)
   const handleLocaleChange = (nextLocale) => {
+    const nextCopy = getPresentationCopy(nextLocale)
+    const nextHomeCompetitions = customCompetitionsByLocale[nextLocale] ?? nextCopy.competitions
     setLocale(nextLocale)
     setActiveSlide(0)
+    setAdminCarsDraft(nextHomeCompetitions)
+    setAdminCarsDirty(false)
+    setAdminCarsNotice('')
   }
 
   const openAdminLogin = () => {
     setAdminError('')
     setIsAccountMenuOpen(false)
+    setAdminDashboardTab('payments')
+    setAdminCarsDraft(homeCompetitions)
+    setAdminCarsDirty(false)
+    setAdminCarsNotice('')
     setView('adminLogin')
   }
 
   const openAdminProfile = () => {
     setIsAccountMenuOpen(false)
+    setAdminDashboardTab('payments')
+    setAdminCarsDraft(homeCompetitions)
+    setAdminCarsDirty(false)
+    setAdminCarsNotice('')
     setView('adminDashboard')
   }
 
@@ -2544,6 +2630,7 @@ function App() {
   const handleAdminLogout = () => {
     setAdminError('')
     setAdminForm({ email: '', password: '' })
+    setAdminDashboardTab('payments')
     setIsAdminAuthenticated(false)
     setIsAccountMenuOpen(false)
     setView('landing')
@@ -2558,9 +2645,88 @@ function App() {
     }
 
     setAdminError('')
+    setAdminDashboardTab('payments')
     setIsAdminAuthenticated(true)
     setIsAccountMenuOpen(false)
     setView('adminDashboard')
+  }
+
+  const updateAdminCarField = (index, field, value) => {
+    setAdminCarsDraft((current) => current.map((item, itemIndex) => (
+      itemIndex === index ? { ...item, [field]: value } : item
+    )))
+    setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const handleAddAdminCar = () => {
+    setAdminCarsDraft((current) => [
+      ...current,
+      {
+        title: `Novo carro ${current.length + 1}`,
+        subtitle: 'Configurar detalhes',
+        image: '/cars/hero-1.jpg',
+        deadline: 'Termina em breve',
+        price: 'EUR 0.00',
+        progress: 0,
+        sold: '0 vendidos',
+      },
+    ])
+    setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const handleRemoveAdminCar = (index) => {
+    setAdminCarsDraft((current) => current.filter((_, itemIndex) => itemIndex !== index))
+    setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const handleResetAdminCarsDraft = () => {
+    setAdminCarsDraft(homeCompetitions)
+    setAdminCarsDirty(false)
+    setAdminCarsNotice('')
+  }
+
+  const handleSaveAdminCars = () => {
+    const normalizedCompetitions = adminCarsDraft
+      .map((item, index) => {
+        const normalizedProgress = Number.parseInt(`${item.progress ?? 0}`, 10)
+
+        return {
+          ...item,
+          title: item.title?.trim() || `Carro ${index + 1}`,
+          subtitle: item.subtitle?.trim() || 'Sem subtitulo',
+          image: item.image?.trim() || '/cars/hero-1.jpg',
+          deadline: item.deadline?.trim() || 'Termina em breve',
+          price: item.price?.trim() || 'EUR 0.00',
+          sold: item.sold?.trim() || '0 vendidos',
+          progress: Number.isNaN(normalizedProgress)
+            ? 0
+            : Math.max(0, Math.min(100, normalizedProgress)),
+        }
+      })
+      .filter((item) => item.title)
+
+    const safeCompetitions = normalizedCompetitions.length
+      ? normalizedCompetitions
+      : [{
+        title: 'Carro 1',
+        subtitle: 'Configurar detalhes',
+        image: '/cars/hero-1.jpg',
+        deadline: 'Termina em breve',
+        price: 'EUR 0.00',
+        sold: '0 vendidos',
+        progress: 0,
+      }]
+
+    setCustomCompetitionsByLocale((current) => ({
+      ...current,
+      [locale]: safeCompetitions,
+    }))
+    setAdminCarsDraft(safeCompetitions)
+    setAdminCarsDirty(false)
+    setAdminCarsNotice(adminCarsCopy.savedMessage)
   }
 
   const goToPreviousSlide = () => {
@@ -3196,32 +3362,213 @@ function App() {
             </div>
 
             <div className="surface-card overflow-hidden p-0">
-              <div className="overflow-x-auto">
-                <table className="min-w-full border-separate border-spacing-0 text-left">
-                  <thead className="bg-[#12131a]">
-                    <tr>
-                      {paymentScreen.headers.map((header) => (
-                        <th
-                          key={header}
-                          className="border-b border-white/8 px-5 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]"
-                        >
-                          {header}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {paymentScreen.rows.map((row) => (
-                      <tr key={`${row.name}-${row.cpf}`} className="bg-[#101218] transition hover:bg-[#1a1c24]">
-                        <td className="border-b border-white/6 px-5 py-4 text-sm font-semibold text-white">{row.name}</td>
-                        <td className="border-b border-white/6 px-5 py-4 text-sm text-[#b7beca]">{row.cpf}</td>
-                        <td className="border-b border-white/6 px-5 py-4 text-sm font-bold text-[#ffd25a]">{row.coupons}</td>
-                        <td className="border-b border-white/6 px-5 py-4 text-sm text-[#b7beca]">{row.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="border-b border-white/8 bg-[#12131a] px-5 py-4">
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setAdminDashboardTab('payments')}
+                    className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition ${
+                      adminDashboardTab === 'payments'
+                        ? 'border border-[#f0c000]/35 bg-[#f0c000]/14 text-[#ffd25a]'
+                        : 'border border-white/10 bg-white/5 text-[#b7beca] hover:border-[#f0c000]/30 hover:text-white'
+                    }`}
+                  >
+                    {adminCarsCopy.paymentsTab}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAdminDashboardTab('cars')}
+                    className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition ${
+                      adminDashboardTab === 'cars'
+                        ? 'border border-[#f0c000]/35 bg-[#f0c000]/14 text-[#ffd25a]'
+                        : 'border border-white/10 bg-white/5 text-[#b7beca] hover:border-[#f0c000]/30 hover:text-white'
+                    }`}
+                  >
+                    {adminCarsCopy.carsTab}
+                  </button>
+                </div>
               </div>
+
+              {adminDashboardTab === 'payments' ? (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border-separate border-spacing-0 text-left">
+                    <thead className="bg-[#12131a]">
+                      <tr>
+                        {paymentScreen.headers.map((header) => (
+                          <th
+                            key={header}
+                            className="border-b border-white/8 px-5 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-[#9aa0ac]"
+                          >
+                            {header}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {paymentScreen.rows.map((row) => (
+                        <tr key={`${row.name}-${row.cpf}`} className="bg-[#101218] transition hover:bg-[#1a1c24]">
+                          <td className="border-b border-white/6 px-5 py-4 text-sm font-semibold text-white">{row.name}</td>
+                          <td className="border-b border-white/6 px-5 py-4 text-sm text-[#b7beca]">{row.cpf}</td>
+                          <td className="border-b border-white/6 px-5 py-4 text-sm font-bold text-[#ffd25a]">{row.coupons}</td>
+                          <td className="border-b border-white/6 px-5 py-4 text-sm text-[#b7beca]">{row.status}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="p-5 sm:p-6">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9aa0ac]">{adminCarsCopy.draftBadge}</p>
+                      <h3 className="mt-2 text-2xl font-black tracking-[-0.03em] text-white">{adminCarsCopy.title}</h3>
+                      <p className="mt-2 max-w-3xl text-sm leading-7 text-[#b7beca]">{adminCarsCopy.copy}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={handleAddAdminCar}
+                        className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
+                      >
+                        {adminCarsCopy.addCar}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleResetAdminCarsDraft}
+                        className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
+                      >
+                        {adminCarsCopy.restore}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleSaveAdminCars}
+                        className="rounded-full border border-[#f0c000]/25 bg-[#f0c000]/10 px-4 py-2 text-sm font-semibold text-[#ffd25a] transition hover:bg-[#f0c000]/16"
+                      >
+                        {adminCarsCopy.save}
+                      </button>
+                    </div>
+                  </div>
+
+                  {adminCarsNotice ? (
+                    <p className="mt-4 rounded-[14px] border border-[#f0c000]/20 bg-[#f0c000]/8 px-4 py-3 text-sm font-semibold text-[#ffd25a]">
+                      {adminCarsNotice}
+                    </p>
+                  ) : null}
+
+                  {adminCarsDirty ? (
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                      {adminCarsCopy.draftBadge}
+                    </p>
+                  ) : null}
+
+                  <div className="mt-5 grid gap-4">
+                    {adminCarsDraft.map((car, index) => (
+                      <article key={`admin-car-${index}`} className="rounded-[22px] border border-white/8 bg-[#12131a] p-4">
+                        <div className="mb-4 flex items-center justify-between gap-3">
+                          <p className="text-sm font-black uppercase tracking-[0.12em] text-white">
+                            {adminCarsCopy.carsTab} #{index + 1}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveAdminCar(index)}
+                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white transition hover:border-[#f0c000]/35"
+                          >
+                            {adminCarsCopy.remove}
+                          </button>
+                        </div>
+
+                        <div className="grid gap-3 md:grid-cols-2">
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.titleLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.title ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'title', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.subtitleLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.subtitle ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'subtitle', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block md:col-span-2">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.imageLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.image ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'image', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.deadlineLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.deadline ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'deadline', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.priceLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.price ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'price', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.soldLabel}
+                            </span>
+                            <input
+                              type="text"
+                              value={car.sold ?? ''}
+                              onChange={(event) => updateAdminCarField(index, 'sold', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+
+                          <label className="block">
+                            <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                              {adminCarsCopy.progressLabel}
+                            </span>
+                            <input
+                              type="number"
+                              min="0"
+                              max="100"
+                              value={car.progress ?? 0}
+                              onChange={(event) => updateAdminCarField(index, 'progress', event.target.value)}
+                              className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </label>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -3989,7 +4336,7 @@ function App() {
             </div>
 
             <div className="home-competitions-grid mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {copy.competitions.map((competition, index) => (
+              {homeCompetitions.map((competition, index) => (
                 <article
                   key={competition.title}
                   className={`home-competition-card flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28 ${
