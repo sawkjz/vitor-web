@@ -9,7 +9,10 @@ const languageOptions = [
 
 const ADMIN_TOKEN_STORAGE_KEY = 'admin_access_token'
 const ADMIN_USER_STORAGE_KEY = 'admin_user_email'
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8787'
+const normalizeApiBaseUrl = (url) => `${url || ''}`.trim().replace(/\/+$/, '')
+const API_BASE_URL = normalizeApiBaseUrl(
+  import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:8787' : ''),
+)
 
 const mockedMediaData = {
   heroVideo: {

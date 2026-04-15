@@ -322,6 +322,13 @@ app.get('/api/admin/campaigns', async (req, res) => {
 
 app.put('/api/admin/campaigns', async (req, res) => {
   try {
+    if (process.env.VERCEL) {
+      throw toApiError(
+        501,
+        'Persistencia em arquivo nao e suportada no Vercel Serverless. Migre campanhas para banco de dados.',
+      )
+    }
+
     const token = getBearerToken(req)
     if (!token) {
       throw toApiError(401, 'Token de acesso ausente.')
@@ -360,6 +367,10 @@ app.put('/api/admin/campaigns', async (req, res) => {
   }
 })
 
-app.listen(PORT, () => {
-  console.log(`API admin online em http://localhost:${PORT}`)
-})
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`API admin online em http://localhost:${PORT}`)
+  })
+}
+
+export default app
