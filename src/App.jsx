@@ -18,7 +18,7 @@ const mockedMediaData = {
   heroVideo: {
     id: 'pinterest-demo',
     title: 'Video Promocional (Mock)',
-    source: 'blob:https://br.pinterest.com/532406fe-cfb5-4b02-b63c-6a76a6d5336c',
+    source: '',
     poster: '/cars/hero-1.jpg',
     note: 'video mockado para demo visual',
   },
@@ -2956,7 +2956,13 @@ function App() {
     const narrowViewportQuery = window.matchMedia('(max-width: 767px)')
 
     const updateHeroVideoState = () => {
-      setShowMockHeroVideo(!(reduceMotionQuery.matches || narrowViewportQuery.matches))
+      const hasPlayableMockVideo = (
+        Boolean(mockedMediaData.heroVideo.source)
+        && mockedMediaData.heroVideo.source.startsWith('/')
+      )
+      setShowMockHeroVideo(
+        hasPlayableMockVideo && !(reduceMotionQuery.matches || narrowViewportQuery.matches),
+      )
     }
 
     updateHeroVideoState()
