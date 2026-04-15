@@ -2746,7 +2746,6 @@ function App() {
     () => storeCampaigns.map((campaign, index) => mapCampaignToCompetition(campaign, locale, index)),
     [locale, storeCampaigns]
   )
-  const homeCompetitions = mappedCampaignCompetitions.filter((campaign) => campaign.featured)
   const carCampaignCompetitions = useMemo(
     () => mappedCampaignCompetitions.filter((campaign) => campaign.category !== 'houses'),
     [mappedCampaignCompetitions]
@@ -2763,6 +2762,8 @@ function App() {
     () => getHouseCatalogItems(houseCampaignCompetitions.length ? houseCampaignCompetitions : getHouseCompetitions(locale)),
     [houseCampaignCompetitions, locale]
   )
+  const homeCarCompetitions = useMemo(() => carCompetitions.slice(0, 4), [carCompetitions])
+  const homeHouseCompetitions = useMemo(() => houseCompetitions.slice(0, 3), [houseCompetitions])
   const visibleAdminDrafts = useMemo(
     () => adminCarsDraft
       .map((campaign, index) => ({ campaign, index }))
@@ -5391,15 +5392,16 @@ function App() {
               </div>
             </div>
 
-            <div className="home-competitions-grid mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {homeCompetitions.map((competition, index) => (
+            <h3 className="mt-8 text-xl font-extrabold tracking-[-0.03em] text-white">
+              {catalogCopy.carsTab}
+            </h3>
+            <div className="home-competitions-grid mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {homeCarCompetitions.map((competition) => (
                 <article
                   key={competition.title}
-                  className={`home-competition-card flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28 ${
-                    index === 0 ? 'md:col-span-2 xl:col-span-2' : ''
-                  }`}
+                  className="home-competition-card flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28"
                 >
-                  <div className={`relative overflow-hidden ${index === 0 ? 'h-80 md:h-[22rem]' : 'h-72'}`}>
+                  <div className="relative h-72 overflow-hidden">
                     <img
                       src={competition.image}
                       alt={competition.title}
@@ -5445,6 +5447,68 @@ function App() {
                     <button
                       type="button"
                       onClick={() => openProductPage(competition, competition.category === 'houses' ? 'houses' : 'cars')}
+                      className="premium-button mt-6 w-full justify-center"
+                    >
+                      {copy.actions.enterCompetition}
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <h3 className="mt-10 text-xl font-extrabold tracking-[-0.03em] text-white">{catalogCopy.housesTab}</h3>
+            <div className="home-houses-grid mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {homeHouseCompetitions.map((competition) => (
+                <article
+                  key={competition.title}
+                  className="home-competition-card flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28"
+                >
+                  <div className="relative h-72 overflow-hidden">
+                    <img
+                      src={competition.image}
+                      alt={competition.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.06)_0%,rgba(10,11,15,0.1)_30%,rgba(10,11,15,0.85)_100%)]" />
+                    <div
+                      className={`competition-deadline-badge competition-deadline-badge--${getDeadlineBadgeTone(competition.deadline)} absolute left-4 top-4 sm:left-5 sm:top-5`}
+                    >
+                      {getDeadlineBadgeLabel(competition.deadline, locale)}
+                    </div>
+                    <div className="absolute bottom-5 left-5 rounded-full bg-[#ffd25a] px-4 py-2 text-sm font-black text-[#0b0c10] shadow-[0_14px_40px_rgba(201,162,74,0.28)]">
+                      {competition.price}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-h-[84px]">
+                        <h3 className="text-2xl font-extrabold tracking-[-0.03em] text-white">{competition.title}</h3>
+                        <p className="mt-2 line-clamp-2 text-sm text-[#9aa0ac]">{competition.subtitle}</p>
+                      </div>
+                      <span className="rounded-full border border-[#f0c000]/30 bg-[#1a1c24] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#b7beca]">
+                        {copy.badges.euDraw}
+                      </span>
+                    </div>
+
+                    <div className="mt-auto pt-6">
+                      <div className="flex items-center justify-between text-sm text-[#b7beca]">
+                        <span>{competition.entries || competition.sold}</span>
+                        <span>{competition.progress}%</span>
+                      </div>
+                      <div className="mt-3 h-2 rounded-full bg-white/8">
+                        <div
+                          className="h-full rounded-full bg-[#f0c000]"
+                          style={{ width: `${competition.progress}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => openProductPage(competition, 'houses')}
                       className="premium-button mt-6 w-full justify-center"
                     >
                       {copy.actions.enterCompetition}
