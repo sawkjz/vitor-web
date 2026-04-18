@@ -2704,6 +2704,7 @@ function App() {
   const [view, setView] = useState('landing')
   const [locale, setLocale] = useState('ptBR')
   const [activeSlide, setActiveSlide] = useState(0)
+  const [activeWinnersSlide, setActiveWinnersSlide] = useState(0)
   const [catalogCategory, setCatalogCategory] = useState('cars')
   const [catalogSearch, setCatalogSearch] = useState('')
   const [catalogColor, setCatalogColor] = useState('all')
@@ -2735,6 +2736,7 @@ function App() {
   const accountMenuRef = useRef(null)
   const mobileMenuRef = useRef(null)
   const heroSwipeStartRef = useRef(null)
+  const winnersSwipeStartRef = useRef(null)
   const copy = useMemo(() => getPresentationCopy(locale), [locale])
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
@@ -2764,6 +2766,13 @@ function App() {
   )
   const homeCarCompetitions = useMemo(() => carCompetitions.slice(0, 4), [carCompetitions])
   const homeHouseCompetitions = useMemo(() => houseCompetitions.slice(0, 3), [houseCompetitions])
+  const winnersShowcaseSlides = useMemo(
+    () => [
+      { id: 'casal', image: '/houses/casal.jpg', alt: 'Casal vencedor com premio' },
+      { id: 'casal2', image: '/houses/casal2.jpg', alt: 'Casal celebrando sorteio' },
+    ],
+    []
+  )
   const visibleAdminDrafts = useMemo(
     () => adminCarsDraft
       .map((campaign, index) => ({ campaign, index }))
@@ -3411,6 +3420,59 @@ function App() {
     }
 
     goToPreviousSlide()
+  }
+
+  const goToPreviousWinnersSlide = () => {
+    setActiveWinnersSlide((current) => (current - 1 + winnersShowcaseSlides.length) % winnersShowcaseSlides.length)
+  }
+
+  const goToNextWinnersSlide = () => {
+    setActiveWinnersSlide((current) => (current + 1) % winnersShowcaseSlides.length)
+  }
+
+  const handleWinnersPointerDown = (event) => {
+    if (event.target instanceof Element && event.target.closest('button')) {
+      return
+    }
+
+    if (event.pointerType === 'mouse' && event.button !== 0) {
+      return
+    }
+
+    winnersSwipeStartRef.current = { x: event.clientX, y: event.clientY }
+  }
+
+  const handleWinnersPointerUp = (event) => {
+    if (event.target instanceof Element && event.target.closest('button')) {
+      winnersSwipeStartRef.current = null
+      return
+    }
+
+    const start = winnersSwipeStartRef.current
+    winnersSwipeStartRef.current = null
+
+    if (!start) {
+      return
+    }
+
+    const deltaX = event.clientX - start.x
+    const deltaY = event.clientY - start.y
+    const horizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 44
+
+    if (!horizontalSwipe) {
+      return
+    }
+
+    if (deltaX < 0) {
+      goToNextWinnersSlide()
+      return
+    }
+
+    goToPreviousWinnersSlide()
+  }
+
+  const handleWinnersPointerCancel = () => {
+    winnersSwipeStartRef.current = null
   }
 
   const openCatalogPage = (category = 'cars') => {
@@ -5551,15 +5613,44 @@ function App() {
             <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
               <div className="surface-card overflow-hidden p-0">
                 <div className="grid lg:grid-cols-[1fr_0.95fr]">
-                  <div className="relative min-h-[360px]">
-                    <img
-                      src="/cars/hero-2.jpg"
-                      alt="Premium car showcase"
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.02),rgba(10,11,15,0.7))]" />
+                  <div
+                    className="relative min-h-[360px] overflow-hidden touch-pan-y"
+                    onPointerDown={handleWinnersPointerDown}
+                    onPointerUp={handleWinnersPointerUp}
+                    onPointerCancel={handleWinnersPointerCancel}
+                  >
+                    <div
+                      className="flex h-full transition-transform duration-500 ease-out"
+                      style={{ transform: `translateX(-${activeWinnersSlide * 100}%)` }}
+                    >
+                      {winnersShowcaseSlides.map((slide) => (
+                        <div key={slide.id} className="min-w-full">
+                          <img
+                            src={slide.image}
+                            alt={slide.alt}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.02),rgba(10,11,15,0.7))]" />
+                    <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2">
+                      <div className="hero-carousel-dots flex items-center gap-2 rounded-full px-3 py-2">
+                        {winnersShowcaseSlides.map((slide, index) => (
+                          <button
+                            key={slide.id}
+                            type="button"
+                            onClick={() => setActiveWinnersSlide(index)}
+                            className={`h-2.5 rounded-full transition-all duration-300 ${
+                              index === activeWinnersSlide ? 'w-9 bg-[#f0c000]' : 'w-2.5 bg-white/35 hover:bg-white/60'
+                            }`}
+                            aria-label={`Go to winners slide ${index + 1}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   <div className="p-6 lg:p-8">
                     <span className="section-kicker">{copy.sections.winners.kicker}</span>
