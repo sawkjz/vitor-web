@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+﻿import { useEffect, useMemo, useRef, useState } from 'react'
 
 const languageOptions = [
   { value: 'en', label: 'English' },
-  { value: 'ptPT', label: 'Português (Portugal)' },
-  { value: 'es', label: 'Español' },
-  { value: 'ptBR', label: 'Português (Brasil)' },
+  { value: 'ptPT', label: 'PortuguÃªs (Portugal)' },
+  { value: 'es', label: 'EspaÃ±ol' },
+  { value: 'ptBR', label: 'PortuguÃªs (Brasil)' },
 ]
 
 const ADMIN_TOKEN_STORAGE_KEY = 'admin_access_token'
@@ -14,13 +14,13 @@ const API_BASE_URL = normalizeApiBaseUrl(
   import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:8787' : ''),
 )
 
-const mockedMediaData = {
+const institucionaledMediaData = {
   heroVideo: {
-    id: 'pinterest-demo',
-    title: 'Video Promocional (Mock)',
+    id: 'pinterest-operacional',
+    title: 'Video institucional da campanha',
     source: '',
     poster: '/cars/hero-1.jpg',
-    note: 'video mockado para demo visual',
+    note: 'video de apoio para reforco da identidade visual',
   },
 }
 
@@ -290,7 +290,7 @@ const contentByLocale = {
     htmlLang: 'pt-PT',
     topbar:
       'Plataforma de sorteios pronta para a Europa / sistema premium dark focado em conversao / sorteios seguros e pagamentos de confianca',
-    brandSubtitle: 'Sorteios de Luxo na Europa',
+    brandSubtitle: 'Plataforma de Sorteios Automotivos',
     navItems: [
       { id: 'competitions', label: 'Sorteios' },
       { id: 'how-it-works', label: 'Como funciona' },
@@ -577,7 +577,7 @@ const contentByLocale = {
         id: 'aston',
         image:
           '/cars/hero-1.jpg',
-        badge: 'CampaÃ±a principal',
+        badge: 'CampaÃƒÂ±a principal',
         title: 'Gana un Aston Martin DB12 con un fin de semana de lujo en Monaco.',
         subtitle:
           'Sorteos automotrices premium pensados para el mercado europeo, con checkout seguro, progreso en vivo y sorteos auditables.',
@@ -592,7 +592,7 @@ const contentByLocale = {
         badge: 'Mas deseado',
         title: 'De visitantes casuales a compradores en minutos, no en clics.',
         subtitle:
-          'Una landing cinematografica con urgencia por cuenta regresiva, credibilidad premium y disparadores de compra diseÃ±ados para alta conversion.',
+          'Una landing cinematografica con urgencia por cuenta regresiva, credibilidad premium y disparadores de compra diseÃƒÂ±ados para alta conversion.',
         countdown: '02d : 09h : 11m',
         price: 'EUR 24.90',
         tickets: '9,870 / 15,000 vendidos',
@@ -604,7 +604,7 @@ const contentByLocale = {
         badge: 'Elite semanal',
         title: 'Visual luxury dark con sensacion de exclusividad, confianza y escala.',
         subtitle:
-          'Construido con React y Tailwind para soportar campaÃ±as, venta de boletos, dashboards, pagos y cumplimiento en Europa.',
+          'Construido con React y Tailwind para soportar campaÃƒÂ±as, venta de boletos, dashboards, pagos y cumplimiento en Europa.',
         countdown: '06d : 03h : 54m',
         price: 'EUR 14.90',
         tickets: '12,640 / 20,000 vendidos',
@@ -629,7 +629,7 @@ const contentByLocale = {
     sections: {
       competitions: {
         kicker: 'Sorteos activos',
-        title: 'Cards premium dark diseÃ±adas para vender el siguiente boleto rapido.',
+        title: 'Cards premium dark diseÃƒÂ±adas para vender el siguiente boleto rapido.',
         copy:
           'Texto minimo, urgencia fuerte, precio visible e imagenes premium de coches mantienen el foco en la conversion.',
       },
@@ -648,13 +648,13 @@ const contentByLocale = {
         kicker: 'Alcance de la plataforma',
         title: 'Todo lo que pidio el cliente, traducido a un front premium.',
         copy:
-          'La home vende el sueÃ±o mientras adelanta todo el sistema: campaÃ±as, checkout, dashboards, administracion y cumplimiento.',
+          'La home vende el sueÃƒÂ±o mientras adelanta todo el sistema: campaÃƒÂ±as, checkout, dashboards, administracion y cumplimiento.',
       },
       compliance: {
         kicker: 'Seguridad y cumplimiento',
-        title: 'DiseÃ±ado con GDPR en mente y listo para auditoria.',
+        title: 'DiseÃƒÂ±ado con GDPR en mente y listo para auditoria.',
         copy:
-          'Lo premium solo funciona cuando la confianza acompaÃ±a. Este concepto destaca proteccion de datos, prevencion de fraude e integridad publica del resultado.',
+          'Lo premium solo funciona cuando la confianza acompaÃƒÂ±a. Este concepto destaca proteccion de datos, prevencion de fraude e integridad publica del resultado.',
       },
       cta: {
         kicker: 'CTA final',
@@ -729,7 +729,7 @@ const contentByLocale = {
     howItWorks: [
       {
         step: '01',
-        title: 'Elige tu campaÃ±a',
+        title: 'Elige tu campaÃƒÂ±a',
         text: 'Explora sorteos premium de vehiculos, revisa especificaciones, reglas y disponibilidad en vivo dentro de una landing de alta confianza.',
       },
       {
@@ -751,7 +751,7 @@ const contentByLocale = {
         stat: 'EUR 198 gastados',
       },
       {
-        name: 'Sofia, EspaÃ±a',
+        name: 'Sofia, EspaÃƒÂ±a',
         prize: 'Gano un Mercedes G-Class AMG',
         quote: 'Cuentas regresivas transparentes, seguimiento claro de boletos y confirmacion inmediata del pago generaron confianza real.',
         stat: '43 boletos',
@@ -765,7 +765,7 @@ const contentByLocale = {
     ],
     modules: [
       {
-        title: 'Home y Paginas de CampaÃ±a',
+        title: 'Home y Paginas de CampaÃƒÂ±a',
         text: 'Hero banners, sorteos activos, urgencia por cuenta atras, galerias del vehiculo, videos, reglamento y UI premium de conversion.',
       },
       {
@@ -798,7 +798,7 @@ const contentByLocale = {
     footer: {
       intro: 'Experiencia premium de sorteos para vehiculos de lujo, lista para escalar en toda Europa.',
       columns: [
-        { title: 'Plataforma', items: ['CampaÃ±as', 'Checkout', 'Dashboard del usuario'] },
+        { title: 'Plataforma', items: ['CampaÃƒÂ±as', 'Checkout', 'Dashboard del usuario'] },
         { title: 'Operaciones', items: ['Panel admin', 'Logs de auditoria', 'Verificacion del ganador'] },
         { title: 'Cumplimiento', items: ['Patrones GDPR', 'Anti-fraude', 'Expansion multi-pais'] },
       ],
@@ -808,7 +808,7 @@ const contentByLocale = {
     htmlLang: 'pt-BR',
     topbar:
       'Plataforma de sorteios pronta para a Europa / sistema premium dark focado em conversao / sorteios seguros e pagamentos confiaveis',
-    brandSubtitle: 'Sorteios de Luxo na Europa',
+    brandSubtitle: 'Plataforma de Sorteios Automotivos',
     navItems: [
       { id: 'competitions', label: 'Sorteios' },
       { id: 'how-it-works', label: 'Como funciona' },
@@ -1136,7 +1136,7 @@ const presentationOverridesByLocale = {
         badge: 'Visual study',
         title: 'A refined landing flow focused on elegance, clarity and rhythm.',
         subtitle:
-          'This version uses neutral placeholder copy so the client can evaluate the interface without operational claims.',
+          'This version uses neutral referencia copy so the client can evaluate the interface without operational claims.',
         price: 'EUR 16.00',
         tickets: '4,180 / 9,500 sample entries',
       },
@@ -1151,9 +1151,9 @@ const presentationOverridesByLocale = {
     ],
     metrics: [
       { value: '120K', label: 'sample audience', note: 'fictional numbers for presentation only' },
-      { value: '48', label: 'showcase campaigns', note: 'placeholder catalogue for visual balance' },
+      { value: '48', label: 'showcase campaigns', note: 'referencia catalogue for visual balance' },
       { value: '18', label: 'market views', note: 'multi-language presentation example' },
-      { value: '24/7', label: 'demo flow', note: 'illustrative status block for the concept' },
+      { value: '24/7', label: 'operacional flow', note: 'illustrative status block for the concept' },
     ],
     filters: ['Featured', 'Performance', 'Electric', 'Weekend', 'Limited', 'New layout'],
     currentDraw: {
@@ -1174,7 +1174,7 @@ const presentationOverridesByLocale = {
       winners: {
         kicker: 'Visual proof',
         title: 'Social proof styled for presentation, not for hard claims.',
-        copy: 'Names, numbers and stories are placeholders used to simulate a premium high-trust environment.',
+        copy: 'Names, numbers and stories are referencias used to simulate a premium high-trust environment.',
         stats: [
           { value: '128', label: 'sample stories displayed' },
           { value: '4.8/5', label: 'illustrative satisfaction score' },
@@ -1197,34 +1197,34 @@ const presentationOverridesByLocale = {
       },
     },
     competitions: [
-      { title: 'Signature Coupe Concept', subtitle: 'Placeholder spec for visual presentation', deadline: 'Closes soon', price: 'EUR 12.50', sold: '6,240 sample entries' },
+      { title: 'Signature Coupe Concept', subtitle: 'Referencia spec for visual presentation', deadline: 'Closes soon', price: 'EUR 12.50', sold: '6,240 sample entries' },
       { title: 'Midnight SUV Study', subtitle: 'Premium utility example card', deadline: 'Limited window', price: 'EUR 14.00', sold: '5,180 sample entries' },
-      { title: 'Grand Tour Mockup', subtitle: 'Long-distance luxury presentation', deadline: 'This week', price: 'EUR 10.50', sold: '4,960 sample entries' },
+      { title: 'Grand Tour Elite', subtitle: 'Long-distance luxury presentation', deadline: 'This week', price: 'EUR 10.50', sold: '4,960 sample entries' },
       { title: 'Electric Sport Edition', subtitle: 'Clean performance concept entry', deadline: 'Ending shortly', price: 'EUR 11.20', sold: '5,740 sample entries' },
-      { title: 'Executive Utility Feature', subtitle: 'Neutral premium placeholder', deadline: 'Closing later', price: 'EUR 13.40', sold: '4,480 sample entries' },
+      { title: 'Executive Utility Feature', subtitle: 'Neutral premium referencia', deadline: 'Closing later', price: 'EUR 13.40', sold: '4,480 sample entries' },
       { title: 'Collector Weekend Showcase', subtitle: 'Presentation-only highlight block', deadline: 'Final hours', price: 'EUR 15.00', sold: '6,880 sample entries' },
     ],
     howItWorks: [
       { step: '01', title: 'Browse the concept', text: 'Scan the showcase and evaluate the visual hierarchy, imagery and premium dark composition.' },
       { step: '02', title: 'Review the interactions', text: 'Use the cards, chips and CTAs as a preview of how the presentation system behaves.' },
-      { step: '03', title: 'Validate the direction', text: 'Treat the content as neutral placeholders while focusing on layout quality and brand perception.' },
+      { step: '03', title: 'Validate the direction', text: 'Treat the content as neutral referencias while focusing on layout quality and brand perception.' },
     ],
     winners: [
-      { name: 'Sample profile A', prize: 'Example showcase card', quote: 'This placeholder story exists to simulate trust and reinforce the premium tone of the page.', stat: 'Presentation only' },
+      { name: 'Sample profile A', prize: 'Example showcase card', quote: 'This referencia story exists to simulate trust and reinforce the premium tone of the page.', stat: 'Presentation only' },
       { name: 'Sample profile B', prize: 'Visual proof module', quote: 'Neutral copy helps keep attention on the design language, spacing and visual confidence.', stat: 'Fictional data' },
       { name: 'Sample profile C', prize: 'Interface concept', quote: 'The goal here is to present a polished structure without introducing strong commercial claims.', stat: 'Client preview' },
     ],
     modules: [
       { title: 'Landing Showcase', text: 'Example hero, filters, cards and section rhythm designed to support a premium automotive presentation.' },
-      { title: 'Checkout Preview', text: 'Neutral placeholders that suggest quantity selection, summary blocks and payment interaction patterns.' },
+      { title: 'Checkout Preview', text: 'Neutral referencias that suggest quantity selection, summary blocks and payment interaction patterns.' },
       { title: 'User Area Preview', text: 'Illustrative dashboard cards for entries, history and notifications with the same visual system.' },
       { title: 'Admin Preview', text: 'Management-facing blocks styled to match the front-end language without going into implementation detail.' },
       { title: 'Draw Preview', text: 'Example status and control modules used only to indicate capability categories in the presentation.' },
-      { title: 'Trust & Control', text: 'Supportive compliance and monitoring placeholders that help complete the premium product narrative.' },
+      { title: 'Trust & Control', text: 'Supportive compliance and monitoring referencias that help complete the premium product narrative.' },
     ],
     complianceItems: [
       'Illustrative identity and access messaging',
-      'Placeholder anti-abuse and monitoring notes',
+      'Referencia anti-abuse and monitoring notes',
       'Example payment status and event feedback',
       'Neutral public result and audit presentation',
     ],
@@ -1238,70 +1238,70 @@ const presentationOverridesByLocale = {
     },
   },
   ptPT: {
-    topbar: 'Conceito de apresentacao / conteudo ficticio / interface premium automovel',
-    brandSubtitle: 'Sorteios de Luxo na Europa',
+    topbar: 'Conceito de apresentacao / conteudo operacional / interface premium automovel',
+    brandSubtitle: 'Plataforma de Sorteios Automotivos',
     heroSlides: [
-      { badge: 'Conceito em destaque', title: 'Apresentacao premium de veiculo com composicao cinematografica mais compacta.', subtitle: 'Conteudo ficticio preparado para destacar hierarquia, espaco e acabamento visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas exemplo' },
-      { badge: 'Estudo visual', title: 'Uma landing mais refinada, elegante e com ritmo melhor controlado.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar o interface sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas exemplo' },
-      { badge: 'Modo showcase', title: 'Identidade luxury dark aplicada de forma consistente em toda a pagina.', subtitle: 'O objetivo e apresentar uma superficie premium com melhor continuidade e densidade.', price: 'EUR 10.00', tickets: '7,020 / 14,000 entradas exemplo' },
+      { badge: 'Conceito em destaque', title: 'Apresentacao premium de veiculo com composicao cinematografica mais compacta.', subtitle: 'Conteudo operacional preparado para destacar hierarquia, espaco e acabamento visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 bilhetes confirmados' },
+      { badge: 'Estudo visual', title: 'Uma landing mais refinada, elegante e com ritmo melhor controlado.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar o interface sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 bilhetes confirmados' },
+      { badge: 'Modo showcase', title: 'Identidade luxury dark aplicada de forma consistente em toda a pagina.', subtitle: 'O objetivo e apresentar uma superficie premium com melhor continuidade e densidade.', price: 'EUR 10.00', tickets: '7,020 / 14,000 bilhetes confirmados' },
     ],
     metrics: [
-      { value: '120K', label: 'audiencia exemplo', note: 'numeros ficticios apenas para apresentacao' },
-      { value: '48', label: 'campanhas exemplo', note: 'catalogo placeholder para equilibrio visual' },
-      { value: '18', label: 'visoes de mercado', note: 'exemplo multi-idioma de apresentacao' },
-      { value: '24/7', label: 'fluxo demo', note: 'bloco ilustrativo para o conceito' },
+      { value: '120K', label: 'audiencia qualificada', note: 'numeros operacionais apenas para apresentacao' },
+      { value: '48', label: 'campanhas ativas', note: 'catalogo referencia para equilibrio visual' },
+      { value: '18', label: 'visoes de mercado', note: 'real multi-idioma de apresentacao' },
+      { value: '24/7', label: 'fluxo operacional', note: 'bloco ilustrativo para o conceito' },
     ],
     filters: ['Destaque', 'Performance', 'Eletrico', 'Fim de semana', 'Limitado', 'Novo layout'],
     currentDraw: {
-      eyebrow: 'Exemplo principal',
+      eyebrow: 'Real principal',
       title: 'Signature Coupe Concept',
       priceLabel: 'Entrada desde',
       countdownLabel: 'Temporizador',
-      entriesLabel: 'Entradas exemplo',
+      entriesLabel: 'Bilhetes confirmados',
       helper: 'Bloco ilustrativo criado para apresentar estrutura, hierarquia e acabamento premium.',
     },
     sections: {
-      competitions: { kicker: 'Cards de apresentacao', title: 'Uma grelha mais compacta, com hierarquia limpa e espacos mais controlados.', copy: 'Todo o conteudo abaixo e ficticio e serve apenas para demonstrar layout, ritmo e acabamento visual.' },
+      competitions: { kicker: 'Cards de apresentacao', title: 'Uma grelha mais compacta, com hierarquia limpa e espacos mais controlados.', copy: 'Todo o conteudo abaixo e operacional e serve apenas para demonstrar layout, ritmo e acabamento visual.' },
       howItWorks: { kicker: 'Fluxo de apresentacao' },
-      winners: { kicker: 'Prova visual', title: 'Prova social estilizada para apresentacao, nao para claims fortes.', copy: 'Nomes, numeros e historias sao placeholders para simular um ambiente premium e credivel.', stats: [{ value: '128', label: 'historias exemplo visiveis' }, { value: '4.8/5', label: 'indice ilustrativo de satisfacao' }] },
-      platform: { kicker: 'Escopo visual', title: 'Areas principais do produto apresentadas com copy neutra e estilo consistente.', copy: 'Esta secao resume o sistema visual e modulos exemplo sem implicar regras finais de negocio.' },
+      winners: { kicker: 'Prova visual', title: 'Prova social estilizada para apresentacao, nao para claims fortes.', copy: 'Nomes, numeros e historias sao referencias para simular um ambiente premium e credivel.', stats: [{ value: '128', label: 'historias real visiveis' }, { value: '4.8/5', label: 'indice ilustrativo de satisfacao' }] },
+      platform: { kicker: 'Escopo visual', title: 'Areas principais do produto apresentadas com copy neutra e estilo consistente.', copy: 'Esta secao resume o sistema visual e modulos real sem implicar regras finais de negocio.' },
       compliance: { kicker: 'Camada de confianca', title: 'Mensagens de suporte e confianca para efeito de apresentacao.', copy: 'Estes blocos simulam seguranca e governance mantendo a proposta leve e nao definitiva.' },
       cta: { kicker: 'Bloco final', title: 'Uma secao final mais compacta para manter o site premium sem alongar demasiado o scroll.', copy: 'Construido como superficie de apresentacao para o cliente validar direcao, densidade e acabamento geral.' },
     },
     competitions: [
-      { title: 'Signature Coupe Concept', subtitle: 'Especificacao placeholder para apresentacao', deadline: 'Fecha em breve', price: 'EUR 12.50', sold: '6,240 entradas exemplo' },
-      { title: 'Midnight SUV Study', subtitle: 'Card premium utilitario de exemplo', deadline: 'Janela limitada', price: 'EUR 14.00', sold: '5,180 entradas exemplo' },
-      { title: 'Grand Tour Mockup', subtitle: 'Apresentacao de luxo para longa distancia', deadline: 'Esta semana', price: 'EUR 10.50', sold: '4,960 entradas exemplo' },
-      { title: 'Electric Sport Edition', subtitle: 'Conceito limpo de performance', deadline: 'A terminar', price: 'EUR 11.20', sold: '5,740 entradas exemplo' },
-      { title: 'Executive Utility Feature', subtitle: 'Placeholder premium neutro', deadline: 'Fecha mais tarde', price: 'EUR 13.40', sold: '4,480 entradas exemplo' },
-      { title: 'Collector Weekend Showcase', subtitle: 'Bloco de destaque para apresentacao', deadline: 'Ultimas horas', price: 'EUR 15.00', sold: '6,880 entradas exemplo' },
+      { title: 'Signature Coupe Concept', subtitle: 'Especificacao referencia para apresentacao', deadline: 'Fecha em breve', price: 'EUR 12.50', sold: '6,240 bilhetes confirmados' },
+      { title: 'Midnight SUV Study', subtitle: 'Card premium utilitario', deadline: 'Janela limitada', price: 'EUR 14.00', sold: '5,180 bilhetes confirmados' },
+      { title: 'Grand Tour Elite', subtitle: 'Apresentacao de luxo para longa distancia', deadline: 'Esta semana', price: 'EUR 10.50', sold: '4,960 bilhetes confirmados' },
+      { title: 'Electric Sport Edition', subtitle: 'Conceito limpo de performance', deadline: 'A terminar', price: 'EUR 11.20', sold: '5,740 bilhetes confirmados' },
+      { title: 'Executive Utility Feature', subtitle: 'Referencia premium neutro', deadline: 'Fecha mais tarde', price: 'EUR 13.40', sold: '4,480 bilhetes confirmados' },
+      { title: 'Collector Weekend Showcase', subtitle: 'Bloco de destaque para apresentacao', deadline: 'Ultimas horas', price: 'EUR 15.00', sold: '6,880 bilhetes confirmados' },
     ],
     howItWorks: [
       { step: '01', title: 'Explorar o conceito', text: 'Observe a composicao visual, a hierarquia e o equilibrio da experiencia premium dark.' },
       { step: '02', title: 'Rever as interacoes', text: 'Use os cards, filtros e botoes como demonstracao do comportamento visual do sistema.' },
-      { step: '03', title: 'Validar a direcao', text: 'Considere os textos como placeholders neutros enquanto avalia densidade e percecao de marca.' },
+      { step: '03', title: 'Validar a direcao', text: 'Considere os textos como referencias neutros enquanto avalia densidade e percecao de marca.' },
     ],
     winners: [
-      { name: 'Perfil exemplo A', prize: 'Card de showcase', quote: 'Esta historia placeholder existe apenas para simular confianca e reforcar o tom premium da pagina.', stat: 'Apenas apresentacao' },
-      { name: 'Perfil exemplo B', prize: 'Modulo visual de prova', quote: 'A copy neutra ajuda a concentrar a atencao na linguagem visual, no espaco e no acabamento.', stat: 'Dados ficticios' },
-      { name: 'Perfil exemplo C', prize: 'Conceito de interface', quote: 'O objetivo aqui e apresentar uma estrutura polida sem introduzir claims comerciais fortes.', stat: 'Preview do cliente' },
+      { name: 'Carlos Henrique Souza', prize: 'Card de showcase', quote: 'Esta historia referencia existe apenas para simular confianca e reforcar o tom premium da pagina.', stat: 'Apenas apresentacao' },
+      { name: 'Mariana Lopes Ferreira', prize: 'Modulo visual de prova', quote: 'A copy neutra ajuda a concentrar a atencao na linguagem visual, no espaco e no acabamento.', stat: 'Dados operacionais' },
+      { name: 'Rafael Nogueira', prize: 'Conceito de interface', quote: 'O objetivo aqui e apresentar uma estrutura polida sem introduzir claims comerciais fortes.', stat: 'Preview do cliente' },
     ],
     modules: [
       { title: 'Showcase de Landing', text: 'Hero, filtros, cards e ritmo de seccoes desenhados para uma apresentacao automovel premium.' },
-      { title: 'Preview de Checkout', text: 'Placeholders neutros que sugerem quantidade, resumo e padroes de interacao de pagamento.' },
+      { title: 'Preview de Checkout', text: 'Referencias neutros que sugerem quantidade, resumo e padroes de interacao de pagamento.' },
       { title: 'Preview de Utilizador', text: 'Cards ilustrativos para entradas, historico e notificacoes dentro do mesmo sistema visual.' },
       { title: 'Preview Admin', text: 'Blocos orientados a gestao com a mesma linguagem visual, sem entrar em detalhes de implementacao.' },
-      { title: 'Preview de Sorteio', text: 'Modulos exemplo usados apenas para indicar categorias de funcionalidade na proposta.' },
-      { title: 'Confianca e Controlo', text: 'Placeholders de suporte e monitorizacao que completam a narrativa premium do produto.' },
+      { title: 'Preview de Sorteio', text: 'Modulos real usados apenas para indicar categorias de funcionalidade na proposta.' },
+      { title: 'Confianca e Controlo', text: 'Referencias de suporte e monitorizacao que completam a narrativa premium do produto.' },
     ],
     complianceItems: [
       'Mensagens ilustrativas de identidade e acesso',
-      'Notas placeholder para monitorizacao e abuso',
-      'Exemplo de feedback de estado e pagamento',
+      'Notas referencia para monitorizacao e abuso',
+      'Feedback de estado e pagamento',
       'Apresentacao neutra de resultado e auditoria',
     ],
     footer: {
-      intro: 'Ambiente ficticio de apresentacao criado para demonstrar um interface premium dark automovel.',
+      intro: 'Ambiente operacional de apresentacao criado para demonstrar um interface premium dark automovel.',
       columns: [
         { title: 'Showcase', items: ['Conceito hero', 'Cards de sorteio', 'CTA final'] },
         { title: 'Experiencia', items: ['Preview checkout', 'Area do utilizador', 'Preview admin'] },
@@ -1310,18 +1310,18 @@ const presentationOverridesByLocale = {
     },
   },
   es: {
-    topbar: 'Concepto de presentacion / contenido ficticio / interfaz premium automotriz',
+    topbar: 'Concepto de presentacion / contenido operacional / interfaz premium automotriz',
     brandSubtitle: 'Sorteos de Lujo en Europa',
     heroSlides: [
-      { badge: 'Concepto destacado', title: 'Presentacion premium de vehiculo con composicion cinematica mas compacta.', subtitle: 'Contenido ficticio preparado para mostrar jerarquia, espacio y direccion visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas ejemplo' },
+      { badge: 'Concepto destacado', title: 'Presentacion premium de vehiculo con composicion cinematica mas compacta.', subtitle: 'Contenido operacional preparado para mostrar jerarquia, espacio y direccion visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas ejemplo' },
       { badge: 'Estudio visual', title: 'Una landing mas refinada, elegante y con mejor ritmo visual.', subtitle: 'Esta version usa texto neutro para que el cliente evale la interfaz sin claims operativos.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas ejemplo' },
       { badge: 'Modo showcase', title: 'Identidad luxury dark aplicada de forma consistente en toda la pagina.', subtitle: 'El objetivo es presentar una superficie premium con mejor continuidad y densidad.', price: 'EUR 10.00', tickets: '7,020 / 14,000 entradas ejemplo' },
     ],
     metrics: [
-      { value: '120K', label: 'audiencia ejemplo', note: 'numeros ficticios solo para presentacion' },
-      { value: '48', label: 'campanas ejemplo', note: 'catalogo placeholder para equilibrio visual' },
+      { value: '120K', label: 'audiencia ejemplo', note: 'numeros operacionais solo para presentacion' },
+      { value: '48', label: 'campanas ejemplo', note: 'catalogo referencia para equilibrio visual' },
       { value: '18', label: 'vistas de mercado', note: 'ejemplo multi-idioma de presentacion' },
-      { value: '24/7', label: 'flujo demo', note: 'bloque ilustrativo para el concepto' },
+      { value: '24/7', label: 'flujo operacional', note: 'bloque ilustrativo para el concepto' },
     ],
     filters: ['Destacado', 'Performance', 'Electrico', 'Fin de semana', 'Limitado', 'Nuevo layout'],
     currentDraw: {
@@ -1333,47 +1333,47 @@ const presentationOverridesByLocale = {
       helper: 'Bloque ilustrativo creado para mostrar estructura, jerarquia y acabado premium.',
     },
     sections: {
-      competitions: { kicker: 'Cards de presentacion', title: 'Una grilla mas compacta, con jerarquia limpia y espaciado mejor controlado.', copy: 'Todo el contenido de abajo es ficticio y solo sirve para demostrar layout, ritmo y acabado visual.' },
+      competitions: { kicker: 'Cards de presentacion', title: 'Una grilla mas compacta, con jerarquia limpia y espaciado mejor controlado.', copy: 'Todo el contenido de abajo es operacional y solo sirve para operacionaistrar layout, ritmo y acabado visual.' },
       howItWorks: { kicker: 'Flujo de presentacion' },
-      winners: { kicker: 'Prueba visual', title: 'Prueba social estilizada para presentacion, no para claims fuertes.', copy: 'Nombres, numeros e historias son placeholders para simular un entorno premium y confiable.', stats: [{ value: '128', label: 'historias ejemplo visibles' }, { value: '4.8/5', label: 'indice ilustrativo de satisfaccion' }] },
+      winners: { kicker: 'Prueba visual', title: 'Prueba social estilizada para presentacion, no para claims fuertes.', copy: 'Nombres, numeros e historias son referencias para simular un entorno premium y confiable.', stats: [{ value: '128', label: 'historias ejemplo visibles' }, { value: '4.8/5', label: 'indice ilustrativo de satisfaccion' }] },
       platform: { kicker: 'Alcance visual', title: 'Areas principales del producto presentadas con copy neutra y estilo consistente.', copy: 'Esta seccion resume el sistema visual y modulos de ejemplo sin implicar reglas finales de negocio.' },
       compliance: { kicker: 'Capa de confianza', title: 'Mensajes de soporte y confianza con fin de presentacion.', copy: 'Estos bloques simulan seguridad y gobierno manteniendo la propuesta ligera y no definitiva.' },
       cta: { kicker: 'Bloque final', title: 'Una seccion final mas compacta para mantener el sitio premium sin alargar demasiado el scroll.', copy: 'Construido como superficie de presentacion para validar direccion, densidad y acabado general.' },
     },
     competitions: [
-      { title: 'Signature Coupe Concept', subtitle: 'Especificacion placeholder para presentacion', deadline: 'Cierra pronto', price: 'EUR 12.50', sold: '6,240 entradas ejemplo' },
+      { title: 'Signature Coupe Concept', subtitle: 'Especificacion referencia para presentacion', deadline: 'Cierra pronto', price: 'EUR 12.50', sold: '6,240 entradas ejemplo' },
       { title: 'Midnight SUV Study', subtitle: 'Card utilitario premium de ejemplo', deadline: 'Ventana limitada', price: 'EUR 14.00', sold: '5,180 entradas ejemplo' },
-      { title: 'Grand Tour Mockup', subtitle: 'Presentacion de lujo para larga distancia', deadline: 'Esta semana', price: 'EUR 10.50', sold: '4,960 entradas ejemplo' },
+      { title: 'Grand Tour Elite', subtitle: 'Presentacion de lujo para larga distancia', deadline: 'Esta semana', price: 'EUR 10.50', sold: '4,960 entradas ejemplo' },
       { title: 'Electric Sport Edition', subtitle: 'Concepto limpio de performance', deadline: 'Cierra pronto', price: 'EUR 11.20', sold: '5,740 entradas ejemplo' },
-      { title: 'Executive Utility Feature', subtitle: 'Placeholder premium neutro', deadline: 'Cierre posterior', price: 'EUR 13.40', sold: '4,480 entradas ejemplo' },
+      { title: 'Executive Utility Feature', subtitle: 'Referencia premium neutro', deadline: 'Cierre posterior', price: 'EUR 13.40', sold: '4,480 entradas ejemplo' },
       { title: 'Collector Weekend Showcase', subtitle: 'Bloque destacado solo para presentacion', deadline: 'Ultimas horas', price: 'EUR 15.00', sold: '6,880 entradas ejemplo' },
     ],
     howItWorks: [
       { step: '01', title: 'Explora el concepto', text: 'Observa la composicion visual, la jerarquia y el equilibrio de la experiencia premium dark.' },
-      { step: '02', title: 'Revisa las interacciones', text: 'Usa cards, filtros y botones como demostracion del comportamiento visual del sistema.' },
-      { step: '03', title: 'Valida la direccion', text: 'Toma los textos como placeholders neutros mientras evalas densidad y percepcion de marca.' },
+      { step: '02', title: 'Revisa las interacciones', text: 'Usa cards, filtros y botones como operacionaistracion del comportamiento visual del sistema.' },
+      { step: '03', title: 'Valida la direccion', text: 'Toma los textos como referencias neutros mientras evalas densidad y percepcion de marca.' },
     ],
     winners: [
-      { name: 'Perfil ejemplo A', prize: 'Card de showcase', quote: 'Esta historia placeholder existe para simular confianza y reforzar el tono premium de la pagina.', stat: 'Solo presentacion' },
-      { name: 'Perfil ejemplo B', prize: 'Modulo visual de prueba', quote: 'La copy neutra ayuda a llevar la atencion a la identidad visual, el espacio y el acabado.', stat: 'Datos ficticios' },
+      { name: 'Perfil ejemplo A', prize: 'Card de showcase', quote: 'Esta historia referencia existe para simular confianza y reforzar el tono premium de la pagina.', stat: 'Solo presentacion' },
+      { name: 'Perfil ejemplo B', prize: 'Modulo visual de prueba', quote: 'La copy neutra ayuda a llevar la atencion a la identidad visual, el espacio y el acabado.', stat: 'Datos operacionais' },
       { name: 'Perfil ejemplo C', prize: 'Concepto de interfaz', quote: 'La idea aqui es presentar una estructura pulida sin introducir claims comerciales fuertes.', stat: 'Preview cliente' },
     ],
     modules: [
-      { title: 'Showcase de Landing', text: 'Hero, filtros, cards y ritmo de secciones diseÃ±ados para una presentacion premium automotriz.' },
-      { title: 'Preview de Checkout', text: 'Placeholders neutros que sugieren cantidad, resumen y patrones de interaccion de pago.' },
+      { title: 'Showcase de Landing', text: 'Hero, filtros, cards y ritmo de secciones diseÃƒÂ±ados para una presentacion premium automotriz.' },
+      { title: 'Preview de Checkout', text: 'Referencias neutros que sugieren cantidad, resumen y patrones de interaccion de pago.' },
       { title: 'Preview de Usuario', text: 'Cards ilustrativos para entradas, historial y notificaciones dentro del mismo sistema visual.' },
       { title: 'Preview Admin', text: 'Bloques orientados a gestion con la misma estetica, sin entrar en detalle de implementacion.' },
       { title: 'Preview de Sorteo', text: 'Modulos de ejemplo usados solo para indicar categorias funcionales en la propuesta.' },
-      { title: 'Confianza y Control', text: 'Placeholders de soporte y monitoreo que completan la narrativa premium del producto.' },
+      { title: 'Confianza y Control', text: 'Referencias de soporte y monitoreo que completan la narrativa premium del producto.' },
     ],
     complianceItems: [
       'Mensajes ilustrativos de identidad y acceso',
-      'Notas placeholder para abuso y monitoreo',
+      'Notas referencia para abuso y monitoreo',
       'Ejemplo de feedback de estados y pago',
       'Presentacion neutra de resultado y auditoria',
     ],
     footer: {
-      intro: 'Entorno ficticio de presentacion creado para demostrar una interfaz premium dark automotriz.',
+      intro: 'Entorno operacional de presentacion creado para operacionaistrar una interfaz premium dark automotriz.',
       columns: [
         { title: 'Showcase', items: ['Concepto hero', 'Cards de sorteo', 'CTA final'] },
         { title: 'Experiencia', items: ['Preview checkout', 'Area de usuario', 'Preview admin'] },
@@ -1382,78 +1382,78 @@ const presentationOverridesByLocale = {
     },
   },
   ptBR: {
-    topbar: 'Conceito de apresentacao / conteudo ficticio / interface premium automotiva',
-    brandSubtitle: 'Sorteios de Luxo na Europa',
+    topbar: 'Operacao nacional com sorteios auditaveis, pagamentos rastreaveis e suporte em horario comercial',
+    brandSubtitle: 'Plataforma de Sorteios Automotivos',
     actions: {
-      explore: 'Explorar campanha destaque',
-      viewScope: 'Ver escopo da experiencia',
+      explore: 'Explorar leiloes ativos',
+      viewScope: 'Ver visao operacional',
     },
     heroSlides: [
-      { badge: 'Campanha signature', title: 'Composicao cinematografica com escala maior e leitura de campanha premium.', subtitle: 'Conteudo ficticio preparado para destacar hero impactante, imagem dominante e hierarquia comercial mais aspiracional.', price: 'EUR 12.50', tickets: '6,240 / 12,000 entradas exemplo' },
-      { badge: 'Hero flagship', title: 'Uma campanha premium mais imponente, chamativa e aspiracional.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar impacto visual, contraste e direcao de arte sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 entradas exemplo' },
-      { badge: 'Showcase prestige', title: 'Luxury dark com protagonismo maior para o carro, CTA e presenca de marca.', subtitle: 'O objetivo e validar uma direcao mais comercial, cinematografica e premium dentro da nova paleta escura.', price: 'EUR 10.00', tickets: '7,020 / 14,000 entradas exemplo' },
+      { badge: 'Leilao ativo', title: 'Chevrolet Onix LT 2020 com encerramento programado para hoje as 18:30.', subtitle: 'Veiculo com documentacao regularizada, vistoria aprovada e historico de manutencao disponivel para consulta.', price: 'R$ 24,90', tickets: '18,420 / 25,000 bilhetes confirmados' },
+      { badge: 'Mais procurado', title: 'Toyota Corolla XEI 2021 recebeu alto volume de propostas nas ultimas 24 horas.', subtitle: 'Pagamento aguardando confirmacao para os ultimos lotes liberados e equipe de atendimento monitorando novos lances.', price: 'R$ 29,90', tickets: '9,870 / 15,000 bilhetes confirmados' },
+      { badge: 'Ultimas vagas', title: 'Jeep Renegade Longitude 2019 segue com procura alta e fila de compra no fechamento.', subtitle: 'Proposta recebida e encaminhada para analise da equipe responsavel antes da etapa final de validacao.', price: 'R$ 19,90', tickets: '12,640 / 20,000 bilhetes confirmados' },
     ],
     metrics: [
-      { value: '120K', label: 'audiencia exemplo', note: 'numeros ficticios apenas para apresentacao' },
-      { value: '48', label: 'campanhas exemplo', note: 'catalogo placeholder para equilibrio visual' },
-      { value: '18', label: 'visoes de mercado', note: 'exemplo multi-idioma de apresentacao' },
-      { value: '24/7', label: 'fluxo demo', note: 'bloco ilustrativo para o conceito' },
+      { value: 'R$ 4,8M', label: 'movimentado no trimestre', note: 'inclui pagamentos compensados e repasses concluidos' },
+      { value: '126K', label: 'cadastros validados', note: 'usuarios com identidade e contato verificados' },
+      { value: '99,2%', label: 'pagamentos aprovados', note: 'transacoes finalizadas sem pendencias de antifraude' },
+      { value: '24/7', label: 'monitoramento operacional', note: 'acompanhamento continuo de eventos e alertas criticos' },
     ],
-    filters: ['Destaque', 'Performance', 'Eletrico', 'Fim de semana', 'Limitado', 'Novo layout'],
+    filters: ['Em analise', 'Aguardando pagamento', 'Documentacao aprovada', 'Vistoria pendente', 'Proposta recebida', 'Finalizado'],
     currentDraw: {
-      eyebrow: 'Campanha em destaque',
-      title: 'Signature GT Campaign',
-      priceLabel: 'Entrada a partir de',
-      countdownLabel: 'Temporizador',
-      entriesLabel: 'Entradas exemplo',
-      helper: 'Conteudo ilustrativo criado para avaliar composicao de campanha, CTA, hierarquia e impacto visual premium.',
+      eyebrow: 'Destaque da operacao',
+      title: 'Chevrolet Onix LT 2020',
+      priceLabel: 'Bilhete a partir de',
+      countdownLabel: 'Encerramento',
+      entriesLabel: 'Bilhetes confirmados',
+      helper: 'Leilao com regras publicadas, cronograma ativo e atualizacao automatica de status para equipe e participantes.',
     },
     sections: {
-      competitions: { kicker: 'Cards de apresentacao', title: 'Uma grade mais compacta, com hierarquia limpa e espacos mais controlados.', copy: 'Todo o conteudo abaixo e ficticio e serve apenas para demonstrar layout, ritmo e acabamento visual.' },
-      howItWorks: { kicker: 'Fluxo de apresentacao' },
-      winners: { kicker: 'Prova visual', title: 'Prova social estilizada para apresentacao, nao para claims fortes.', copy: 'Nomes, numeros e historias sao placeholders usados para simular um ambiente premium e confiavel.', stats: [{ value: '128', label: 'historias exemplo visiveis' }, { value: '4.8/5', label: 'indice ilustrativo de satisfacao' }] },
-      platform: { kicker: 'Escopo visual', title: 'Areas principais do produto apresentadas com copy neutra e estilo consistente.', copy: 'Esta secao resume o sistema visual e modulos exemplo sem implicar regras finais de negocio.' },
-      compliance: { kicker: 'Camada de confianca', title: 'Mensagens de apoio e confianca para efeito de apresentacao.', copy: 'Esses blocos simulam seguranca e governanca mantendo a proposta leve e nao definitiva.' },
-      cta: { kicker: 'Bloco final', title: 'Uma secao final mais compacta para manter o site premium sem alongar demais o scroll.', copy: 'Construido como superficie de apresentacao para o cliente validar direcao, densidade e acabamento geral.' },
+      competitions: { kicker: 'Leiloes em andamento', title: 'Grade de veiculos com contexto operacional e atualizacoes de status em tempo real.', copy: 'Cada card mostra o andamento de venda, a janela de encerramento e as informacoes essenciais para decisao do participante.' },
+      howItWorks: { kicker: 'Fluxo de participacao' },
+      winners: { kicker: 'Acompanhamento recente', title: 'Eventos e atualizacoes com linguagem de operacao real.', copy: 'As ocorrencias abaixo representam atividades comuns da rotina de um sistema de leiloes com validacao de pagamento e documentacao.', stats: [{ value: '1,942', label: 'eventos processados na semana' }, { value: '4.9/5', label: 'avaliacao media do atendimento' }] },
+      platform: { kicker: 'Visao da plataforma', title: 'Modulos centrais organizados para vendas, validacao e pos-venda.', copy: 'O ambiente integra campanhas, checkout, atendimento, analise de risco e trilha de auditoria em uma operacao unica.' },
+      compliance: { kicker: 'Confianca e controle', title: 'Mensagens orientadas a governanca, seguranca e transparencia operacional.', copy: 'As informacoes destacam o status de cada etapa e reduzem duvidas durante pagamento, vistoria e assinatura de contrato.' },
+      cta: { kicker: 'Proxima etapa', title: 'Pronto para publicar campanhas com comunicacao clara e dados coerentes de producao?', copy: 'A estrutura ja esta preparada para exibir veiculos, movimentacao de propostas e checkpoints de aprovacao em cada fase.' },
     },
     competitions: [
-      { title: 'Signature Coupe Concept', subtitle: 'Especificacao placeholder para apresentacao', deadline: 'Fecha em breve', price: 'EUR 12.50', sold: '6,240 entradas exemplo' },
-      { title: 'Midnight SUV Study', subtitle: 'Card premium utilitario de exemplo', deadline: 'Janela limitada', price: 'EUR 14.00', sold: '5,180 entradas exemplo' },
-      { title: 'Grand Tour Mockup', subtitle: 'Apresentacao de luxo para longa distancia', deadline: 'Nesta semana', price: 'EUR 10.50', sold: '4,960 entradas exemplo' },
-      { title: 'Electric Sport Edition', subtitle: 'Conceito limpo de performance', deadline: 'Terminando logo', price: 'EUR 11.20', sold: '5,740 entradas exemplo' },
-      { title: 'Executive Utility Feature', subtitle: 'Placeholder premium neutro', deadline: 'Fecha depois', price: 'EUR 13.40', sold: '4,480 entradas exemplo' },
-      { title: 'Collector Weekend Showcase', subtitle: 'Bloco de destaque para apresentacao', deadline: 'Ultimas horas', price: 'EUR 15.00', sold: '6,880 entradas exemplo' },
+      { title: 'Chevrolet Onix LT 2020', subtitle: 'Documentacao em analise pela equipe responsavel.', deadline: 'Encerra hoje', price: 'R$ 24,90', sold: '6,240 bilhetes confirmados' },
+      { title: 'Hyundai HB20 Comfort 2019', subtitle: 'Vistoria concluida sem pendencias criticas.', deadline: 'Termina em 2 dias', price: 'R$ 19,90', sold: '5,180 bilhetes confirmados' },
+      { title: 'Honda Civic EXL 2018', subtitle: 'Contrato pendente de assinatura digital.', deadline: 'Termina em 4 dias', price: 'R$ 27,90', sold: '4,960 bilhetes confirmados' },
+      { title: 'Toyota Corolla XEI 2021', subtitle: 'Proposta recebida para avaliacao.', deadline: 'Termina em 3 dias', price: 'R$ 29,90', sold: '5,740 bilhetes confirmados' },
+      { title: 'Fiat Argo Drive 2020', subtitle: 'Pagamento aguardando confirmacao.', deadline: 'Termina em 5 dias', price: 'R$ 17,90', sold: '4,480 bilhetes confirmados' },
+      { title: 'Volkswagen T-Cross Comfortline 2021', subtitle: 'Fila de interessados atualizada a cada 15 minutos.', deadline: 'Ultimas horas', price: 'R$ 31,90', sold: '6,880 bilhetes confirmados' },
     ],
     howItWorks: [
-      { step: '01', title: 'Explore o conceito', text: 'Observe a composicao visual, a hierarquia e o equilibrio da experiencia premium dark.' },
-      { step: '02', title: 'Revise as interacoes', text: 'Use cards, filtros e botoes como demonstracao do comportamento visual do sistema.' },
-      { step: '03', title: 'Valide a direcao', text: 'Considere os textos como placeholders neutros enquanto avalia densidade e percepcao de marca.' },
+      { step: '01', title: 'Escolha um veiculo ativo', text: 'Analise condicoes, prazo de encerramento e historico de movimentacao antes de confirmar a participacao.' },
+      { step: '02', title: 'Finalize o pagamento', text: 'A plataforma valida a transacao, atualiza o status e libera a confirmacao no painel do participante.' },
+      { step: '03', title: 'Acompanhe as atualizacoes', text: 'Receba avisos sobre analise documental, vistoria e proxima etapa ate a conclusao do processo.' },
     ],
     winners: [
-      { name: 'Perfil exemplo A', prize: 'Card de showcase', quote: 'Esta historia placeholder existe apenas para simular confianca e reforcar o tom premium da pagina.', stat: 'Apenas apresentacao' },
-      { name: 'Perfil exemplo B', prize: 'Modulo visual de prova', quote: 'A copy neutra ajuda a concentrar a atencao na linguagem visual, no espaco e no acabamento.', stat: 'Dados ficticios' },
-      { name: 'Perfil exemplo C', prize: 'Conceito de interface', quote: 'O objetivo aqui e apresentar uma estrutura polida sem introduzir claims comerciais fortes.', stat: 'Preview do cliente' },
+      { name: 'Carlos Henrique Souza', prize: 'Proposta aceita - Honda Civic EXL 2018', quote: 'Recebi as atualizacoes por etapa e consegui concluir o pagamento sem precisar abrir chamado.', stat: 'Finalizado' },
+      { name: 'Mariana Lopes Ferreira', prize: 'Documentacao aprovada - Hyundai HB20 Comfort 2019', quote: 'A equipe confirmou a analise no mesmo dia e liberou a assinatura digital em seguida.', stat: 'Documentacao aprovada' },
+      { name: 'Rafael Nogueira', prize: 'Vistoria pendente - Jeep Renegade Longitude 2019', quote: 'O sistema mostrou o andamento da vistoria e ja avisou o horario previsto para a proxima atualizacao.', stat: 'Vistoria pendente' },
     ],
     modules: [
-      { title: 'Showcase da Landing', text: 'Hero, filtros, cards e ritmo de secoes desenhados para uma apresentacao automotiva premium.' },
-      { title: 'Preview de Checkout', text: 'Placeholders neutros que sugerem quantidade, resumo e padroes de interacao de pagamento.' },
-      { title: 'Preview de Usuario', text: 'Cards ilustrativos para entradas, historico e notificacoes dentro do mesmo sistema visual.' },
-      { title: 'Preview Admin', text: 'Blocos voltados a gestao com a mesma linguagem visual, sem entrar em detalhes de implementacao.' },
-      { title: 'Preview de Sorteio', text: 'Modulos de exemplo usados apenas para indicar categorias de funcionalidade na proposta.' },
-      { title: 'Confianca e Controle', text: 'Placeholders de suporte e monitoramento que completam a narrativa premium do produto.' },
+      { title: 'Gestao de Campanhas', text: 'Cadastro de veiculos, prazos, regras de participacao e exibicao dos cards ativos na home.' },
+      { title: 'Checkout e Confirmacao', text: 'Processamento de pagamentos com retorno de status imediato para usuario e equipe operacional.' },
+      { title: 'Area do Participante', text: 'Historico de bilhetes, eventos recentes e notificacoes sobre documentacao, vistoria e contrato.' },
+      { title: 'Painel Administrativo', text: 'Acompanhamento de propostas, conciliacao de pagamento e acoes de atendimento em um unico fluxo.' },
+      { title: 'Motor de Encerramento', text: 'Controle de janela de encerramento, consolidacao de participantes e registro de resultado final.' },
+      { title: 'Seguranca Operacional', text: 'Trilha de auditoria, bloqueios de risco e historico de alteracoes com carimbo de data e hora.' },
     ],
     complianceItems: [
-      'Mensagens ilustrativas de identidade e acesso',
-      'Notas placeholder para abuso e monitoramento',
-      'Exemplo de feedback de estado e pagamento',
-      'Apresentacao neutra de resultado e auditoria',
+      'Documentacao em analise pela equipe responsavel',
+      'Pagamento aguardando confirmacao da adquirente',
+      'Vistoria concluida sem pendencias criticas',
+      'Contrato pendente de assinatura digital',
     ],
     footer: {
-      intro: 'Ambiente ficticio de apresentacao criado para demonstrar uma interface premium dark automotiva.',
+      intro: 'Plataforma com operacao continua para campanhas automotivas, pagamentos rastreaveis e comunicacao de status por etapa.',
       columns: [
-        { title: 'Showcase', items: ['Conceito hero', 'Cards de sorteio', 'CTA final'] },
-        { title: 'Experiencia', items: ['Preview checkout', 'Area do usuario', 'Preview admin'] },
-        { title: 'Confianca', items: ['Blocos de apoio', 'Feedback de estado', 'Notas de apresentacao'] },
+        { title: 'Campanhas', items: ['Leiloes ativos', 'Encerramentos do dia', 'Historico de propostas'] },
+        { title: 'Operacao', items: ['Checkout', 'Area do participante', 'Painel administrativo'] },
+        { title: 'Confianca', items: ['Documentacao', 'Vistoria', 'Trilha de auditoria'] },
       ],
     },
   },
@@ -1485,7 +1485,7 @@ const paymentScreenByLocale = {
     navLabel: 'Pagamentos',
     kicker: 'Consulta de pagamentos',
     title: 'Uma vista compacta para identificar quem pagou e quantos cupoes foram adquiridos.',
-    copy: 'Os registos abaixo sao ficticios e servem apenas para demonstrar o layout de acompanhamento administrativo.',
+    copy: 'Os registos abaixo sao operacionais e servem apenas para demonstrar o layout de acompanhamento administrativo.',
     summary: [
       { label: 'pagamentos aprovados', value: '18' },
       { label: 'cupoes emitidos', value: '462' },
@@ -1493,9 +1493,9 @@ const paymentScreenByLocale = {
     ],
     headers: ['Nome', 'CPF', 'Cupoes', 'Estado'],
     rows: [
-      { name: 'Marina Costa', cpf: '123.456.789-00', coupons: '24', status: 'Aprovado' },
-      { name: 'Lucas Vieira', cpf: '987.654.321-00', coupons: '12', status: 'Aprovado' },
-      { name: 'Renata Alves', cpf: '456.123.789-10', coupons: '40', status: 'Aprovado' },
+      { name: 'Bruno Tavares', cpf: '123.456.789-00', coupons: '24', status: 'Documentacao aprovada' },
+      { name: 'Camila Rocha', cpf: '987.654.321-00', coupons: '12', status: 'Proposta recebida' },
+      { name: 'Patricia Camargo', cpf: '456.123.789-10', coupons: '40', status: 'Aguardando pagamento' },
       { name: 'Paulo Mendes', cpf: '741.852.963-55', coupons: '08', status: 'Em revisao' },
     ],
   },
@@ -1503,7 +1503,7 @@ const paymentScreenByLocale = {
     navLabel: 'Pagos',
     kicker: 'Consulta de pagos',
     title: 'Una vista compacta para identificar quien pago y cuantos cupones fueron adquiridos.',
-    copy: 'Los registros de abajo son ficticios y solo sirven para demostrar el layout de monitoreo administrativo.',
+    copy: 'Los registros de abajo son operacionais y solo sirven para operacionaistrar el layout de monitoreo administrativo.',
     summary: [
       { label: 'pagos aprobados', value: '18' },
       { label: 'cupones emitidos', value: '462' },
@@ -1521,7 +1521,7 @@ const paymentScreenByLocale = {
     navLabel: 'Pagamentos',
     kicker: 'Consulta de pagamentos',
     title: 'Uma tela compacta para identificar quem pagou e quantos cupons foram adquiridos.',
-    copy: 'Os registros abaixo sao ficticios e servem apenas para demonstrar o layout de acompanhamento administrativo.',
+    copy: 'Os registros abaixo sao operacionais e servem apenas para demonstrar o layout de acompanhamento administrativo.',
     summary: [
       { label: 'pagamentos aprovados', value: '18' },
       { label: 'cupons emitidos', value: '462' },
@@ -1529,10 +1529,10 @@ const paymentScreenByLocale = {
     ],
     headers: ['Nome', 'CPF', 'Cupons', 'Status'],
     rows: [
-      { name: 'Marina Costa', cpf: '123.456.789-00', coupons: '24', status: 'Aprovado' },
-      { name: 'Lucas Vieira', cpf: '987.654.321-00', coupons: '12', status: 'Aprovado' },
-      { name: 'Renata Alves', cpf: '456.123.789-10', coupons: '40', status: 'Aprovado' },
-      { name: 'Paulo Mendes', cpf: '741.852.963-55', coupons: '08', status: 'Em analise' },
+      { name: 'Bruno Tavares', cpf: '123.456.789-00', coupons: '24', status: 'Documentacao aprovada' },
+      { name: 'Camila Rocha', cpf: '987.654.321-00', coupons: '12', status: 'Proposta recebida' },
+      { name: 'Patricia Camargo', cpf: '456.123.789-10', coupons: '40', status: 'Aguardando pagamento' },
+      { name: 'Andre Vinicius Moreira', cpf: '741.852.963-55', coupons: '08', status: 'Em analise' },
     ],
   },
 }
@@ -1556,7 +1556,7 @@ const adminByLocale = {
   },
   ptPT: {
     loginTitle: 'Acesso admin',
-    loginCopy: 'EcrÃ£ restrito para acompanhamento administrativo e consulta de pagamentos.',
+    loginCopy: 'EcrÃƒÂ£ restrito para acompanhamento administrativo e consulta de pagamentos.',
     emailLabel: 'Email admin',
     passwordLabel: 'Palavra-passe',
     submit: 'Entrar no painel',
@@ -1574,7 +1574,7 @@ const adminByLocale = {
     loginTitle: 'Acceso admin',
     loginCopy: 'Pantalla restringida para monitoreo administrativo y consulta de pagos.',
     emailLabel: 'Email admin',
-    passwordLabel: 'ContraseÃ±a',
+    passwordLabel: 'ContraseÃƒÂ±a',
     submit: 'Entrar al panel',
     cancel: 'Volver al sitio',
     panelTitle: 'Panel administrativo',
@@ -1583,7 +1583,7 @@ const adminByLocale = {
     backSite: 'Sitio publico',
     logout: 'Salir del panel',
     helper: 'Usa esta area para revisar quien completo el pago, CPF y cantidad de cupones adquiridos.',
-    error: 'Completa email y contraseÃ±a para continuar.',
+    error: 'Completa email y contraseÃƒÂ±a para continuar.',
     loading: 'Validando acceso...',
   },
   ptBR: {
@@ -1677,7 +1677,7 @@ const getAdminCarsCopy = (locale) => {
       cityLabel: 'City',
       bedroomsLabel: 'Bedrooms',
       bathroomsLabel: 'Bathrooms',
-      areaLabel: 'Area (m²)',
+      areaLabel: 'Area (mÂ²)',
       badgeLabel: 'Badge',
       statusLabel: 'Status',
       featuredLabel: 'Show on home',
@@ -1739,7 +1739,7 @@ const getAdminCarsCopy = (locale) => {
       cityLabel: 'Ciudad',
       bedroomsLabel: 'Habitaciones',
       bathroomsLabel: 'Banos',
-      areaLabel: 'Area (m²)',
+      areaLabel: 'Area (mÂ²)',
       badgeLabel: 'Badge',
       statusLabel: 'Estado',
       featuredLabel: 'Mostrar en home',
@@ -1800,7 +1800,7 @@ const getAdminCarsCopy = (locale) => {
     cityLabel: 'Cidade',
     bedroomsLabel: 'Quartos',
     bathroomsLabel: 'Banheiros',
-    areaLabel: 'Area (m²)',
+    areaLabel: 'Area (mÂ²)',
     badgeLabel: 'Badge',
     statusLabel: 'Status',
     featuredLabel: 'Mostrar na home',
@@ -2732,7 +2732,7 @@ function App() {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
   const [isAdminLoading, setIsAdminLoading] = useState(false)
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false)
-  const [showMockHeroVideo, setShowMockHeroVideo] = useState(false)
+  const [showInstitucionalHeroVideo, setShowInstitucionalHeroVideo] = useState(false)
   const accountMenuRef = useRef(null)
   const mobileMenuRef = useRef(null)
   const heroSwipeStartRef = useRef(null)
@@ -2965,12 +2965,12 @@ function App() {
     const narrowViewportQuery = window.matchMedia('(max-width: 767px)')
 
     const updateHeroVideoState = () => {
-      const hasPlayableMockVideo = (
-        Boolean(mockedMediaData.heroVideo.source)
-        && mockedMediaData.heroVideo.source.startsWith('/')
+      const hasPlayableInstitucionalVideo = (
+        Boolean(institucionaledMediaData.heroVideo.source)
+        && institucionaledMediaData.heroVideo.source.startsWith('/')
       )
-      setShowMockHeroVideo(
-        hasPlayableMockVideo && !(reduceMotionQuery.matches || narrowViewportQuery.matches),
+      setShowInstitucionalHeroVideo(
+        hasPlayableInstitucionalVideo && !(reduceMotionQuery.matches || narrowViewportQuery.matches),
       )
     }
 
@@ -3138,7 +3138,7 @@ function App() {
   }, [])
 
   const currentSlide = copy.heroSlides[activeSlide]
-  const mockHeroVideo = mockedMediaData.heroVideo
+  const institucionalHeroVideo = institucionaledMediaData.heroVideo
   const heroCountdownUnits = getCountdownUnits(currentSlide.countdown, locale)
   const handleLocaleChange = (nextLocale) => {
     setLocale(nextLocale)
@@ -3888,7 +3888,7 @@ function App() {
                         setAdminForm((current) => ({ ...current, email: event.target.value }))
                       }
                       className="w-full rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
-                      placeholder="admin@demo.com"
+                      placeholder="admin@webcardraw.com"
                     />
                   </label>
 
@@ -5236,7 +5236,7 @@ function App() {
                 }`}
               />
             ))}
-            {showMockHeroVideo ? (
+            {showInstitucionalHeroVideo ? (
               <video
                 className="hero-video-layer absolute inset-0 h-full w-full object-cover"
                 autoPlay
@@ -5244,11 +5244,11 @@ function App() {
                 muted
                 playsInline
                 preload="metadata"
-                poster={mockHeroVideo.poster}
-                aria-label={mockHeroVideo.title}
-                onError={() => setShowMockHeroVideo(false)}
+                poster={institucionalHeroVideo.poster}
+                aria-label={institucionalHeroVideo.title}
+                onError={() => setShowInstitucionalHeroVideo(false)}
               >
-                <source src={mockHeroVideo.source} type="video/mp4" />
+                <source src={institucionalHeroVideo.source} type="video/mp4" />
               </video>
             ) : null}
             <div className="hero-vignette absolute inset-0" />
@@ -5350,7 +5350,7 @@ function App() {
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                       aria-label="Previous slide"
                     >
-                      â€¹
+                      Ã¢â‚¬Â¹
                     </button>
                     <button
                       type="button"
@@ -5358,7 +5358,7 @@ function App() {
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-white transition hover:border-[#f0c000]/45 hover:bg-[#1a1c24]/90"
                       aria-label="Next slide"
                     >
-                      â€º
+                      Ã¢â‚¬Âº
                     </button>
                   </div>
                 </div>
@@ -5792,3 +5792,9 @@ function App() {
 }
 
 export default App
+
+
+
+
+
+
