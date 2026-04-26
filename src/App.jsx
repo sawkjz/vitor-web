@@ -2,9 +2,9 @@
 
 const languageOptions = [
   { value: 'en', label: 'English' },
-  { value: 'ptPT', label: 'PortuguÃªs (Portugal)' },
-  { value: 'es', label: 'EspaÃ±ol' },
-  { value: 'ptBR', label: 'PortuguÃªs (Brasil)' },
+  { value: 'ptPT', label: 'Portugu\u00EAs (Portugal)' },
+  { value: 'es', label: 'Espa\u00F1ol' },
+  { value: 'ptBR', label: 'Portugu\u00EAs (Brasil)' },
 ]
 
 const ADMIN_TOKEN_STORAGE_KEY = 'admin_access_token'
@@ -151,7 +151,7 @@ const contentByLocale = {
         title: 'Porsche 911 Turbo S',
         subtitle: 'Midnight spec, Zurich delivery',
         image:
-          '/cars/hero-2.jpg',
+          '/cars/carro1.jpeg',
         deadline: 'Ends in 2 days',
         price: 'EUR 24.90',
         progress: 82,
@@ -161,7 +161,7 @@ const contentByLocale = {
         title: 'Mercedes G-Class AMG',
         subtitle: 'Black pack, Paris reveal',
         image:
-          '/cars/hero-3.jpg',
+          '/cars/carro2.jpeg',
         deadline: 'Ends in 5 days',
         price: 'EUR 19.90',
         progress: 61,
@@ -171,7 +171,7 @@ const contentByLocale = {
         title: 'BMW M4 Competition',
         subtitle: 'Frozen blue, Milan event',
         image:
-          '/cars/card-1.jpg',
+          '/cars/carro3.jpeg',
         deadline: 'Ends in 8 days',
         price: 'EUR 14.90',
         progress: 48,
@@ -410,7 +410,7 @@ const contentByLocale = {
         title: 'Porsche 911 Turbo S',
         subtitle: 'Especificacao midnight, entrega em Zurique',
         image:
-          '/cars/hero-2.jpg',
+          '/cars/carro1.jpeg',
         deadline: 'Termina em 2 dias',
         price: 'EUR 24.90',
         progress: 82,
@@ -420,7 +420,7 @@ const contentByLocale = {
         title: 'Mercedes G-Class AMG',
         subtitle: 'Black pack, revelacao em Paris',
         image:
-          '/cars/hero-3.jpg',
+          '/cars/carro2.jpeg',
         deadline: 'Termina em 5 dias',
         price: 'EUR 19.90',
         progress: 61,
@@ -430,7 +430,7 @@ const contentByLocale = {
         title: 'BMW M4 Competition',
         subtitle: 'Azul frozen, evento em Milao',
         image:
-          '/cars/card-1.jpg',
+          '/cars/carro3.jpeg',
         deadline: 'Termina em 8 dias',
         price: 'EUR 14.90',
         progress: 48,
@@ -669,7 +669,7 @@ const contentByLocale = {
         title: 'Porsche 911 Turbo S',
         subtitle: 'Especificacion midnight, entrega en Zurich',
         image:
-          '/cars/hero-2.jpg',
+          '/cars/carro1.jpeg',
         deadline: 'Termina en 2 dias',
         price: 'EUR 24.90',
         progress: 82,
@@ -679,7 +679,7 @@ const contentByLocale = {
         title: 'Mercedes G-Class AMG',
         subtitle: 'Black pack, estreno en Paris',
         image:
-          '/cars/hero-3.jpg',
+          '/cars/carro2.jpeg',
         deadline: 'Termina en 5 dias',
         price: 'EUR 19.90',
         progress: 61,
@@ -689,7 +689,7 @@ const contentByLocale = {
         title: 'BMW M4 Competition',
         subtitle: 'Azul frozen, evento en Milan',
         image:
-          '/cars/card-1.jpg',
+          '/cars/carro3.jpeg',
         deadline: 'Termina en 8 dias',
         price: 'EUR 14.90',
         progress: 48,
@@ -928,7 +928,7 @@ const contentByLocale = {
         title: 'Porsche 911 Turbo S',
         subtitle: 'Especificacao midnight, entrega em Zurique',
         image:
-          '/cars/hero-2.jpg',
+          '/cars/carro1.jpeg',
         deadline: 'Termina em 2 dias',
         price: 'EUR 24.90',
         progress: 82,
@@ -938,7 +938,7 @@ const contentByLocale = {
         title: 'Mercedes G-Class AMG',
         subtitle: 'Black pack, reveal em Paris',
         image:
-          '/cars/hero-3.jpg',
+          '/cars/carro2.jpeg',
         deadline: 'Termina em 5 dias',
         price: 'EUR 19.90',
         progress: 61,
@@ -948,7 +948,7 @@ const contentByLocale = {
         title: 'BMW M4 Competition',
         subtitle: 'Azul frozen, evento em Milao',
         image:
-          '/cars/card-1.jpg',
+          '/cars/carro3.jpeg',
         deadline: 'Termina em 8 dias',
         price: 'EUR 14.90',
         progress: 48,
@@ -1557,7 +1557,7 @@ const adminByLocale = {
   ptPT: {
     loginTitle: 'Acesso admin',
     loginCopy: 'EcrÃƒÂ£ restrito para acompanhamento administrativo e consulta de pagamentos.',
-    emailLabel: 'Email admin',
+    emailLabel: 'Email',
     passwordLabel: 'Palavra-passe',
     submit: 'Entrar no painel',
     cancel: 'Voltar ao site',
@@ -1573,7 +1573,7 @@ const adminByLocale = {
   es: {
     loginTitle: 'Acceso admin',
     loginCopy: 'Pantalla restringida para monitoreo administrativo y consulta de pagos.',
-    emailLabel: 'Email admin',
+    emailLabel: 'Email',
     passwordLabel: 'ContraseÃƒÂ±a',
     submit: 'Entrar al panel',
     cancel: 'Volver al sitio',
@@ -1587,15 +1587,15 @@ const adminByLocale = {
     loading: 'Validando acceso...',
   },
   ptBR: {
-    loginTitle: 'Acesso admin',
-    loginCopy: 'Tela restrita para acompanhamento administrativo e consulta de pagamentos.',
-    emailLabel: 'Email admin',
+    loginTitle: 'Acesso Administrativo',
+    loginCopy: 'Acompanhamento e consulta de pagamentos, apenas para administradores.',
+    emailLabel: 'Email',
     passwordLabel: 'Senha',
     submit: 'Entrar no painel',
     cancel: 'Voltar ao site',
     panelTitle: 'Painel administrativo',
     panelCopy: 'Acompanhe os pagamentos aprovados e o volume de cupons em um unico lugar.',
-    panelBadge: 'Somente admin',
+    panelBadge: 'Admin',
     backSite: 'Site publico',
     logout: 'Sair do painel',
     helper: 'Use esta area para verificar quem concluiu o pagamento, CPF e quantidade de cupons adquiridos.',
@@ -2365,7 +2365,11 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
     return []
   }
 
-  const fallbackCars = ['/cars/hero-1.jpg', '/cars/hero-2.jpg', '/cars/hero-3.jpg', '/cars/card-1.jpg']
+  const hummerReference = `${competition.title || ''} ${competition.slug || ''} ${competition.carName || ''}`.toLowerCase()
+  const isHummerCompetition = hummerReference.includes('hummer')
+  const fallbackCars = isHummerCompetition
+    ? ['/cars/hero-1.jpg', '/cars/hummer1.avif', '/cars/hummer2.avif', '/cars/hummer3.avif']
+    : ['/cars/hero-1.jpg', '/cars/hero-2.jpg', '/cars/hero-3.jpg', '/cars/card-1.jpg']
   const fallbackHouses = [
     '/houses/casa-1.jpeg',
     '/houses/casa-2.jpeg',
@@ -2389,6 +2393,74 @@ const slugifyValue = (value) =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
+
+const createEmptyWinnersPanelDraft = () => ({
+  kicker: '',
+  title: '',
+  copy: '',
+  stats: [
+    { value: '', label: '' },
+    { value: '', label: '' },
+  ],
+  slides: [
+    { image: '', alt: '' },
+    { image: '', alt: '' },
+  ],
+  cards: [
+    { name: '', prize: '', stat: '', quote: '' },
+    { name: '', prize: '', stat: '', quote: '' },
+    { name: '', prize: '', stat: '', quote: '' },
+  ],
+})
+
+const normalizeWinnersPanelDraft = (panel = {}) => {
+  const base = createEmptyWinnersPanelDraft()
+  const text = (value) => `${value ?? ''}`.trim()
+  const legacyStats = [
+    { value: panel.stat1Value, label: panel.stat1Label },
+    { value: panel.stat2Value, label: panel.stat2Label },
+  ]
+  const legacySlides = [
+    { image: panel.slide1Image, alt: panel.slide1Alt },
+    { image: panel.slide2Image, alt: panel.slide2Alt },
+  ]
+  const legacyCards = [
+    { name: panel.card1Name, prize: panel.card1Prize, stat: panel.card1Stat, quote: panel.card1Quote },
+    { name: panel.card2Name, prize: panel.card2Prize, stat: panel.card2Stat, quote: panel.card2Quote },
+    { name: panel.card3Name, prize: panel.card3Prize, stat: panel.card3Stat, quote: panel.card3Quote },
+  ]
+  const statsInput = Array.isArray(panel.stats) ? panel.stats : legacyStats
+  const slidesInput = Array.isArray(panel.slides) ? panel.slides : legacySlides
+  const cardsInput = Array.isArray(panel.cards) ? panel.cards : legacyCards
+
+  return {
+    kicker: text(panel.kicker),
+    title: text(panel.title),
+    copy: text(panel.copy),
+    stats: base.stats.map((item, index) => ({
+      ...item,
+      value: text(statsInput[index]?.value),
+      label: text(statsInput[index]?.label),
+    })),
+    slides: base.slides.map((item, index) => ({
+      ...item,
+      image: text(slidesInput[index]?.image),
+      alt: text(slidesInput[index]?.alt),
+    })),
+    cards: base.cards.map((item, index) => ({
+      ...item,
+      name: text(cardsInput[index]?.name),
+      prize: text(cardsInput[index]?.prize),
+      stat: text(cardsInput[index]?.stat),
+      quote: text(cardsInput[index]?.quote),
+    })),
+  }
+}
+
+const getPreferredText = (value, fallback = '') => {
+  const normalized = `${value ?? ''}`.trim()
+  return normalized || fallback
+}
 
 const createEmptyCampaignDraft = (index = 0) => ({
   id: `raffle-${Date.now()}-${index + 1}`,
@@ -2430,23 +2502,35 @@ const createEmptyCampaignDraft = (index = 0) => ({
   stripeCancelUrl: '',
 })
 
-const toAdminDraftCampaign = (campaign = {}, index = 0) => ({
-  ...createEmptyCampaignDraft(index),
-  ...campaign,
-  drawDate: toDateTimeLocalValue(campaign.drawDate),
-  gallery1: Array.isArray(campaign.gallery) ? (campaign.gallery[0] ?? '') : '',
-  gallery2: Array.isArray(campaign.gallery) ? (campaign.gallery[1] ?? '') : '',
-  gallery3: Array.isArray(campaign.gallery) ? (campaign.gallery[2] ?? '') : '',
-  gallery4: Array.isArray(campaign.gallery) ? (campaign.gallery[3] ?? '') : '',
-  highlight1: Array.isArray(campaign.highlights) ? (campaign.highlights[0] ?? '') : '',
-  highlight2: Array.isArray(campaign.highlights) ? (campaign.highlights[1] ?? '') : '',
-  highlight3: Array.isArray(campaign.highlights) ? (campaign.highlights[2] ?? '') : '',
-  stripeEnabled: Boolean(campaign.stripe?.enabled),
-  stripePriceId: campaign.stripe?.priceId ?? '',
-  stripeProductName: campaign.stripe?.productName ?? '',
-  stripeSuccessUrl: campaign.stripe?.successUrl ?? '',
-  stripeCancelUrl: campaign.stripe?.cancelUrl ?? '',
-})
+const toAdminDraftCampaign = (campaign = {}, index = 0) => {
+  const gallery = Array.isArray(campaign.gallery)
+    ? campaign.gallery
+    : Array.isArray(campaign.images)
+      ? campaign.images
+      : []
+
+  return {
+    ...createEmptyCampaignDraft(index),
+    ...campaign,
+    title: `${campaign.title || campaign.carName || campaign.propertyName || ''}`.trim(),
+    shortDescription: `${campaign.shortDescription || campaign.subtitle || ''}`.trim(),
+    description: `${campaign.description || campaign.shortDescription || campaign.subtitle || ''}`.trim(),
+    heroImage: `${campaign.heroImage || campaign.image || ''}`.trim(),
+    drawDate: toDateTimeLocalValue(campaign.drawDate || campaign.endAt),
+    gallery1: gallery[0] ?? '',
+    gallery2: gallery[1] ?? '',
+    gallery3: gallery[2] ?? '',
+    gallery4: gallery[3] ?? '',
+    highlight1: Array.isArray(campaign.highlights) ? (campaign.highlights[0] ?? '') : '',
+    highlight2: Array.isArray(campaign.highlights) ? (campaign.highlights[1] ?? '') : '',
+    highlight3: Array.isArray(campaign.highlights) ? (campaign.highlights[2] ?? '') : '',
+    stripeEnabled: Boolean(campaign.stripe?.enabled),
+    stripePriceId: campaign.stripe?.priceId ?? '',
+    stripeProductName: campaign.stripe?.productName ?? '',
+    stripeSuccessUrl: campaign.stripe?.successUrl ?? '',
+    stripeCancelUrl: campaign.stripe?.cancelUrl ?? '',
+  }
+}
 
 const toAdminDraftCampaigns = (campaigns) =>
   (campaigns ?? []).map((campaign, index) => toAdminDraftCampaign(campaign, index))
@@ -2476,8 +2560,8 @@ const normalizeCampaignDraft = (campaign, locale = 'ptBR', existingCampaign = nu
     area: `${campaign.area || ''}`.trim(),
     location: `${campaign.location || campaign.city || ''}`.trim(),
     color: `${campaign.color || ''}`.trim(),
-    shortDescription: `${campaign.shortDescription || ''}`.trim(),
-    description: `${campaign.description || ''}`.trim(),
+    shortDescription: `${campaign.shortDescription || campaign.subtitle || ''}`.trim(),
+    description: `${campaign.description || campaign.shortDescription || campaign.subtitle || ''}`.trim(),
     status: `${campaign.status || 'draft'}`.trim(),
     featuredOnHome: Boolean(campaign.featuredOnHome),
     ticketPrice: Number.isFinite(ticketPrice) ? Math.max(0, ticketPrice) : 0,
@@ -2486,7 +2570,7 @@ const normalizeCampaignDraft = (campaign, locale = 'ptBR', existingCampaign = nu
     soldTickets: Math.min(Math.max(0, soldTickets), Math.max(0, totalTickets || soldTickets)),
     maxTicketsPerOrder: Math.max(1, parseIntegerLike(campaign.maxTicketsPerOrder) || 100),
     drawDate: drawDateIso,
-    heroImage: `${campaign.heroImage || ''}`.trim(),
+    heroImage: `${campaign.heroImage || campaign.image || ''}`.trim(),
     gallery: [campaign.gallery1, campaign.gallery2, campaign.gallery3, campaign.gallery4]
       .map((item) => `${item || ''}`.trim())
       .filter(Boolean),
@@ -2525,16 +2609,20 @@ const mapCampaignToCompetition = (campaign, locale = 'ptBR', index = 0) => {
   const assetName = isHouse
     ? (campaign.propertyName || campaign.title)
     : (campaign.carName || campaign.title)
+  const raffleTitle = `${campaign.title || assetName || 'Sorteio principal'}`.trim()
+  const raffleSubtitle = `${campaign.shortDescription || campaign.subtitle || campaign.description || assetName || raffleTitle}`.trim()
+  const raffleDescription = `${campaign.description || campaign.shortDescription || campaign.subtitle || raffleTitle}`.trim()
+  const heroImage = `${campaign.heroImage || campaign.image || ''}`.trim()
 
   return {
     id: campaign.id,
     slug: campaign.slug,
     category: campaign.category || 'cars',
     badge: campaign.badge,
-    title: assetName,
-    subtitle: campaign.shortDescription || campaign.title,
-    description: campaign.description,
-    image: campaign.heroImage || (isHouse ? '/houses/6391394-house-6597406_1920.jpg' : '/cars/hero-1.jpg'),
+    title: raffleTitle,
+    subtitle: raffleSubtitle,
+    description: raffleDescription,
+    image: heroImage || (isHouse ? '/houses/6391394-house-6597406_1920.jpg' : '/cars/hero-1.jpg'),
     gallery: campaign.gallery ?? [],
     deadline: buildDeadlineFromEndAt(campaign.drawDate, locale),
     price: formatMoney(campaign.ticketPrice ?? 0, campaign.currency ?? 'BRL', locale),
@@ -2565,6 +2653,7 @@ const DEFAULT_STORE_CONFIG = {
   homeSubtitle: 'Escolha um sorteio e compre seus bilhetes.',
   homeDescription: 'Painel administrativo conectado ao backend para editar campanhas reais.',
   campaigns: [],
+  winnersPanel: createEmptyWinnersPanelDraft(),
 }
 
 const internalScreenCopyByLocale = {
@@ -2725,6 +2814,7 @@ function App() {
   const [storeConfig, setStoreConfig] = useState(DEFAULT_STORE_CONFIG)
   const [storeCampaigns, setStoreCampaigns] = useState([])
   const [adminCarsDraft, setAdminCarsDraft] = useState([])
+  const [adminWinnersDraft, setAdminWinnersDraft] = useState(createEmptyWinnersPanelDraft())
   const [adminCarsDirty, setAdminCarsDirty] = useState(false)
   const [adminCarsNotice, setAdminCarsNotice] = useState('')
   const [adminUploadBusy, setAdminUploadBusy] = useState({})
@@ -2764,14 +2854,49 @@ function App() {
     () => getHouseCatalogItems(houseCampaignCompetitions.length ? houseCampaignCompetitions : getHouseCompetitions(locale)),
     [houseCampaignCompetitions, locale]
   )
-  const homeCarCompetitions = useMemo(() => carCompetitions.slice(0, 4), [carCompetitions])
+  const homeCarCompetitions = useMemo(() => carCompetitions.slice(0, 3), [carCompetitions])
   const homeHouseCompetitions = useMemo(() => houseCompetitions.slice(0, 3), [houseCompetitions])
+  const winnersPanelConfig = useMemo(
+    () => normalizeWinnersPanelDraft(storeConfig.winnersPanel),
+    [storeConfig.winnersPanel]
+  )
+  const winnersSectionContent = useMemo(() => ({
+    kicker: getPreferredText(winnersPanelConfig.kicker, copy.sections.winners.kicker),
+    title: getPreferredText(winnersPanelConfig.title, copy.sections.winners.title),
+    copy: getPreferredText(winnersPanelConfig.copy, copy.sections.winners.copy),
+    stats: copy.sections.winners.stats.map((stat, index) => ({
+      ...stat,
+      value: getPreferredText(winnersPanelConfig.stats[index]?.value, stat.value),
+      label: getPreferredText(winnersPanelConfig.stats[index]?.label, stat.label),
+    })),
+  }), [copy.sections.winners, winnersPanelConfig])
+  const winnersCards = useMemo(() => (
+    copy.winners.map((winner, index) => ({
+      ...winner,
+      name: getPreferredText(winnersPanelConfig.cards[index]?.name, winner.name),
+      prize: getPreferredText(winnersPanelConfig.cards[index]?.prize, winner.prize),
+      stat: getPreferredText(winnersPanelConfig.cards[index]?.stat, winner.stat),
+      quote: getPreferredText(winnersPanelConfig.cards[index]?.quote, winner.quote),
+    }))
+  ), [copy.winners, winnersPanelConfig])
   const winnersShowcaseSlides = useMemo(
-    () => [
-      { id: 'casal', image: '/houses/casal.jpg', alt: 'Casal vencedor com premio' },
-      { id: 'casal2', image: '/houses/casal2.jpg', alt: 'Casal celebrando sorteio' },
-    ],
-    []
+    () => {
+      const baseSlides = [
+        { id: 'casal', image: '/houses/casal.jpg', alt: 'Casal vencedor com premio' },
+        { id: 'casal2', image: '/houses/casal2.jpg', alt: 'Casal celebrando sorteio' },
+      ]
+
+      return baseSlides.map((slide, index) => {
+        const overrideSlide = winnersPanelConfig.slides[index] ?? {}
+
+        return {
+          ...slide,
+          image: getPreferredText(overrideSlide.image, slide.image),
+          alt: getPreferredText(overrideSlide.alt, slide.alt),
+        }
+      })
+    },
+    [winnersPanelConfig]
   )
   const visibleAdminDrafts = useMemo(
     () => adminCarsDraft
@@ -2912,9 +3037,11 @@ function App() {
         }
 
         const campaigns = Array.isArray(payload?.campaigns) ? payload.campaigns : []
-        setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns })
+        const winnersPanel = normalizeWinnersPanelDraft(payload?.winnersPanel)
+        setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns, winnersPanel })
         setStoreCampaigns(campaigns)
         setAdminCarsDraft(toAdminDraftCampaigns(campaigns))
+        setAdminWinnersDraft(winnersPanel)
       } catch {
         if (!isMounted) {
           return
@@ -2923,6 +3050,7 @@ function App() {
         setStoreConfig(DEFAULT_STORE_CONFIG)
         setStoreCampaigns([])
         setAdminCarsDraft([])
+        setAdminWinnersDraft(createEmptyWinnersPanelDraft())
       } finally {
         if (isMounted) {
           setIsCampaignsLoading(false)
@@ -3148,8 +3276,10 @@ function App() {
   const openAdminLogin = () => {
     setAdminError('')
     setIsAccountMenuOpen(false)
-    setAdminDashboardTab('payments')
+    setAdminDashboardTab('cars')
+    setAdminCampaignCategory('cars')
     setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
+    setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminLogin')
@@ -3157,8 +3287,10 @@ function App() {
 
   const openAdminProfile = () => {
     setIsAccountMenuOpen(false)
-    setAdminDashboardTab('payments')
+    setAdminDashboardTab('cars')
+    setAdminCampaignCategory('cars')
     setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
+    setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminDashboard')
@@ -3235,7 +3367,9 @@ function App() {
       }
 
       setAdminForm((current) => ({ ...current, password: '', email }))
-      setAdminDashboardTab('payments')
+      setAdminDashboardTab('cars')
+      setAdminCampaignCategory('cars')
+      setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
       setIsAdminAuthenticated(true)
       setIsAccountMenuOpen(false)
       setView('adminDashboard')
@@ -3250,6 +3384,26 @@ function App() {
     setAdminCarsDraft((current) => current.map((item, itemIndex) => (
       itemIndex === index ? { ...item, [field]: value } : item
     )))
+    setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const updateAdminWinnersField = (field, value) => {
+    setAdminWinnersDraft((current) => ({
+      ...current,
+      [field]: value,
+    }))
+    setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const updateAdminWinnersCollectionField = (collection, index, field, value) => {
+    setAdminWinnersDraft((current) => ({
+      ...current,
+      [collection]: (current[collection] ?? []).map((item, itemIndex) => (
+        itemIndex === index ? { ...item, [field]: value } : item
+      )),
+    }))
     setAdminCarsDirty(true)
     setAdminCarsNotice('')
   }
@@ -3304,6 +3458,56 @@ function App() {
     }
   }
 
+  const handleAdminWinnersImageUpload = async (file, slideIndex) => {
+    if (!file) {
+      return
+    }
+
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const token = window.localStorage.getItem(ADMIN_TOKEN_STORAGE_KEY)
+    if (!token) {
+      setAdminCarsNotice('Sessao admin expirada. Faca login novamente.')
+      return
+    }
+
+    const busyKey = `winners-slide-${slideIndex}`
+    setAdminUploadBusy((current) => ({ ...current, [busyKey]: true }))
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('folder', 'admin-winners')
+
+      const response = await fetch(`${API_BASE_URL}/api/admin/upload-image`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      })
+
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Falha ao anexar imagem do painel.')
+      }
+
+      const imageUrl = payload?.publicUrl || ''
+      if (!imageUrl) {
+        throw new Error('URL da imagem nao retornada pela API.')
+      }
+
+      updateAdminWinnersCollectionField('slides', slideIndex, 'image', imageUrl)
+      setAdminCarsNotice('Imagem do painel anexada com sucesso.')
+    } catch (error) {
+      setAdminCarsNotice(error?.message || 'Erro ao anexar imagem.')
+    } finally {
+      setAdminUploadBusy((current) => ({ ...current, [busyKey]: false }))
+    }
+  }
+
   const handleAddAdminCar = () => {
     setAdminCarsDraft((current) => [
       ...current,
@@ -3324,6 +3528,7 @@ function App() {
 
   const handleResetAdminCarsDraft = () => {
     setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
+    setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
   }
@@ -3358,6 +3563,7 @@ function App() {
           homeTitle: storeConfig.homeTitle,
           homeSubtitle: storeConfig.homeSubtitle,
           homeDescription: storeConfig.homeDescription,
+          winnersPanel: normalizeWinnersPanelDraft(adminWinnersDraft),
           campaigns,
         }),
       })
@@ -3368,9 +3574,11 @@ function App() {
       }
 
       const nextCampaigns = Array.isArray(payload?.campaigns) ? payload.campaigns : campaigns
-      setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns: nextCampaigns })
+      const nextWinnersPanel = normalizeWinnersPanelDraft(payload?.winnersPanel)
+      setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns: nextCampaigns, winnersPanel: nextWinnersPanel })
       setStoreCampaigns(nextCampaigns)
       setAdminCarsDraft(toAdminDraftCampaigns(nextCampaigns))
+      setAdminWinnersDraft(nextWinnersPanel)
       setAdminCarsDirty(false)
       setAdminCarsNotice(adminCarsCopy.savedMessage)
     } catch (error) {
@@ -4197,6 +4405,169 @@ function App() {
                     <p className="mt-5 text-sm font-semibold text-[#b7beca]">{adminCarsCopy.loading}</p>
                   ) : null}
 
+                  <section className="mt-5 rounded-[22px] border border-white/8 bg-[#101218] p-4 sm:p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
+                          Painel de acompanhamento
+                        </p>
+                        <h4 className="mt-1 text-lg font-black text-white">
+                          Bloco de testemunhos da home
+                        </h4>
+                        <p className="mt-1 text-sm text-[#b7beca]">
+                          Edite textos, metricas, cards e imagens do painel mostrado na secao de vencedores.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Badge
+                        </span>
+                        <input
+                          type="text"
+                          value={adminWinnersDraft.kicker}
+                          onChange={(event) => updateAdminWinnersField('kicker', event.target.value)}
+                          placeholder={winnersSectionContent.kicker}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Titulo
+                        </span>
+                        <input
+                          type="text"
+                          value={adminWinnersDraft.title}
+                          onChange={(event) => updateAdminWinnersField('title', event.target.value)}
+                          placeholder={winnersSectionContent.title}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                      <label className="block md:col-span-2">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Texto de apoio
+                        </span>
+                        <textarea
+                          rows={3}
+                          value={adminWinnersDraft.copy}
+                          onChange={(event) => updateAdminWinnersField('copy', event.target.value)}
+                          placeholder={winnersSectionContent.copy}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                      {adminWinnersDraft.stats.map((stat, statIndex) => (
+                        <div key={`winners-stat-${statIndex}`} className="rounded-[16px] border border-white/10 bg-[#12131a] p-3">
+                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
+                            Metrica {statIndex + 1}
+                          </p>
+                          <div className="mt-2 grid gap-2">
+                            <input
+                              type="text"
+                              value={stat.value}
+                              onChange={(event) => updateAdminWinnersCollectionField('stats', statIndex, 'value', event.target.value)}
+                              placeholder={winnersSectionContent.stats[statIndex]?.value || 'Valor'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                            <input
+                              type="text"
+                              value={stat.label}
+                              onChange={(event) => updateAdminWinnersCollectionField('stats', statIndex, 'label', event.target.value)}
+                              placeholder={winnersSectionContent.stats[statIndex]?.label || 'Descricao da metrica'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                      {adminWinnersDraft.slides.map((slide, slideIndex) => (
+                        <div key={`winners-slide-${slideIndex}`} className="rounded-[16px] border border-white/10 bg-[#12131a] p-3">
+                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
+                            Imagem do carrossel {slideIndex + 1}
+                          </p>
+                          <div className="mt-2 grid gap-2">
+                            <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_150px]">
+                              <input
+                                type="text"
+                                value={slide.image}
+                                onChange={(event) => updateAdminWinnersCollectionField('slides', slideIndex, 'image', event.target.value)}
+                                placeholder={winnersShowcaseSlides[slideIndex]?.image || '/houses/casal.jpg'}
+                                className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                              <label className="inline-flex cursor-pointer items-center justify-center rounded-[12px] border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#f0c000]/35">
+                                {adminUploadBusy[`winners-slide-${slideIndex}`] ? adminCarsCopy.uploadingImage : adminCarsCopy.uploadImage}
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  disabled={Boolean(adminUploadBusy[`winners-slide-${slideIndex}`])}
+                                  onChange={(event) => {
+                                    const file = event.target.files?.[0]
+                                    handleAdminWinnersImageUpload(file, slideIndex)
+                                    event.target.value = ''
+                                  }}
+                                />
+                              </label>
+                            </div>
+                            <input
+                              type="text"
+                              value={slide.alt}
+                              onChange={(event) => updateAdminWinnersCollectionField('slides', slideIndex, 'alt', event.target.value)}
+                              placeholder={winnersShowcaseSlides[slideIndex]?.alt || 'Texto alternativo da imagem'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-4 grid gap-3">
+                      {adminWinnersDraft.cards.map((card, cardIndex) => (
+                        <div key={`winners-card-${cardIndex}`} className="rounded-[16px] border border-white/10 bg-[#12131a] p-3">
+                          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
+                            Card lateral {cardIndex + 1}
+                          </p>
+                          <div className="mt-2 grid gap-2 md:grid-cols-2">
+                            <input
+                              type="text"
+                              value={card.name}
+                              onChange={(event) => updateAdminWinnersCollectionField('cards', cardIndex, 'name', event.target.value)}
+                              placeholder={winnersCards[cardIndex]?.name || 'Nome'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                            <input
+                              type="text"
+                              value={card.prize}
+                              onChange={(event) => updateAdminWinnersCollectionField('cards', cardIndex, 'prize', event.target.value)}
+                              placeholder={winnersCards[cardIndex]?.prize || 'Linha de destaque'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                            <input
+                              type="text"
+                              value={card.stat}
+                              onChange={(event) => updateAdminWinnersCollectionField('cards', cardIndex, 'stat', event.target.value)}
+                              placeholder={winnersCards[cardIndex]?.stat || 'Status (badge)'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                            />
+                            <input
+                              type="text"
+                              value={card.quote}
+                              onChange={(event) => updateAdminWinnersCollectionField('cards', cardIndex, 'quote', event.target.value)}
+                              placeholder={winnersCards[cardIndex]?.quote || 'Depoimento'}
+                              className="w-full rounded-[12px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45 md:col-span-2"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+
                   <div className="mt-5 grid gap-4">
                     {!visibleAdminDrafts.length ? (
                       <div className="rounded-[22px] border border-dashed border-white/10 bg-[#12131a] p-6 text-sm text-[#b7beca]">
@@ -4219,9 +4590,12 @@ function App() {
                       return (
                         <article key={`admin-car-${index}`} className="rounded-[22px] border border-white/8 bg-[#12131a] p-4">
                           <div className="mb-4 flex items-center justify-between gap-3">
-                            <p className="text-sm font-black uppercase tracking-[0.12em] text-white">
-                              {adminCarsCopy.carsTab} #{index + 1}
-                            </p>
+                            <div>
+                              <p className="text-sm font-black uppercase tracking-[0.12em] text-white">
+                                {adminCarsCopy.carsTab} #{index + 1}
+                              </p>
+                              <p className="mt-1 text-xs text-[#9aa0ac]">ID: {car.id || 'sem identificação'}</p>
+                            </div>
                             <button
                               type="button"
                               onClick={() => handleRemoveAdminCar(index)}
@@ -4231,22 +4605,42 @@ function App() {
                             </button>
                           </div>
 
-                          <div className="mb-4 grid gap-3 rounded-[16px] border border-white/8 bg-[#101218] p-3 sm:grid-cols-[88px_minmax(0,1fr)]">
-                            <img
-                              src={car.heroImage || (isHouseDraft ? '/houses/6391394-house-6597406_1920.jpg' : '/cars/hero-1.jpg')}
-                              alt={assetName || `Sorteio ${index + 1}`}
-                              className="h-20 w-full rounded-[12px] object-cover"
-                            />
-                            <div className="flex flex-col justify-center gap-1">
-                              <p className="text-sm font-bold text-white">{assetName || `Sorteio ${index + 1}`}</p>
-                              <p className="text-xs text-[#9aa0ac]">{entriesSummary}</p>
-                              <p className="text-xs text-[#9aa0ac]">
-                                {adminCarsCopy.progressLabel}: {progress}%
-                              </p>
+                          <div className="mb-6 grid gap-4 rounded-[16px] border border-white/8 bg-[#101218] p-4 lg:grid-cols-[320px_minmax(0,1fr)]">
+                            <div className="relative h-64 overflow-hidden rounded-[12px] bg-[#0b0c10]">
+                              <img
+                                src={car.heroImage || (isHouseDraft ? '/houses/6391394-house-6597406_1920.jpg' : '/cars/hero-1.jpg')}
+                                alt={assetName || `Sorteio ${index + 1}`}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <div className="flex flex-col justify-between gap-3 rounded-[12px] border border-white/8 bg-[#12131a] p-4">
+                              <div>
+                                <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#9aa0ac]">Preview</p>
+                                <h3 className="mt-2 line-clamp-2 text-lg font-bold text-white">{car.title || 'Título não definido'}</h3>
+                                <p className="mt-1 line-clamp-2 text-sm text-[#b7beca]">{car.shortDescription || 'Descrição não definida'}</p>
+                              </div>
+                              <div className="grid gap-2 rounded-[10px] border border-white/8 bg-[#101218] p-3">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs text-[#9aa0ac]">{adminCarsCopy.entriesLabel}:</span>
+                                  <span className="font-bold text-[#ffd25a]">{entriesSummary}</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs text-[#9aa0ac]">{adminCarsCopy.progressLabel}:</span>
+                                  <span className="font-bold text-[#ffd25a]">{progress}%</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs text-[#9aa0ac]">Preço:</span>
+                                  <span className="font-bold text-[#ffd25a]">{car.currency || 'EUR'} {car.ticketPrice || '0'}</span>
+                                </div>
+                              </div>
                             </div>
                           </div>
 
                           <div className="grid gap-3 md:grid-cols-2">
+                            <div className="md:col-span-2 mb-2">
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">📋 Informações Básicas</p>
+                            </div>
+
                             <label className="block">
                               <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
                                 {adminCarsCopy.idLabel}
@@ -4414,6 +4808,10 @@ function App() {
                               <span className="text-sm font-semibold text-white">{adminCarsCopy.featuredLabel}</span>
                             </label>
 
+                            <div className="md:col-span-2 mt-3 pt-3 border-t border-white/10">
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">📝 Textos e Descrição</p>
+                            </div>
+
                             <label className="block md:col-span-2">
                               <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
                                 {adminCarsCopy.subtitleLabel}
@@ -4437,6 +4835,10 @@ function App() {
                                 className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
                               />
                             </label>
+
+                            <div className="md:col-span-2 mt-3 pt-3 border-t border-white/10">
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">🖼️ Imagens e Mídia</p>
+                            </div>
 
                             <label className="block md:col-span-2">
                               <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
@@ -4500,6 +4902,10 @@ function App() {
                               </div>
                               <span className="mt-1 block text-[11px] text-[#7f8794]">{adminCarsCopy.uploadHint}</span>
                             </label>
+
+                            <div className="md:col-span-2 mt-3 pt-3 border-t border-white/10">
+                              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">💰 Preço e Bilhetes</p>
+                            </div>
 
                             <label className="block">
                               <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
@@ -5463,7 +5869,7 @@ function App() {
             <h3 className="mt-8 text-xl font-extrabold tracking-[-0.03em] text-white">
               {catalogCopy.carsTab}
             </h3>
-            <div className="home-competitions-grid mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="home-competitions-grid mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {homeCarCompetitions.map((competition) => (
                 <article
                   key={competition.title}
@@ -5653,11 +6059,11 @@ function App() {
                     </div>
                   </div>
                   <div className="p-6 lg:p-8">
-                    <span className="section-kicker">{copy.sections.winners.kicker}</span>
-                    <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-white">{copy.sections.winners.title}</h2>
-                    <p className="mt-4 text-sm leading-7 text-[#b7beca]">{copy.sections.winners.copy}</p>
+                    <span className="section-kicker">{winnersSectionContent.kicker}</span>
+                    <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-white">{winnersSectionContent.title}</h2>
+                    <p className="mt-4 text-sm leading-7 text-[#b7beca]">{winnersSectionContent.copy}</p>
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                      {copy.sections.winners.stats.map((stat) => (
+                      {winnersSectionContent.stats.map((stat) => (
                         <div key={stat.label} className="rounded-[22px] border border-white/8 bg-[#12131a] p-5">
                           <p className="text-3xl font-black text-[#ffd25a]">{stat.value}</p>
                           <p className="mt-2 text-sm text-[#9aa0ac]">{stat.label}</p>
@@ -5669,7 +6075,7 @@ function App() {
               </div>
 
               <div className="grid gap-5">
-                {copy.winners.map((winner) => (
+                {winnersCards.map((winner) => (
                   <article key={winner.name} className="surface-card p-6">
                     <div className="flex items-center justify-between gap-4">
                       <div>

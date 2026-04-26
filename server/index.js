@@ -119,6 +119,69 @@ const writeJsonFile = async (filePath, data) => {
 
 const getStoreConfig = async () => readJsonFile(STORE_CONFIG_PATH)
 
+const createEmptyWinnersPanel = () => ({
+  kicker: '',
+  title: '',
+  copy: '',
+  stats: [
+    { value: '', label: '' },
+    { value: '', label: '' },
+  ],
+  slides: [
+    { image: '', alt: '' },
+    { image: '', alt: '' },
+  ],
+  cards: [
+    { name: '', prize: '', stat: '', quote: '' },
+    { name: '', prize: '', stat: '', quote: '' },
+    { name: '', prize: '', stat: '', quote: '' },
+  ],
+})
+
+const normalizeWinnersPanel = (panel = {}) => {
+  const base = createEmptyWinnersPanel()
+  const text = (value) => `${value ?? ''}`.trim()
+  const legacyStats = [
+    { value: panel.stat1Value, label: panel.stat1Label },
+    { value: panel.stat2Value, label: panel.stat2Label },
+  ]
+  const legacySlides = [
+    { image: panel.slide1Image, alt: panel.slide1Alt },
+    { image: panel.slide2Image, alt: panel.slide2Alt },
+  ]
+  const legacyCards = [
+    { name: panel.card1Name, prize: panel.card1Prize, stat: panel.card1Stat, quote: panel.card1Quote },
+    { name: panel.card2Name, prize: panel.card2Prize, stat: panel.card2Stat, quote: panel.card2Quote },
+    { name: panel.card3Name, prize: panel.card3Prize, stat: panel.card3Stat, quote: panel.card3Quote },
+  ]
+  const statsInput = Array.isArray(panel.stats) ? panel.stats : legacyStats
+  const slidesInput = Array.isArray(panel.slides) ? panel.slides : legacySlides
+  const cardsInput = Array.isArray(panel.cards) ? panel.cards : legacyCards
+
+  return {
+    kicker: text(panel.kicker),
+    title: text(panel.title),
+    copy: text(panel.copy),
+    stats: base.stats.map((item, index) => ({
+      ...item,
+      value: text(statsInput[index]?.value),
+      label: text(statsInput[index]?.label),
+    })),
+    slides: base.slides.map((item, index) => ({
+      ...item,
+      image: text(slidesInput[index]?.image),
+      alt: text(slidesInput[index]?.alt),
+    })),
+    cards: base.cards.map((item, index) => ({
+      ...item,
+      name: text(cardsInput[index]?.name),
+      prize: text(cardsInput[index]?.prize),
+      stat: text(cardsInput[index]?.stat),
+      quote: text(cardsInput[index]?.quote),
+    })),
+  }
+}
+
 const buildRaffleConfigFromCampaign = (campaign) => ({
   id: campaign.id,
   slug: campaign.slug,
@@ -309,6 +372,7 @@ app.get('/api/admin/campaigns', async (req, res) => {
       homeTitle: config.homeTitle,
       homeSubtitle: config.homeSubtitle,
       homeDescription: config.homeDescription,
+      winnersPanel: normalizeWinnersPanel(config.winnersPanel),
       campaigns: config.campaigns ?? [],
     })
   } catch (error) {
@@ -340,12 +404,14 @@ app.put('/api/admin/campaigns', async (req, res) => {
     campaignsInput.forEach((campaign, index) => validateCampaign(campaign, index))
 
     const currentConfig = await getStoreConfig()
+    const winnersPanelInput = req.body?.winnersPanel ?? currentConfig.winnersPanel
     const nextConfig = {
       ...currentConfig,
       siteName: `${req.body?.siteName || currentConfig.siteName || ''}`.trim() || currentConfig.siteName,
       homeTitle: `${req.body?.homeTitle || currentConfig.homeTitle || ''}`.trim() || currentConfig.homeTitle,
       homeSubtitle: `${req.body?.homeSubtitle || currentConfig.homeSubtitle || ''}`.trim() || currentConfig.homeSubtitle,
       homeDescription: `${req.body?.homeDescription || currentConfig.homeDescription || ''}`.trim() || currentConfig.homeDescription,
+      winnersPanel: normalizeWinnersPanel(winnersPanelInput),
       campaigns: campaignsInput,
       updatedAt: new Date().toISOString(),
     }
