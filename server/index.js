@@ -23,6 +23,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const STORE_CONFIG_PATH = path.join(__dirname, 'data', 'store-config.json')
 const RAFFLE_CONFIG_PATH = path.join(__dirname, 'data', 'raffle-config.json')
+const SITE_CONTENT_LOCALES = ['en', 'ptPT', 'es', 'ptBR']
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !SUPABASE_SERVICE_ROLE_KEY) {
   throw new Error('Missing Supabase environment variables.')
@@ -180,6 +181,20 @@ const normalizeWinnersPanel = (panel = {}) => {
       quote: text(cardsInput[index]?.quote),
     })),
   }
+}
+
+const normalizeSiteContentOverrides = (overrides = {}) => {
+  const source = overrides && typeof overrides === 'object' && !Array.isArray(overrides)
+    ? overrides
+    : {}
+
+  return SITE_CONTENT_LOCALES.reduce((accumulator, locale) => {
+    const localeOverrides = source[locale]
+    accumulator[locale] = localeOverrides && typeof localeOverrides === 'object' && !Array.isArray(localeOverrides)
+      ? localeOverrides
+      : {}
+    return accumulator
+  }, {})
 }
 
 const buildRaffleConfigFromCampaign = (campaign) => ({
@@ -372,6 +387,7 @@ app.get('/api/admin/campaigns', async (req, res) => {
       homeTitle: config.homeTitle,
       homeSubtitle: config.homeSubtitle,
       homeDescription: config.homeDescription,
+      siteContentOverrides: normalizeSiteContentOverrides(config.siteContentOverrides),
       winnersPanel: normalizeWinnersPanel(config.winnersPanel),
       campaigns: config.campaigns ?? [],
     })
@@ -411,6 +427,9 @@ app.put('/api/admin/campaigns', async (req, res) => {
       homeTitle: `${req.body?.homeTitle || currentConfig.homeTitle || ''}`.trim() || currentConfig.homeTitle,
       homeSubtitle: `${req.body?.homeSubtitle || currentConfig.homeSubtitle || ''}`.trim() || currentConfig.homeSubtitle,
       homeDescription: `${req.body?.homeDescription || currentConfig.homeDescription || ''}`.trim() || currentConfig.homeDescription,
+      siteContentOverrides: normalizeSiteContentOverrides(
+        req.body?.siteContentOverrides ?? currentConfig.siteContentOverrides,
+      ),
       winnersPanel: normalizeWinnersPanel(winnersPanelInput),
       campaigns: campaignsInput,
       updatedAt: new Date().toISOString(),

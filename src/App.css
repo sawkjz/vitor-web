@@ -419,6 +419,31 @@ textarea {
   margin-bottom: 18px;
 }
 
+.admin-editable-block {
+  position: relative;
+}
+
+.admin-editable-block::after {
+  content: '✏ Editavel';
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 192, 0, 0.35);
+  background: rgba(16, 18, 24, 0.82);
+  color: #ffd25a;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 25;
+}
+
 @media (max-width: 1100px) {
   .hero-card,
   .content-grid,

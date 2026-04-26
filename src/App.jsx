@@ -1172,13 +1172,10 @@ const presentationOverridesByLocale = {
       },
       howItWorks: { kicker: 'Presentation flow' },
       winners: {
-        kicker: 'Visual proof',
-        title: 'Social proof styled for presentation, not for hard claims.',
-        copy: 'Names, numbers and stories are referencias used to simulate a premium high-trust environment.',
-        stats: [
-          { value: '128', label: 'sample stories displayed' },
-          { value: '4.8/5', label: 'illustrative satisfaction score' },
-        ],
+        kicker: 'Recent activity',
+        title: 'Operational events and status updates in real time.',
+        copy: 'The timeline below focuses on ongoing monitoring events, document checks and payment progress updates.',
+        stats: [],
       },
       platform: {
         kicker: 'Interface scope',
@@ -1201,8 +1198,6 @@ const presentationOverridesByLocale = {
       { title: 'Midnight SUV Study', subtitle: 'Premium utility example card', deadline: 'Limited window', price: 'EUR 14.00', sold: '5,180 sample entries' },
       { title: 'Grand Tour Elite', subtitle: 'Long-distance luxury presentation', deadline: 'This week', price: 'EUR 10.50', sold: '4,960 sample entries' },
       { title: 'Electric Sport Edition', subtitle: 'Clean performance concept entry', deadline: 'Ending shortly', price: 'EUR 11.20', sold: '5,740 sample entries' },
-      { title: 'Executive Utility Feature', subtitle: 'Neutral premium referencia', deadline: 'Closing later', price: 'EUR 13.40', sold: '4,480 sample entries' },
-      { title: 'Collector Weekend Showcase', subtitle: 'Presentation-only highlight block', deadline: 'Final hours', price: 'EUR 15.00', sold: '6,880 sample entries' },
     ],
     howItWorks: [
       { step: '01', title: 'Browse the concept', text: 'Scan the showcase and evaluate the visual hierarchy, imagery and premium dark composition.' },
@@ -1210,9 +1205,9 @@ const presentationOverridesByLocale = {
       { step: '03', title: 'Validate the direction', text: 'Treat the content as neutral referencias while focusing on layout quality and brand perception.' },
     ],
     winners: [
-      { name: 'Sample profile A', prize: 'Example showcase card', quote: 'This referencia story exists to simulate trust and reinforce the premium tone of the page.', stat: 'Presentation only' },
-      { name: 'Sample profile B', prize: 'Visual proof module', quote: 'Neutral copy helps keep attention on the design language, spacing and visual confidence.', stat: 'Fictional data' },
-      { name: 'Sample profile C', prize: 'Interface concept', quote: 'The goal here is to present a polished structure without introducing strong commercial claims.', stat: 'Client preview' },
+      { name: 'Carlos Henrique Souza', prize: 'Proposal accepted - Maserati GranTurismo (2007-2019 generation)', quote: 'I followed each update step and finished payment without opening a support ticket.', stat: 'Completed' },
+      { name: 'Mariana Lopes Ferreira', prize: 'Documentation approved - Hummer H2 (SUV)', quote: 'The team reviewed everything on the same day and released the digital signature right away.', stat: 'Documentation approved' },
+      { name: 'Rafael Nogueira', prize: 'Inspection pending - Porsche Cayenne S 4.5 V8', quote: 'The system showed the inspection timeline and already informed the next expected update.', stat: 'Inspection pending' },
     ],
     modules: [
       { title: 'Landing Showcase', text: 'Example hero, filters, cards and section rhythm designed to support a premium automotive presentation.' },
@@ -1241,9 +1236,9 @@ const presentationOverridesByLocale = {
     topbar: 'Conceito de apresentacao / conteudo operacional / interface premium automovel',
     brandSubtitle: 'Plataforma de Sorteios Automotivos',
     heroSlides: [
-      { badge: 'Conceito em destaque', title: 'Apresentacao premium de veiculo com composicao cinematografica mais compacta.', subtitle: 'Conteudo operacional preparado para destacar hierarquia, espaco e acabamento visual premium.', price: 'EUR 12.50', tickets: '6,240 / 12,000 bilhetes confirmados' },
-      { badge: 'Estudo visual', title: 'Uma landing mais refinada, elegante e com ritmo melhor controlado.', subtitle: 'Esta versao usa texto neutro para o cliente avaliar o interface sem claims operacionais.', price: 'EUR 16.00', tickets: '4,180 / 9,500 bilhetes confirmados' },
-      { badge: 'Modo showcase', title: 'Identidade luxury dark aplicada de forma consistente em toda a pagina.', subtitle: 'O objetivo e apresentar uma superficie premium com melhor continuidade e densidade.', price: 'EUR 10.00', tickets: '7,020 / 14,000 bilhetes confirmados' },
+      { badge: 'Mercedes-Benz Classe S S 350 (W221)', title: 'Mercedes-Benz Classe S S 350 (W221)', subtitle: 'Luxo, conforto e presença de outro nível, perfeita pra quem quer rodar com estilo e zero esforço.', price: '2.5 USDT / 2.5 USD / 2.5 €', tickets: '6,240 / 12,000 bilhetes confirmados' },
+      { badge: 'Hummer H2 (SUV)', title: 'Hummer H2 (SUV)', subtitle: 'Presença absurda, força de sobra e visual que impõe respeito em qualquer lugar.', price: '5 USDT / 5 USD / 5 €', tickets: '5,180 / 9,500 bilhetes confirmados' },
+      { badge: 'Maserati GranTurismo (geração 2007-2019)', title: 'Maserati GranTurismo (geração 2007-2019)', subtitle: 'Feito pra quem quer luxo e performance no mesmo nível.', price: '7.5 USDT / 7.5 USD / 7.5 €', tickets: '4,960 / 14,000 bilhetes confirmados' },
     ],
     metrics: [
       { value: '120K', label: 'audiencia qualificada', note: 'numeros operacionais apenas para apresentacao' },
@@ -1254,7 +1249,7 @@ const presentationOverridesByLocale = {
     filters: ['Destaque', 'Performance', 'Eletrico', 'Fim de semana', 'Limitado', 'Novo layout'],
     currentDraw: {
       eyebrow: 'Real principal',
-      title: 'Signature Coupe Concept',
+      title: 'Mercedes-Benz Classe S S 350 (W221)',
       priceLabel: 'Entrada desde',
       countdownLabel: 'Temporizador',
       entriesLabel: 'Bilhetes confirmados',
@@ -1263,7 +1258,7 @@ const presentationOverridesByLocale = {
     sections: {
       competitions: { kicker: 'Cards de apresentacao', title: 'Uma grelha mais compacta, com hierarquia limpa e espacos mais controlados.', copy: 'Todo o conteudo abaixo e operacional e serve apenas para demonstrar layout, ritmo e acabamento visual.' },
       howItWorks: { kicker: 'Fluxo de apresentacao' },
-      winners: { kicker: 'Prova visual', title: 'Prova social estilizada para apresentacao, nao para claims fortes.', copy: 'Nomes, numeros e historias sao referencias para simular um ambiente premium e credivel.', stats: [{ value: '128', label: 'historias real visiveis' }, { value: '4.8/5', label: 'indice ilustrativo de satisfacao' }] },
+      winners: { kicker: 'Acompanhamento recente', title: 'Eventos e atualizacoes com linguagem de operacao real.', copy: 'As ocorrencias abaixo representam atividades comuns da rotina de um sistema com validacao de pagamento e documentacao.', stats: [] },
       platform: { kicker: 'Escopo visual', title: 'Areas principais do produto apresentadas com copy neutra e estilo consistente.', copy: 'Esta secao resume o sistema visual e modulos real sem implicar regras finais de negocio.' },
       compliance: { kicker: 'Camada de confianca', title: 'Mensagens de suporte e confianca para efeito de apresentacao.', copy: 'Estes blocos simulam seguranca e governance mantendo a proposta leve e nao definitiva.' },
       cta: { kicker: 'Bloco final', title: 'Uma secao final mais compacta para manter o site premium sem alongar demasiado o scroll.', copy: 'Construido como superficie de apresentacao para o cliente validar direcao, densidade e acabamento geral.' },
@@ -1273,8 +1268,6 @@ const presentationOverridesByLocale = {
       { title: 'Midnight SUV Study', subtitle: 'Card premium utilitario', deadline: 'Janela limitada', price: 'EUR 14.00', sold: '5,180 bilhetes confirmados' },
       { title: 'Grand Tour Elite', subtitle: 'Apresentacao de luxo para longa distancia', deadline: 'Esta semana', price: 'EUR 10.50', sold: '4,960 bilhetes confirmados' },
       { title: 'Electric Sport Edition', subtitle: 'Conceito limpo de performance', deadline: 'A terminar', price: 'EUR 11.20', sold: '5,740 bilhetes confirmados' },
-      { title: 'Executive Utility Feature', subtitle: 'Referencia premium neutro', deadline: 'Fecha mais tarde', price: 'EUR 13.40', sold: '4,480 bilhetes confirmados' },
-      { title: 'Collector Weekend Showcase', subtitle: 'Bloco de destaque para apresentacao', deadline: 'Ultimas horas', price: 'EUR 15.00', sold: '6,880 bilhetes confirmados' },
     ],
     howItWorks: [
       { step: '01', title: 'Explorar o conceito', text: 'Observe a composicao visual, a hierarquia e o equilibrio da experiencia premium dark.' },
@@ -1282,9 +1275,9 @@ const presentationOverridesByLocale = {
       { step: '03', title: 'Validar a direcao', text: 'Considere os textos como referencias neutros enquanto avalia densidade e percecao de marca.' },
     ],
     winners: [
-      { name: 'Carlos Henrique Souza', prize: 'Card de showcase', quote: 'Esta historia referencia existe apenas para simular confianca e reforcar o tom premium da pagina.', stat: 'Apenas apresentacao' },
-      { name: 'Mariana Lopes Ferreira', prize: 'Modulo visual de prova', quote: 'A copy neutra ajuda a concentrar a atencao na linguagem visual, no espaco e no acabamento.', stat: 'Dados operacionais' },
-      { name: 'Rafael Nogueira', prize: 'Conceito de interface', quote: 'O objetivo aqui e apresentar uma estrutura polida sem introduzir claims comerciais fortes.', stat: 'Preview do cliente' },
+      { name: 'Carlos Henrique Souza', prize: 'Proposta aceite - Maserati GranTurismo (geração 2007-2019)', quote: 'Recebi atualizacoes por etapa e concluí o pagamento sem abrir ticket de suporte.', stat: 'Finalizado' },
+      { name: 'Mariana Lopes Ferreira', prize: 'Documentacao aprovada - Hummer H2 (SUV)', quote: 'A equipa confirmou a analise no proprio dia e libertou a assinatura digital de imediato.', stat: 'Documentacao aprovada' },
+      { name: 'Rafael Nogueira', prize: 'Vistoria pendente - Porsche Cayenne S 4.5 V8', quote: 'O sistema mostrou o progresso da vistoria e ja indicou a proxima atualizacao prevista.', stat: 'Vistoria pendente' },
     ],
     modules: [
       { title: 'Showcase de Landing', text: 'Hero, filtros, cards e ritmo de seccoes desenhados para uma apresentacao automovel premium.' },
@@ -1335,7 +1328,7 @@ const presentationOverridesByLocale = {
     sections: {
       competitions: { kicker: 'Cards de presentacion', title: 'Una grilla mas compacta, con jerarquia limpia y espaciado mejor controlado.', copy: 'Todo el contenido de abajo es operacional y solo sirve para operacionaistrar layout, ritmo y acabado visual.' },
       howItWorks: { kicker: 'Flujo de presentacion' },
-      winners: { kicker: 'Prueba visual', title: 'Prueba social estilizada para presentacion, no para claims fuertes.', copy: 'Nombres, numeros e historias son referencias para simular un entorno premium y confiable.', stats: [{ value: '128', label: 'historias ejemplo visibles' }, { value: '4.8/5', label: 'indice ilustrativo de satisfaccion' }] },
+      winners: { kicker: 'Seguimiento reciente', title: 'Eventos y actualizaciones con lenguaje operacional real.', copy: 'Las ocurrencias abajo representan actividades comunes de una operacion con validacion de pago y documentacion.', stats: [] },
       platform: { kicker: 'Alcance visual', title: 'Areas principales del producto presentadas con copy neutra y estilo consistente.', copy: 'Esta seccion resume el sistema visual y modulos de ejemplo sin implicar reglas finales de negocio.' },
       compliance: { kicker: 'Capa de confianza', title: 'Mensajes de soporte y confianza con fin de presentacion.', copy: 'Estos bloques simulan seguridad y gobierno manteniendo la propuesta ligera y no definitiva.' },
       cta: { kicker: 'Bloque final', title: 'Una seccion final mas compacta para mantener el sitio premium sin alargar demasiado el scroll.', copy: 'Construido como superficie de presentacion para validar direccion, densidad y acabado general.' },
@@ -1345,8 +1338,6 @@ const presentationOverridesByLocale = {
       { title: 'Midnight SUV Study', subtitle: 'Card utilitario premium de ejemplo', deadline: 'Ventana limitada', price: 'EUR 14.00', sold: '5,180 entradas ejemplo' },
       { title: 'Grand Tour Elite', subtitle: 'Presentacion de lujo para larga distancia', deadline: 'Esta semana', price: 'EUR 10.50', sold: '4,960 entradas ejemplo' },
       { title: 'Electric Sport Edition', subtitle: 'Concepto limpio de performance', deadline: 'Cierra pronto', price: 'EUR 11.20', sold: '5,740 entradas ejemplo' },
-      { title: 'Executive Utility Feature', subtitle: 'Referencia premium neutro', deadline: 'Cierre posterior', price: 'EUR 13.40', sold: '4,480 entradas ejemplo' },
-      { title: 'Collector Weekend Showcase', subtitle: 'Bloque destacado solo para presentacion', deadline: 'Ultimas horas', price: 'EUR 15.00', sold: '6,880 entradas ejemplo' },
     ],
     howItWorks: [
       { step: '01', title: 'Explora el concepto', text: 'Observa la composicion visual, la jerarquia y el equilibrio de la experiencia premium dark.' },
@@ -1354,9 +1345,9 @@ const presentationOverridesByLocale = {
       { step: '03', title: 'Valida la direccion', text: 'Toma los textos como referencias neutros mientras evalas densidad y percepcion de marca.' },
     ],
     winners: [
-      { name: 'Perfil ejemplo A', prize: 'Card de showcase', quote: 'Esta historia referencia existe para simular confianza y reforzar el tono premium de la pagina.', stat: 'Solo presentacion' },
-      { name: 'Perfil ejemplo B', prize: 'Modulo visual de prueba', quote: 'La copy neutra ayuda a llevar la atencion a la identidad visual, el espacio y el acabado.', stat: 'Datos operacionais' },
-      { name: 'Perfil ejemplo C', prize: 'Concepto de interfaz', quote: 'La idea aqui es presentar una estructura pulida sin introducir claims comerciales fuertes.', stat: 'Preview cliente' },
+      { name: 'Carlos Henrique Souza', prize: 'Propuesta aceptada - Maserati GranTurismo (generacion 2007-2019)', quote: 'Recibi actualizaciones por etapa y complete el pago sin abrir ticket de soporte.', stat: 'Finalizado' },
+      { name: 'Mariana Lopes Ferreira', prize: 'Documentacion aprobada - Hummer H2 (SUV)', quote: 'El equipo confirmo la revision el mismo dia y libero la firma digital de inmediato.', stat: 'Documentacion aprobada' },
+      { name: 'Rafael Nogueira', prize: 'Inspeccion pendiente - Porsche Cayenne S 4.5 V8', quote: 'El sistema mostro el avance de la inspeccion y ya indico la proxima actualizacion prevista.', stat: 'Inspeccion pendiente' },
     ],
     modules: [
       { title: 'Showcase de Landing', text: 'Hero, filtros, cards y ritmo de secciones diseÃƒÂ±ados para una presentacion premium automotriz.' },
@@ -1389,7 +1380,7 @@ const presentationOverridesByLocale = {
       viewScope: 'Ver visao operacional',
     },
     heroSlides: [
-      { badge: 'Leilao ativo', title: 'Chevrolet Onix LT 2020 com encerramento programado para hoje as 18:30.', subtitle: 'Veiculo com documentacao regularizada, vistoria aprovada e historico de manutencao disponivel para consulta.', price: 'R$ 24,90', tickets: '18,420 / 25,000 bilhetes confirmados' },
+      { badge: 'Leilao ativo', title: 'Mercedes-Benz Classe S S 350 (W221) com encerramento programado para hoje as 18:30.', subtitle: 'Luxo, conforto e presença de outro nível, perfeita pra quem quer rodar com estilo e zero esforço.', price: '2.5 USDT / 2.5 USD / 2.5 €', tickets: '18,420 / 25,000 bilhetes confirmados' },
       { badge: 'Mais procurado', title: 'Toyota Corolla XEI 2021 recebeu alto volume de propostas nas ultimas 24 horas.', subtitle: 'Pagamento aguardando confirmacao para os ultimos lotes liberados e equipe de atendimento monitorando novos lances.', price: 'R$ 29,90', tickets: '9,870 / 15,000 bilhetes confirmados' },
       { badge: 'Ultimas vagas', title: 'Jeep Renegade Longitude 2019 segue com procura alta e fila de compra no fechamento.', subtitle: 'Proposta recebida e encaminhada para analise da equipe responsavel antes da etapa final de validacao.', price: 'R$ 19,90', tickets: '12,640 / 20,000 bilhetes confirmados' },
     ],
@@ -1402,7 +1393,7 @@ const presentationOverridesByLocale = {
     filters: ['Em analise', 'Aguardando pagamento', 'Documentacao aprovada', 'Vistoria pendente', 'Proposta recebida', 'Finalizado'],
     currentDraw: {
       eyebrow: 'Destaque da operacao',
-      title: 'Chevrolet Onix LT 2020',
+      title: 'Mercedes-Benz Classe S S 350 (W221)',
       priceLabel: 'Bilhete a partir de',
       countdownLabel: 'Encerramento',
       entriesLabel: 'Bilhetes confirmados',
@@ -1411,15 +1402,15 @@ const presentationOverridesByLocale = {
     sections: {
       competitions: { kicker: 'Leiloes em andamento', title: 'Grade de veiculos com contexto operacional e atualizacoes de status em tempo real.', copy: 'Cada card mostra o andamento de venda, a janela de encerramento e as informacoes essenciais para decisao do participante.' },
       howItWorks: { kicker: 'Fluxo de participacao' },
-      winners: { kicker: 'Acompanhamento recente', title: 'Eventos e atualizacoes com linguagem de operacao real.', copy: 'As ocorrencias abaixo representam atividades comuns da rotina de um sistema de leiloes com validacao de pagamento e documentacao.', stats: [{ value: '1,942', label: 'eventos processados na semana' }, { value: '4.9/5', label: 'avaliacao media do atendimento' }] },
+      winners: { kicker: 'Acompanhamento recente', title: 'Eventos e atualizacoes com linguagem de operacao real.', copy: 'As ocorrencias abaixo representam atividades comuns da rotina de um sistema de leiloes com validacao de pagamento e documentacao.', stats: [] },
       platform: { kicker: 'Visao da plataforma', title: 'Modulos centrais organizados para vendas, validacao e pos-venda.', copy: 'O ambiente integra campanhas, checkout, atendimento, analise de risco e trilha de auditoria em uma operacao unica.' },
       compliance: { kicker: 'Confianca e controle', title: 'Mensagens orientadas a governanca, seguranca e transparencia operacional.', copy: 'As informacoes destacam o status de cada etapa e reduzem duvidas durante pagamento, vistoria e assinatura de contrato.' },
       cta: { kicker: 'Proxima etapa', title: 'Pronto para publicar campanhas com comunicacao clara e dados coerentes de producao?', copy: 'A estrutura ja esta preparada para exibir veiculos, movimentacao de propostas e checkpoints de aprovacao em cada fase.' },
     },
     competitions: [
-      { title: 'Chevrolet Onix LT 2020', subtitle: 'Documentacao em analise pela equipe responsavel.', deadline: 'Encerra hoje', price: 'R$ 24,90', sold: '6,240 bilhetes confirmados' },
-      { title: 'Hyundai HB20 Comfort 2019', subtitle: 'Vistoria concluida sem pendencias criticas.', deadline: 'Termina em 2 dias', price: 'R$ 19,90', sold: '5,180 bilhetes confirmados' },
-      { title: 'Honda Civic EXL 2018', subtitle: 'Contrato pendente de assinatura digital.', deadline: 'Termina em 4 dias', price: 'R$ 27,90', sold: '4,960 bilhetes confirmados' },
+      { title: 'Mercedes-Benz Classe S S 350 (W221)', subtitle: 'Luxo, conforto e presença de outro nível, perfeita pra quem quer rodar com estilo e zero esforço.', deadline: 'Encerra hoje', price: '2.5 USDT / 2.5 USD / 2.5 €', sold: '6,240 bilhetes confirmados' },
+      { title: 'Hummer H2 (SUV)', subtitle: 'Presença absurda, força de sobra e visual que impõe respeito em qualquer lugar.', deadline: 'Termina em 2 dias', price: '5 USDT / 5 USD / 5 €', sold: '5,180 bilhetes confirmados' },
+      { title: 'Maserati GranTurismo (geração 2007–2019)', subtitle: 'Feito pra quem quer luxo e performance no mesmo nível.', deadline: 'Termina em 4 dias', price: '7.5 USDT / 7.5 USD / 7.5 €', sold: '4,960 bilhetes confirmados' },
       { title: 'Toyota Corolla XEI 2021', subtitle: 'Proposta recebida para avaliacao.', deadline: 'Termina em 3 dias', price: 'R$ 29,90', sold: '5,740 bilhetes confirmados' },
       { title: 'Fiat Argo Drive 2020', subtitle: 'Pagamento aguardando confirmacao.', deadline: 'Termina em 5 dias', price: 'R$ 17,90', sold: '4,480 bilhetes confirmados' },
       { title: 'Volkswagen T-Cross Comfortline 2021', subtitle: 'Fila de interessados atualizada a cada 15 minutos.', deadline: 'Ultimas horas', price: 'R$ 31,90', sold: '6,880 bilhetes confirmados' },
@@ -1430,8 +1421,8 @@ const presentationOverridesByLocale = {
       { step: '03', title: 'Acompanhe as atualizacoes', text: 'Receba avisos sobre analise documental, vistoria e proxima etapa ate a conclusao do processo.' },
     ],
     winners: [
-      { name: 'Carlos Henrique Souza', prize: 'Proposta aceita - Honda Civic EXL 2018', quote: 'Recebi as atualizacoes por etapa e consegui concluir o pagamento sem precisar abrir chamado.', stat: 'Finalizado' },
-      { name: 'Mariana Lopes Ferreira', prize: 'Documentacao aprovada - Hyundai HB20 Comfort 2019', quote: 'A equipe confirmou a analise no mesmo dia e liberou a assinatura digital em seguida.', stat: 'Documentacao aprovada' },
+      { name: 'Carlos Henrique Souza', prize: 'Proposta aceita - Maserati GranTurismo (geração 2007–2019)', quote: 'Recebi as atualizacoes por etapa e consegui concluir o pagamento sem precisar abrir chamado.', stat: 'Finalizado' },
+      { name: 'Mariana Lopes Ferreira', prize: 'Documentacao aprovada - Hummer H2 (SUV)', quote: 'A equipe confirmou a analise no mesmo dia e liberou a assinatura digital em seguida.', stat: 'Documentacao aprovada' },
       { name: 'Rafael Nogueira', prize: 'Vistoria pendente - Jeep Renegade Longitude 2019', quote: 'O sistema mostrou o andamento da vistoria e ja avisou o horario previsto para a proxima atualizacao.', stat: 'Vistoria pendente' },
     ],
     modules: [
@@ -1459,8 +1450,29 @@ const presentationOverridesByLocale = {
   },
 }
 
-const getPresentationCopy = (locale) =>
-  mergePresentationCopy(contentByLocale[locale], presentationOverridesByLocale[locale] ?? {})
+const SITE_CONTENT_LOCALES = ['en', 'ptPT', 'es', 'ptBR']
+
+const normalizeSiteContentOverrides = (overrides = {}) => {
+  const source = overrides && typeof overrides === 'object' && !Array.isArray(overrides)
+    ? overrides
+    : {}
+
+  return SITE_CONTENT_LOCALES.reduce((accumulator, locale) => {
+    const localeOverrides = source[locale]
+    accumulator[locale] = localeOverrides && typeof localeOverrides === 'object' && !Array.isArray(localeOverrides)
+      ? localeOverrides
+      : {}
+    return accumulator
+  }, {})
+}
+
+const stringifySiteContentLocale = (value = {}) => JSON.stringify(value ?? {}, null, 2)
+
+const getPresentationCopy = (locale, customOverrides = {}) =>
+  mergePresentationCopy(
+    mergePresentationCopy(contentByLocale[locale], presentationOverridesByLocale[locale] ?? {}),
+    customOverrides ?? {},
+  )
 
 const paymentScreenByLocale = {
   en: {
@@ -1556,7 +1568,7 @@ const adminByLocale = {
   },
   ptPT: {
     loginTitle: 'Acesso admin',
-    loginCopy: 'EcrÃƒÂ£ restrito para acompanhamento administrativo e consulta de pagamentos.',
+    loginCopy: 'Ecrã restrito para acompanhamento administrativo e consulta de pagamentos.',
     emailLabel: 'Email',
     passwordLabel: 'Palavra-passe',
     submit: 'Entrar no painel',
@@ -1693,7 +1705,7 @@ const getAdminCarsCopy = (locale) => {
       priceLabel: 'Ticket price',
       currencyLabel: 'Currency',
       entriesLabel: 'Entries summary',
-      entriesSoldLabel: 'Sold tickets (auto)',
+      entriesSoldLabel: 'Sold tickets',
       entriesTotalLabel: 'Total tickets',
       maxTicketsLabel: 'Max tickets/order',
       stockStatusLabel: 'Status',
@@ -1755,7 +1767,7 @@ const getAdminCarsCopy = (locale) => {
       priceLabel: 'Precio del boleto',
       currencyLabel: 'Moneda',
       entriesLabel: 'Resumen de entradas',
-      entriesSoldLabel: 'Boletos vendidos (auto)',
+      entriesSoldLabel: 'Boletos vendidos',
       entriesTotalLabel: 'Boletos totales',
       maxTicketsLabel: 'Maximo por pedido',
       stockStatusLabel: 'Estado',
@@ -1816,7 +1828,7 @@ const getAdminCarsCopy = (locale) => {
     priceLabel: 'Preco do bilhete',
     currencyLabel: 'Moeda',
     entriesLabel: 'Resumo de entradas',
-    entriesSoldLabel: 'Bilhetes vendidos (auto)',
+    entriesSoldLabel: 'Bilhetes vendidos',
     entriesTotalLabel: 'Bilhetes totais',
     maxTicketsLabel: 'Max. por pedido',
     stockStatusLabel: 'Status',
@@ -1879,6 +1891,7 @@ const getCatalogCopy = (locale) => {
       clearFilters: 'Clear filters',
       allColors: 'All colors',
       allYears: 'All years',
+      allCurrencies: 'All currencies',
       featuredLabel: 'Featured',
       infoColor: 'Color',
       infoYear: 'Year',
@@ -1905,6 +1918,7 @@ const getCatalogCopy = (locale) => {
       clearFilters: 'Limpiar filtros',
       allColors: 'Todos los colores',
       allYears: 'Todos los anos',
+      allCurrencies: 'Todas las monedas',
       featuredLabel: 'Destacado',
       infoColor: 'Color',
       infoYear: 'Ano',
@@ -1931,6 +1945,7 @@ const getCatalogCopy = (locale) => {
       clearFilters: 'Limpar filtros',
       allColors: 'Todas as cores',
       allYears: 'Todos os anos',
+      allCurrencies: 'Todas as moedas',
       featuredLabel: 'Destaque',
       infoColor: 'Cor',
       infoYear: 'Ano',
@@ -1956,6 +1971,7 @@ const getCatalogCopy = (locale) => {
     clearFilters: 'Limpar filtros',
     allColors: 'Todas as cores',
     allYears: 'Todos os anos',
+    allCurrencies: 'Todas as moedas',
     featuredLabel: 'Destaque',
     infoColor: 'Cor',
     infoYear: 'Ano',
@@ -1966,7 +1982,127 @@ const getCatalogCopy = (locale) => {
   }
 }
 
-const getCarCatalogItems = (competitions) => {
+const LEGACY_MERCEDES_SOURCE_TITLES = [
+  'Chevrolet Onix LT 2020',
+  'Porsche 911 Turbo S',
+  'Signature Coupe Concept',
+]
+const LEGACY_HUMMER_SOURCE_TITLES = [
+  'Hyundai HB20 Comfort 2019',
+  'Mercedes G-Class AMG',
+  'Midnight SUV Study',
+]
+const LEGACY_MASERATI_SOURCE_TITLES = [
+  'Honda Civic EXL 2018',
+  'BMW M4 Competition',
+  'Grand Tour Elite',
+]
+const LEGACY_PORSCHE_SOURCE_TITLES = [
+  'Electric Sport Edition',
+  'Audi RS e-tron GT',
+]
+const isLegacySourceTitle = (title, sourceTitles = []) => sourceTitles.includes(`${title || ''}`.trim())
+const MERCEDES_COMPETITION_TITLE = 'Mercedes-Benz Classe S S 350 (W221)'
+const MERCEDES_COMPETITION_SUBTITLE = 'Luxo, conforto e presença de outro nível, perfeita pra quem quer rodar com estilo e zero esforço.'
+const MERCEDES_COVER_IMAGE = '/cars/carro1.jpeg'
+const MERCEDES_GALLERY_IMAGES = [
+  '/cars/mercedes/0ee859ff-6d78-4b9d-8c98-8fea013c6952.jpg',
+  '/cars/mercedes/17438018-fbf7-4a98-bce8-482b87b13d37.jpg',
+  '/cars/mercedes/7875ab0f-c9f1-4746-8def-5a4d985f065b.jpg',
+  '/cars/mercedes/97389b02-82cc-460f-ba12-ed77afaf5261.jpg',
+  '/cars/mercedes/af73058f-b5fc-4166-a5c3-5e1879ecf0d0.jpg',
+]
+const HUMMER_COMPETITION_TITLE = 'Hummer H2 (SUV)'
+const HUMMER_COMPETITION_SUBTITLE = 'Presença absurda, força de sobra e visual que impõe respeito em qualquer lugar.'
+const HUMMER_COVER_IMAGE = '/cars/carro2.jpeg'
+const HUMMER_GALLERY_IMAGES = [
+  '/cars/hummer/2ce66bff-aca3-4018-8cbc-c958f7aafea6.jpg',
+  '/cars/hummer/41128128-49ee-420d-a417-2395f2ebb21f.jpg',
+  '/cars/hummer/4e49c5c8-bf0e-4d28-b9ec-39814a97e734.jpg',
+  '/cars/hummer/79fb565e-4e03-44a9-93e1-d3087a4a20b5.jpg',
+  '/cars/hummer/96ae4f57-b1d9-46d9-a552-27e4862fffd1.jpg',
+]
+const MASERATI_COMPETITION_TITLE = 'Maserati GranTurismo (geração 2007–2019)'
+const MASERATI_COMPETITION_SUBTITLE = 'Feito pra quem quer luxo e performance no mesmo nível.'
+const MASERATI_COVER_IMAGE = '/cars/carro3.jpeg'
+const MASERATI_GALLERY_IMAGES = [
+  '/cars/maserati/12b44419-2c1b-4a6f-8f73-3d139a947e08.jpg',
+  '/cars/maserati/57723d10-e92d-4d1d-af63-2968f4369d70.jpg',
+  '/cars/maserati/a4e37c1b-f0d0-4357-b7ae-ad17d911d15e.jpg',
+  '/cars/maserati/b8e839b0-2145-49bc-9f01-bd7520288704.jpg',
+]
+const PORSCHE_COMPETITION_TITLE = 'Porsche Cayenne S 4.5 V8'
+const PORSCHE_COMPETITION_SUBTITLE = 'SUV de luxo com alma esportiva, potência bruta e presença que impõe respeito em qualquer terreno.'
+const PORSCHE_COVER_IMAGE = '/cars/porsche/3dcefc21-2508-4135-84fa-0958b96fa05a.jpg'
+const PORSCHE_GALLERY_IMAGES = [
+  '/cars/porsche/3dcefc21-2508-4135-84fa-0958b96fa05a.jpg',
+  '/cars/porsche/6f0f9c2c-5ca3-4a5f-bdde-13e98a232484.jpg',
+  '/cars/porsche/8b7a1342-5b92-45e7-8bec-dda1b2d77393.jpg',
+  '/cars/porsche/ad97fcb2-9d4e-4bcb-8327-1028e9d324f0.jpg',
+  '/cars/porsche/ca9595d6-8df6-4171-ad5e-31cb58c38a18.jpg',
+]
+const MERCEDES_TICKET_PRICE = 2.5
+const HUMMER_TICKET_PRICE = 5
+const MASERATI_TICKET_PRICE = 7.5
+const SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES = ['USDT', 'USD', 'EUR']
+const formatTicketValue = (value) => {
+  const numericValue = Number(value)
+
+  if (!Number.isFinite(numericValue)) {
+    return '0'
+  }
+
+  if (Number.isInteger(numericValue)) {
+    return `${numericValue}`
+  }
+
+  return `${numericValue}`.replace(/0+$/g, '').replace(/\.$/, '')
+}
+const formatMultiCurrencyTicketPrice = (value) => {
+  const ticketValue = formatTicketValue(value)
+  return `${ticketValue} USDT / ${ticketValue} USD / ${ticketValue} €`
+}
+const inferCurrencyFromPrice = (price = '') => {
+  const normalizedPrice = `${price ?? ''}`.trim().toUpperCase()
+  if (!normalizedPrice) {
+    return ''
+  }
+  if (normalizedPrice.includes('R$') || normalizedPrice.includes('BRL') || normalizedPrice.includes('REAIS')) {
+    return 'BRL'
+  }
+  if (normalizedPrice.includes('EUR') || normalizedPrice.includes('€')) {
+    return 'EUR'
+  }
+  if (normalizedPrice.includes('USD') || normalizedPrice.includes('US$') || normalizedPrice.includes('$')) {
+    return 'USD'
+  }
+  return ''
+}
+const normalizeCompetitionCurrency = (competition) => ({
+  ...competition,
+  currency: `${competition.currency || inferCurrencyFromPrice(competition.price) || 'EUR'}`.trim().toUpperCase(),
+})
+const getCurrencyFilterLabel = (currency, locale, allCurrenciesLabel) => {
+  if (currency === 'all') {
+    return allCurrenciesLabel
+  }
+  if (currency === 'USD') {
+    return locale === 'en' ? 'USD (Dollar)' : locale === 'es' ? 'USD (Dolar)' : 'USD (Dolar)'
+  }
+  if (currency === 'EUR') {
+    return 'EUR (Euro)'
+  }
+  if (currency === 'USDT') {
+    return 'USDT (Tether)'
+  }
+  if (currency === 'BRL') {
+    return locale === 'en' ? 'BRL (Brazilian Real)' : locale === 'es' ? 'BRL (Reales)' : 'BRL (Reais)'
+  }
+  return currency
+}
+
+const getCarCatalogItems = (competitions, options = {}) => {
+  const { applyPresetMappings = true } = options
   const metadata = [
     { color: 'Preto', year: '2024', location: 'Zurique', featured: true },
     { color: 'Cinza', year: '2023', location: 'Paris', featured: false },
@@ -1976,10 +2112,82 @@ const getCarCatalogItems = (competitions) => {
     { color: 'Vermelho', year: '2025', location: 'Roma', featured: true },
   ]
 
-  return competitions.map((competition, index) => ({
-    ...metadata[index % metadata.length],
-    ...competition,
-  }))
+  return competitions.map((competition, index) => {
+    const normalizedCompetition = normalizeCompetitionCurrency({
+      ...metadata[index % metadata.length],
+      ...competition,
+    })
+
+    if (!applyPresetMappings) {
+      return normalizedCompetition
+    }
+
+    const normalizedTitle = `${normalizedCompetition.title || ''}`.trim()
+    const isMercedesCompetition =
+      isLegacySourceTitle(normalizedTitle, LEGACY_MERCEDES_SOURCE_TITLES) || normalizedTitle === MERCEDES_COMPETITION_TITLE
+    const isHummerCompetition =
+      isLegacySourceTitle(normalizedTitle, LEGACY_HUMMER_SOURCE_TITLES) || normalizedTitle === HUMMER_COMPETITION_TITLE
+    const isMaseratiCompetition =
+      isLegacySourceTitle(normalizedTitle, LEGACY_MASERATI_SOURCE_TITLES) || normalizedTitle === MASERATI_COMPETITION_TITLE
+    const isPorscheCompetition =
+      isLegacySourceTitle(normalizedTitle, LEGACY_PORSCHE_SOURCE_TITLES) || normalizedTitle === PORSCHE_COMPETITION_TITLE
+
+    if (isMercedesCompetition) {
+      return {
+        ...normalizedCompetition,
+        title: MERCEDES_COMPETITION_TITLE,
+        subtitle: MERCEDES_COMPETITION_SUBTITLE,
+        description: MERCEDES_COMPETITION_SUBTITLE,
+        image: MERCEDES_COVER_IMAGE,
+        gallery: MERCEDES_GALLERY_IMAGES,
+        ticketPrice: MERCEDES_TICKET_PRICE,
+        currency: 'USD',
+        supportedCurrencies: SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES,
+        price: formatMultiCurrencyTicketPrice(MERCEDES_TICKET_PRICE),
+      }
+    }
+
+    if (isHummerCompetition) {
+      return {
+        ...normalizedCompetition,
+        title: HUMMER_COMPETITION_TITLE,
+        subtitle: HUMMER_COMPETITION_SUBTITLE,
+        description: HUMMER_COMPETITION_SUBTITLE,
+        image: HUMMER_COVER_IMAGE,
+        gallery: HUMMER_GALLERY_IMAGES,
+        ticketPrice: HUMMER_TICKET_PRICE,
+        currency: 'USD',
+        supportedCurrencies: SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES,
+        price: formatMultiCurrencyTicketPrice(HUMMER_TICKET_PRICE),
+      }
+    }
+    if (isMaseratiCompetition) {
+      return {
+        ...normalizedCompetition,
+        title: MASERATI_COMPETITION_TITLE,
+        subtitle: MASERATI_COMPETITION_SUBTITLE,
+        description: MASERATI_COMPETITION_SUBTITLE,
+        image: MASERATI_COVER_IMAGE,
+        gallery: MASERATI_GALLERY_IMAGES,
+        ticketPrice: MASERATI_TICKET_PRICE,
+        currency: 'USD',
+        supportedCurrencies: SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES,
+        price: formatMultiCurrencyTicketPrice(MASERATI_TICKET_PRICE),
+      }
+    }
+    if (isPorscheCompetition) {
+      return {
+        ...normalizedCompetition,
+        title: PORSCHE_COMPETITION_TITLE,
+        subtitle: PORSCHE_COMPETITION_SUBTITLE,
+        description: PORSCHE_COMPETITION_SUBTITLE,
+        image: PORSCHE_COVER_IMAGE,
+        gallery: PORSCHE_GALLERY_IMAGES,
+      }
+    }
+
+    return normalizedCompetition
+  })
 }
 
 const getHouseCatalogItems = (competitions) => {
@@ -1990,7 +2198,7 @@ const getHouseCatalogItems = (competitions) => {
     { color: 'Bege', year: '2025', location: 'Algarve', featured: false },
   ]
 
-  return competitions.map((competition, index) => ({
+  return competitions.map((competition, index) => normalizeCompetitionCurrency({
     ...metadata[index % metadata.length],
     ...competition,
   }))
@@ -2281,8 +2489,20 @@ const formatMoney = (value, currency = 'EUR', locale = 'ptBR') =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value)
+const formatAmountByCurrency = (value, currency = 'EUR', locale = 'ptBR') => {
+  const normalizedCurrency = `${currency || 'EUR'}`.trim().toUpperCase()
+  if (normalizedCurrency === 'USDT') {
+    const numericValue = Number(value)
+    const normalizedValue = Number.isFinite(numericValue) ? numericValue : 0
+    const formattedValue = normalizedValue
+      .toFixed(2)
+      .replace(/\.00$/, '')
+      .replace(/(\.\d)0$/, '$1')
+    return `${formattedValue} USDT`
+  }
 
-const formatEuroPrice = (value, locale = 'ptBR') => formatMoney(value, 'EUR', locale)
+  return formatMoney(value, normalizedCurrency, locale)
+}
 
 const parseIntegerLike = (value) => {
   const numeric = Number.parseInt(`${value ?? ''}`.replace(/[^\d]/g, ''), 10)
@@ -2365,8 +2585,37 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
     return []
   }
 
+  const mercedesReference = `${competition.title || ''} ${competition.slug || ''} ${competition.carName || ''}`.toLowerCase()
+  const isMercedesCompetition = mercedesReference.includes('mercedes')
   const hummerReference = `${competition.title || ''} ${competition.slug || ''} ${competition.carName || ''}`.toLowerCase()
   const isHummerCompetition = hummerReference.includes('hummer')
+  const maseratiReference = `${competition.title || ''} ${competition.slug || ''} ${competition.carName || ''}`.toLowerCase()
+  const isMaseratiCompetition = maseratiReference.includes('maserati')
+  const porscheReference = `${competition.title || ''} ${competition.slug || ''} ${competition.carName || ''}`.toLowerCase()
+  const isPorscheCompetition = porscheReference.includes('porsche')
+  const customGallery = Array.isArray(competition.gallery)
+    ? competition.gallery
+    : typeof competition.gallery === 'string'
+      ? competition.gallery.split(/[\n,]+/).map((item) => item.trim()).filter(Boolean)
+      : []
+
+  if (isMercedesCompetition) {
+    const mercedesGallery = customGallery.length ? customGallery : MERCEDES_GALLERY_IMAGES
+    return mercedesGallery.filter((image, index, array) => image && array.indexOf(image) === index)
+  }
+  if (isHummerCompetition) {
+    const hummerGallery = customGallery.length ? customGallery : HUMMER_GALLERY_IMAGES
+    return hummerGallery.filter((image, index, array) => image && array.indexOf(image) === index)
+  }
+  if (isMaseratiCompetition) {
+    const maseratiGallery = customGallery.length ? customGallery : MASERATI_GALLERY_IMAGES
+    return maseratiGallery.filter((image, index, array) => image && array.indexOf(image) === index)
+  }
+  if (isPorscheCompetition) {
+    const porscheGallery = customGallery.length ? customGallery : PORSCHE_GALLERY_IMAGES
+    return porscheGallery.filter((image, index, array) => image && array.indexOf(image) === index)
+  }
+
   const fallbackCars = isHummerCompetition
     ? ['/cars/hero-1.jpg', '/cars/hummer1.avif', '/cars/hummer2.avif', '/cars/hummer3.avif']
     : ['/cars/hero-1.jpg', '/cars/hero-2.jpg', '/cars/hero-3.jpg', '/cars/card-1.jpg']
@@ -2376,11 +2625,6 @@ const buildGalleryFromCompetition = (competition, category = 'cars') => {
     '/houses/casa-3.jpeg',
   ]
   const fallback = category === 'houses' ? fallbackHouses : fallbackCars
-  const customGallery = Array.isArray(competition.gallery)
-    ? competition.gallery
-    : typeof competition.gallery === 'string'
-      ? competition.gallery.split(/[\n,]+/).map((item) => item.trim()).filter(Boolean)
-      : []
 
   return [competition.image, ...customGallery, ...fallback]
     .filter((image, index, array) => image && array.indexOf(image) === index)
@@ -2614,7 +2858,7 @@ const mapCampaignToCompetition = (campaign, locale = 'ptBR', index = 0) => {
   const raffleDescription = `${campaign.description || campaign.shortDescription || campaign.subtitle || raffleTitle}`.trim()
   const heroImage = `${campaign.heroImage || campaign.image || ''}`.trim()
 
-  return {
+  const mappedCompetition = {
     id: campaign.id,
     slug: campaign.slug,
     category: campaign.category || 'cars',
@@ -2645,6 +2889,40 @@ const mapCampaignToCompetition = (campaign, locale = 'ptBR', index = 0) => {
     bathrooms: campaign.bathrooms || '',
     area: campaign.area || '',
   }
+
+  const competitionReference = `${mappedCompetition.title || ''} ${mappedCompetition.slug || ''} ${campaign.carName || ''}`.toLowerCase()
+
+  if (competitionReference.includes('mercedes')) {
+    return {
+      ...mappedCompetition,
+      ticketPrice: MERCEDES_TICKET_PRICE,
+      currency: 'USD',
+      supportedCurrencies: SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES,
+      price: formatMultiCurrencyTicketPrice(MERCEDES_TICKET_PRICE),
+    }
+  }
+
+  if (competitionReference.includes('hummer')) {
+    return {
+      ...mappedCompetition,
+      ticketPrice: HUMMER_TICKET_PRICE,
+      currency: 'USD',
+      supportedCurrencies: SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES,
+      price: formatMultiCurrencyTicketPrice(HUMMER_TICKET_PRICE),
+    }
+  }
+
+  if (competitionReference.includes('maserati')) {
+    return {
+      ...mappedCompetition,
+      ticketPrice: MASERATI_TICKET_PRICE,
+      currency: 'USD',
+      supportedCurrencies: SIGNATURE_COMPETITION_SUPPORTED_CURRENCIES,
+      price: formatMultiCurrencyTicketPrice(MASERATI_TICKET_PRICE),
+    }
+  }
+
+  return mappedCompetition
 }
 
 const DEFAULT_STORE_CONFIG = {
@@ -2652,6 +2930,7 @@ const DEFAULT_STORE_CONFIG = {
   homeTitle: 'Compre bilhetes dos carros em destaque',
   homeSubtitle: 'Escolha um sorteio e compre seus bilhetes.',
   homeDescription: 'Painel administrativo conectado ao backend para editar campanhas reais.',
+  siteContentOverrides: normalizeSiteContentOverrides(),
   campaigns: [],
   winnersPanel: createEmptyWinnersPanelDraft(),
 }
@@ -2791,13 +3070,14 @@ const formatAdminName = (email) => {
 
 function App() {
   const [view, setView] = useState('landing')
-  const [locale, setLocale] = useState('ptBR')
+  const [locale, setLocale] = useState('ptPT')
   const [activeSlide, setActiveSlide] = useState(0)
   const [activeWinnersSlide, setActiveWinnersSlide] = useState(0)
   const [catalogCategory, setCatalogCategory] = useState('cars')
   const [catalogSearch, setCatalogSearch] = useState('')
   const [catalogColor, setCatalogColor] = useState('all')
   const [catalogYear, setCatalogYear] = useState('all')
+  const [catalogCurrency, setCatalogCurrency] = useState('all')
   const [selectedCompetition, setSelectedCompetition] = useState(null)
   const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0)
   const [quantity, setQuantity] = useState(1)
@@ -2815,6 +3095,14 @@ function App() {
   const [storeCampaigns, setStoreCampaigns] = useState([])
   const [adminCarsDraft, setAdminCarsDraft] = useState([])
   const [adminWinnersDraft, setAdminWinnersDraft] = useState(createEmptyWinnersPanelDraft())
+  const [adminSiteLocale, setAdminSiteLocale] = useState('ptPT')
+  const [adminSiteContentDraft, setAdminSiteContentDraft] = useState(
+    () => normalizeSiteContentOverrides(DEFAULT_STORE_CONFIG.siteContentOverrides),
+  )
+  const [adminSiteContentInput, setAdminSiteContentInput] = useState(
+    () => stringifySiteContentLocale(normalizeSiteContentOverrides(DEFAULT_STORE_CONFIG.siteContentOverrides).ptPT),
+  )
+  const [adminSiteContentError, setAdminSiteContentError] = useState('')
   const [adminCarsDirty, setAdminCarsDirty] = useState(false)
   const [adminCarsNotice, setAdminCarsNotice] = useState('')
   const [adminUploadBusy, setAdminUploadBusy] = useState({})
@@ -2827,7 +3115,14 @@ function App() {
   const mobileMenuRef = useRef(null)
   const heroSwipeStartRef = useRef(null)
   const winnersSwipeStartRef = useRef(null)
-  const copy = useMemo(() => getPresentationCopy(locale), [locale])
+  const siteContentOverrides = useMemo(
+    () => normalizeSiteContentOverrides(storeConfig.siteContentOverrides),
+    [storeConfig.siteContentOverrides],
+  )
+  const copy = useMemo(
+    () => getPresentationCopy(locale, siteContentOverrides[locale] ?? {}),
+    [locale, siteContentOverrides],
+  )
   const paymentScreen = paymentScreenByLocale[locale] ?? paymentScreenByLocale.en
   const adminCopy = adminByLocale[locale] ?? adminByLocale.ptBR
   const adminProfileCopy = getAdminProfileCopy(locale)
@@ -2846,9 +3141,13 @@ function App() {
     () => mappedCampaignCompetitions.filter((campaign) => campaign.category === 'houses'),
     [mappedCampaignCompetitions]
   )
+  const hasManagedCarCampaigns = carCampaignCompetitions.length > 0
   const carCompetitions = useMemo(
-    () => getCarCatalogItems(carCampaignCompetitions.length ? carCampaignCompetitions : copy.competitions),
-    [copy.competitions, carCampaignCompetitions]
+    () => getCarCatalogItems(
+      hasManagedCarCampaigns ? carCampaignCompetitions : copy.competitions,
+      { applyPresetMappings: !hasManagedCarCampaigns },
+    ),
+    [copy.competitions, carCampaignCompetitions, hasManagedCarCampaigns]
   )
   const houseCompetitions = useMemo(
     () => getHouseCatalogItems(houseCampaignCompetitions.length ? houseCampaignCompetitions : getHouseCompetitions(locale)),
@@ -2916,6 +3215,25 @@ function App() {
     () => ['all', ...new Set(catalogCompetitions.map((item) => item.year).sort((a, b) => Number(b) - Number(a)))],
     [catalogCompetitions]
   )
+  const catalogCurrencies = useMemo(() => {
+    const baseCurrencies = ['USD', 'EUR', 'BRL']
+    const dynamicCurrencies = [
+      ...new Set(
+        catalogCompetitions
+          .flatMap((item) => {
+            const supportedCurrencies = Array.isArray(item.supportedCurrencies)
+              ? item.supportedCurrencies
+              : []
+            return [
+              `${item.currency || inferCurrencyFromPrice(item.price) || ''}`.trim().toUpperCase(),
+              ...supportedCurrencies.map((currency) => `${currency || ''}`.trim().toUpperCase()),
+            ]
+          })
+          .filter(Boolean)
+      ),
+    ].filter((currency) => !baseCurrencies.includes(currency))
+    return ['all', ...baseCurrencies, ...dynamicCurrencies]
+  }, [catalogCompetitions])
   const internalCopy = internalScreenCopyByLocale[locale] ?? internalScreenCopyByLocale.ptBR
   const fallbackCompetition = catalogCategory === 'houses' ? houseCompetitions[0] : carCompetitions[0]
   const activeCompetition = selectedCompetition ?? fallbackCompetition
@@ -2923,15 +3241,44 @@ function App() {
     () => buildGalleryFromCompetition(activeCompetition, catalogCategory),
     [activeCompetition, catalogCategory]
   )
+  const supportedCheckoutCurrencies = useMemo(
+    () => (
+      Array.isArray(activeCompetition?.supportedCurrencies)
+        ? activeCompetition.supportedCurrencies.map((currency) => `${currency || ''}`.trim().toUpperCase()).filter(Boolean)
+        : []
+    ),
+    [activeCompetition?.supportedCurrencies]
+  )
+  const checkoutCurrency = useMemo(() => {
+    const selectedCatalogCurrency = `${catalogCurrency || ''}`.trim().toUpperCase()
+    const baseCurrency = `${activeCompetition?.currency || 'USD'}`.trim().toUpperCase()
+    const validCurrencies = ['USD', 'EUR', 'BRL', 'USDT']
+
+    if (
+      selectedCatalogCurrency &&
+      selectedCatalogCurrency !== 'ALL' &&
+      supportedCheckoutCurrencies.includes(selectedCatalogCurrency)
+    ) {
+      return selectedCatalogCurrency
+    }
+
+    if (validCurrencies.includes(baseCurrency)) {
+      return baseCurrency
+    }
+
+    if (supportedCheckoutCurrencies.includes('EUR')) {
+      return 'EUR'
+    }
+
+    return 'USD'
+  }, [activeCompetition?.currency, catalogCurrency, supportedCheckoutCurrencies])
   const unitPrice = Number(activeCompetition?.ticketPrice) || parseEuroPrice(activeCompetition?.price)
   const offerOptions = useMemo(
     () => [
-      { id: 'single', label: `1 x ${formatMoney(unitPrice, activeCompetition?.currency ?? 'EUR', locale)}`, baseQty: 1, bonusQty: 0, multiplier: 1 },
-      { id: 'plus1', label: '3 + 1 Gratis', baseQty: 3, bonusQty: 1, multiplier: 3 },
-      { id: 'plus3', label: '5 + 3 Gratis', baseQty: 5, bonusQty: 3, multiplier: 5 },
-      { id: 'plus4', label: '10 + 4 Gratis', baseQty: 10, bonusQty: 4, multiplier: 10 },
+      { id: 'single', label: `1 x ${formatAmountByCurrency(unitPrice, checkoutCurrency, locale)}`, baseQty: 1, bonusQty: 0, multiplier: 1 },
+      { id: 'plus1', label: '3 + 1 Oferta', baseQty: 3, bonusQty: 1, multiplier: 3 },
     ],
-    [activeCompetition?.currency, unitPrice, locale]
+    [checkoutCurrency, unitPrice, locale]
   )
   const activeOffer = offerOptions.find((offer) => offer.id === selectedOffer) ?? offerOptions[0]
   const subtotal = unitPrice * Math.max(1, quantity) * activeOffer.multiplier
@@ -2950,10 +3297,16 @@ function App() {
       ].some((value) => value.toLowerCase().includes(normalizedSearch))
       const matchesColor = catalogColor === 'all' || competition.color === catalogColor
       const matchesYear = catalogYear === 'all' || competition.year === catalogYear
+      const competitionCurrency = `${competition.currency || inferCurrencyFromPrice(competition.price) || ''}`.trim().toUpperCase()
+      const supportedCurrencies = Array.isArray(competition.supportedCurrencies)
+        ? competition.supportedCurrencies.map((currency) => `${currency || ''}`.trim().toUpperCase()).filter(Boolean)
+        : []
+      const currencyMatches = [competitionCurrency, ...supportedCurrencies]
+      const matchesCurrency = catalogCurrency === 'all' || currencyMatches.includes(catalogCurrency)
 
-      return matchesSearch && matchesColor && matchesYear
+      return matchesSearch && matchesColor && matchesYear && matchesCurrency
     })
-  }, [catalogSearch, catalogCompetitions, catalogColor, catalogYear])
+  }, [catalogSearch, catalogCompetitions, catalogColor, catalogYear, catalogCurrency])
   const navigationItems = copy.navItems.filter((item) =>
     ['competitions', 'how-it-works', 'winners'].includes(item.id)
   )
@@ -3038,10 +3391,13 @@ function App() {
 
         const campaigns = Array.isArray(payload?.campaigns) ? payload.campaigns : []
         const winnersPanel = normalizeWinnersPanelDraft(payload?.winnersPanel)
-        setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns, winnersPanel })
+        const siteContentOverridesDraft = normalizeSiteContentOverrides(payload?.siteContentOverrides)
+        setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns, winnersPanel, siteContentOverrides: siteContentOverridesDraft })
         setStoreCampaigns(campaigns)
         setAdminCarsDraft(toAdminDraftCampaigns(campaigns))
         setAdminWinnersDraft(winnersPanel)
+        setAdminSiteContentDraft(siteContentOverridesDraft)
+        setAdminSiteContentError('')
       } catch {
         if (!isMounted) {
           return
@@ -3051,6 +3407,8 @@ function App() {
         setStoreCampaigns([])
         setAdminCarsDraft([])
         setAdminWinnersDraft(createEmptyWinnersPanelDraft())
+        setAdminSiteContentDraft(normalizeSiteContentOverrides(DEFAULT_STORE_CONFIG.siteContentOverrides))
+        setAdminSiteContentError('')
       } finally {
         if (isMounted) {
           setIsCampaignsLoading(false)
@@ -3064,6 +3422,11 @@ function App() {
       isMounted = false
     }
   }, [])
+
+  useEffect(() => {
+    setAdminSiteContentInput(stringifySiteContentLocale(adminSiteContentDraft[adminSiteLocale]))
+    setAdminSiteContentError('')
+  }, [adminSiteContentDraft, adminSiteLocale])
 
   useEffect(() => {
     if (view !== 'landing') {
@@ -3280,6 +3643,8 @@ function App() {
     setAdminCampaignCategory('cars')
     setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
     setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
+    setAdminSiteContentDraft(normalizeSiteContentOverrides(storeConfig.siteContentOverrides))
+    setAdminSiteContentError('')
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminLogin')
@@ -3291,6 +3656,8 @@ function App() {
     setAdminCampaignCategory('cars')
     setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
     setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
+    setAdminSiteContentDraft(normalizeSiteContentOverrides(storeConfig.siteContentOverrides))
+    setAdminSiteContentError('')
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
     setView('adminDashboard')
@@ -3370,6 +3737,8 @@ function App() {
       setAdminDashboardTab('cars')
       setAdminCampaignCategory('cars')
       setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
+      setAdminSiteContentDraft(normalizeSiteContentOverrides(storeConfig.siteContentOverrides))
+      setAdminSiteContentError('')
       setIsAdminAuthenticated(true)
       setIsAccountMenuOpen(false)
       setView('adminDashboard')
@@ -3405,6 +3774,45 @@ function App() {
       )),
     }))
     setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const updateStoreConfigField = (field, value) => {
+    setStoreConfig((current) => ({ ...current, [field]: value }))
+    setAdminCarsDirty(true)
+    setAdminCarsNotice('')
+  }
+
+  const handleApplySiteContentLocaleJson = () => {
+    const raw = `${adminSiteContentInput || ''}`.trim()
+
+    try {
+      const parsed = raw ? JSON.parse(raw) : {}
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        setAdminSiteContentError('O JSON precisa ser um objeto (chave/valor).')
+        return
+      }
+
+      setAdminSiteContentDraft((current) => ({
+        ...current,
+        [adminSiteLocale]: parsed,
+      }))
+      setAdminSiteContentError('')
+      setAdminCarsDirty(true)
+      setAdminCarsNotice('Conteudo do idioma aplicado ao rascunho. Clique em salvar para publicar.')
+    } catch {
+      setAdminSiteContentError('JSON invalido. Corrija o formato antes de aplicar.')
+    }
+  }
+
+  const handleRestoreSiteContentLocale = () => {
+    const savedOverrides = normalizeSiteContentOverrides(storeConfig.siteContentOverrides)
+    setAdminSiteContentDraft((current) => ({
+      ...current,
+      [adminSiteLocale]: savedOverrides[adminSiteLocale],
+    }))
+    setAdminSiteContentInput(stringifySiteContentLocale(savedOverrides[adminSiteLocale]))
+    setAdminSiteContentError('')
     setAdminCarsNotice('')
   }
 
@@ -3529,6 +3937,8 @@ function App() {
   const handleResetAdminCarsDraft = () => {
     setAdminCarsDraft(toAdminDraftCampaigns(storeCampaigns))
     setAdminWinnersDraft(normalizeWinnersPanelDraft(storeConfig.winnersPanel))
+    setAdminSiteContentDraft(normalizeSiteContentOverrides(storeConfig.siteContentOverrides))
+    setAdminSiteContentError('')
     setAdminCarsDirty(false)
     setAdminCarsNotice('')
   }
@@ -3548,6 +3958,7 @@ function App() {
       const existingCampaign = storeCampaigns.find((item) => item.id === campaign.id || item.slug === campaign.slug) ?? null
       return normalizeCampaignDraft(campaign, locale, existingCampaign)
     })
+    const normalizedSiteContentDraft = normalizeSiteContentOverrides(adminSiteContentDraft)
 
     try {
       setIsCampaignsLoading(true)
@@ -3563,6 +3974,7 @@ function App() {
           homeTitle: storeConfig.homeTitle,
           homeSubtitle: storeConfig.homeSubtitle,
           homeDescription: storeConfig.homeDescription,
+          siteContentOverrides: normalizedSiteContentDraft,
           winnersPanel: normalizeWinnersPanelDraft(adminWinnersDraft),
           campaigns,
         }),
@@ -3575,10 +3987,21 @@ function App() {
 
       const nextCampaigns = Array.isArray(payload?.campaigns) ? payload.campaigns : campaigns
       const nextWinnersPanel = normalizeWinnersPanelDraft(payload?.winnersPanel)
-      setStoreConfig({ ...DEFAULT_STORE_CONFIG, ...payload, campaigns: nextCampaigns, winnersPanel: nextWinnersPanel })
+      const nextSiteContentOverrides = normalizeSiteContentOverrides(
+        payload?.siteContentOverrides ?? normalizedSiteContentDraft,
+      )
+      setStoreConfig({
+        ...DEFAULT_STORE_CONFIG,
+        ...payload,
+        campaigns: nextCampaigns,
+        winnersPanel: nextWinnersPanel,
+        siteContentOverrides: nextSiteContentOverrides,
+      })
       setStoreCampaigns(nextCampaigns)
       setAdminCarsDraft(toAdminDraftCampaigns(nextCampaigns))
       setAdminWinnersDraft(nextWinnersPanel)
+      setAdminSiteContentDraft(nextSiteContentOverrides)
+      setAdminSiteContentError('')
       setAdminCarsDirty(false)
       setAdminCarsNotice(adminCarsCopy.savedMessage)
     } catch (error) {
@@ -3777,13 +4200,18 @@ function App() {
             <section className="internal-product-card rounded-[28px] border border-white/10 bg-[#111622] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.36)] sm:p-6">
               <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
                 <div>
-                  <div className="overflow-hidden rounded-[22px] border border-white/10 bg-[#0f131e]">
+                  <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-[#0f131e]">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 scale-110 bg-center bg-cover opacity-40 blur-xl"
+                      style={{ backgroundImage: `url(${competitionGallery[selectedGalleryIndex] ?? activeCompetition.image})` }}
+                    />
                     <img
                       src={competitionGallery[selectedGalleryIndex] ?? activeCompetition.image}
                       alt={activeCompetition.title}
                       loading="lazy"
                       decoding="async"
-                      className="h-[260px] w-full object-cover sm:h-[320px] lg:h-[420px]"
+                      className="relative z-10 h-[260px] w-full object-contain sm:h-[320px] lg:h-[420px]"
                     />
                   </div>
                   <div className="mt-3 grid grid-cols-4 gap-2">
@@ -3798,7 +4226,7 @@ function App() {
                             : 'border-white/10'
                         }`}
                       >
-                        <img src={image} alt={activeCompetition.title} className="h-20 w-full object-cover sm:h-24" />
+                        <img src={image} alt={activeCompetition.title} className="h-20 w-full object-contain bg-[#0f131e] sm:h-24" />
                       </button>
                     ))}
                   </div>
@@ -3938,11 +4366,11 @@ function App() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm text-[#b7beca]">
                       <span>{internalCopy.checkoutDiscount}</span>
-                      <strong className="text-[#ff9ca8]">-{formatEuroPrice(discount, locale)}</strong>
+                      <strong className="text-[#ff9ca8]">-{formatAmountByCurrency(discount, checkoutCurrency, locale)}</strong>
                     </div>
                     <div className="flex items-center justify-between border-t border-white/10 pt-3 text-base text-white">
                       <span>{internalCopy.checkoutTotal}</span>
-                      <strong className="text-3xl font-black text-[#ffd25a]">{formatEuroPrice(total, locale)}</strong>
+                      <strong className="text-3xl font-black text-[#ffd25a]">{formatAmountByCurrency(total, checkoutCurrency, locale)}</strong>
                     </div>
                   </div>
 
@@ -4405,7 +4833,120 @@ function App() {
                     <p className="mt-5 text-sm font-semibold text-[#b7beca]">{adminCarsCopy.loading}</p>
                   ) : null}
 
-                  <section className="mt-5 rounded-[22px] border border-white/8 bg-[#101218] p-4 sm:p-5">
+                  <section className="admin-editable-block mt-5 rounded-[22px] border border-white/8 bg-[#101218] p-4 sm:p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
+                          Configuracao global
+                        </p>
+                        <h4 className="mt-1 text-lg font-black text-white">
+                          Informacoes gerais do site
+                        </h4>
+                        <p className="mt-1 text-sm text-[#b7beca]">
+                          Edite textos principais e, se precisar, aplique override completo por idioma no JSON.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Nome do site
+                        </span>
+                        <input
+                          type="text"
+                          value={storeConfig.siteName ?? ''}
+                          onChange={(event) => updateStoreConfigField('siteName', event.target.value)}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Titulo da secao principal
+                        </span>
+                        <input
+                          type="text"
+                          value={storeConfig.homeTitle ?? ''}
+                          onChange={(event) => updateStoreConfigField('homeTitle', event.target.value)}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                      <label className="block md:col-span-2">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Subtitulo da secao principal
+                        </span>
+                        <input
+                          type="text"
+                          value={storeConfig.homeSubtitle ?? ''}
+                          onChange={(event) => updateStoreConfigField('homeSubtitle', event.target.value)}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                      <label className="block md:col-span-2">
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
+                          Descricao da secao principal
+                        </span>
+                        <textarea
+                          rows={3}
+                          value={storeConfig.homeDescription ?? ''}
+                          onChange={(event) => updateStoreConfigField('homeDescription', event.target.value)}
+                          className="w-full rounded-[14px] border border-white/10 bg-[#12131a] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="mt-5 rounded-[18px] border border-white/8 bg-[#12131a] p-4">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
+                          Conteudo da pagina por idioma (override JSON)
+                        </p>
+                        <label className="flex items-center gap-2 text-xs font-semibold text-[#b7beca]">
+                          Idioma
+                          <select
+                            value={adminSiteLocale}
+                            onChange={(event) => setAdminSiteLocale(event.target.value)}
+                            className="rounded-[10px] border border-white/10 bg-[#101218] px-2 py-1 text-xs text-white outline-none transition focus:border-[#f0c000]/45"
+                          >
+                            {SITE_CONTENT_LOCALES.map((option) => (
+                              <option key={`site-locale-${option}`} value={option}>
+                                {option}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      </div>
+                      <p className="mt-2 text-xs text-[#9aa0ac]">
+                        Exemplo: {`{ "topbar": "...", "sections": { "competitions": { "title": "..." } } }`}
+                      </p>
+                      <textarea
+                        rows={10}
+                        value={adminSiteContentInput}
+                        onChange={(event) => setAdminSiteContentInput(event.target.value)}
+                        className="mt-3 w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 font-mono text-xs text-white outline-none transition focus:border-[#f0c000]/45"
+                      />
+                      {adminSiteContentError ? (
+                        <p className="mt-2 text-xs font-semibold text-[#ff9ea7]">{adminSiteContentError}</p>
+                      ) : null}
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={handleApplySiteContentLocaleJson}
+                          className="rounded-full border border-[#f0c000]/25 bg-[#f0c000]/10 px-4 py-2 text-xs font-semibold text-[#ffd25a] transition hover:bg-[#f0c000]/16"
+                        >
+                          Aplicar JSON deste idioma
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleRestoreSiteContentLocale}
+                          className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
+                        >
+                          Restaurar idioma salvo
+                        </button>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="admin-editable-block mt-5 rounded-[22px] border border-white/8 bg-[#101218] p-4 sm:p-5">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div>
                         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#9aa0ac]">
@@ -4461,7 +5002,7 @@ function App() {
 
                     <div className="mt-4 grid gap-3 md:grid-cols-2">
                       {adminWinnersDraft.stats.map((stat, statIndex) => (
-                        <div key={`winners-stat-${statIndex}`} className="rounded-[16px] border border-white/10 bg-[#12131a] p-3">
+                        <div key={`winners-stat-${statIndex}`} className="admin-editable-block rounded-[16px] border border-white/10 bg-[#12131a] p-3">
                           <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
                             Metrica {statIndex + 1}
                           </p>
@@ -4487,7 +5028,7 @@ function App() {
 
                     <div className="mt-4 grid gap-3 md:grid-cols-2">
                       {adminWinnersDraft.slides.map((slide, slideIndex) => (
-                        <div key={`winners-slide-${slideIndex}`} className="rounded-[16px] border border-white/10 bg-[#12131a] p-3">
+                        <div key={`winners-slide-${slideIndex}`} className="admin-editable-block rounded-[16px] border border-white/10 bg-[#12131a] p-3">
                           <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
                             Imagem do carrossel {slideIndex + 1}
                           </p>
@@ -4529,7 +5070,7 @@ function App() {
 
                     <div className="mt-4 grid gap-3">
                       {adminWinnersDraft.cards.map((card, cardIndex) => (
-                        <div key={`winners-card-${cardIndex}`} className="rounded-[16px] border border-white/10 bg-[#12131a] p-3">
+                        <div key={`winners-card-${cardIndex}`} className="admin-editable-block rounded-[16px] border border-white/10 bg-[#12131a] p-3">
                           <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffd25a]">
                             Card lateral {cardIndex + 1}
                           </p>
@@ -4588,7 +5129,7 @@ function App() {
                       const assetName = isHouseDraft ? (car.propertyName || '') : (car.carName || '')
 
                       return (
-                        <article key={`admin-car-${index}`} className="rounded-[22px] border border-white/8 bg-[#12131a] p-4">
+                        <article key={`admin-car-${index}`} className="admin-editable-block rounded-[22px] border border-white/8 bg-[#12131a] p-4">
                           <div className="mb-4 flex items-center justify-between gap-3">
                             <div>
                               <p className="text-sm font-black uppercase tracking-[0.12em] text-white">
@@ -4958,12 +5499,18 @@ function App() {
                               />
                             </label>
 
-                            <div className="rounded-[14px] border border-white/10 bg-[#101218] px-3 py-3">
+                            <label className="block">
                               <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
                                 {adminCarsCopy.entriesSoldLabel}
                               </span>
-                              <p className="text-sm font-semibold text-white">{soldTickets}</p>
-                            </div>
+                              <input
+                                type="number"
+                                min="0"
+                                value={car.soldTickets ?? 0}
+                                onChange={(event) => updateAdminCarField(index, 'soldTickets', event.target.value)}
+                                className="w-full rounded-[14px] border border-white/10 bg-[#101218] px-3 py-2 text-sm text-white outline-none transition focus:border-[#f0c000]/45"
+                              />
+                            </label>
 
                             <label className="block">
                               <span className="mb-1 block text-xs font-bold uppercase tracking-[0.14em] text-[#9aa0ac]">
@@ -5184,7 +5731,7 @@ function App() {
                     <p className="mt-2 max-w-3xl text-sm leading-6 text-[#b7beca]">{catalogCopy.copy}</p>
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_160px_140px] lg:min-w-[760px]">
+                  <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[900px] lg:grid-cols-[minmax(0,1fr)_160px_140px_180px]">
                     <label className="block">
                       <input
                         type="text"
@@ -5218,6 +5765,20 @@ function App() {
                         {catalogYears.map((year) => (
                           <option key={year} value={year}>
                             {year === 'all' ? catalogCopy.allYears : year}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label className="block">
+                      <select
+                        value={catalogCurrency}
+                        onChange={(event) => setCatalogCurrency(event.target.value)}
+                        className="w-full appearance-none rounded-[18px] border border-white/10 bg-[#12131a] px-4 py-3 text-sm text-white outline-none transition focus:border-[#f0c000]/40"
+                      >
+                        {catalogCurrencies.map((currency) => (
+                          <option key={currency} value={currency}>
+                            {getCurrencyFilterLabel(currency, locale, catalogCopy.allCurrencies)}
                           </option>
                         ))}
                       </select>
@@ -5274,6 +5835,7 @@ function App() {
                         setCatalogSearch('')
                         setCatalogColor('all')
                         setCatalogYear('all')
+                        setCatalogCurrency('all')
                       }}
                       className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#f0c000]/35 hover:bg-[#1a1c24]"
                     >
@@ -5689,12 +6251,6 @@ function App() {
                         <span>{copy.actions.explore}</span>
                         <span aria-hidden="true" className="premium-button__icon">{'>'}</span>
                       </button>
-                      <a
-                        href="#platform"
-                        className="hero-secondary-cta rounded-full px-7 py-4 text-center text-sm font-semibold text-white"
-                      >
-                        {copy.actions.viewScope}
-                      </a>
                     </div>
                     <div className="hero-inline-meta mt-4 flex flex-wrap gap-x-6 gap-y-3">
                       <div>
@@ -5870,26 +6426,39 @@ function App() {
               {catalogCopy.carsTab}
             </h3>
             <div className="home-competitions-grid mt-4 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {homeCarCompetitions.map((competition) => (
+              {homeCarCompetitions.map((competition) => {
+                const hasReinforcedGradient = competition.title === HUMMER_COMPETITION_TITLE
+                  || competition.title === MERCEDES_COMPETITION_TITLE
+
+                return (
                 <article
                   key={competition.title}
                   className="home-competition-card flex h-full flex-col overflow-hidden rounded-[26px] border border-white/8 bg-[#12131a] shadow-[0_18px_70px_rgba(0,0,0,0.32)] transition hover:-translate-y-1 hover:border-[#f0c000]/28"
                 >
-                  <div className="relative h-72 overflow-hidden">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-[#0d0f15]">
+                    <div
+                      aria-hidden="true"
+                      className={`absolute inset-0 z-0 scale-110 bg-center bg-cover blur-lg ${hasReinforcedGradient ? 'opacity-65' : 'opacity-45'}`}
+                      style={{ backgroundImage: `url(${competition.image})` }}
+                    />
                     <img
                       src={competition.image}
                       alt={competition.title}
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                      className="relative z-10 h-full w-full object-contain object-center transition duration-700 hover:scale-[1.02]"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,15,0.06)_0%,rgba(10,11,15,0.1)_30%,rgba(10,11,15,0.85)_100%)]" />
                     <div
-                      className={`competition-deadline-badge competition-deadline-badge--${getDeadlineBadgeTone(competition.deadline)} absolute left-4 top-4 sm:left-5 sm:top-5`}
+                      className={`absolute inset-0 z-20 ${hasReinforcedGradient
+                        ? 'bg-[linear-gradient(180deg,rgba(10,11,15,0.22)_0%,rgba(10,11,15,0.08)_26%,rgba(10,11,15,0.78)_70%,rgba(10,11,15,0.9)_100%)]'
+                        : 'bg-[linear-gradient(180deg,rgba(10,11,15,0.06)_0%,rgba(10,11,15,0.1)_30%,rgba(10,11,15,0.85)_100%)]'}`}
+                    />
+                    <div
+                      className={`competition-deadline-badge competition-deadline-badge--${getDeadlineBadgeTone(competition.deadline)} absolute left-4 top-4 z-30 sm:left-5 sm:top-5`}
                     >
                       {getDeadlineBadgeLabel(competition.deadline, locale)}
                     </div>
-                    <div className="absolute bottom-5 left-5 rounded-full bg-[#ffd25a] px-4 py-2 text-sm font-black text-[#0b0c10] shadow-[0_14px_40px_rgba(201,162,74,0.28)]">
+                    <div className="absolute bottom-5 left-5 z-30 rounded-full bg-[#ffd25a] px-4 py-2 text-sm font-black text-[#0b0c10] shadow-[0_14px_40px_rgba(201,162,74,0.28)]">
                       {competition.price}
                     </div>
                   </div>
@@ -5927,7 +6496,8 @@ function App() {
                     </button>
                   </div>
                 </article>
-              ))}
+                )
+              })}
             </div>
 
             <h3 className="mt-10 text-xl font-extrabold tracking-[-0.03em] text-white">{catalogCopy.housesTab}</h3>
@@ -6062,14 +6632,6 @@ function App() {
                     <span className="section-kicker">{winnersSectionContent.kicker}</span>
                     <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-white">{winnersSectionContent.title}</h2>
                     <p className="mt-4 text-sm leading-7 text-[#b7beca]">{winnersSectionContent.copy}</p>
-                    <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                      {winnersSectionContent.stats.map((stat) => (
-                        <div key={stat.label} className="rounded-[22px] border border-white/8 bg-[#12131a] p-5">
-                          <p className="text-3xl font-black text-[#ffd25a]">{stat.value}</p>
-                          <p className="mt-2 text-sm text-[#9aa0ac]">{stat.label}</p>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </div>
